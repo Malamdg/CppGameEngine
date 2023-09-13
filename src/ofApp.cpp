@@ -1,30 +1,35 @@
 #include "ofApp.h"
-#include "Vector.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 
+	primitives = std::list<of3dPrimitive>();
+
+	sphere.setRadius(50);
+	position = Vector3D();
+	sphere.setPosition(position.v3());
+	speed = Vector3D(1, 1);
+
+	primitives.push_back(sphere);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+	position += speed;
+	sphere.setPosition(position.v3());
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	box.set(100);
-	box.draw();
-	box.setPosition(positionVect.v3());
-	for (int i = 0; i < 10; i++) {
-		positionVect += speedVect;
-		box.setPosition(positionVect.v3());
-	}
+	sphere.draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	for(of3dPrimitive primitive : primitives)
+	{
+		primitive.draw();
+	}
 }
 
 //--------------------------------------------------------------
@@ -44,16 +49,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	printf("button clicked: %d \n", button);
-	switch (button) {
-		case 1:
-			speedVect += Vector(0.001, 0.001, 0.001);
-			break;
-		default:
-			positionVect = Vector();
-			box.setPosition(positionVect.v3());
-			break;
-	}
+
 }
 
 //--------------------------------------------------------------

@@ -1,17 +1,25 @@
 #pragma once
-#include "Vector.h"
-#include "ofMain.h"
+#include "Vector3D.h"
 
-class Particle
+
+class Particle : ofSpherePrimitive
 {
-private: 
-	Vector position, initSpeed, speed, acceleration;
-	float mass;
-	of3dPrimitive shape;
-	
-public: 
-	Particle::Particle(glm::vec3 position, glm::vec3 initSpeed, float mass);
-	void Particle::draw();
-	void Particle::incrementPosition();
-};
 
+private:
+
+	Vector3D m_position;
+	Vector3D m_velocity;
+	Vector3D m_acceleration;
+	float m_masse;
+
+
+public:
+	Particle(int radius, Vector3D position = Vector3D(),
+		Vector3D velocity = Vector3D(),
+		Vector3D acceleration = Vector3D(),
+		float masse = 0);
+	~Particle();
+
+	float getInverseMasse();
+
+};

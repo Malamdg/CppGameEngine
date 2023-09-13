@@ -2,7 +2,8 @@
 
 #include "ofMain.h"
 #include "of3dPrimitives.h"
-#include "Vector.h"
+#include "Vector3D.h"
+#include "iostream"
 
 class ofApp : public ofBaseApp{
 
@@ -23,7 +24,10 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-		Vector positionVect = Vector();
-		Vector speedVect = Vector(0.5, 0.5, 0.1);
-		ofBoxPrimitive box = ofBoxPrimitive();
+
+		std::list<of3dPrimitive> primitives;
+
+		ofSpherePrimitive sphere;
+		Vector3D position;
+		Vector3D speed;
 };
