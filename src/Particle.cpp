@@ -2,10 +2,10 @@
 
 
 Particle::Particle(int radius,
-	Vector3D position = Vector3D(),
-	Vector3D velocity = Vector3D(),
-	float masse = 0,
-	float gravity = 9.8)
+	Vector3D position,
+	Vector3D velocity,
+	float masse,
+	float gravity)
 	:
 	ofSpherePrimitive(),
 	m_position(position),
