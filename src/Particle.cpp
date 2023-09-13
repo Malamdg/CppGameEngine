@@ -11,19 +11,20 @@ Particle::Particle(int radius,
 	ofSpherePrimitive(),
 	m_position(position),
 	m_velocity(velocity),
-	m_acceleration(acceleration),
 	m_masse(masse),
 	m_velocityInit(velocity)
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
+	m_acceleration = m_masse * m_gravity;
 }
 
 Particle::~Particle(){}
 
 void Particle::Update()
 {
-
+	//Deux intégration
+	m_position += m_velocity;
 }
 
 float Particle::getInverseMasse()
