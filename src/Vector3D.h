@@ -29,6 +29,7 @@ public:
 	float Norm2();
 	void Normalize();
 
+	string toString() const;
 
 	float& operator[](int i);
 	const float& operator[](int i) const;

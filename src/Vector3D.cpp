@@ -64,6 +64,13 @@ void Vector3D::Normalize()
 	m_z /= norm;
 }
 
+string Vector3D::toString() const
+{
+	return "( " + to_string(m_x) + ", "
+		+ to_string(m_y) + ", "
+		+ to_string(m_z) + " )";
+}
+
 float& Vector3D::operator[](int i)
 {
 	switch (i)

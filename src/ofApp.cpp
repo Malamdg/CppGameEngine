@@ -17,6 +17,7 @@ void ofApp::setup(){
 void ofApp::update(){
 	position += speed;
 	sphere.setPosition(position.v3());
+	std::cout << position.toString() << std::endl;
 }
 
 //--------------------------------------------------------------
