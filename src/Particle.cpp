@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include "MathHelper.h"
 
 
 Particle::Particle(int radius,
@@ -22,8 +23,11 @@ Particle::~Particle(){}
 
 void Particle::Update()
 {
-	//Deux intégration
-	m_position += m_velocity;
+	// integrate acceleration to update velocity
+	m_velocity += integrate(m_acceleration);
+	
+	// integrate speed to update position
+	m_position += integrate(m_velocity);
 }
 
 float Particle::getInverseMasse()
