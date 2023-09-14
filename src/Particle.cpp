@@ -16,7 +16,7 @@ Particle::Particle(int radius,
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
-	m_acceleration = m_masse * m_gravity;
+	m_acceleration = m_gravity;
 }
 
 Particle::~Particle(){}
