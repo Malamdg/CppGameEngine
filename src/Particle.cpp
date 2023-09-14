@@ -1,6 +1,6 @@
 #include "Particle.h"
 #include "MathHelper.h"
-
+#include "ofMain.h"
 
 Particle::Particle(int radius,
 	Vector3D position,
@@ -23,11 +23,19 @@ Particle::~Particle(){}
 
 void Particle::Update()
 {
-	// integrate acceleration to update velocity
-	m_velocity += integrate(m_acceleration);
-	
-	// integrate speed to update position
-	m_position += integrate(m_velocity);
+	float time, fps;
+	fps = ofGetFrameRate();
+	// avoid division by zero
+	time = fps == 0 ? -1 : 1 / fps;
+
+	// if no fps no movement 
+	if (time != -1) {
+		// integrate acceleration to update velocity
+		m_velocity += integrate(m_acceleration, time);
+
+		// integrate speed to update position
+		m_position += integrate(m_velocity, time);
+	}
 }
 
 float Particle::getInverseMasse()
