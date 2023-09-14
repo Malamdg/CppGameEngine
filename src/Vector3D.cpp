@@ -43,17 +43,17 @@ Vector3D & Vector3D::operator^(const Vector3D vector) const
 {
 	return Vector3D(m_y * vector.m_z - m_z * vector.m_y,
 		m_z * vector.m_x - m_x * vector.m_z,
-		m_y * vector.m_x - m_x * vector.m_y);
+		m_x * vector.m_y - m_y * vector.m_x);
 }
 
 float Vector3D::Norm()
 {
-	return sqrt(pow(m_x,2) + pow(m_z, 2) + pow(m_z, 2));
+	return sqrt(pow(m_x,2) + pow(m_y, 2) + pow(m_z, 2));
 }
 
 float Vector3D::Norm2()
 {
-	return pow(m_x, 2) + pow(m_z, 2) + pow(m_z, 2);
+	return pow(m_x, 2) + pow(m_y, 2) + pow(m_z, 2);
 }
 
 void Vector3D::Normalize()
