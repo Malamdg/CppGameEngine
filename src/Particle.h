@@ -11,7 +11,7 @@ private:
 	Vector3D m_velocity;
 	Vector3D m_acceleration;
 	float m_masse;
-	float m_gravity;
+	Vector3D m_gravity;
 
 	Vector3D m_velocityInit;
 
@@ -20,7 +20,7 @@ public:
 		Vector3D position = Vector3D(),
 		Vector3D velocity = Vector3D(),
 		float masse = 0,
-		float gravity = 9.8);
+		Vector3D gravity = Vector3D(0, 0, 9.8));
 	~Particle();
 
 	void Update();

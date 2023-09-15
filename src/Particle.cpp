@@ -5,7 +5,7 @@ Particle::Particle(int radius,
 	Vector3D position,
 	Vector3D velocity,
 	float masse,
-	float gravity)
+	Vector3D gravity)
 	:
 	ofSpherePrimitive(),
 	m_position(position),
@@ -15,7 +15,7 @@ Particle::Particle(int radius,
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
-	m_acceleration = m_masse * m_gravity;
+	m_acceleration = m_gravity;
 }
 
 Particle::~Particle(){}
