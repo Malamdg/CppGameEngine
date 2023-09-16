@@ -1,6 +1,11 @@
 #include "Particle.h"
 
+/*
+definition of the particle class and initialization of parameters
 
+Gravity is normally constant and could have been global. 
+However, here it is specific to each particle, which allows greater modularity.
+*/
 Particle::Particle(int radius,
 	Vector3D position,
 	Vector3D velocity,
@@ -11,7 +16,7 @@ Particle::Particle(int radius,
 	m_position(position),
 	m_velocity(velocity),
 	m_masse(masse),
-	m_velocityInit(velocity)
+	m_velocityInit(velocity) 
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
