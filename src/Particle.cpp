@@ -20,12 +20,23 @@ Particle::Particle(int radius,
 
 Particle::~Particle(){}
 
+/*
+update position 
+update the position of a particle using particle's parameters
+*/
+
+@return
 void Particle::Update()
 {
-	//Deux intégration
+	//Deux intÃ©gration
 	m_position += m_velocity;
 }
 
+/*
+get the inverse of the particle's mass
+
+@return the inverse of the particle's mass
+*/
 float Particle::getInverseMasse()
 {
 	return 1 / m_masse;
