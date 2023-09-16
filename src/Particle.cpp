@@ -1,7 +1,7 @@
 #include "Particle.h"
 
 /*
-definition of the particle class and initialization of parameters
+class constructor
 
 Gravity is normally constant and could have been global. 
 However, here it is specific to each particle, which allows greater modularity.
