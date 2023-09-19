@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "of3dPrimitives.h"
 #include "Vector3D.h"
+#include "Particle.h"
 #include "iostream"
 
 class ofApp : public ofBaseApp{
@@ -25,9 +26,10 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 
-		std::list<of3dPrimitive> primitives;
+		std::list<of3dPrimitive*> primitives;
 
 		ofSpherePrimitive sphere;
+		Particle p1;
 		Vector3D position;
 		Vector3D speed;
 };

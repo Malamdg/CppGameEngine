@@ -24,6 +24,8 @@ void Particle::Update()
 {
 	//Deux intégration
 	m_position += m_velocity;
+
+	this->setPosition(m_position.v3());
 }
 
 float Particle::getInverseMasse()

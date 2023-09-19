@@ -3,14 +3,16 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	primitives = std::list<of3dPrimitive>();
+	primitives = std::list<of3dPrimitive*>();
 
 	sphere.setRadius(50);
+	p1 = Particle(50, Vector3D(), Vector3D(.1, .1, 0));
 	position = Vector3D();
 	sphere.setPosition(position.v3());
 	speed = Vector3D(1, 1);
 
-	primitives.push_back(sphere);
+	primitives.push_back(&sphere);
+	primitives.push_back(&p1);
 
 
 	//Tests
@@ -59,19 +61,20 @@ void ofApp::setup(){
 void ofApp::update(){
 	position += speed;
 	sphere.setPosition(position.v3());
+	p1.Update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	sphere.draw();
+	for (of3dPrimitive* primitive : primitives)
+	{
+		primitive->draw();
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	for(of3dPrimitive primitive : primitives)
-	{
-		primitive.draw();
-	}
+	
 }
 
 //--------------------------------------------------------------

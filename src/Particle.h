@@ -2,7 +2,7 @@
 #include "Vector3D.h"
 
 
-class Particle : ofSpherePrimitive
+class Particle : public ofSpherePrimitive
 {
 
 private:
@@ -16,7 +16,7 @@ private:
 	Vector3D m_velocityInit;
 
 public:
-	Particle(int radius,
+	Particle(int radius = 10,
 		Vector3D position = Vector3D(),
 		Vector3D velocity = Vector3D(),
 		float masse = 0,
