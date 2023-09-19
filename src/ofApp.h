@@ -26,6 +26,8 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 
+		ofCamera cam;
+
 		std::list<of3dPrimitive*> primitives;
 
 		ofSpherePrimitive sphere;

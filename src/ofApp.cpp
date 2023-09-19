@@ -5,8 +5,8 @@ void ofApp::setup(){
 
 	primitives = std::list<of3dPrimitive*>();
 
-	sphere.setRadius(50);
-	p1 = Particle(50, Vector3D(), Vector3D(.1, .1, 0));
+	sphere.setRadius(10);
+	p1 = Particle(50, Vector3D(), Vector3D(50, 0, 50));
 	position = Vector3D();
 	sphere.setPosition(position.v3());
 	speed = Vector3D(1, 1);
@@ -14,6 +14,8 @@ void ofApp::setup(){
 	primitives.push_back(&sphere);
 	primitives.push_back(&p1);
 
+	// Center cam and set origin at the bottom left corner
+	cam.move(Vector3D(ofGetWidth() * 0.5, ofGetHeight() * 0.5, 1000).v3());
 
 	//Tests
 	std::cout << std::endl << "===============================Tests===============================" << std::endl << std::endl;
@@ -53,8 +55,6 @@ void ofApp::setup(){
 	std::cout << std::endl << "-----------------Produits Vectoriels------------------" << std::endl << std::endl;
 
 	std::cout << "Produit Vectoriel des deux Vector3D (attendu ( -35.6, -22, -62)): " + (vecTest1^vecTest2).toString() << std::endl;
-
-
 }
 
 //--------------------------------------------------------------
@@ -66,10 +66,14 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	cam.begin();
+
 	for (of3dPrimitive* primitive : primitives)
 	{
 		primitive->draw();
 	}
+
+	cam.end();
 }
 
 //--------------------------------------------------------------
