@@ -93,32 +93,6 @@ float Vector3D::operator*(const Vector3D vector) const
 }
 
 /*
-definition of operator /
-allows to do the quotient of a vector and a value
-
-@param val, the value by which the vector is divided
-
-@return the product
-*/
-Vector3D & Vector3D::operator/(const float val) const
-{
-	return Vector3D(m_x / val, m_y / val, m_z / val);
-}
-
-/*
-definition of operator /=
-allows to do the quotient of a vector and a value
-
-@param val, the value by which the vector is divided
-*/
-Vector3D & Vector3D::operator/=(const float val) const
-{
-	m_x /= val;
-	m_y /= val;
-	m_z /= val;
-}
-
-/*
 definition of operator ^
 allows to do the cross product of two vectors
 
