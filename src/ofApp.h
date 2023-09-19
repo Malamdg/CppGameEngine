@@ -34,4 +34,8 @@ class ofApp : public ofBaseApp{
 		Particle p1;
 		Vector3D position;
 		Vector3D speed;
+
+
+private :
+	void TestsVector3D();
 };
