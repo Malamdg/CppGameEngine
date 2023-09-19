@@ -2,7 +2,6 @@
 
 /*
 class constructor
-
 Gravity is normally constant and could have been global. 
 However, here it is specific to each particle, which allows greater modularity.
 */
@@ -20,7 +19,7 @@ Particle::Particle(int radius,
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
-	m_acceleration = m_masse * m_gravity;
+	m_acceleration = m_gravity;
 }
 
 Particle::~Particle(){}
