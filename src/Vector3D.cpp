@@ -108,19 +108,6 @@ Vector3D & Vector3D::operator^(const Vector3D vector) const
 }
 
 /*
-definition of operator ==
-determine the equality between two vectors
-
-@param vector, the vector to check the equality with
-
-@return true if the vectors are equals, false otherwise
-*/
-bool Vector3D::operator==(const Vector3D vector) const
-{
-	return this->m_x == vector.m_x && this->m_y == vector.m_y && this->m_z == vector.m_z;
-}
-
-/*
 definition of the norm (here norm2)
 allows to do compute the norm of a vector
 

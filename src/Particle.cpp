@@ -29,6 +29,7 @@ update position
 update the position of a particle using particle's parameters
 */
 
+@return
 void Particle::Update()
 {
 	//Deux intégration

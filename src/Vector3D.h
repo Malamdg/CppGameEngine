@@ -24,7 +24,6 @@ public:
 	Vector3D& operator*(const float val) const;
 	float operator*(const Vector3D vector) const;
 	Vector3D& operator^(const Vector3D vector) const;
-	bool operator==(const Vector3D vector) const;
 
 	float Norm();
 	float Norm2();

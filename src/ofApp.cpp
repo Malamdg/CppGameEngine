@@ -1,5 +1,4 @@
 #include "ofApp.h"
-#include "Tests.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -13,10 +12,9 @@ void ofApp::setup(){
 
 	primitives.push_back(sphere);
 
-	Tests::ExecuteTests();
 
 	//Tests
-	/*std::cout << std::endl << "===============================Tests===============================" << std::endl << std::endl;
+	std::cout << std::endl << "===============================Tests===============================" << std::endl << std::endl;
 
 	std::cout << std::endl << "-----------------Constructeur / Accesseurs / Mutateurs------------------" << std::endl << std::endl;
 	Vector3D vecTest1 = Vector3D();
@@ -53,7 +51,8 @@ void ofApp::setup(){
 	std::cout << std::endl << "-----------------Produits Vectoriels------------------" << std::endl << std::endl;
 
 	std::cout << "Produit Vectoriel des deux Vector3D (attendu ( -35.6, -22, -62)): " + (vecTest1^vecTest2).toString() << std::endl;
-	*/
+
+
 }
 
 //--------------------------------------------------------------
