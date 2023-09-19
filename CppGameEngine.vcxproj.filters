@@ -10,7 +10,10 @@
     <ClCompile Include="src\Particle.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Vector3D.cpp">
+    <ClCompile Include="src\Vector3D.cpp" />
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MathHelper.cpp" />
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -26,7 +29,10 @@
     <ClInclude Include="src\Particle.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Vector3D.h">
+    <ClInclude Include="src\Vector3D.h" />
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MathHelper.h" />
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
