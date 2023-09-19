@@ -1,7 +1,10 @@
 #include "Particle.h"
-#include "MathHelper.h"
-#include "ofMain.h"
 
+/*
+class constructor
+Gravity is normally constant and could have been global. 
+However, here it is specific to each particle, which allows greater modularity.
+*/
 Particle::Particle(int radius,
 	Vector3D position,
 	Vector3D velocity,
@@ -12,7 +15,7 @@ Particle::Particle(int radius,
 	m_position(position),
 	m_velocity(velocity),
 	m_masse(masse),
-	m_velocityInit(velocity)
+	m_velocityInit(velocity) 
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
@@ -21,23 +24,23 @@ Particle::Particle(int radius,
 
 Particle::~Particle(){}
 
+/*
+update position 
+update the position of a particle using particle's parameters
+*/
+
+@return
 void Particle::Update()
 {
-	float time, fps;
-	fps = ofGetFrameRate();
-	// avoid division by zero
-	time = fps == 0 ? -1 : 1 / fps;
-
-	// if no fps no movement 
-	if (time != -1) {
-		// integrate acceleration to update velocity
-		m_velocity += integrate(m_acceleration, time);
-
-		// integrate speed to update position
-		m_position += integrate(m_velocity, time);
-	}
+	//Deux intégration
+	m_position += m_velocity;
 }
 
+/*
+get the inverse of the particle's mass
+
+@return the inverse of the particle's mass
+*/
 float Particle::getInverseMasse()
 {
 	return 1 / m_masse;
