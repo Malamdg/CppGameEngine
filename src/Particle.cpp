@@ -22,6 +22,7 @@ Particle::Particle(int radius,
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
+	this->setColor(Vector3D());
 }
 
 Particle::~Particle(){}
@@ -67,4 +68,14 @@ get the inverse of the particle's mass
 float Particle::getInverseMasse()
 {
 	return 1 / m_masse;
+}
+
+void Particle::setColor(Vector3D v)
+{
+	m_color = v;
+}
+
+Vector3D Particle::getColor()
+{
+	return m_color;
 }

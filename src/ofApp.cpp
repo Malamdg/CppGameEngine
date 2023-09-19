@@ -6,16 +6,17 @@ void ofApp::setup(){
 	primitives = std::list<of3dPrimitive*>();
 
 	sphere.setRadius(10);
-	p1 = Particle(50, Vector3D(), Vector3D(50, 0, 50), 50);
 	position = Vector3D();
 	sphere.setPosition(position.v3());
 	speed = Vector3D(1, 1);
 
 	primitives.push_back(&sphere);
-	primitives.push_back(&p1);
 
 	// Center cam and set origin at the bottom left corner
 	cam.move(Vector3D(ofGetWidth() * 0.5, ofGetHeight() * 0.5, 1000).v3());
+
+
+	std::cout << "Change de mode de tire en appuyant sur 'a', 'z', 'e', 'r', et 't' !" << std::endl;
 
 	//Tests
 	//TestsVector3D();
@@ -23,15 +24,20 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	//Update Sphere
 	position += speed;
 	sphere.setPosition(position.v3());
 	
-	///
+	//Update particles
 	for (Particle* particle : particles)
 	{
 		particle->Update();
+		/*std::cout << "particle position : ( " 
+			+ to_string(particle->getPosition().x) + ", "
+			+ to_string(particle->getPosition().y) + ", "
+			+ to_string(particle->getPosition().z) + " )"
+			<< std::endl;*/
 	}
-	p1.Update();
 }
 
 //--------------------------------------------------------------
@@ -42,13 +48,44 @@ void ofApp::draw(){
 	{
 		primitive->draw();
 	}
+	for (Particle* particle : particles)
+	{
+		int r = particle->getColor()[0];
+		int g = particle->getColor()[1];
+		int b = particle->getColor()[2];
+		ofSetColor(r, g, b);
+		particle->draw();
+	}
 
 	cam.end();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	
+	switch (key)
+	{
+	case 'a':
+	{
+		mode = 0; break;
+	}
+	case 'z': 
+	{
+		mode = 1; break;
+	}
+	case 'e': 
+	{
+		mode = 2; break;
+	}
+	case 'r': 
+	{
+		mode = 3; break;
+	}
+	case 't': 
+	{
+		mode = 4; break;
+	}
+	default: break;
+	}
 }
 
 //--------------------------------------------------------------
@@ -77,9 +114,49 @@ void ofApp::mouseReleased(int x, int y, int button){
 	{
 		case 0 : 
 		{
-			Particle* p = new Particle(10, Vector3D(), Vector3D(50, 0, 50), 1000, Vector3D(0, 0, -5));
-			primitives.push_back(p);
+			Vector3D speedParticle;
+			Vector3D colorParticle;
+			switch (mode)
+			{
+			case 0 :
+			{
+				colorParticle = Vector3D(0, 255, 0);
+				speedParticle = Vector3D(50, 50, 0);
+				break;
+			}
+			case 1 :
+			{
+				colorParticle = Vector3D(255, 0, 0);
+				speedParticle = Vector3D(100, 50, 0);
+				break;
+			}
+			case 2 :
+			{
+				colorParticle = Vector3D(0, 0, 255);
+				speedParticle = Vector3D(50, 100, 0);
+				break;
+			}
+			case 3 :
+			{
+				colorParticle = Vector3D(125, 125, 125);
+				speedParticle = Vector3D(100, 100, 0);
+				break;
+			}
+			case 4 : 
+			{
+				int r = rand() % 256;
+				int g = rand() % 256;
+				int b = rand() % 256;
+				colorParticle = Vector3D(r, g, b);
+				speedParticle = Vector3D(r, g, 0);
+				break;
+			}
+			default: break;
+			}
+			Particle* p = new Particle(10, Vector3D(), speedParticle, 10, Vector3D(0, -9.8, 0));
+			p->setColor(colorParticle);
 			particles.push_back(p);
+			break;
 		}
 		default: break;
 	}

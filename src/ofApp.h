@@ -26,17 +26,18 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 
+	private:
+
 		ofCamera cam;
 
 		std::list<of3dPrimitive*> primitives;
 		std::list<Particle*> particles;
 
 		ofSpherePrimitive sphere;
-		Particle p1;
 		Vector3D position;
 		Vector3D speed;
 
+		int mode = 0;
 
-private :
-	void TestsVector3D();
+		void TestsVector3D();
 };

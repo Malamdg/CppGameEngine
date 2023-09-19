@@ -13,6 +13,8 @@ private:
 
 	Vector3D m_velocityInit;
 
+	Vector3D m_color;
+
 public:
 	Particle(int radius = 10,
 		Vector3D position = Vector3D(),
@@ -24,4 +26,7 @@ public:
 	void Update();
 
 	float getInverseMasse();
+
+	void setColor(Vector3D v);
+	Vector3D getColor();
 };
