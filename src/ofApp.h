@@ -29,6 +29,7 @@ class ofApp : public ofBaseApp{
 		ofCamera cam;
 
 		std::list<of3dPrimitive*> primitives;
+		std::list<Particle*> particles;
 
 		ofSpherePrimitive sphere;
 		Particle p1;

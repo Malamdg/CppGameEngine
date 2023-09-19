@@ -18,7 +18,7 @@ void ofApp::setup(){
 	cam.move(Vector3D(ofGetWidth() * 0.5, ofGetHeight() * 0.5, 1000).v3());
 
 	//Tests
-	TestsVector3D();
+	//TestsVector3D();
 }
 
 //--------------------------------------------------------------
@@ -27,6 +27,10 @@ void ofApp::update(){
 	sphere.setPosition(position.v3());
 	
 	///
+	for (Particle* particle : particles)
+	{
+		particle->Update();
+	}
 	p1.Update();
 }
 
@@ -69,7 +73,16 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+	switch(button)
+	{
+		case 0 : 
+		{
+			Particle* p = new Particle(10, Vector3D(), Vector3D(50, 0, 50), 1000, Vector3D(0, 0, -5));
+			primitives.push_back(p);
+			particles.push_back(p);
+		}
+		default: break;
+	}
 }
 
 //--------------------------------------------------------------
