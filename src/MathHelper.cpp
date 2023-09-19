@@ -1,15 +1,15 @@
 #include "MathHelper.h"
 #include "Vector3D.h"
 
-/*
-integrate a vector 
-integration over time with Euler alorithm (rectangle method) to get velocity from acceleration and position from velocity.
+Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N)
+{
+	Vector3D u = Vector3D();
+	float step = (interval[1] - interval[0]) / N; // algorithm integration step, width of a rectangle
 
-@param v the vector to integrate, time the current time, v0 the initial velocity
+	// Midpoint integration precise enough with min 50 rectangles
+	for (int i = 0; i < N; i++) {
+		u += f((2 * i + 1) * step / 2) * step;
+	}
 
-@return the vector integrated
-*/
-Vector3D integrate(Vector3D v, float time, Vector3D v0) {
-	// rectangle area on one frame using its duration => all frames make sum on mvt duration
-	return v * time + v0;
+	return u;
 }

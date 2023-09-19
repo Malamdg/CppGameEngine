@@ -1,4 +1,4 @@
 #pragma once
 #include "Vector3D.h"
 
-Vector3D integrate(Vector3D v, float time, Vector3D v0 = Vector3D());
+Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 50);
