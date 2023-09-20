@@ -27,10 +27,7 @@ Particle::Particle(int radius,
 
 Particle::~Particle(){}
 
-/*
-update position
-update the position of a particle using particle's parameters
-*/
+
 void Particle::Update()
 {
 	float fps;
@@ -78,6 +75,7 @@ void Particle::Update()
 	}
 }
 
+<<<<<<< Updated upstream
 
 void Particle::setMasse(float masse)
 {
@@ -91,9 +89,9 @@ void Particle::setMasse(float masse)
 
 /*
 get the inverse of the particle's mass
+=======
+>>>>>>> Stashed changes
 
-@return the inverse of the particle's mass
-*/
 float Particle::getInverseMasse()
 {
 	return m_invertedMasse;
