@@ -32,6 +32,7 @@ class ofApp : public ofBaseApp{
 
 		std::list<of3dPrimitive*> primitives;
 		std::list<Particle*> particles;
+		std::list<Particle*> preview;
 
 		ofSpherePrimitive sphere;
 		Vector3D position;
@@ -40,4 +41,5 @@ class ofApp : public ofBaseApp{
 		int mode = 0;
 
 		Vector3D GetLaunchDirection(float x, float y);
+		void GeneratePrevisualization(Vector3D initialPosition);
 };

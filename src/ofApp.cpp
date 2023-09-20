@@ -4,6 +4,7 @@
 void ofApp::setup(){
 
 	primitives = std::list<of3dPrimitive*>();
+	preview = std::list<Particle*>();
 
 	sphere.setRadius(10);
 	position = Vector3D();
@@ -27,7 +28,7 @@ void ofApp::update(){
 	//Update Sphere
 	position += speed;
 	sphere.setPosition(position.v3());
-	
+
 	//Update particles
 	for (Particle* particle : particles)
 	{
@@ -39,7 +40,8 @@ void ofApp::update(){
 			<< std::endl;*/
 	}
 
-	
+	preview.clear();
+	GeneratePrevisualization(Vector3D());
 }
 
 //--------------------------------------------------------------
@@ -56,6 +58,10 @@ void ofApp::draw(){
 		int g = particle->getColor()[1];
 		int b = particle->getColor()[2];
 		ofSetColor(r, g, b);
+		particle->draw();
+	}
+	for (Particle* particle : preview)
+	{
 		particle->draw();
 	}
 
@@ -207,4 +213,52 @@ Vector3D ofApp::GetLaunchDirection(float x, float y)
 	launchDirection.Normalize();
 
 	return launchDirection;
+}
+
+void ofApp::GeneratePrevisualization(Vector3D initialPosition)
+{
+	std::list<float> timestamp;
+	for (int i = 0; i < 5; i++)
+	{
+		timestamp.push_back(i);
+	}
+
+	float speedParticle = 0;
+	switch (mode)
+	{
+		case 0:
+		{
+			speedParticle = 50;
+			break;
+		}
+		case 1:
+		{
+			speedParticle = 75;
+			break;
+		}
+		case 2:
+		{
+			speedParticle = 100;
+			break;
+		}
+		case 3:
+		{
+			speedParticle = 125;
+			break;
+		}
+		default: break;
+	}
+
+	Vector3D initialSpeed = GetLaunchDirection(ofGetMouseX(), ofGetMouseY()) * speedParticle;
+	Vector3D acceleration = Vector3D(0, -9.8, 0);
+
+	Vector3D position = initialPosition;
+
+	for (float time : timestamp)
+	{
+		position += acceleration * .5 * time * time + initialSpeed * time;
+		
+		Particle* previewParticle = new Particle(10, position, Vector3D(), 0, Vector3D());
+		preview.push_back(previewParticle);
+	}
 }
