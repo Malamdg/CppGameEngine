@@ -53,9 +53,9 @@ void Particle::Update()
 		this->setPosition(m_position.v3());
 
 		// when floor is attained
-		if (m_position[2] <= 0) {
-			m_acceleration[2] = 0;
-			m_velocity[2] = 0;
+		if (m_position[1] <= 0) {
+			m_acceleration[1] = 0;
+			m_velocity[1] = 0;
 		}
 	}
 }

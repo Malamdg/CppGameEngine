@@ -20,7 +20,7 @@ public:
 		Vector3D position = Vector3D(),
 		Vector3D velocity = Vector3D(),
 		float masse = 0,
-		Vector3D gravity = Vector3D(0, 0, -9.8));
+		Vector3D gravity = Vector3D(0, -9.8, 0));
 	~Particle();
 
 	void Update();
