@@ -12,7 +12,7 @@ private:
 	Vector3D m_gravity;
 
 	Vector3D m_velocityInit;
-
+	float m_dumping = 0.01;
 	Vector3D m_color;
 
 public:
