@@ -6,11 +6,16 @@ void ofApp::setup(){
 	primitives = std::list<of3dPrimitive*>();
 
 	sphere.setRadius(10);
+	const float floorWidth = ofGetScreenWidth() * 100;
+	const float floorHeight = 5;
+	floor = ofBoxPrimitive(floorWidth, floorHeight, 0);
 	position = Vector3D();
 	sphere.setPosition(position.v3());
+	floor.setPosition(Vector3D(0, -10).v3());
 	speed = Vector3D(1, 1);
 
 	primitives.push_back(&sphere);
+	primitives.push_back(&floor);
 
 	// Center cam and set origin at the bottom left corner
 	cam.setPosition(Vector3D(0, 0, 1500).v3());

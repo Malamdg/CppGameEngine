@@ -34,6 +34,7 @@ class ofApp : public ofBaseApp{
 		std::list<Particle*> particles;
 
 		ofSpherePrimitive sphere;
+		ofBoxPrimitive floor;
 		Vector3D position;
 		Vector3D speed;
 
