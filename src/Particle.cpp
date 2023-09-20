@@ -21,7 +21,6 @@ Particle::Particle(int radius,
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
-	this->setColor(Vector3D());
 }
 
 Particle::~Particle(){}
