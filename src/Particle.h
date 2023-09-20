@@ -53,18 +53,4 @@ public:
 	@return the inverse of the particle's mass
 	*/
 	float getInverseMasse();
-
-	/*
-	set the color of the particle
-
-	@param v, the r/g/b component ofthe particle's color
-	*/
-	void setColor(Vector3D v);
-
-	/*
-	get the color of the particle
-
-	@return the r/g/b component ofthe particle's color
-	*/
-	Vector3D getColor();
 };
