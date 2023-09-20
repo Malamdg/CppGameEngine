@@ -3,24 +3,26 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	primitives = std::list<of3dPrimitive*>();
-
-	sphere.setRadius(10);
-	const float floorWidth = ofGetScreenWidth() * 100;
-	const float floorHeight = 5;
-	floor = ofBoxPrimitive(floorWidth, floorHeight, 0);
-	position = Vector3D();
-	sphere.setPosition(position.v3());
-	floor.setPosition(Vector3D(0, -10).v3());
-	speed = Vector3D(1, 1);
-
-	primitives.push_back(&sphere);
-	primitives.push_back(&floor);
+	primitives = std::list<std::pair<of3dPrimitive*, Vector3D*>>();
 
 	particleVisualization.setRadius(10);
 	particleVisualization.setPosition(Vector3D().v3());
+	const float floorWidth = ofGetScreenWidth() * 100;
+	const float floorHeight = 5;
+	floor = ofBoxPrimitive(floorWidth, floorHeight, 0);
+	floor.setPosition(Vector3D(0, -10).v3());
 
-	primitives.push_back(&particleVisualization);
+	//Colors
+	colors[0] = Vector3D(0, 255, 0);
+	colors[1] = Vector3D(255, 0, 0);
+	colors[2] = Vector3D(0, 0, 255);
+	colors[3] = Vector3D(125, 125, 125);
+
+	primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(&particleVisualization, &colorVisualization));
+	primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(&floor, new Vector3D(120, 120, 120)));
+
+	particleVisualization.setRadius(10);
+	particleVisualization.setPosition(Vector3D().v3());
 
 	// Center cam and set origin at the bottom left corner
 	cam.setPosition(Vector3D(0, 0, 1500).v3());
@@ -46,20 +48,13 @@ void ofApp::update(){
 void ofApp::draw(){
 	cam.begin();
 
-	for (of3dPrimitive* primitive : primitives)
+	for (std::pair<of3dPrimitive*, Vector3D*> primitive : primitives)
 	{
-		ofSetColor(colorVisualization[0], 
-			colorVisualization[1], 
-			colorVisualization[2]);
-		primitive->draw();
-	}
-	for (Particle* particle : particles)
-	{
-		int r = particle->getColor()[0];
-		int g = particle->getColor()[1];
-		int b = particle->getColor()[2];
+		int r = primitive.second->x();
+		int g = primitive.second->y();
+		int b = primitive.second->z();
 		ofSetColor(r, g, b);
-		particle->draw();
+		primitive.first->draw();
 	}
 
 	cam.end();
@@ -132,27 +127,31 @@ void ofApp::mouseReleased(int x, int y, int button){
 		case 0 : 
 		{
 			Vector3D speedParticle;
-			Vector3D colorParticle;
+			Vector3D* colorParticle;
 			switch (mode)
 			{
 				case 0 :
 				{
 					speedParticle = Vector3D(50, 50, 0);
+					colorParticle = &colors[0];
 					break;
 				}
 				case 1 :
 				{
 					speedParticle = Vector3D(100, 50, 0);
+					colorParticle = &colors[1];
 					break;
 				}
 				case 2 :
 				{
 					speedParticle = Vector3D(50, 100, 0);
+					colorParticle = &colors[2];
 					break;
 				}
 				case 3 :
 				{
 					speedParticle = Vector3D(100, 100, 0);
+					colorParticle = &colors[3];
 					break;
 				}
 				case 4 : 
@@ -160,17 +159,17 @@ void ofApp::mouseReleased(int x, int y, int button){
 					int r = rand() % 256;
 					int g = rand() % 256;
 					int b = rand() % 256;
-					colorVisualization = Vector3D(r, g, b);
+					colorParticle = new Vector3D(r, g, b);
+					colorVisualization = *colorParticle;
 					speedParticle = Vector3D(r, g, 0);
 					break;
 				}
 				default: break;
 			}
-			colorParticle = colorVisualization;
 			
 			Particle* p = new Particle(10, Vector3D(), speedParticle, 10);
-			p->setColor(colorParticle);
-			particles.push_back(p);;
+			primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(p, colorParticle));
+			particles.push_back(p);
 			break;
 		}
 		default: break;

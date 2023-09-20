@@ -128,6 +128,13 @@ public:
 	*/
 	string toString() const;
 
+	float x()const;
+	void x(float f);
+	float y()const;
+	void y(float f);
+	float z()const;
+	void z(float f);
+  
 	/*
 	set the component of a vector
 	set the i-th coordinate of the vector

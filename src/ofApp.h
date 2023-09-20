@@ -31,19 +31,16 @@ class ofApp : public ofBaseApp{
 
 		ofCamera cam;
 
-		std::list<of3dPrimitive*> primitives;
+		std::list<std::pair<of3dPrimitive*, Vector3D*>> primitives;
 		std::list<Particle*> particles;
 		Vector3D colorVisualization = Vector3D(0, 255, 0);
+		Vector3D* colors = new Vector3D[4];
 
-		ofSpherePrimitive sphere;
 		ofBoxPrimitive floor;
-		Vector3D position;
-		Vector3D speed;
 
 		ofSpherePrimitive particleVisualization;
 
 
 		int mode = 0;
 
-		void TestsVector3D();
 };
