@@ -8,26 +8,49 @@ private:
 	Vector3D m_position;
 	Vector3D m_velocity;
 	Vector3D m_acceleration;
-	float m_invertedMasse;
+	float m_invertedMass;
 	Vector3D m_gravity;
 
 	Vector3D m_velocityInit;
-
+	float m_drag_coef = 0.01;
 	Vector3D m_color;
 
 public:
+	/*
+	class constructor
+	@param radius, the radius of the particle set to 10 by default
+	@param position, a vector to set the initial position of the particle
+	@param velocity, a vector to set the initial velocity of the particle
+	@param masse, the mass of the particle set to 0 (it is a particle)
+	@param gravity, set to earth gravity but can be updated
+
+	NOTE : Gravity is normally constant and could have been global.
+	However, here it is specific to each particle, which allows greater modularity.
+	*/
 	Particle(int radius = 10,
 		Vector3D position = Vector3D(),
 		Vector3D velocity = Vector3D(),
-		float invertedMasse = 0,
+		float invertedMass = 0,
 		Vector3D gravity = Vector3D(0, -9.8, 0));
 	~Particle();
 
+	/*
+	update position
+	update the position of a particle using particle's parameters
+	*/
 	void Update();
 
-	void setMasse(float masse);
-	float getInverseMasse();
+	/*
+	set the particle's mass
 
-	void setColor(Vector3D v);
-	Vector3D getColor();
+	@param mass, the particle's mass
+	*/
+	void setMass(float mass);
+
+	/*
+	get the inverse of the particle's mass
+
+	@return the inverse of the particle's mass
+	*/
+	float getInverseMass();
 };
