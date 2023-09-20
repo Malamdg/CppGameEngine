@@ -158,6 +158,13 @@ string Vector3D::toString() const
 		+ to_string(m_z) + " )";
 }
 
+float Vector3D::x()const { return m_x; }
+void Vector3D::x(float f) { m_x = f; }
+float Vector3D::y()const { return m_y; }
+void Vector3D::y(float f) { m_y = f; }
+float Vector3D::z()const { return m_z; }
+void Vector3D::z(float f) { m_z = f; }
+
 float& Vector3D::operator[](int i)
 {
 	switch (i)

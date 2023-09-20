@@ -32,6 +32,13 @@ public:
 
 	string toString() const;
 
+	float x()const;
+	void x(float f);
+	float y()const;
+	void y(float f);
+	float z()const;
+	void z(float f);
+
 	float& operator[](int i);
 	const float& operator[](int i) const;
 
