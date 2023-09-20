@@ -71,7 +71,6 @@ void Particle::Update()
 	}
 }
 
-
 void Particle::setMass(float mass)
 {
 	if (mass <= 0)
@@ -82,9 +81,18 @@ void Particle::setMass(float mass)
 	else m_invertedMass = 1 / mass;
 }
 
-
-float Particle::getInverseMass()
+float Particle::getInverseMass()  
 {
 	return m_invertedMass;
+}
 
+void Particle::setColor(Vector3D v)
+{
+	m_color = v;
+}
+
+
+Vector3D Particle::getColor()
+{
+	return m_color;
 }

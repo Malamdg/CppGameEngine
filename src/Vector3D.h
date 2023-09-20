@@ -134,8 +134,7 @@ public:
 	void y(float f);
 	float z()const;
 	void z(float f);
-
-
+  
 	/*
 	set the component of a vector
 	set the i-th coordinate of the vector
