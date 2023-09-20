@@ -40,15 +40,18 @@ public:
 	*/
 	void Update();
 
-<<<<<<< Updated upstream
+	/*
+	set the particle's mass
+
+	@param mass, the particle's mass
+	*/
 	void setMasse(float masse);
-=======
+
 	/*
 	get the inverse of the particle's mass
 
 	@return the inverse of the particle's mass
 	*/
->>>>>>> Stashed changes
 	float getInverseMasse();
 
 	/*
