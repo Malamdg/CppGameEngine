@@ -26,7 +26,6 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-
 	private:
 
 		ofCamera cam;
@@ -40,5 +39,5 @@ class ofApp : public ofBaseApp{
 
 		int mode = 0;
 
-		void TestsVector3D();
+		Vector3D GetLaunchDirection(float x, float y);
 };

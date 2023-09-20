@@ -38,6 +38,8 @@ void ofApp::update(){
 			+ to_string(particle->getPosition().z) + " )"
 			<< std::endl;*/
 	}
+
+	
 }
 
 //--------------------------------------------------------------
@@ -116,32 +118,34 @@ void ofApp::mouseReleased(int x, int y, int button){
 	{
 		case 0 : 
 		{
-			Vector3D speedParticle;
+			Vector3D launchDirection = GetLaunchDirection(x, y);
+
+			float speedParticle;
 			Vector3D colorParticle;
 			switch (mode)
 			{
 				case 0 :
 				{
 					colorParticle = Vector3D(0, 255, 0);
-					speedParticle = Vector3D(50, 50, 0);
+					speedParticle = 50;
 					break;
 				}
 				case 1 :
 				{
 					colorParticle = Vector3D(255, 0, 0);
-					speedParticle = Vector3D(100, 50, 0);
+					speedParticle = 75;
 					break;
 				}
 				case 2 :
 				{
 					colorParticle = Vector3D(0, 0, 255);
-					speedParticle = Vector3D(50, 100, 0);
+					speedParticle = 100;
 					break;
 				}
 				case 3 :
 				{
 					colorParticle = Vector3D(125, 125, 125);
-					speedParticle = Vector3D(100, 100, 0);
+					speedParticle = 125;
 					break;
 				}
 				case 4 : 
@@ -150,12 +154,12 @@ void ofApp::mouseReleased(int x, int y, int button){
 					int g = rand() % 256;
 					int b = rand() % 256;
 					colorParticle = Vector3D(r, g, b);
-					speedParticle = Vector3D(r, g, 0);
+					speedParticle = (r * g * b) % 500;
 					break;
 				}
 				default: break;
 			}
-			Particle* p = new Particle(10, Vector3D(), speedParticle, 10);
+			Particle* p = new Particle(10, Vector3D(), launchDirection * speedParticle, 10);
 			p->setColor(colorParticle);
 			particles.push_back(p);
 			break;
@@ -189,4 +193,18 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+Vector3D ofApp::GetLaunchDirection(float x, float y)
+{
+	Vector3D worldZeroOnScreen = Vector3D(cam.worldToScreen(glm::uvec3(0, 0, 0)));
+	worldZeroOnScreen[2] = 0;
+
+	Vector3D cursorPosition = Vector3D(x, y);
+
+	Vector3D launchDirection = cursorPosition - worldZeroOnScreen;
+	launchDirection[1] *= -1;
+	launchDirection.Normalize();
+
+	return launchDirection;
 }

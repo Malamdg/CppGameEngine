@@ -15,6 +15,7 @@ public:
 	
 
 	Vector3D(const float x = 0, const float y = 0, const float z = 0);
+	Vector3D(glm::vec3 vector);
 	~Vector3D();
 
 	Vector3D& operator+(const Vector3D vector) const;
