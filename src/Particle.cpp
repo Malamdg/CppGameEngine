@@ -8,7 +8,7 @@ However, here it is specific to each particle, which allows greater modularity.
 Particle::Particle(int radius,
 	Vector3D position,
 	Vector3D velocity,
-	float invertedMasse,
+	float invertedMass,
 	Vector3D gravity)
 	:
 	ofSpherePrimitive(),
@@ -16,7 +16,7 @@ Particle::Particle(int radius,
 	m_velocity(velocity),
 	m_gravity(gravity),
 	m_acceleration(gravity),
-	m_invertedMasse(invertedMasse),
+	m_invertedMass(invertedMass),
 	m_velocityInit(velocity)
 {
 	this->setRadius(radius);
@@ -48,45 +48,43 @@ void Particle::Update()
 		this->setPosition(m_position.v3());
 
 		// floor is attained
-		if (m_position[1] <= 0) {
+		if (m_position.y() <= 0) {
 			// first time 
-			if (m_velocity[1] < 0) {
+			if (m_velocity.y() < 0) {
 				m_acceleration[1] = 0;
 				m_velocity[1] = 0;
+				m_position[1] = 0;
 			}
 			
-			if (m_velocity[0] > 0 || m_velocity[2] > 0) {
+			// if x velocity is not null
+			if (m_velocity.x() > 0) {
 				// Add drag coefficient to simulate friction
-				m_acceleration += m_velocity * -m_dumping * this->getInverseMasse(); // divide by mass to be coherent with FPD
+				m_acceleration += m_velocity * -m_drag_coef * m_invertedMass; // divide by mass to be coherent with FPD
 			}
 
 			// Do put coefficent to 0 only once
-			if (m_velocity[0] < 0) {
+			if (m_velocity.x() <= 0) {
 				m_velocity[0] = 0;
-			}
-			
-			// Do put coefficent to 0 only once
-			if (m_velocity[2] < 0) {
-				m_velocity[2] = 0;
+				m_acceleration[0] = 0;
 			}
 		}
 	}
 }
 
 
-void Particle::setMasse(float masse)
+void Particle::setMass(float mass)
 {
-	if (masse <= 0)
+	if (mass <= 0)
 	{
-		throw std::exception("Masse has to be strictly positive - setting an infini masse");
-		m_invertedMasse = 0;
+		throw std::exception("Mass has to be strictly positive - setting an infini masse");
+		m_invertedMass = 0;
 	}
-	else m_invertedMasse = 1 / masse;
+	else m_invertedMass = 1 / mass;
 }
 
 
-float Particle::getInverseMasse()
+float Particle::getInverseMass()
 {
-	return m_invertedMasse;
+	return m_invertedMass;
 
 }
