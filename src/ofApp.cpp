@@ -3,24 +3,20 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	primitives = std::list<of3dPrimitive*>();
-
-	sphere.setRadius(10);
-	const float floorWidth = ofGetScreenWidth() * 100;
-	const float floorHeight = 5;
-	floor = ofBoxPrimitive(floorWidth, floorHeight, 0);
-	position = Vector3D();
-	sphere.setPosition(position.v3());
-	floor.setPosition(Vector3D(0, -10).v3());
-	speed = Vector3D(1, 1);
-
-	primitives.push_back(&sphere);
-	primitives.push_back(&floor);
+	primitives = std::list<std::pair<of3dPrimitive*, Vector3D*>>();
 
 	particleVisualization.setRadius(10);
 	particleVisualization.setPosition(Vector3D().v3());
+	const float floorWidth = ofGetScreenWidth() * 100;
+	const float floorHeight = 5;
+	floor = ofBoxPrimitive(floorWidth, floorHeight, 0);
+	floor.setPosition(Vector3D(0, -10).v3());
 
-	primitives.push_back(&particleVisualization);
+	primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(&particleVisualization, &colorVisualization));
+	primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(&floor, new Vector3D(120, 120, 120)));
+
+	particleVisualization.setRadius(10);
+	particleVisualization.setPosition(Vector3D().v3());
 
 	// Center cam and set origin at the bottom left corner
 	cam.setPosition(Vector3D(0, 0, 1500).v3());
@@ -46,12 +42,13 @@ void ofApp::update(){
 void ofApp::draw(){
 	cam.begin();
 
-	for (of3dPrimitive* primitive : primitives)
+	for (std::pair<of3dPrimitive*, Vector3D*> primitive : primitives)
 	{
-		ofSetColor(colorVisualization[0], 
-			colorVisualization[1], 
-			colorVisualization[2]);
-		primitive->draw();
+		int r = primitive.second->x();
+		int g = primitive.second->y();
+		int b = primitive.second->z();
+		ofSetColor(r, g, b);
+		primitive.first->draw();
 	}
 	for (Particle* particle : particles)
 	{
