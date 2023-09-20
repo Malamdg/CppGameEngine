@@ -12,6 +12,12 @@ void ofApp::setup(){
 	floor = ofBoxPrimitive(floorWidth, floorHeight, 0);
 	floor.setPosition(Vector3D(0, -10).v3());
 
+	//Colors
+	colors[0] = Vector3D(0, 255, 0);
+	colors[1] = Vector3D(255, 0, 0);
+	colors[2] = Vector3D(0, 0, 255);
+	colors[3] = Vector3D(125, 125, 125);
+
 	primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(&particleVisualization, &colorVisualization));
 	primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(&floor, new Vector3D(120, 120, 120)));
 
@@ -49,14 +55,6 @@ void ofApp::draw(){
 		int b = primitive.second->z();
 		ofSetColor(r, g, b);
 		primitive.first->draw();
-	}
-	for (Particle* particle : particles)
-	{
-		int r = particle->getColor()[0];
-		int g = particle->getColor()[1];
-		int b = particle->getColor()[2];
-		ofSetColor(r, g, b);
-		particle->draw();
 	}
 
 	cam.end();
@@ -129,27 +127,31 @@ void ofApp::mouseReleased(int x, int y, int button){
 		case 0 : 
 		{
 			Vector3D speedParticle;
-			Vector3D colorParticle;
+			Vector3D* colorParticle;
 			switch (mode)
 			{
 				case 0 :
 				{
 					speedParticle = Vector3D(50, 50, 0);
+					colorParticle = &colors[0];
 					break;
 				}
 				case 1 :
 				{
 					speedParticle = Vector3D(100, 50, 0);
+					colorParticle = &colors[1];
 					break;
 				}
 				case 2 :
 				{
 					speedParticle = Vector3D(50, 100, 0);
+					colorParticle = &colors[2];
 					break;
 				}
 				case 3 :
 				{
 					speedParticle = Vector3D(100, 100, 0);
+					colorParticle = &colors[3];
 					break;
 				}
 				case 4 : 
@@ -157,17 +159,17 @@ void ofApp::mouseReleased(int x, int y, int button){
 					int r = rand() % 256;
 					int g = rand() % 256;
 					int b = rand() % 256;
-					colorVisualization = Vector3D(r, g, b);
+					colorParticle = new Vector3D(r, g, b);
+					colorVisualization = *colorParticle;
 					speedParticle = Vector3D(r, g, 0);
 					break;
 				}
 				default: break;
 			}
-			colorParticle = colorVisualization;
 			
 			Particle* p = new Particle(10, Vector3D(), speedParticle, 10);
-			p->setColor(colorParticle);
-			particles.push_back(p);;
+			primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(p, colorParticle));
+			particles.push_back(p);
 			break;
 		}
 		default: break;

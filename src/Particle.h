@@ -28,6 +28,4 @@ public:
 	void setMasse(float masse);
 	float getInverseMasse();
 
-	void setColor(Vector3D v);
-	Vector3D getColor();
 };
