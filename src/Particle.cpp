@@ -2,7 +2,6 @@
 #include "MathHelper.h"
 
 /*
-class constructor
 Gravity is normally constant and could have been global. 
 However, here it is specific to each particle, which allows greater modularity.
 */
@@ -27,10 +26,7 @@ Particle::Particle(int radius,
 
 Particle::~Particle(){}
 
-/*
-update position
-update the position of a particle using particle's parameters
-*/
+
 void Particle::Update()
 {
 	float fps;
@@ -89,20 +85,18 @@ void Particle::setMasse(float masse)
 	else m_invertedMasse = 1 / masse;
 }
 
-/*
-get the inverse of the particle's mass
 
-@return the inverse of the particle's mass
-*/
 float Particle::getInverseMasse()
 {
 	return m_invertedMasse;
 }
 
+
 void Particle::setColor(Vector3D v)
 {
 	m_color = v;
 }
+
 
 Vector3D Particle::getColor()
 {
