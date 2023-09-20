@@ -107,6 +107,11 @@ Vector3D & Vector3D::operator^(const Vector3D vector) const
 		m_x * vector.m_y - m_y * vector.m_x);
 }
 
+bool Vector3D::operator==(const Vector3D vector) const
+{
+	return this->m_x == vector.m_x && this->m_y == vector.m_y && this->m_z == vector.m_z && this->m_w == vector.m_w;
+}
+
 /*
 definition of the norm (here norm2)
 allows to do compute the norm of a vector

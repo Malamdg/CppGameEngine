@@ -4,6 +4,7 @@
 #include "of3dPrimitives.h"
 #include "Vector3D.h"
 #include "Particle.h"
+#include "Tests.h"
 #include "iostream"
 
 class ofApp : public ofBaseApp{
