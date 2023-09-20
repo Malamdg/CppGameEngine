@@ -52,10 +52,28 @@ void Particle::Update()
 
 		this->setPosition(m_position.v3());
 
-		// when floor is attained
+		// floor is attained
 		if (m_position[1] <= 0) {
-			m_acceleration[1] = 0;
-			m_velocity[1] = 0;
+			// first time 
+			if (m_velocity[1] < 0) {
+				m_acceleration[1] = 0;
+				m_velocity[1] = 0;
+			}
+			
+			if (m_velocity[0] > 0 || m_velocity[2] > 0) {
+				// Add drag coefficient to simulate friction
+				m_acceleration += m_velocity * -m_dumping * this->getInverseMasse(); // divide by mass to be coherent with FPD
+			}
+
+			// Do put coefficent to 0 only once
+			if (m_velocity[0] < 0) {
+				m_velocity[0] = 0;
+			}
+			
+			// Do put coefficent to 0 only once
+			if (m_velocity[2] < 0) {
+				m_velocity[2] = 0;
+			}
 		}
 	}
 }
