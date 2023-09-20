@@ -4,6 +4,7 @@
 #include "of3dPrimitives.h"
 #include "Vector3D.h"
 #include "Particle.h"
+#include "Tests.h"
 #include "iostream"
 
 class ofApp : public ofBaseApp{
@@ -32,11 +33,15 @@ class ofApp : public ofBaseApp{
 
 		std::list<of3dPrimitive*> primitives;
 		std::list<Particle*> particles;
+		Vector3D colorVisualization = Vector3D(0, 255, 0);
 
 		ofSpherePrimitive sphere;
 		ofBoxPrimitive floor;
 		Vector3D position;
 		Vector3D speed;
+
+		ofSpherePrimitive particleVisualization;
+
 
 		int mode = 0;
 

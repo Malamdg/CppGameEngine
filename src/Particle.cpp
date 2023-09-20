@@ -9,7 +9,7 @@ However, here it is specific to each particle, which allows greater modularity.
 Particle::Particle(int radius,
 	Vector3D position,
 	Vector3D velocity,
-	float masse,
+	float invertedMasse,
 	Vector3D gravity)
 	:
 	ofSpherePrimitive(),
@@ -17,7 +17,7 @@ Particle::Particle(int radius,
 	m_velocity(velocity),
 	m_gravity(gravity),
 	m_acceleration(gravity),
-	m_masse(masse),
+	m_invertedMasse(invertedMasse),
 	m_velocityInit(velocity)
 {
 	this->setRadius(radius);
@@ -78,6 +78,17 @@ void Particle::Update()
 	}
 }
 
+
+void Particle::setMasse(float masse)
+{
+	if (masse <= 0)
+	{
+		throw std::exception("Masse has to be strictly positive - setting an infini masse");
+		m_invertedMasse = 0;
+	}
+	else m_invertedMasse = 1 / masse;
+}
+
 /*
 get the inverse of the particle's mass
 
@@ -85,7 +96,7 @@ get the inverse of the particle's mass
 */
 float Particle::getInverseMasse()
 {
-	return 1 / m_masse;
+	return m_invertedMasse;
 }
 
 void Particle::setColor(Vector3D v)
