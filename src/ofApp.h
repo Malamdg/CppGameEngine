@@ -29,18 +29,25 @@ class ofApp : public ofBaseApp{
 
 	private:
 
+		//Camera
 		ofCamera cam;
 
-		std::list<std::pair<of3dPrimitive*, Vector3D*>> primitives;
+		//**Primitives**//
+		std::list<std::pair<of3dPrimitive*, int*>> primitives;
 		std::list<Particle*> particles;
-		Vector3D colorVisualization = Vector3D(0, 255, 0);
-		Vector3D* colors = new Vector3D[4];
 
 		ofBoxPrimitive floor;
-
 		ofSpherePrimitive particleVisualization;
 
+		//Colors & Textures
+		Vector3D* colors = new Vector3D[5];
+		Vector3D colorVisualization = Vector3D(0, 255, 0);
 
+		ofTexture* textures = new ofTexture[1];
+		ofTexture textureVisualization;
+		ofTexture canonText;
+
+		//Shot modes
 		int mode = 0;
 
 };
