@@ -32,20 +32,17 @@ class ofApp : public ofBaseApp{
 
 		std::list<std::pair<of3dPrimitive*, Vector3D*>> primitives;
 		std::list<Particle*> particles;
-		std::list<Particle*> preview;
+		std::list<std::pair<ofSpherePrimitive*, Vector3D*>> preview;
 
-		Vector3D colorVisualization = Vector3D(0, 255, 0);
+		Vector3D visualizationColor = Vector3D(0, 255, 0);
 		Vector3D* colors = new Vector3D[4];
 
 		ofBoxPrimitive floor;
-
 		ofSpherePrimitive particleVisualization;
-
-
-
 		int mode = 0;
 
+
 		Vector3D GetLaunchDirection(float x, float y);
-		void GeneratePrevisualization(Vector3D initialPosition);
+		void GeneratePrevisualization();
 
 };
