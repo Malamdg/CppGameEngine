@@ -43,9 +43,8 @@ class ofApp : public ofBaseApp{
 		Vector3D* colors = new Vector3D[5];
 		Vector3D colorVisualization = Vector3D(0, 255, 0);
 
-		ofTexture* textures = new ofTexture[1];
+		ofTexture* textures = new ofTexture[2];
 		ofTexture textureVisualization;
-		ofTexture canonText;
 
 		//Shot modes
 		int mode = 0;

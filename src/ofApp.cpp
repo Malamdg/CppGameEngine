@@ -14,11 +14,11 @@ void ofApp::setup(){
 	
 	//Colors & Text
 	ofDisableArbTex();
-	ofLoadImage(canonText, "T_canonBall.png");
-	textures[0] = canonText;
+	ofLoadImage(textures[0], "T_fireBall.png");
+	ofLoadImage(textures[1], "T_canonBall.png");
 
 	colors[0] = Vector3D(0, 255, 0);
-	colors[1] = Vector3D(255, 0, 0);
+	colors[1] = Vector3D(255, 100, 100);
 	colors[2] = Vector3D(0, 0, 255);
 	colors[3] = Vector3D(125, 125, 125);
 	colors[4] = Vector3D(255, 255, 255);
@@ -62,10 +62,12 @@ void ofApp::draw(){
 		int b = colors[*(primitive.second)][2];
 		ofSetColor(r, g, b);
 		
-		if (*primitive.second == 3) textures[0].bind();
+		if (*primitive.second == 1) textures[0].bind();
+		if (*primitive.second == 3) textures[1].bind();
 		
 		primitive.first->draw();
 		
+		if (*primitive.second == 1) textures[0].unbind();
 		if (*primitive.second == 3) textures[0].unbind();
 	}
 
@@ -87,6 +89,7 @@ void ofApp::keyPressed(int key){
 		case 'w': 
 		{
 			mode = 1;
+			textureVisualization = textures[0];
 			colorVisualization = colors[1];
 			break;
 		}
@@ -99,7 +102,7 @@ void ofApp::keyPressed(int key){
 		case 'r': 
 		{
 			mode = 3;
-			textureVisualization = textures[0];
+			textureVisualization = textures[1];
 			colorVisualization = colors[3];
 			break;
 		}
@@ -146,25 +149,21 @@ void ofApp::mouseReleased(int x, int y, int button){
 				case 0 :
 				{
 					speedParticle = Vector3D(50, 50, 0);
-					colorParticle = &colors[0];
 					break;
 				}
 				case 1 :
 				{
 					speedParticle = Vector3D(100, 50, 0);
-					colorParticle = &colors[1];
 					break;
 				}
 				case 2 :
 				{
 					speedParticle = Vector3D(50, 100, 0);
-					colorParticle = &colors[2];
 					break;
 				}
 				case 3 :
 				{
 					speedParticle = Vector3D(100, 100, 0);
-					colorParticle = &colors[3];
 					break;
 				}
 				case 4 : 
@@ -172,7 +171,6 @@ void ofApp::mouseReleased(int x, int y, int button){
 					int r = rand() % 256;
 					int g = rand() % 256;
 					int b = rand() % 256;
-					colorParticle = new Vector3D(r, g, b);
 					colorVisualization = *colorParticle;
 					speedParticle = Vector3D(r, g, 0);
 					break;
