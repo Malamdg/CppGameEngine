@@ -274,7 +274,7 @@ void ofApp::GeneratePrevisualization()
 
 	float y = 0;
 
-	for (float x = 0; x <= finalX; x += deltaX)
+	for (float x = 0; abs(x) <= abs(finalX); x += deltaX)
 	{
 		y = f(x);
 
