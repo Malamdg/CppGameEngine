@@ -34,6 +34,7 @@ class ofApp : public ofBaseApp{
 		std::list<Particle*> particles;
 		std::list<std::pair<ofSpherePrimitive*, Vector3D*>> preview;
 
+		Vector3D m_initialPosition = Vector3D();
 		Vector3D visualizationColor = Vector3D(0, 255, 0);
 		Vector3D* colors = new Vector3D[4];
 
@@ -43,6 +44,6 @@ class ofApp : public ofBaseApp{
 
 
 		Vector3D GetLaunchDirection(float x, float y);
-		void GeneratePrevisualization();
+		void GeneratePrevisualization(Vector3D initialPosition = Vector3D());
 
 };

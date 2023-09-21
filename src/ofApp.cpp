@@ -1,4 +1,5 @@
 #include "ofApp.h"
+#include "MathHelper.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -224,15 +225,18 @@ Vector3D ofApp::GetLaunchDirection(float x, float y)
 
 	Vector3D launchDirection = cursorPosition - worldZeroOnScreen;
 	launchDirection[1] *= -1;
+	launchDirection += m_initialPosition;
 	launchDirection.Normalize();
 
 	return launchDirection;
 }
 
-void ofApp::GeneratePrevisualization()
+void ofApp::GeneratePrevisualization(Vector3D initialPosition)
 {
 	float particleSpeed;
 	Vector3D* particleColor;
+	Vector3D directionUnitVector = GetLaunchDirection(ofGetMouseX(), ofGetMouseY());
+
 	switch (mode)
 	{
 		case 0:
@@ -259,24 +263,75 @@ void ofApp::GeneratePrevisualization()
 			particleColor = &colors[3];
 			break;
 		}
-		default: return;
+		case 4:
+		{
+			Vector3D position;
+			for (int i = 0; i < 3; i++) {
+				position = directionUnitVector * 20 * (i + 1);
+				ofSpherePrimitive* previewSphere = new ofSpherePrimitive();
+				previewSphere->setRadius(5);
+				previewSphere->setPosition(position.v3());
+				preview.push_back(std::pair<ofSpherePrimitive*, Vector3D*>(previewSphere, &visualizationColor));
+			}
+
+			return;
+		}
+		default: break;
 	}
 
-	const Vector3D initialSpeed = GetLaunchDirection(ofGetMouseX(), ofGetMouseY()) * particleSpeed;
+	const Vector3D initialSpeed = directionUnitVector * particleSpeed;
 
-	function <float(float)> f = [initialSpeed](float x) {
-		return (x * x * -9.8) / (2 * initialSpeed.x() * initialSpeed.x()) + x * (initialSpeed.y() / initialSpeed.x());
+	// parametric equation of y
+	function <float(float)> y_t = [initialSpeed, initialPosition](float t) {
+			return -9.8 * t * t / 2 + t * initialSpeed.y() + initialPosition.y();
+		}
+	;
+	
+	// cartesian equation of time
+	function <float(float)> t_x = [initialSpeed, initialPosition](float x) {
+			return (x - initialPosition.x()) / initialSpeed.x();
+		}
+	;	
+	
+	// cartesian equation of y, avoid developping expressions with x - x0
+	function <float(float)> y_x = [y_t, t_x](float x) {
+			return y_t(t_x(x));
+		}
+	;	
+	
+	// cartesian equation of dy / dx
+	function <float(float)> dy_x = [initialSpeed, initialPosition](float x) {
+		return (-9.8 * x * x / (initialSpeed.x() * initialSpeed.x())) + x * (initialSpeed.y() / initialSpeed.x() - initialPosition.x());
+		}
+	;	
+	
+	// differential of length to integrate to get y(x)'s curve length
+	function <float(float)> dl = [dy_x](float x) {
+			return sqrt(1 + dy_x(x) * dy_x(x));
 		}
 	;
 
-	float finalX = 2 * initialSpeed.x() * initialSpeed.y() / 9.8;
-	float deltaX = finalX / 10;
+	
+	float finalX = initialPosition.x() + 2 * initialSpeed.x() * initialSpeed.y() / 9.8;
 
-	float y = 0;
 
-	for (float x = 0; abs(x) <= abs(finalX); x += deltaX)
+
+	Vector3D i;
+	i[0] = finalX > initialPosition.x() ? initialPosition.x() : finalX;
+	i[1] = finalX > initialPosition.x() ? finalX : initialPosition.x();
+	
+	float interval[2] = { i.x(), i.y() };
+	float l = abs(integrate(dy_x, interval)); // dunno why I've got negative values
+
+	int nbDots = l > 200 ? 10 : (l >= 20 ? round(l / 10) : 1);
+
+	float deltaX = finalX / nbDots;
+
+	float y;
+
+	for (float x = initialPosition.x(); abs(x) <= abs(finalX); x += deltaX)
 	{
-		y = f(x);
+		y = y_x(x);
 
 		ofSpherePrimitive* previewSphere = new ofSpherePrimitive();
 		previewSphere->setRadius(5);

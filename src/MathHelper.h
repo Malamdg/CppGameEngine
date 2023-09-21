@@ -12,3 +12,4 @@ integrate the function over an interval with Euler's method using a defined numb
 @return a vector whose components have been integrated
 */
 Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 50);
+float integrate(function<float(float)> f, float interval[2], int N = 50);
