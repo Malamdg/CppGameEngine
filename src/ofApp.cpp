@@ -8,6 +8,7 @@ void ofApp::setup(){
 	primitives = std::list<std::pair<of3dPrimitive*, int*>>();
 	preview = std::list<std::pair<ofSpherePrimitive*, int*>>();
 
+
 	particleVisualization.setRadius(10);
 	particleVisualization.setPosition(Vector3D().v3());
 	const float floorWidth = ofGetScreenWidth() * 100;
@@ -31,7 +32,6 @@ void ofApp::setup(){
 	int* floorMode = new int(3);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(&floor, floorMode));
 
-
 	particleVisualization.setRadius(10);
 	particleVisualization.setPosition(Vector3D().v3());
 
@@ -45,7 +45,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+	
 	//Update particles
 	for (Particle* particle : particles)
 	{
