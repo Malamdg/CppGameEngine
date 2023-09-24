@@ -37,7 +37,7 @@ void Particle::Update()
 
 		// integrate acceleration to update velocity
 		const Vector3D acceleration = m_acceleration;
-		auto a = [acceleration](float t) { return acceleration; };
+		function<Vector3D(float)> a = [acceleration](float t) { return acceleration; };
 		m_velocity += integrate(a, interval);
 
 		// integrate velocity to update position

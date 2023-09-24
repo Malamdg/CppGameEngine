@@ -9,6 +9,13 @@ Vector3D::Vector3D(const float x, const float y, const float z)
 	m_w(0)
 { }
 
+Vector3D::Vector3D(glm::vec3 vector) 
+{
+	m_x = vector.x;		
+	m_y = vector.y;		
+	m_z = vector.z;		
+	m_w = 0;		
+};
 
 Vector3D::~Vector3D() {}
 
