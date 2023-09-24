@@ -157,7 +157,6 @@ void ofApp::mouseReleased(int x, int y, int button){
 		{
 			float particleSpeed;
 			Vector3D* particleColor;
-
 			switch (mode)
 			{
 				case 0 :
@@ -188,12 +187,11 @@ void ofApp::mouseReleased(int x, int y, int button){
 					particleColor = new Vector3D(r, g, b);
 					particleSpeed = (r * g * b) % 500;
 					visualizationColor = *particleColor;
-
 					break;
 				}
 				default: break;
 			}
-
+      
 			Particle* p = new Particle(10, Vector3D(), GetLaunchDirection(x, y) * particleSpeed, 10, Vector3D(0, -gravity));
 			int* tmpMode = new int(mode);
 			primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
