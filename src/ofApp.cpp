@@ -4,6 +4,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
+	commandText = "Changer de mode de tir en appuyant sur 'a'/'q', 'z'/'w', 'e', 'r', et 't' !";
+
 	primitives = std::list<std::pair<of3dPrimitive*, Vector3D*>>();
 	particles = std::list<Particle*>();
 	preview = std::list<std::pair<ofSpherePrimitive*, Vector3D*>>();
@@ -31,8 +33,6 @@ void ofApp::setup(){
 	cam.setPosition(Vector3D(0, 0, 1500).v3());
 	cam.move(Vector3D(ofGetWidth() * .5, ofGetHeight() * .5).v3());
 
-	std::cout << "Change de mode de tir en appuyant sur 'a'/'q', 'z'/'w', 'e', 'r', et 't' !" << std::endl;
-
 	//Tests
 	Tests::ExecuteTests();
 }
@@ -53,6 +53,9 @@ void ofApp::update(){
 void ofApp::draw(){
 	cam.begin();
 
+	ofSetColor(255, 255, 255);
+	ofDrawBitmapString(ofToString(commandText), 0, ofGetScreenHeight());
+
 	for (std::pair<of3dPrimitive*, Vector3D*> primitive : primitives)
 	{
 		int r = primitive.second->x();
@@ -61,6 +64,7 @@ void ofApp::draw(){
 		ofSetColor(r, g, b);
 		primitive.first->draw();
 	}
+
 	for (std::pair<ofSpherePrimitive*, Vector3D*> previewPair : preview)
 	{
 		int r = previewPair.second->x();
@@ -180,7 +184,7 @@ void ofApp::mouseReleased(int x, int y, int button){
 				default: break;
 			}
 
-			Particle* p = new Particle(10, Vector3D(), GetLaunchDirection(x, y) * particleSpeed, 10);
+			Particle* p = new Particle(10, Vector3D(), GetLaunchDirection(x, y) * particleSpeed, 10, Vector3D(0, -gravity));
 			primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(p, particleColor));
 			particles.push_back(p);
 			break;
@@ -280,59 +284,32 @@ void ofApp::GeneratePrevisualization(Vector3D initialPosition)
 	}
 
 	const Vector3D initialSpeed = directionUnitVector * particleSpeed;
+	
+	if (initialSpeed.y() <= 0) {
+		return;
+	}
+	
+	float g = gravity;
 
-	// parametric equation of y
-	function <float(float)> y_t = [initialSpeed, initialPosition](float t) {
-			return -9.8 * t * t / 2 + t * initialSpeed.y() + initialPosition.y();
-		}
-	;
-	
-	// cartesian equation of time
-	function <float(float)> t_x = [initialSpeed, initialPosition](float x) {
-			return (x - initialPosition.x()) / initialSpeed.x();
-		}
-	;	
-	
-	// cartesian equation of y, avoid developping expressions with x - x0
-	function <float(float)> y_x = [y_t, t_x](float x) {
-			return y_t(t_x(x));
+	// cartesian equation of y
+	function <float(float)> y_x = [initialSpeed, initialPosition, g](float x) {
+		return -g * x * x / (2 * initialSpeed.x() * initialSpeed.x()) + x * initialSpeed.y() / initialSpeed.x() + initialPosition.y();
 		}
 	;	
-	
-	// cartesian equation of dy / dx
-	function <float(float)> dy_x = [initialSpeed, initialPosition](float x) {
-		return (-9.8 * x * x / (initialSpeed.x() * initialSpeed.x())) + x * (initialSpeed.y() / initialSpeed.x() - initialPosition.x());
-		}
-	;	
-	
-	// differential of length to integrate to get y(x)'s curve length
-	function <float(float)> dl = [dy_x](float x) {
-			return sqrt(1 + dy_x(x) * dy_x(x));
-		}
-	;
 
-	
-	float finalX = initialPosition.x() + 2 * initialSpeed.x() * initialSpeed.y() / 9.8;
+	float finalX = initialPosition.x() + 2 * initialSpeed.x() * initialSpeed.y() / gravity;
+	float apexY = initialPosition.y() + initialSpeed.y() * initialSpeed.y() / (2 * gravity);
 
+	int nbSphere = 10;
 
-
-	Vector3D i;
-	i[0] = finalX > initialPosition.x() ? initialPosition.x() : finalX;
-	i[1] = finalX > initialPosition.x() ? finalX : initialPosition.x();
-	
-	float interval[2] = { i.x(), i.y() };
-	float l = abs(integrate(dy_x, interval)); // dunno why I've got negative values
-
-	int nbDots = l > 200 ? 10 : (l >= 20 ? round(l / 10) : 1);
-
-	float deltaX = finalX / nbDots;
+	float deltaX = finalX / nbSphere;
 
 	float y;
 
 	for (float x = initialPosition.x(); abs(x) <= abs(finalX); x += deltaX)
 	{
 		y = y_x(x);
-
+		
 		ofSpherePrimitive* previewSphere = new ofSpherePrimitive();
 		previewSphere->setRadius(5);
 		previewSphere->setPosition(Vector3D(x, y).v3());

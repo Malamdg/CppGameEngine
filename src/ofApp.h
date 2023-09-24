@@ -41,7 +41,8 @@ class ofApp : public ofBaseApp{
 		ofBoxPrimitive floor;
 		ofSpherePrimitive particleVisualization;
 		int mode = 0;
-
+		float gravity = 9.8;
+		string commandText;
 
 		Vector3D GetLaunchDirection(float x, float y);
 		void GeneratePrevisualization(Vector3D initialPosition = Vector3D());
