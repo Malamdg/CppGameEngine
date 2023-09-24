@@ -34,7 +34,7 @@ bld/
 [Ll]ogs/
 
 # Filters
-![Bb]in/data/*.png
+![Bb]in/!data/*.!png
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
