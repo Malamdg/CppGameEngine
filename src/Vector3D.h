@@ -128,11 +128,46 @@ public:
 	*/
 	string toString() const;
 
+	/*
+	get the x component of a vector
+ 
+	@return the component
+	*/
 	float x()const;
+
+	/*
+	set the x component of a vector
+
+ 	@param f, the new value for the component
+	*/
 	void x(float f);
+
+	/*
+	get the y component of a vector
+ 
+	@return the component
+	*/
 	float y()const;
+
+	/*
+	set the y component of a vector
+
+ 	@param f, the new value for the component
+	*/
 	void y(float f);
+
+	/*
+	get the z component of a vector
+ 
+	@return the component
+	*/
 	float z()const;
+
+	/*
+	set the z component of a vector
+
+ 	@param f, the new value for the component
+	*/
 	void z(float f);
   
 	/*
