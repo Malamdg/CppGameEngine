@@ -3,12 +3,10 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
 	commandText = "Changer de mode de tir en appuyant sur 'a'/'q', 'z'/'w', 'e', 'r', et 't' !";
 
-	primitives = std::list<std::pair<of3dPrimitive*, Vector3D*>>();
-	particles = std::list<Particle*>();
-	preview = std::list<std::pair<ofSpherePrimitive*, Vector3D*>>();
+	primitives = std::list<std::pair<of3dPrimitive*, int*>>();
+	preview = std::list<std::pair<ofSpherePrimitive*, int*>>();
 
 	particleVisualization.setRadius(10);
 	particleVisualization.setPosition(Vector3D().v3());
@@ -16,15 +14,23 @@ void ofApp::setup(){
 	const float floorHeight = 5;
 	floor = ofBoxPrimitive(floorWidth, floorHeight, 0);
 	floor.setPosition(Vector3D(0, -10).v3());
+	
+	//Colors & Text
+	ofDisableArbTex();
+	ofLoadImage(textures[0], "T_fireBall.png");
+	ofLoadImage(textures[1], "T_canonBall.png");
 
-	//Colors
 	colors[0] = Vector3D(0, 255, 0);
-	colors[1] = Vector3D(255, 0, 0);
+	colors[1] = Vector3D(255, 100, 100);
 	colors[2] = Vector3D(0, 0, 255);
 	colors[3] = Vector3D(125, 125, 125);
+	colors[4] = Vector3D(255, 255, 255);
 
-	primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(&particleVisualization, &visualizationColor));
-	primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(&floor, new Vector3D(120, 120, 120)));
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(&particleVisualization, &mode));
+	
+	int* floorMode = new int(3);
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(&floor, floorMode));
+
 
 	particleVisualization.setRadius(10);
 	particleVisualization.setPosition(Vector3D().v3());
@@ -38,7 +44,8 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){	
+void ofApp::update(){
+
 	//Update particles
 	for (Particle* particle : particles)
 	{
@@ -52,28 +59,34 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	cam.begin();
-
 	ofSetColor(255, 255, 255);
 	ofDrawBitmapString(ofToString(commandText), 0, ofGetScreenHeight());
 
-	for (std::pair<of3dPrimitive*, Vector3D*> primitive : primitives)
+	for (std::pair<of3dPrimitive*, int*> primitive : primitives)
 	{
-		int r = primitive.second->x();
-		int g = primitive.second->y();
-		int b = primitive.second->z();
+		int r = colors[*(primitive.second)][0];
+		int g = colors[*(primitive.second)][1];
+		int b = colors[*(primitive.second)][2];
 		ofSetColor(r, g, b);
+		
+		if (*primitive.second == 1) textures[0].bind();
+		if (*primitive.second == 3) textures[1].bind();
+		
 		primitive.first->draw();
+		
+		if (*primitive.second == 1) textures[0].unbind();
+		if (*primitive.second == 3) textures[0].unbind();
 	}
 
-	for (std::pair<ofSpherePrimitive*, Vector3D*> previewPair : preview)
+	for (std::pair<ofSpherePrimitive*, int*> previewPair : preview)
 	{
-		int r = previewPair.second->x();
-		int g = previewPair.second->y();
-		int b = previewPair.second->z();
+		int r = colors[*(previewPair.second)][0];
+		int g = colors[*(previewPair.second)][1];
+		int b = colors[*(previewPair.second)][2];
 		ofSetColor(r, g, b);
+
 		previewPair.first->draw();
 	}
-
 	cam.end();
 }
 
@@ -85,35 +98,34 @@ void ofApp::keyPressed(int key){
 		case 'q':
 		{
 			mode = 0;
-			visualizationColor = Vector3D(0, 255, 0);
 			break;
 		}
 		case 'z': 
 		case 'w': 
 		{
 			mode = 1;
-			visualizationColor = Vector3D(255, 0, 0);
+			textureVisualization = textures[0];
 			break;
 		}
 		case 'e': 
 		{
 			mode = 2;
-			visualizationColor = Vector3D(0, 0, 255);
 			break;
 		}
 		case 'r': 
 		{
 			mode = 3;
-			visualizationColor = Vector3D(125, 125, 125);
+			textureVisualization = textures[1];
 			break;
 		}
 		case 't': 
 		{
-			mode = 4; 
-			visualizationColor = Vector3D(255, 255, 255);
+			mode = 4;
 			break;
 		}
 		default: break;
+
+		colorVisualization = colors[mode];
 	}
 }
 
@@ -145,30 +157,27 @@ void ofApp::mouseReleased(int x, int y, int button){
 		{
 			float particleSpeed;
 			Vector3D* particleColor;
+
 			switch (mode)
 			{
 				case 0 :
 				{
 					particleSpeed = 50;
-					particleColor = &colors[0];
 					break;
 				}
 				case 1 :
 				{
 					particleSpeed = 75;
-					particleColor = &colors[1];
 					break;
 				}
 				case 2 :
 				{
 					particleSpeed = 100;
-					particleColor = &colors[2];
 					break;
 				}
 				case 3 :
 				{
 					particleSpeed = 125;
-					particleColor = &colors[3];
 					break;
 				}
 				case 4 : 
@@ -179,13 +188,15 @@ void ofApp::mouseReleased(int x, int y, int button){
 					particleColor = new Vector3D(r, g, b);
 					particleSpeed = (r * g * b) % 500;
 					visualizationColor = *particleColor;
+
 					break;
 				}
 				default: break;
 			}
 
 			Particle* p = new Particle(10, Vector3D(), GetLaunchDirection(x, y) * particleSpeed, 10, Vector3D(0, -gravity));
-			primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(p, particleColor));
+			int* tmpMode = new int(mode);
+			primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
 			particles.push_back(p);
 			break;
 		}
