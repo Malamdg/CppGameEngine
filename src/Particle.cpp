@@ -85,14 +85,3 @@ float Particle::getInverseMass()
 {
 	return m_invertedMass;
 }
-
-void Particle::setColor(Vector3D v)
-{
-	m_color = v;
-}
-
-
-Vector3D Particle::getColor()
-{
-	return m_color;
-}
