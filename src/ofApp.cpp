@@ -125,7 +125,7 @@ void ofApp::keyPressed(int key){
 		}
 		default: break;
 
-		colorVisualization = colors[mode];
+		visualizationColor = colors[mode];
 	}
 }
 
@@ -286,7 +286,7 @@ void ofApp::GeneratePrevisualization(Vector3D initialPosition)
 				ofSpherePrimitive* previewSphere = new ofSpherePrimitive();
 				previewSphere->setRadius(5);
 				previewSphere->setPosition(position.v3());
-				preview.push_back(std::pair<ofSpherePrimitive*, Vector3D*>(previewSphere, &visualizationColor));
+				preview.push_back(std::pair<ofSpherePrimitive*, int*>(previewSphere, &mode));
 			}
 
 			return;
@@ -324,6 +324,6 @@ void ofApp::GeneratePrevisualization(Vector3D initialPosition)
 		ofSpherePrimitive* previewSphere = new ofSpherePrimitive();
 		previewSphere->setRadius(5);
 		previewSphere->setPosition(Vector3D(x, y).v3());
-		preview.push_back(std::pair<ofSpherePrimitive*, Vector3D*>(previewSphere, &visualizationColor));
+		preview.push_back(std::pair<ofSpherePrimitive*, int*>(previewSphere, &mode));
 	}
 }
