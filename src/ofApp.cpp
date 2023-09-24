@@ -75,7 +75,7 @@ void ofApp::draw(){
 		primitive.first->draw();
 		
 		if (*primitive.second == 1) textures[0].unbind();
-		if (*primitive.second == 3) textures[0].unbind();
+		if (*primitive.second == 3) textures[1].unbind();
 	}
 
 	for (std::pair<ofSpherePrimitive*, int*> previewPair : preview)
