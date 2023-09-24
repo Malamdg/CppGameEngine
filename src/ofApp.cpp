@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	primitives = std::list<std::pair<of3dPrimitive*, Vector3D*>>();
+	primitives = std::list<std::pair<of3dPrimitive*, int*>>();
 
 	particleVisualization.setRadius(10);
 	particleVisualization.setPosition(Vector3D().v3());
@@ -11,15 +11,22 @@ void ofApp::setup(){
 	const float floorHeight = 5;
 	floor = ofBoxPrimitive(floorWidth, floorHeight, 0);
 	floor.setPosition(Vector3D(0, -10).v3());
+	
+	//Colors & Text
+	ofDisableArbTex();
+	ofLoadImage(textures[0], "T_fireBall.png");
+	ofLoadImage(textures[1], "T_canonBall.png");
 
-	//Colors
 	colors[0] = Vector3D(0, 255, 0);
-	colors[1] = Vector3D(255, 0, 0);
+	colors[1] = Vector3D(255, 100, 100);
 	colors[2] = Vector3D(0, 0, 255);
 	colors[3] = Vector3D(125, 125, 125);
+	colors[4] = Vector3D(255, 255, 255);
 
-	primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(&particleVisualization, &colorVisualization));
-	primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(&floor, new Vector3D(120, 120, 120)));
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(&particleVisualization, &mode));
+	
+	int* floorMode = new int(3);
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(&floor, floorMode));
 
 	particleVisualization.setRadius(10);
 	particleVisualization.setPosition(Vector3D().v3());
@@ -48,13 +55,20 @@ void ofApp::update(){
 void ofApp::draw(){
 	cam.begin();
 
-	for (std::pair<of3dPrimitive*, Vector3D*> primitive : primitives)
+	for (std::pair<of3dPrimitive*, int*> primitive : primitives)
 	{
-		int r = primitive.second->x();
-		int g = primitive.second->y();
-		int b = primitive.second->z();
+		int r = colors[*(primitive.second)][0];
+		int g = colors[*(primitive.second)][1];
+		int b = colors[*(primitive.second)][2];
 		ofSetColor(r, g, b);
+		
+		if (*primitive.second == 1) textures[0].bind();
+		if (*primitive.second == 3) textures[1].bind();
+		
 		primitive.first->draw();
+		
+		if (*primitive.second == 1) textures[0].unbind();
+		if (*primitive.second == 3) textures[0].unbind();
 	}
 
 	cam.end();
@@ -68,32 +82,34 @@ void ofApp::keyPressed(int key){
 		case 'q':
 		{
 			mode = 0;
-			colorVisualization = Vector3D(0, 255, 0);
+			colorVisualization = colors[0];
 			break;
 		}
 		case 'z': 
 		case 'w': 
 		{
 			mode = 1;
-			colorVisualization = Vector3D(255, 0, 0);
+			textureVisualization = textures[0];
+			colorVisualization = colors[1];
 			break;
 		}
 		case 'e': 
 		{
 			mode = 2;
-			colorVisualization = Vector3D(0, 0, 255);
+			colorVisualization = colors[2];
 			break;
 		}
 		case 'r': 
 		{
 			mode = 3;
-			colorVisualization = Vector3D(125, 125, 125);
+			textureVisualization = textures[1];
+			colorVisualization = colors[3];
 			break;
 		}
 		case 't': 
 		{
 			mode = 4; 
-			colorVisualization = Vector3D(255, 255, 255);
+			colorVisualization = colors[4];
 			break;
 		}
 		default: break;
@@ -133,25 +149,21 @@ void ofApp::mouseReleased(int x, int y, int button){
 				case 0 :
 				{
 					speedParticle = Vector3D(50, 50, 0);
-					colorParticle = &colors[0];
 					break;
 				}
 				case 1 :
 				{
 					speedParticle = Vector3D(100, 50, 0);
-					colorParticle = &colors[1];
 					break;
 				}
 				case 2 :
 				{
 					speedParticle = Vector3D(50, 100, 0);
-					colorParticle = &colors[2];
 					break;
 				}
 				case 3 :
 				{
 					speedParticle = Vector3D(100, 100, 0);
-					colorParticle = &colors[3];
 					break;
 				}
 				case 4 : 
@@ -159,7 +171,6 @@ void ofApp::mouseReleased(int x, int y, int button){
 					int r = rand() % 256;
 					int g = rand() % 256;
 					int b = rand() % 256;
-					colorParticle = new Vector3D(r, g, b);
 					colorVisualization = *colorParticle;
 					speedParticle = Vector3D(r, g, 0);
 					break;
@@ -168,7 +179,8 @@ void ofApp::mouseReleased(int x, int y, int button){
 			}
 			
 			Particle* p = new Particle(10, Vector3D(), speedParticle, 10);
-			primitives.push_back(std::pair<of3dPrimitive*, Vector3D*>(p, colorParticle));
+			int* tmpMode = new int(mode);
+			primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
 			particles.push_back(p);
 			break;
 		}
