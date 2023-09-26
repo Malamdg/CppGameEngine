@@ -8,21 +8,8 @@ Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N)
 
 	// Midpoint integration precise enough with min 50 rectangles
 	for (int i = 0; i < N; i++) {
-		u += f((2 * i + 1) * step / 2) * step;
+		u += f((2 * i + 1) * step / 2 + interval[0]) * step;
 	}
 
 	return u;
-}
-
-float integrate(function<float(float)> f, float interval[2], int N)
-{
-	float s = 0;
-	float step = (interval[1] - interval[0]) / N; // algorithm integration step, width of a rectangle
-
-	// Midpoint integration precise enough with min 50 rectangles
-	for (int i = 0; i < N; i++) {
-		s += f((2 * i + 1) * step / 2) * step;
-	}
-
-	return s;
 }
