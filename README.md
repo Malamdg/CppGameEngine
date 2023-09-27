@@ -1,5 +1,5 @@
 # CppGameEngine
-credits to ...
+credits to Nekkiji, XordNeuville, theosimon, Malamdg
 
 ## Setting up the project
 
@@ -18,4 +18,8 @@ note that the `myApps` dir is not the only solution you have, you can put your p
 
 Download the version corresponding to the wanted phase of the project from the [Releases page](https://github.com/Malamdg/CppGameEngine/releases)
 
-<!--- Todo add compilation instructions -->
+# Compilation
+From Visual Studio :
+1. open the project via the .sln file
+2. when it is completely loaded compile it via the empty center green play button or press ctrl+F5
+3. and voilà
