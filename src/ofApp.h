@@ -47,12 +47,29 @@ class ofApp : public ofBaseApp{
 		ofTexture* textures = new ofTexture[2];
 		ofTexture textureVisualization;
 
-		//Shot modes
+		// Shooting modes
 		int mode = 0;
+
+		// Constants 
 		float gravity = 9.8;
+		
+		// Texts to display
 		string commandText;
 
+		/*
+		* Function to get launch direction from mouse
+		* 
+		* @param float x, mouse's x on screen
+		* @param float y, mouse's y on screen
+		* @return Vector3D, normalized shooting direction vector
+		*/
 		Vector3D GetLaunchDirection(float x, float y);
+
+		/*
+		* Method to display a previsualization of current shot
+		* 
+		* @param Vector3D initialPosition, particle's starting point from (0, 0, 0)
+		*/
 		void GeneratePrevisualization(Vector3D initialPosition = Vector3D());
 
 };
