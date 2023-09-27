@@ -38,7 +38,7 @@ public:
 	update position
 	update the position of a particle using particle's parameters
 	do a midpoint integration on every frame of movement, each frame representing a rectangle
-	furthermore is done midpoint integration in the update to have an interpolation of velocity and position curbs
+	furthermore is done midpoint integration in the update to have an interpolation of velocity and position curves
 	*/
 	void Update();
 
