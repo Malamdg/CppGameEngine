@@ -33,16 +33,16 @@ void Particle::Update()
 
 	// if no fps no movement && avoid division by zero
 	if (fps != 0) {
-		float interval[2] = { 0, 1 / fps };
+		float interval[2] = { 0, 1 / fps }; // integrate on frame duration = 1 / fps
 
 		// integrate acceleration to update velocity
 		const Vector3D acceleration = m_acceleration;
-		function<Vector3D(float)> a = [acceleration](float t) { return acceleration; };
+		function<Vector3D(float)> a = [acceleration](float t) { return acceleration; }; // function of acceleration over time
 		m_velocity += integrate(a, interval);
 
 		// integrate velocity to update position
 		const Vector3D velocity = m_velocity;
-		function<Vector3D(float)> v = [velocity](float t) { return velocity; };
+		function<Vector3D(float)> v = [velocity](float t) { return velocity; }; // function of velocity over time
 		m_position += integrate(v, interval);
 
 		this->setPosition(m_position.v3());
