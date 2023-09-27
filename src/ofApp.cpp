@@ -335,10 +335,10 @@ void ofApp::GeneratePrevisualization(Vector3D initialPosition)
 
 	// finalX of balistic trajectory to get a stop point
 	float finalX = initialPosition.x() + 2 * initialSpeed.x() * initialSpeed.y() / gravity;
-	// apexY to get number of points proportinal to the curb - todo
+	// apexY to get number of points proportinal to the curve - todo
 	float apexY = initialPosition.y() + initialSpeed.y() * initialSpeed.y() / (2 * gravity);
 
-	// nbSphere - todo proportionnal to curb
+	// nbSphere - todo proportionnal to curve
 	int nbSphere = 10;
 
 	// step between balls
