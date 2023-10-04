@@ -32,7 +32,8 @@ public:
 		Vector3D position = Vector3D(),
 		Vector3D velocity = Vector3D(),
 		float invertedMass = 0,
-		Vector3D gravity = Vector3D(0, -9.8, 0));
+		Vector3D gravity = Vector3D(0, -9.8, 0),
+		Vector3D AccumForce = Vector3D());
 	~Particle();
 
 	/*
@@ -62,7 +63,7 @@ public:
 
 	@param Force, the new Force applied to the particle
 	*/
-	void addForce(const& Vector3D Force);
+	void addForce(const Vector3D &force);
 
 	/*
 	clear the force accumulator assigned to the particle

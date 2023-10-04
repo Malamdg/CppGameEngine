@@ -88,14 +88,13 @@ float Particle::getInverseMass()
 	return m_invertedMass;
 }
 
-void Particle::addForce(const& Vector3D Force) 
+void Particle::addForce(const Vector3D &force) 
 {
-	m_AccumForce += Force;
+	m_AccumForce += force;
 }
 
-void clearAccum()
+void Particle::clearAccum()
 {
 	m_AccumForce = Vector3D();
 }
 
-};

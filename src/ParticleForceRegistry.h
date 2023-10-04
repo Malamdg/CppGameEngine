@@ -1,10 +1,12 @@
 #include "Particle.h"
 
-class ParticleForceGenerator :
+class ParticleForceGenerator
+{
 	public:
 		struct ParticleForceRegistration
 		{
-			Particle *particle;
+			Particle* particle;
 			ParticleForceGenerator* Fg;
 		};
+};
 
