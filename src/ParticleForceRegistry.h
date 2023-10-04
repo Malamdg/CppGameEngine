@@ -1,3 +1,5 @@
+#include "Particle.h"
+
 class ParticleForceGenerator :
 	public:
 		struct ParticleForceRegistration
@@ -5,3 +7,4 @@ class ParticleForceGenerator :
 			Particle *particle;
 			ParticleForceGenerator* Fg;
 		};
+
