@@ -14,6 +14,7 @@ private:
 	Vector3D m_velocityInit;
 	float m_drag_coef = 0.005;
 	Vector3D m_color;
+	Vector3D m_AccumForce;
 
 public:
 	/*
@@ -55,4 +56,16 @@ public:
 	@return the inverse of the particle's mass
 	*/
 	float getInverseMass();
+
+	/*
+	add a Force to the particle
+
+	@param Force, the new Force applied to the particle
+	*/
+	void addForce(const& Vector3D Force);
+
+	/*
+	clear the force accumulator assigned to the particle
+	*/
+	void clearAccum();
 };

@@ -9,7 +9,8 @@ Particle::Particle(int radius,
 	Vector3D position,
 	Vector3D velocity,
 	float invertedMass,
-	Vector3D gravity)
+	Vector3D gravity,
+	Vector3D AccumForce)
 	:
 	ofSpherePrimitive(),
 	m_position(position),
@@ -17,7 +18,8 @@ Particle::Particle(int radius,
 	m_gravity(gravity),
 	m_acceleration(gravity),
 	m_invertedMass(invertedMass),
-	m_velocityInit(velocity)
+	m_velocityInit(velocity),
+	m_AccumForce(AccumForce)
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
@@ -85,3 +87,15 @@ float Particle::getInverseMass()
 {
 	return m_invertedMass;
 }
+
+void Particle::addForce(const& Vector3D Force) 
+{
+	m_AccumForce += Force;
+}
+
+void clearAccum()
+{
+	m_AccumForce = Vector3D();
+}
+
+};
