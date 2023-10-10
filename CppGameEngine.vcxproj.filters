@@ -8,6 +8,9 @@
     <ClCompile Include="src\Vector3D.cpp" />
     <ClCompile Include="src\Tests.cpp" />
     <ClCompile Include="src\ParticleForceRegistry.cpp" />
+    <ClCompile Include="src\ParticleGravity.cpp" />
+    <ClCompile Include="src\ParticleFriction.cpp" />
+    <ClCompile Include="src\ParticleResilience.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MathHelper.h" />
