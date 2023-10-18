@@ -14,7 +14,7 @@ private:
 	Vector3D m_velocityInit;
 	float m_drag_coef = 0.005;
 	Vector3D m_color;
-	Vector3D m_AccumForce;
+	Vector3D m_accumForce;
 
 	/*
 	* private function to implement Euler integration
@@ -24,7 +24,7 @@ private:
 	/*
 	* private method to update acceleration given the duration of the frame
 	*/
-	void updateAcceleration(float duration);
+	void updateAcceleration();
 
 	/*
 	* private method to update velocity given the duration of the frame
