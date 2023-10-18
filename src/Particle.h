@@ -15,17 +15,37 @@ private:
 	float m_drag_coef = 0.005;
 	Vector3D m_color;
 
+	/*
+	* private function to implement Euler integration
+	*/
+	Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 100);
+
+	/*
+	* private method to update acceleration given the duration of the frame
+	*/
+	void updateAcceleration(float duration);
+
+	/*
+	* private method to update velocity given the duration of the frame
+	*/
+	void updateVelocity(float duration);
+	
+	/*
+	* private method to update position given the duration of the frame
+	*/
+	void updatePosition(float duration);
+
 public:
 	/*
-	class constructor
-	@param radius, the radius of the particle set to 10 by default
-	@param position, a vector to set the initial position of the particle
-	@param velocity, a vector to set the initial velocity of the particle
-	@param masse, the mass of the particle set to 0 (it is a particle)
-	@param gravity, set to earth gravity but can be updated
-
-	NOTE : Gravity is normally constant and could have been global.
-	However, here it is specific to each particle, which allows greater modularity.
+	* class constructor
+	* @param radius, the radius of the particle set to 10 by default
+	* @param position, a vector to set the initial position of the particle
+	* @param velocity, a vector to set the initial velocity of the particle
+	* @param masse, the mass of the particle set to 0 (it is a particle)
+	* @param gravity, set to earth gravity but can be updated
+	*
+	* NOTE : Gravity is normally constant and could have been global.
+	* However, here it is specific to each particle, which allows greater modularity.
 	*/
 	Particle(int radius = 10,
 		Vector3D position = Vector3D(),
@@ -35,24 +55,22 @@ public:
 	~Particle();
 
 	/*
-	update position
-	update the position of a particle using particle's parameters
-	do a midpoint integration on every frame of movement, each frame representing a rectangle
-	furthermore is done midpoint integration in the update to have an interpolation of velocity and position curves
+	* public method to be called in ofMain's update
+	* do the update job to the particle
 	*/
 	void Update();
 
 	/*
-	set the particle's mass
-
-	@param mass, the particle's mass
+	* set the particle's mass
+	* 
+	* @param mass, the particle's mass
 	*/
 	void setMass(float mass);
 
 	/*
-	get the inverse of the particle's mass
-
-	@return the inverse of the particle's mass
+	* get the inverse of the particle's
+	* 
+	* @return the inverse of the particle's mass
 	*/
 	float getInverseMass();
 };

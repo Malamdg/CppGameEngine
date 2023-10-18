@@ -1,5 +1,4 @@
 #include "Particle.h"
-#include "MathHelper.h"
 
 /*
 Gravity is normally constant and could have been global. 
@@ -28,46 +27,15 @@ Particle::~Particle(){}
 
 void Particle::Update()
 {
-	float fps;
+	float fps, duration;
 	fps = ofGetFrameRate();
 
 	// if no fps no movement && avoid division by zero
 	if (fps != 0) {
-		float interval[2] = { 0, 1 / fps }; // integrate on frame duration = 1 / fps
-
-		// integrate acceleration to update velocity
-		const Vector3D acceleration = m_acceleration;
-		function<Vector3D(float)> a = [acceleration](float t) { return acceleration; }; // function of acceleration over time
-		m_velocity += integrate(a, interval);
-
-		// integrate velocity to update position
-		const Vector3D velocity = m_velocity;
-		function<Vector3D(float)> v = [velocity](float t) { return velocity; }; // function of velocity over time
-		m_position += integrate(v, interval);
-
-		this->setPosition(m_position.v3());
-
-		// floor is attained
-		if (m_position.y() <= 0) {
-			// first time 
-			if (m_velocity.y() < 0) {
-				m_acceleration[1] = 0;
-				m_velocity[1] = 0;
-				m_position[1] = 0;
-			}
-			
-			// if x velocity is not null
-			if (m_velocity.x() > 0) {
-				// Add drag coefficient to simulate friction
-				m_acceleration += m_velocity * -m_drag_coef * m_invertedMass; // divide by mass to be coherent with FPD
-			}
-
-			// Do put coefficent to 0 only once
-			if (m_velocity.x() <= 0) {
-				m_velocity[0] = 0;
-				m_acceleration[0] = 0;
-			}
-		}
+		duration = 1 / fps;
+		updateAcceleration(duration);
+		updateVelocity(duration);
+		updatePosition(duration);
 	}
 }
 
@@ -84,4 +52,66 @@ void Particle::setMass(float mass)
 float Particle::getInverseMass()  
 {
 	return m_invertedMass;
+}
+
+Vector3D Particle::integrate(function<Vector3D(float)> f, float interval[2], int N)
+{
+	float h = (interval[1] - interval[0]) / N;
+	Vector3D u = Vector3D();
+	for (int k = 0; k < N; k++) {
+		u += f(interval[0] + k * h) * h;
+	}
+
+	return u;
+}
+
+void Particle::updateAcceleration(float duration) {
+	// todo update forces here
+}
+
+void Particle::updateVelocity(float duration) {
+	float interval[2] = { 0.0, duration };
+
+	Vector3D acceleration = m_acceleration;
+
+	function<Vector3D(float)> a = [acceleration](float t) {return acceleration; };
+
+	m_velocity += integrate(a, interval);
+}
+
+void Particle::updatePosition(float duration) {
+	float interval[2] = { 0.0, duration };
+	Vector3D velocity = m_velocity;
+
+	function<Vector3D(float)> v = [velocity](float t) {return velocity; };
+	
+	m_position += integrate(v, interval);
+
+	this->setPosition(m_position.v3());
+
+	/////////////////////////////////////////////////////////////
+	/// todo remove if when forces generators are implemented ///
+	/////////////////////////////////////////////////////////////
+
+	// floor is attained - add friction
+	if (m_position.y() <= 0) {
+		// first time floor is attained
+		if (m_velocity.y() < 0) {
+			m_acceleration[1] = 0;
+			m_velocity[1] = 0;
+			m_position[1] = 0;
+		}
+		
+		// if x velocity is not null
+		if (m_velocity.x() > 0) {
+			// Add drag coefficient to simulate friction
+			m_velocity -= m_velocity * m_drag_coef * m_invertedMass; // divide by mass to be coherent with FPD
+		}
+
+		// Do put coefficent to 0 only once
+		if (m_velocity.x() <= 0) {
+			m_velocity[0] = 0;
+			m_acceleration[0] = 0;
+		}
+	}
 }
