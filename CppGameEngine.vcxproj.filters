@@ -8,6 +8,7 @@
     <ClCompile Include="src\Tests.cpp" />
     <ClCompile Include="src\Cable.cpp" />
     <ClCompile Include="src\Spindle.cpp" />
+    <ClCompile Include="src\CollisionHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Particle.h" />
@@ -16,6 +17,7 @@
     <ClInclude Include="src\Tests.h" />
     <ClInclude Include="src\Cable.h" />
     <ClInclude Include="src\Spindle.h" />
+    <ClInclude Include="src\CollisionHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

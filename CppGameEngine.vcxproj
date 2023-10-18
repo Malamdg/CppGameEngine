@@ -105,6 +105,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Cable.cpp" />
+    <ClCompile Include="src\CollisionHandler.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Particle.cpp" />
@@ -114,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Cable.h" />
+    <ClInclude Include="src\CollisionHandler.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Spindle.h" />

@@ -1,4 +1,5 @@
 #include "ofApp.h"
+#include "CollisionHandler.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -51,6 +52,7 @@ void ofApp::update(){
 	for (Particle* particle : particles)
 	{
 		particle->Update();
+		handleCollision(particles);
 	}
 
 	// clear screen for following draw()
