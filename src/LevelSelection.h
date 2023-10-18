@@ -5,6 +5,8 @@
 class LevelSelection : Level
 { 
 public:
+	string commands;
+
 	LevelSelection();
 	~LevelSelection();
 
@@ -23,7 +25,4 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
-
-private:
-	string commands;
 };

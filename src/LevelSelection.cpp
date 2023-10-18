@@ -17,12 +17,13 @@ void LevelSelection::update() {}
 
 void LevelSelection::draw() {
 	ofSetColor(255, 255, 255);
-	ofDrawBitmapString(ofToString(commands), 0, 0);
+	ofDrawBitmapString(ofToString(commands), ofGetWindowWidth() / 2, ofGetWindowHeight()/2);
 }
 
 void LevelSelection::keyPressed(int key) {}
 
 int LevelSelection::keyReleased(int key) {
+	std::cout << to_string(key) << std::endl;
 	return key;
 }
 

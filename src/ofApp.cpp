@@ -12,7 +12,7 @@ void ofApp::setup(){
 		level.setup();
 	}
 
-	doLevelSelection = true;
+	doLevelSelection = false;
 }
 
 //--------------------------------------------------------------
@@ -23,6 +23,9 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	selectedLevel.draw();
+	if (doLevelSelection) {
+		levelSelection.draw();
+	}
 }
 
 //--------------------------------------------------------------
@@ -38,7 +41,6 @@ void ofApp::keyReleased(int key){
 		if (levels.size() > selectionKey && selectionKey >= 0) {
 			doLevelSelection = false;
 		}
-		std::cout << selectionKey << std::endl;
 	}
 }
 

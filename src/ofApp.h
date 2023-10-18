@@ -30,7 +30,7 @@ class ofApp : public ofBaseApp{
 		LevelSelection levelSelection = LevelSelection();
 		std::list<Level> levels = {level1};
 
-		Level selectedLevel = Level();
+		Level selectedLevel = level1;
 		bool doLevelSelection;
 
 };
