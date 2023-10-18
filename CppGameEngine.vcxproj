@@ -104,15 +104,19 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Cable.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Particle.cpp" />
+    <ClCompile Include="src\Spindle.cpp" />
     <ClCompile Include="src\Tests.cpp" />
     <ClCompile Include="src\Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Cable.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\Spindle.h" />
     <ClInclude Include="src\Tests.h" />
     <ClInclude Include="src\Vector3D.h" />
   </ItemGroup>
