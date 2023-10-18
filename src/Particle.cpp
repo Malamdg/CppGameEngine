@@ -90,3 +90,8 @@ Vector3D Particle::getPosition()
 {
 	return m_position;
 }
+
+void Particle::addPosition(Vector3D newPosition)
+{
+	m_position += newPosition;
+}

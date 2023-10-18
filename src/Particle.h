@@ -62,4 +62,9 @@ public:
 	@return the position of the particle
 	*/
 	Vector3D getPosition();
+
+	/*
+	add a vector to the current position of the particle
+	*/
+	void addPosition(Vector3D newPosition);
 };
