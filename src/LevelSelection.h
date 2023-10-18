@@ -1,20 +1,19 @@
 #pragma once
-#include "ofMain.h"
+#include "Level.h";
+#include "ofMain.h";
 
-class Level
+class LevelSelection : Level
 { 
 public:
-	string name = "level";
+	LevelSelection();
+	~LevelSelection();
 
-	Level();
-	~Level();
-
-	void setup();
+	void setup(std::list<Level> levels);
 	void update();
 	void draw();
 
 	void keyPressed(int key);
-	void keyReleased(int key);
+	int keyReleased(int key);
 	void mouseMoved(int x, int y);
 	void mouseDragged(int x, int y, int button);
 	void mousePressed(int x, int y, int button);
@@ -24,4 +23,7 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
+
+private:
+	string commands;
 };

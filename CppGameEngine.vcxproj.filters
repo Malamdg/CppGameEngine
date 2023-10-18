@@ -7,6 +7,7 @@
     <ClCompile Include="src\Vector3D.cpp" />
     <ClCompile Include="src\Tests.cpp" />
     <ClCompile Include="src\LevelPhase1.cpp" />
+    <ClCompile Include="src\LevelSelection.cpp" />
     <ClCompile Include="src\Level.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -16,6 +17,7 @@
     <ClInclude Include="src\Tests.h" />
     <ClInclude Include="src\Level.h" />
     <ClInclude Include="src\LevelPhase1.h" />
+    <ClInclude Include="src\LevelSelection.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

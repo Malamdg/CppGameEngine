@@ -4,6 +4,7 @@
 #include "Tests.h"	
 #include "Level.h"
 #include "LevelPhase1.h"
+#include "LevelSelection.h"
 
 class ofApp : public ofBaseApp{
 
@@ -26,9 +27,10 @@ class ofApp : public ofBaseApp{
 
 	private:
 		LevelPhase1 level1 = LevelPhase1();
+		LevelSelection levelSelection = LevelSelection();
 		std::list<Level> levels = {level1};
 
-		Level selectedLevel;
+		Level selectedLevel = Level();
 		bool doLevelSelection;
 
 };

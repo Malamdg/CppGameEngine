@@ -106,6 +106,7 @@
   <ItemGroup>
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\LevelPhase1.cpp" />
+    <ClCompile Include="src\LevelSelection.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Particle.cpp" />
@@ -115,6 +116,7 @@
   <ItemGroup>
     <ClInclude Include="src\Level.h" />
     <ClInclude Include="src\LevelPhase1.h" />
+    <ClInclude Include="src\LevelSelection.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Tests.h" />

@@ -5,6 +5,8 @@ void ofApp::setup(){
 	// Tests
 	Tests::ExecuteTests();
 
+	levelSelection.setup(levels);
+
 	for (Level level : levels) {
 		level.setup();
 	}
@@ -30,6 +32,13 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 	selectedLevel.keyReleased(key);
+	if (doLevelSelection) {
+		int selectionKey = levelSelection.keyReleased(key);
+		if (levels.size() > selectionKey && selectionKey >= 0) {
+			doLevelSelection = false;
+		}
+		std::cout << selectionKey << std::endl;
+	}
 }
 
 //--------------------------------------------------------------

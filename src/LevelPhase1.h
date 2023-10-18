@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Level.h"
 #include "of3dPrimitives.h"
 #include "Vector3D.h"
@@ -6,6 +8,8 @@
 class LevelPhase1 : public Level 
 { 
 public:
+	string name = "phase 1";
+
 	LevelPhase1();
 	~LevelPhase1();
 
