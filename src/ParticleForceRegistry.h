@@ -3,6 +3,7 @@
 
 class ParticleForceRegistry
 {
+
 	public:
 
 		/*
@@ -24,6 +25,16 @@ class ParticleForceRegistry
 		*/
 		typedef std::vector<ParticleForceRegistration> Registry;
 		
+		/*
+		Constructor
+		*/
+		ParticleForceRegistry();
+		
+		/*
+		Destructor
+		*/
+		~ParticleForceRegistry();
+
 		/*
 		Add a Particle to Registry
 
@@ -53,5 +64,8 @@ class ParticleForceRegistry
 		@param duration, frame duration when the force applies
 		*/
 		void updateForces(float duration);
+
+private:
+	Registry m_registry;
 }
 

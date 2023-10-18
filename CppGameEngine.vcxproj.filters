@@ -9,7 +9,9 @@
     <ClCompile Include="src\ParticleForceRegistry.cpp" />
     <ClCompile Include="src\ParticleGravity.cpp" />
     <ClCompile Include="src\ParticleFriction.cpp" />
-    <ClCompile Include="src\ParticleResilience.cpp" />
+    <ClCompile Include="src\SpringParticleParticle.cpp" />
+    <ClCompile Include="src\SpringParticlePoint.cpp" />
+    <ClCompile Include="src\SpringPointPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Particle.h" />
