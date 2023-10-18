@@ -94,6 +94,10 @@ void Vector3D::Normalize()
 	m_z /= norm;
 }
 
+float Vector3D::distance(const Vector3D vector)
+{
+	return (*this - vector).Norm();
+}
 
 string Vector3D::toString() const
 {
