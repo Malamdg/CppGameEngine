@@ -1,3 +1,6 @@
-#include "OfApp.h"
+#include "Level.h"
 
-class Level : public ofApp { };
+class LevelPhase1 : public Level 
+{ 
+	
+};
