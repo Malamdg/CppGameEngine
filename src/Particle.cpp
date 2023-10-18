@@ -85,3 +85,8 @@ float Particle::getInverseMass()
 {
 	return m_invertedMass;
 }
+
+Vector3D Particle::getPosition()
+{
+	return m_position;
+}
