@@ -123,13 +123,6 @@ public:
 	void Normalize();
 
 	/*
-	deistance between two vector
-	
-	@return the distance between this vector and the one passed in parameters
-	*/
-	float distance(const Vector3D vector);
-
-	/*
 	convert a vector to string
 
 	@return a string description of the vector

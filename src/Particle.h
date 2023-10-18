@@ -73,16 +73,4 @@ public:
 	* @return the inverse of the particle's mass
 	*/
 	float getInverseMass();
-
-	/*
-	get the position of the particle
-
-	@return the position of the particle
-	*/
-	Vector3D getPosition();
-
-	/*
-	add a vector to the current position of the particle
-	*/
-	void addPosition(Vector3D newPosition);
 };
