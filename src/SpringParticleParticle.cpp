@@ -2,7 +2,7 @@
 #include "ParticleForceGenerator.h"
 #include "Vector3D.h"
 
-class ParticleResilience_2particles : public ParticleForceGenerator {
+class SpringParticleParticle : public ParticleForceGenerator {
 	/* elasticity constant */
 	float m_k;
 
@@ -14,7 +14,7 @@ class ParticleResilience_2particles : public ParticleForceGenerator {
 
 	@param elasticity, elasticity constant
 	*/
-	ParticleResilience_2particles::ParticleResilience_2particles(float elasticity) : m_k(elasticity) {}
+	SpringParticleParticle::SpringParticleParticle(float elasticity) : m_k(elasticity) {}
 
 	/*
 	update the particle's gravity
