@@ -1,11 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
-#include "of3dPrimitives.h"
-#include "Vector3D.h"
-#include "Particle.h"
-#include "Tests.h"
-#include "iostream"
+#include "Tests.h"	
+#include "Level.h"
+#include "LevelPhase1.h"
 
 class ofApp : public ofBaseApp{
 
@@ -27,49 +25,10 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 	private:
+		LevelPhase1 level1 = LevelPhase1();
+		std::list<Level> levels = {level1};
 
-		//Camera
-		ofCamera cam;
-
-		//**Primitives**//
-		std::list<std::pair<of3dPrimitive*, int*>> primitives;
-		std::list<Particle*> particles;
-		std::list<std::pair<ofSpherePrimitive*, int*>> preview;
-
-		Vector3D m_initialPosition = Vector3D();
-		ofBoxPrimitive floor;
-		ofSpherePrimitive particleVisualization;
-
-		//Colors & Textures
-		Vector3D* colors = new Vector3D[5];
-		Vector3D visualizationColor = Vector3D(0, 255, 0);
-
-		ofTexture* textures = new ofTexture[2];
-		ofTexture textureVisualization;
-
-		// Shooting modes
-		int mode = 0;
-
-		// Constants 
-		float gravity = 9.8;
-		
-		// Texts to display
-		string commandText;
-
-		/*
-		* Function to get launch direction from mouse
-		* 
-		* @param float x, mouse's x on screen
-		* @param float y, mouse's y on screen
-		* @return Vector3D, normalized shooting direction vector
-		*/
-		Vector3D GetLaunchDirection(float x, float y);
-
-		/*
-		* Method to display a previsualization of current shot
-		* 
-		* @param Vector3D initialPosition, particle's starting point from (0, 0, 0)
-		*/
-		void GeneratePrevisualization(Vector3D initialPosition = Vector3D());
+		Level selectedLevel;
+		bool doLevelSelection;
 
 };
