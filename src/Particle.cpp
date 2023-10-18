@@ -9,7 +9,7 @@ Particle::Particle(int radius,
 	Vector3D velocity,
 	float invertedMass,
 	Vector3D gravity,
-	Vector3D AccumForce)
+	Vector3D accumForce)
 	:
 	ofSpherePrimitive(),
 	m_position(position),
@@ -18,7 +18,7 @@ Particle::Particle(int radius,
 	m_acceleration(gravity),
 	m_invertedMass(invertedMass),
 	m_velocityInit(velocity),
-	m_AccumForce(AccumForce)
+	m_accumForce(accumForce)
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
@@ -35,7 +35,7 @@ void Particle::Update()
 	// if no fps no movement && avoid division by zero
 	if (fps != 0) {
 		duration = 1 / fps;
-		updateAcceleration(duration);
+		updateAcceleration();
 		updateVelocity(duration);
 		updatePosition(duration);
 	}
@@ -58,12 +58,12 @@ float Particle::getInverseMass()
 
 void Particle::addForce(const Vector3D &force) 
 {
-	m_AccumForce += force;
+	m_accumForce += force;
 }
 
 void Particle::clearAccum()
 {
-	m_AccumForce = Vector3D();
+	m_accumForce = Vector3D();
 }
 
 Vector3D Particle::integrate(function<Vector3D(float)> f, float interval[2], int N)
@@ -77,8 +77,9 @@ Vector3D Particle::integrate(function<Vector3D(float)> f, float interval[2], int
 	return u;
 }
 
-void Particle::updateAcceleration(float duration) {
-	// todo update forces here
+void Particle::updateAcceleration() {
+	m_acceleration = m_accumForce * m_invertedMass;
+	m_accumForce = 0;
 }
 
 void Particle::updateVelocity(float duration) {

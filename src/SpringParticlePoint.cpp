@@ -29,11 +29,13 @@ public:
 
 	@param elasticity, elasticity constant
 	*/
-	SpringParticlePoint::SpringParticlePoint(float elasticity = 1, float lenght = 10, float C = 0) 
-		: 
+	SpringParticlePoint::SpringParticlePoint(float elasticity = 1, float lenght = 10, float C = 0)
+		:
 		m_k(elasticity),
 		m_l0(lenght),
-		m_C(C)
+		m_C(C),
+		m_z(0),
+		m_w(0)
 	{}
 
 	/*
@@ -52,6 +54,7 @@ public:
 		float invMass = particle->getInverseMass();
 		float distance = m_l0 - (m_pointPosition - particle->getPosition()).Norm();
 
+
 		Vector3D direction = (m_pointPosition - particle->getPosition());
 		direction.Normalize();
 
@@ -62,6 +65,6 @@ public:
 		
 		float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
 
-		particle->addForce(direction * coeff);
+		particle->addForce(direction * coeff * duration);
 	}
 };
