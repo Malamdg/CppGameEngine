@@ -1,4 +1,5 @@
 #include "ofApp.h"
+#include "MathHelper.h"
 #include "CollisionHandler.h"
 
 //--------------------------------------------------------------
@@ -334,33 +335,17 @@ void ofApp::GeneratePrevisualization(Vector3D initialPosition)
 		}
 	;	
 
-	// number of spheres
-	int nbSphere = 3;
-	
-	// troublesome case
-	if (initialSpeed.x() == 0) {
-		Vector3D position;
-		for (int i = 0; i < nbSphere; i++) {
-			// update position on each iteration
-			position = directionUnitVector * 10 * (i + 1);
-			// create a new sphere to push at the end of preview list
-			ofSpherePrimitive* previewSphere = new ofSpherePrimitive();
-			previewSphere->setRadius(5); // half of a particule to distinguish between each
-			previewSphere->setPosition(position.v3());// set position calculated one
-			// push particle preview list paired with shooting mode to display correct color
-			preview.push_back(std::pair<ofSpherePrimitive*, int*>(previewSphere, &mode));
-		}
-		return;
-	}
+	// finalX of balistic trajectory to get a stop point
+	float finalX = initialPosition.x() + 2 * initialSpeed.x() * initialSpeed.y() / gravity;
+	// apexY to get number of points proportinal to the curve - todo
+	float apexY = initialPosition.y() + initialSpeed.y() * initialSpeed.y() / (2 * gravity);
+
+	// nbSphere - todo proportionnal to curve
+	int nbSphere = 10;
 
 	// step between balls
-	int direction = initialSpeed.x() < 0 ? -1 :  1;
-	float deltaX = direction * 10;
+	float deltaX = finalX / nbSphere;
 
-	// finalX to get a stop point 
-	float finalX = initialPosition.x() + nbSphere * deltaX;
-	
-	// variable to store the value of y in
 	float y;
 	
 	///////////////////////////////////
@@ -376,7 +361,7 @@ void ofApp::GeneratePrevisualization(Vector3D initialPosition)
 		// use sphere primitives because it is lighter
 		ofSpherePrimitive* previewSphere = new ofSpherePrimitive();
 		previewSphere->setRadius(5); // half of a particule to distinguish between each
-		previewSphere->setPosition(Vector3D(x, y).v3()); // set position to (x, y(x), 0)		
+		previewSphere->setPosition(Vector3D(x, y).v3()); // set position to (x, y(x), 0)
 		// push particle preview list paired with shooting mode to display correct color
 		preview.push_back(std::pair<ofSpherePrimitive*, int*>(previewSphere, &mode)); 
 	}
