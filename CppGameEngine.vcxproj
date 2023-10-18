@@ -105,7 +105,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\MathHelper.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\ParticleForceRegistry.cpp" />
@@ -116,7 +115,6 @@
     <ClCompile Include="src\Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\MathHelper.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\ParticleForceGenerator.h" />
