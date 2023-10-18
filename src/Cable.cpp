@@ -21,12 +21,9 @@ void Cable::Update()
 		float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
 		float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
 
-		// This separate the two particles
-
-		// TODO : Add those two lines once the branch are merged
-
-		//m_firstParticle->addPosition((vectorBetweenParticles * firstDisplacement));
-		//m_secondParticle->addPosition((vectorBetweenParticles * secondDisplacement));
+		// This ensure the length of the cable is always the same
+		m_firstParticle->addPosition((vectorBetweenParticles * firstDisplacement));
+		m_secondParticle->addPosition((vectorBetweenParticles * secondDisplacement));
 
 		// Then we need to add an impulse
 	}

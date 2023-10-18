@@ -21,12 +21,9 @@ void Spindle::Update()
 		float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
 		float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
 
-		// This separate the two particles
-
-		// TODO : Add those two lines once the branch are merged
-
-		//m_firstParticle->addPosition((vectorBetweenParticles * firstDisplacement));
-		//m_secondParticle->addPosition((vectorBetweenParticles * secondDisplacement));
+		// This ensure the length of the spindle is always the same
+		m_firstParticle->addPosition((vectorBetweenParticles * firstDisplacement));
+		m_secondParticle->addPosition((vectorBetweenParticles * secondDisplacement));
 
 		// No impulse to add there because it is considered a static collision
 	}
