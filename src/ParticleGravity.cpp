@@ -19,7 +19,8 @@ class ParticleGravity : public ParticleForceGenerator{
 	@param *particle, the particle to update
 	@param duration, frame duration when the gravity applies
 	*/
-	virtual void updateForce(Particle* particle, float duration) {
-		particle->addForce(m_gravity * (1 / particle->getInverseMass());
+	virtual void updateForce(Particle* particle, float duration) 
+	{
+		particle->addForce(m_gravity * (1 / particle->getInverseMass()));
 	}
 };
