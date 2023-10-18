@@ -27,9 +27,11 @@ void handleCollision(std::list<Particle*> particles)
 				float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
 				float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
 
-				// This should become addForce when possible
+				// This separate the two particles
 				(*firstParticle)->addPosition((vectorBetweenParticles * firstDisplacement));
 				(*secondParticle)->addPosition((vectorBetweenParticles * secondDisplacement));
+
+				// Then we need to add an impulse
 			}
 		}
 	}
