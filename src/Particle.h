@@ -87,4 +87,9 @@ public:
 	clear the force accumulator assigned to the particle
 	*/
 	void clearAccum();
+
+	/*
+	Getter Velocity
+	*/
+	Vector3D getVelocity();
 };

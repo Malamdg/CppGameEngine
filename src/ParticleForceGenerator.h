@@ -3,6 +3,7 @@
 class ParticleForceGenerator
 {
 public:
+
 	/*
 	update the particle's force
 

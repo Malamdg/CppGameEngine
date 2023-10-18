@@ -126,4 +126,8 @@ void Particle::updatePosition(float duration) {
 			m_acceleration[0] = 0;
 		}
 	}
+
 }
+
+Vector3D Particle::getVelocity() { return m_velocity; }
+
