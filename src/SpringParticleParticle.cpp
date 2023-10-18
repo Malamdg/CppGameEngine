@@ -2,16 +2,19 @@
 #include "ParticleForceGenerator.h"
 #include "Vector3D.h"
 
-class ParticleResilience : public ParticleForceGenerator {
+class ParticleResilience_2particles : public ParticleForceGenerator {
 	/* elasticity constant */
 	float m_k;
+
+	/* length at sleep */
+	float m_l0;
 
 	/*
 	class constructor
 
 	@param elasticity, elasticity constant
 	*/
-	ParticleResilience::ParticleResilience(float elasticity) : m_k(elasticity) {}
+	ParticleResilience_2particles::ParticleResilience_2particles(float elasticity) : m_k(elasticity) {}
 
 	/*
 	update the particle's gravity

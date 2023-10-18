@@ -3,19 +3,21 @@
 #include "Vector3D.h"
 
 class ParticleFriction : public ParticleForceGenerator {
-	/* coefficient of static friction */
-	float m_mus;
+	/* first coefficient friction */
+	float m_k1 = 0.05;
 
-	/* coefficient of kinetik friction */
-	float m_muk;
+	/* second coefficient friction */
+	float m_k2 = 0.01;
+
+	/* particle's speed */
+	Vector3D m_velocity = Vector3D();
 
 	/*
 	class constructor
 
-	@param mus, coefficient of static friction
-	@param muk, coefficient of kinetik friction
+	@param velocity, particle's speed
 	*/
-	ParticleFriction::ParticleFriction(float mus, float muk) : m_mus(mus), m_muk(muk) {}
+	ParticleFriction::ParticleFriction(Vector3D velocity) : m_velocity(velocity) {}
 
 	/*
 	update the particle's gravity
@@ -24,6 +26,10 @@ class ParticleFriction : public ParticleForceGenerator {
 	@param duration, frame duration when the gravity applies
 	*/
 	virtual void updateForce(Particle* particle, float duration) {
-		particle->addForce(m_mus * (1 / particle->getInverseMass());
+		float norm_v = m_velocity.Norm();
+		float coeff = m_k1 * norm_v + m_k2*norm_v*norm_v;
+		Vector3D direction = m_velocity;
+		direction.Normalize();
+		particle->addForce(direction*coeff);
 	}
 };
