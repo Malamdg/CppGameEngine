@@ -9,7 +9,6 @@ private:
 	Vector3D m_velocity;
 	Vector3D m_acceleration;
 	float m_invertedMass;
-	Vector3D m_gravity;
 
 	Vector3D m_velocityInit;
 	float m_drag_coef = 0.005;
@@ -51,9 +50,7 @@ public:
 	Particle(int radius = 10,
 		Vector3D position = Vector3D(),
 		Vector3D velocity = Vector3D(),
-		float invertedMass = 0,
-		Vector3D gravity = Vector3D(0, -9.8, 0),
-		Vector3D AccumForce = Vector3D());
+		float invertedMass = 0);
 	~Particle();
 
 	/*

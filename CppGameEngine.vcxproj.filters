@@ -12,6 +12,7 @@
     <ClCompile Include="src\SpringParticleParticle.cpp" />
     <ClCompile Include="src\SpringParticlePoint.cpp" />
     <ClCompile Include="src\SpringPointPoint.cpp" />
+    <ClCompile Include="src\ParticleForceGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Particle.h" />

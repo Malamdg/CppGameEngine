@@ -1,8 +1,12 @@
+#pragma once
 #include "Particle.h"
 
 class ParticleForceGenerator
 {
 public:
+
+	ParticleForceGenerator();
+	~ParticleForceGenerator();
 
 	/*
 	update the particle's force

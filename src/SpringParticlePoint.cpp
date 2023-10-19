@@ -29,8 +29,9 @@ public:
 
 	@param elasticity, elasticity constant
 	*/
-	SpringParticlePoint::SpringParticlePoint(float elasticity = 1, float lenght = 10, float C = 0)
+	SpringParticlePoint::SpringParticlePoint(Vector3D position, float elasticity = 1, float lenght = 10, float C = 0)
 		:
+		m_pointPosition(position),
 		m_k(elasticity),
 		m_l0(lenght),
 		m_C(C),

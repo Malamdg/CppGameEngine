@@ -7,18 +7,15 @@ However, here it is specific to each particle, which allows greater modularity.
 Particle::Particle(int radius,
 	Vector3D position,
 	Vector3D velocity,
-	float invertedMass,
-	Vector3D gravity,
-	Vector3D accumForce)
+	float invertedMass)
 	:
 	ofSpherePrimitive(),
 	m_position(position),
 	m_velocity(velocity),
-	m_gravity(gravity),
-	m_acceleration(gravity),
+	m_acceleration(0),
 	m_invertedMass(invertedMass),
 	m_velocityInit(velocity),
-	m_accumForce(accumForce)
+	m_accumForce(0)
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
