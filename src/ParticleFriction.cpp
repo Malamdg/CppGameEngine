@@ -4,10 +4,10 @@
 
 class ParticleFriction : public ParticleForceGenerator {
 	/* first coefficient friction */
-	float m_k1 = 0.05;
+	float m_k1;
 
 	/* second coefficient friction */
-	float m_k2 = 0.01;
+	float m_k2;
 
 	/* particle's speed */
 	Vector3D m_velocity = Vector3D();
@@ -17,7 +17,7 @@ class ParticleFriction : public ParticleForceGenerator {
 
 	@param velocity, particle's speed
 	*/
-	ParticleFriction::ParticleFriction(Vector3D velocity) : m_velocity(velocity) {}
+	ParticleFriction::ParticleFriction(float k1, float k2) : m_k1(k1), m_k2(k2) {}
 
 	/*
 	update the particle's gravity
@@ -26,6 +26,7 @@ class ParticleFriction : public ParticleForceGenerator {
 	@param duration, frame duration when the gravity applies
 	*/
 	virtual void updateForce(Particle* particle, float duration) {
+		m_velocity = particle->getVelocity();
 		float norm_v = m_velocity.Norm();
 		float coeff = m_k1 * norm_v + m_k2*norm_v*norm_v;
 		Vector3D direction = m_velocity;
