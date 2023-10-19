@@ -1,14 +1,15 @@
 #include "LevelSelection.h"
+#include "ofApp.h"
 
 LevelSelection::LevelSelection() {}
 LevelSelection::~LevelSelection() {}
 
-void LevelSelection::setup(std::list<Level> levels) {
+void LevelSelection::setup(std::list<Level*> levels) {
 	commands = "SELECT YOUR LEVEL:\nuse the number before to select\n";
 	string buffer;
 	int i = 1;
-	for (Level level : levels) {
-		commands = commands + "\t ." + to_string(i) + " : " + level.name + "\n";
+	for (Level* level : levels) {
+		commands = commands + "\t ." + to_string(i) + " : " + (level)->name + "\n";
 		i++;
 	}
 }
@@ -17,14 +18,14 @@ void LevelSelection::update() {}
 
 void LevelSelection::draw() {
 	ofSetColor(255, 255, 255);
-	ofDrawBitmapString(ofToString(commands), ofGetWindowWidth() / 2, ofGetWindowHeight()/2);
+	ofDrawBitmapString(ofToString(commands), ((float) ofGetWindowWidth() / 2) - 100, ((float) ofGetWindowHeight() / 2));
 }
 
 void LevelSelection::keyPressed(int key) {}
 
 int LevelSelection::keyReleased(int key) {
-	std::cout << to_string(key) << std::endl;
-	return key;
+	std::cout << to_string(key - '0') << std::endl;
+	return key - '0';
 }
 
 void LevelSelection::mouseMoved(int x, int y) {}

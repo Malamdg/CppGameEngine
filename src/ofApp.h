@@ -26,11 +26,11 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 	private:
-		LevelPhase1 level1 = LevelPhase1();
-		LevelSelection levelSelection = LevelSelection();
-		std::list<Level> levels = {level1};
+		LevelPhase1* level1;
+		LevelSelection levelSelection;
+		std::list<Level*> levels;
 
-		Level selectedLevel = level1;
+		Level* selectedLevel;
 		bool doLevelSelection;
 
 };

@@ -1,10 +1,16 @@
 #include "LevelPhase1.h"
 
-LevelPhase1::LevelPhase1() {}
+LevelPhase1::LevelPhase1() 
+{
+	name = "phase 1";
+}
+
 LevelPhase1::~LevelPhase1() {}
 
 //--------------------------------------------------------------
 void LevelPhase1::setup() {
+	std::cout << "Phase 1 setupped" << std::endl;
+
 	// Set command text
 	commandText = "Changer de mode de tir en appuyant sur 'a'/'q', 'z'/'w', 'e', 'r', et 't' !\nTirer avec 'mouse left' !";
 

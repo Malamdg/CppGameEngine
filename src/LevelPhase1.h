@@ -8,7 +8,7 @@
 class LevelPhase1 : public Level 
 { 
 public:
-	string name = "phase 1";
+	string name;
 
 	LevelPhase1();
 	~LevelPhase1();

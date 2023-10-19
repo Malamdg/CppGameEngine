@@ -2,7 +2,7 @@
 #include "Level.h";
 #include "ofMain.h";
 
-class LevelSelection : Level
+class LevelSelection : public Level
 { 
 public:
 	string commands;
@@ -10,7 +10,7 @@ public:
 	LevelSelection();
 	~LevelSelection();
 
-	void setup(std::list<Level> levels);
+	void setup(std::list<Level*> levels);
 	void update();
 	void draw();
 
