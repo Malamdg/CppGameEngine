@@ -1,18 +1,24 @@
 #pragma once
+#include "ParticleForceGenerator.h"
 #include "Particle.h"
 
-class Cable
+class Cable : public ParticleForceGenerator
 {
 private:
-	Particle* m_firstParticle;
-	Particle* m_secondParticle;
+	Vector3D* m_attachPoint;
+	Particle* m_attachParticle;
 	float m_length;
 
 public:
-	Cable(Particle* firstParticle, Particle* secondParticle, float length);
+	Cable(Vector3D* attachPoint, float length);
+	Cable(Particle* attachParticle, float length);
 
 	~Cable();
 
-	void Update();
+	void updateForce(Particle* particle, float duration = 0) override;
+
+protected:
+	void updateForPoint(Particle* particle);
+	void updateForParticle(Particle* particle);
 
 };

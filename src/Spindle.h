@@ -1,18 +1,23 @@
 #pragma once
+#include "ParticleForceGenerator.h"
 #include "Particle.h"
 
-class Spindle
+class Spindle : public ParticleForceGenerator
 {
 private:
-	Particle* m_firstParticle;
-	Particle* m_secondParticle;
+	Vector3D* m_attachPoint;
+	Particle* m_attachParticle;
 	float m_length;
 
 public:
-	Spindle(Particle* firstParticle, Particle* secondParticle, float length);
+	Spindle(Vector3D* attachPoint, float length);
+	Spindle(Particle* attachParticle, float length);
 
 	~Spindle();
 
-	void Update();
+	void updateForce(Particle* particle, float duration = 0) override;
 
+protected:
+	void updateForPoint(Particle* particle);
+	void updateForParticle(Particle* particle);
 };
