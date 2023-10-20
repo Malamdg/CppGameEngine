@@ -7,16 +7,15 @@ However, here it is specific to each particle, which allows greater modularity.
 Particle::Particle(int radius,
 	Vector3D position,
 	Vector3D velocity,
-	float invertedMass,
-	Vector3D gravity)
+	float invertedMass)
 	:
 	ofSpherePrimitive(),
 	m_position(position),
 	m_velocity(velocity),
-	m_gravity(gravity),
-	m_acceleration(gravity),
+	m_acceleration(0),
 	m_invertedMass(invertedMass),
-	m_velocityInit(velocity)
+	m_velocityInit(velocity),
+	m_accumForce(0)
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
@@ -33,7 +32,7 @@ void Particle::Update()
 	// if no fps no movement && avoid division by zero
 	if (fps != 0) {
 		duration = 1 / fps;
-		updateAcceleration(duration);
+		updateAcceleration();
 		updateVelocity(duration);
 		updatePosition(duration);
 	}
@@ -54,6 +53,16 @@ float Particle::getInverseMass()
 	return m_invertedMass;
 }
 
+void Particle::addForce(const Vector3D &force) 
+{
+	m_accumForce += force;
+}
+
+void Particle::clearAccum()
+{
+	m_accumForce = Vector3D();
+}
+
 Vector3D Particle::integrate(function<Vector3D(float)> f, float interval[2], int N)
 {
 	float h = (interval[1] - interval[0]) / N;
@@ -65,8 +74,9 @@ Vector3D Particle::integrate(function<Vector3D(float)> f, float interval[2], int
 	return u;
 }
 
-void Particle::updateAcceleration(float duration) {
-	// todo update forces here
+void Particle::updateAcceleration() {
+	m_acceleration = m_accumForce * m_invertedMass;
+	m_accumForce = 0;
 }
 
 void Particle::updateVelocity(float duration) {
@@ -114,14 +124,11 @@ void Particle::updatePosition(float duration) {
 			m_acceleration[0] = 0;
 		}
 	}
-}
 
-Vector3D Particle::getPosition()
-{
-	return m_position;
-}
+	Vector3D Particle::getVelocity() { return m_velocity; }
 
-void Particle::addPosition(Vector3D newPosition)
-{
-	m_position += newPosition;
+	Vector3D Particle::getPosition() { return m_position; }
+
+	void Particle::addPosition(Vector3D newPosition) { m_position += newPosition; }
+
 }
