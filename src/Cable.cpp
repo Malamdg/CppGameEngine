@@ -51,7 +51,7 @@ void Cable::updateForParticle(Particle* particle)
 		float firstMass = 1 / m_attachParticle->getInverseMass();
 		float secondMass = 1 / particle->getInverseMass();
 
-		/* Computation of both particle displaceemnt */
+		/* Computation of both particle displacement */
 		float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
 		float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
 
