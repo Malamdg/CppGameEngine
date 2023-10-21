@@ -1,6 +1,4 @@
 #include "ofApp.h"
-#include "Spindle.h"
-#include "CollisionHandler.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -42,16 +40,19 @@ void ofApp::setup(){
 	cam.setPosition(Vector3D(0, 0, 1500).v3());
 	cam.move(Vector3D(ofGetWidth() * .5, ofGetHeight() * .5).v3());
 
-	Particle* p = new Particle(30, Vector3D(0, 300), Vector3D(50, 0), 10);
+	p = new Particle(30, Vector3D(0, 300), Vector3D(50, 0), 0);
 	int* tmpMode = new int(mode);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
 	particles.push_back(p);
 
-	Particle* p1 = new Particle(30, Vector3D(-100, 300), Vector3D(0, 0), 10);
+	p1 = new Particle(30, Vector3D(-100, 300), Vector3D(0, 0), 10);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p1, tmpMode));
 	particles.push_back(p1);
 
-	Spindle(p, 100);
+	forceRegistry = new ParticleForceRegistry();
+	spindle = new Spindle(p, 10);
+
+	forceRegistry->add(p1, spindle);
 
 	// Tests
 	Tests::ExecuteTests();
@@ -66,6 +67,9 @@ void ofApp::update(){
 		particle->Update();
 		handleCollision(particles);
 	}
+
+	forceRegistry->updateForces(0);
+	forceRegistry->add(p1, spindle);
 }
 
 //--------------------------------------------------------------

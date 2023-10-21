@@ -5,6 +5,9 @@
 #include "Vector3D.h"
 #include "Particle.h"
 #include "Tests.h"
+#include "ParticleForceRegistry.h"
+#include "CollisionHandler.h"
+#include "Spindle.h"
 #include "iostream"
 
 class ofApp : public ofBaseApp{
@@ -46,6 +49,13 @@ class ofApp : public ofBaseApp{
 
 		ofTexture* textures = new ofTexture[2];
 		ofTexture textureVisualization;
+
+		ParticleForceRegistry* forceRegistry;
+
+		Particle* p;
+		Particle* p1;
+
+		Spindle* spindle;
 
 		// Shooting modes
 		int mode = 0;
