@@ -15,7 +15,7 @@ Particle::Particle(int radius,
 	m_acceleration(0),
 	m_invertedMass(invertedMass),
 	m_velocityInit(velocity),
-	m_accumForce(0)
+	m_accumForce(Vector3D())
 {
 	this->setRadius(radius);
 	this->setPosition(position.v3());
@@ -55,12 +55,16 @@ float Particle::getInverseMass()
 
 void Particle::addForce(const Vector3D &force) 
 {
-	m_accumForce += force;
+	//std::cout << "AccumulationForces : " << m_accumForce.toString() << " + " << force.toString() << " = ";
+	m_accumForce = m_accumForce + force;
+	//std::cout << m_accumForce.toString() << std::endl;
 }
 
 void Particle::clearAccum()
 {
-	m_accumForce = Vector3D();
+	m_accumForce[0] = 0;
+	m_accumForce[1] = 0;
+	m_accumForce[2] = 0;
 }
 
 Vector3D Particle::integrate(function<Vector3D(float)> f, float interval[2], int N)
@@ -76,7 +80,7 @@ Vector3D Particle::integrate(function<Vector3D(float)> f, float interval[2], int
 
 void Particle::updateAcceleration() {
 	m_acceleration = m_accumForce * m_invertedMass;
-	m_accumForce = 0;
+	clearAccum();
 }
 
 void Particle::updateVelocity(float duration) {
@@ -104,26 +108,26 @@ void Particle::updatePosition(float duration) {
 	/////////////////////////////////////////////////////////////
 
 	// floor is attained - add friction
-	if (m_position.y() <= 0) {
-		// first time floor is attained
-		if (m_velocity.y() < 0) {
-			m_acceleration[1] = 0;
-			m_velocity[1] = 0;
-			m_position[1] = 0;
-		}
-		
-		// if x velocity is not null
-		if (m_velocity.x() > 0) {
-			// Add drag coefficient to simulate friction
-			m_velocity -= m_velocity * m_drag_coef * m_invertedMass; // divide by mass to be coherent with FPD
-		}
+	//if (m_position.y() <= 0) {
+	//	// first time floor is attained
+	//	if (m_velocity.y() < 0) {
+	//		m_acceleration[1] = 0;
+	//		m_velocity[1] = 0;
+	//		m_position[1] = 0;
+	//	}
+	//	
+	//	// if x velocity is not null
+	//	if (m_velocity.x() > 0) {
+	//		// Add drag coefficient to simulate friction
+	//		m_velocity -= m_velocity * m_drag_coef * m_invertedMass; // divide by mass to be coherent with FPD
+	//	}
 
-		// Do put coefficent to 0 only once
-		if (m_velocity.x() <= 0) {
-			m_velocity[0] = 0;
-			m_acceleration[0] = 0;
-		}
-	}
+	//	// Do put coefficent to 0 only once
+	//	if (m_velocity.x() <= 0) {
+	//		m_velocity[0] = 0;
+	//		m_acceleration[0] = 0;
+	//	}
+	//}
 
 }
 

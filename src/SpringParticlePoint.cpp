@@ -52,20 +52,30 @@ public:
 	*/
 	virtual void updateForce(Particle* particle, float duration) 
 	{
-		float invMass = particle->getInverseMass();
-		float distance = m_l0 - (m_pointPosition - particle->getPosition()).Norm();
-
-
 		Vector3D direction = (m_pointPosition - particle->getPosition());
-		direction.Normalize();
-
-		float velocityProj = particle->getVelocity() * direction;
-
-		m_w = sqrt( invMass * m_k);
-		m_z = m_C * invMass / 2 * m_w;
 		
-		float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
+		if(!(direction == Vector3D()))
+		{
 
-		particle->addForce(direction * coeff * duration);
+			float invMass = particle->getInverseMass();
+			float distance = m_l0 - direction.Norm();
+
+			direction.Normalize();
+
+			float velocityProj = particle->getVelocity() * direction;
+
+			m_w = sqrt(invMass * m_k);
+			m_z = m_C * invMass / 2 * m_w;
+
+			float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
+
+			/*std::cout << "Direction : " << direction.toString() << std::endl;
+			std::cout << "distance : " << distance << std::endl;
+			std::cout << "Projection : " << velocityProj << std::endl;
+			std::cout << "Force z : " << (direction * coeff * duration).z() << std::endl;
+			std::cout << "Coefficient : " << coeff << std::endl;*/
+
+			particle->addForce(direction * coeff * duration);
+		}
 	}
 };
