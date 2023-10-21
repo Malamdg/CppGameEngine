@@ -1,4 +1,5 @@
 #include "ofApp.h"
+#include "Spindle.h"
 #include "CollisionHandler.h"
 
 //--------------------------------------------------------------
@@ -41,6 +42,17 @@ void ofApp::setup(){
 	cam.setPosition(Vector3D(0, 0, 1500).v3());
 	cam.move(Vector3D(ofGetWidth() * .5, ofGetHeight() * .5).v3());
 
+	Particle* p = new Particle(30, Vector3D(0, 300), Vector3D(50, 0), 10);
+	int* tmpMode = new int(mode);
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
+	particles.push_back(p);
+
+	Particle* p1 = new Particle(30, Vector3D(-100, 300), Vector3D(0, 0), 10);
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(p1, tmpMode));
+	particles.push_back(p1);
+
+	Spindle(p, 100);
+
 	// Tests
 	Tests::ExecuteTests();
 }
@@ -54,11 +66,6 @@ void ofApp::update(){
 		particle->Update();
 		handleCollision(particles);
 	}
-
-	// clear screen for following draw()
-	preview.clear();
-	// generate shoot previsualization
-	GeneratePrevisualization();
 }
 
 //--------------------------------------------------------------
@@ -210,7 +217,7 @@ void ofApp::mouseReleased(int x, int y, int button){
 			}
       
 			// store particle in particles and primitives lists
-			Particle* p = new Particle(10, Vector3D(), GetLaunchDirection(x, y) * particleSpeed, 10, Vector3D(0, -gravity));
+			Particle* p = new Particle(10, Vector3D(), GetLaunchDirection(x, y) * particleSpeed, 10);
 			int* tmpMode = new int(mode);
 			primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
 			particles.push_back(p);

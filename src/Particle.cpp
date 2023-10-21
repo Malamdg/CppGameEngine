@@ -124,11 +124,10 @@ void Particle::updatePosition(float duration) {
 			m_acceleration[0] = 0;
 		}
 	}
-
-	Vector3D Particle::getVelocity() { return m_velocity; }
-
-	Vector3D Particle::getPosition() { return m_position; }
-
-	void Particle::addPosition(Vector3D newPosition) { m_position += newPosition; }
-
 }
+
+Vector3D Particle::getVelocity() { return m_velocity; }
+
+Vector3D Particle::getPosition() { return m_position; }
+
+void Particle::addPosition(Vector3D newPosition) { m_position += newPosition; }

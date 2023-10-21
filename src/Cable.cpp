@@ -43,15 +43,27 @@ void Cable::updateForParticle(Particle* particle)
 	if (vectorBetweenParticles.Norm() > m_length)
 	{
 		float displacement = vectorBetweenParticles.Norm() - m_length;
-		float firstMass = 1 / m_attachParticle->getInverseMass();
-		float secondMass = 1 / particle->getInverseMass();
 
-		float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
-		float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
+		if (m_attachParticle->getInverseMass() == 0)
+		{
+			particle->addPosition((vectorBetweenParticles * displacement));
+		}
+		else if (particle->getInverseMass() == 0)
+		{
+			m_attachParticle->addPosition((vectorBetweenParticles * displacement));
+		}
+		else
+		{
+			float firstMass = 1 / m_attachParticle->getInverseMass();
+			float secondMass = 1 / particle->getInverseMass();
 
-		// This ensure the length of the cable is always the same
-		m_attachParticle->addPosition((vectorBetweenParticles * firstDisplacement));
-		particle->addPosition((vectorBetweenParticles * secondDisplacement));
+			float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
+			float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
+
+			// This ensure the length of the cable is always the same
+			m_attachParticle->addPosition((vectorBetweenParticles * firstDisplacement));
+			particle->addPosition((vectorBetweenParticles * secondDisplacement));
+		}
 
 		// Then we need to add an impulse
 	}
