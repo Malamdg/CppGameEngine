@@ -58,13 +58,18 @@ public:
 		{
 
 			float invMass = particle->getInverseMass();
+			/* l-l0 distance computation */
 			float distance = m_l0 - direction.Norm();
 
+			/* Force director vector */
 			direction.Normalize();
 
+			/* Velocity of the particle on the particle-fixation axis by projection */
 			float velocityProj = particle->getVelocity() * direction;
 
+			/* Calculation of natural frequency */
 			m_w = sqrt(invMass * m_k);
+			/* Calculation of the depreciation rate */
 			m_z = m_C * invMass / 2 * m_w;
 
 			float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
