@@ -51,6 +51,10 @@ public:
 		Vector3D position = Vector3D(),
 		Vector3D velocity = Vector3D(),
 		float invertedMass = 0);
+
+	/*
+	* class destructor
+	*/
 	~Particle();
 
 	/*
