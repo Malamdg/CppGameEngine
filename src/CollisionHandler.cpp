@@ -18,8 +18,6 @@ void handleCollision(std::list<Particle*> particles)
 			if (vectorBetweenParticles.Norm() <= sumOfRadius)
 			{
 				// Here we handle the collision between particles
-				//std::cout << "Particle " << i << " collide with particle " << y << std::endl;
-
 				float displacement = sumOfRadius - vectorBetweenParticles.Norm();
 				float firstMass = (1 / (*firstParticle)->getInverseMass());
 				float secondMass = (1 / (*secondParticle)->getInverseMass());
