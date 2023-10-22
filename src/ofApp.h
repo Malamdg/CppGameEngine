@@ -5,9 +5,9 @@
 #include "Vector3D.h"
 #include "Particle.h"
 #include "Tests.h"
-#include "ParticleForceRegistry.h"
-#include "CollisionHandler.h"
-#include "Spindle.h"
+#include "Forces/ParticleForceRegistry.h"
+#include "Collisions/CollisionHandler.h"
+#include "Collisions/Spindle.h"
 #include "iostream"
 
 class ofApp : public ofBaseApp{
