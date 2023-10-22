@@ -56,8 +56,10 @@ float Particle::getInverseMass()
 
 Vector3D Particle::integrate(function<Vector3D(float)> f, float interval[2], int N)
 {
+	// interval over which we integrate
 	float h = (interval[1] - interval[0]) / N;
 	Vector3D u = Vector3D();
+	// euler algorithm
 	for (int k = 0; k < N; k++) {
 		u += f(interval[0] + k * h) * h;
 	}
@@ -76,6 +78,7 @@ void Particle::updateVelocity(float duration) {
 
 	function<Vector3D(float)> a = [acceleration](float t) {return acceleration; };
 
+	//  is acceleration after integration
 	m_velocity += integrate(a, interval);
 }
 
@@ -85,6 +88,7 @@ void Particle::updatePosition(float duration) {
 
 	function<Vector3D(float)> v = [velocity](float t) {return velocity; };
 	
+	// position is velocity after integration
 	m_position += integrate(v, interval);
 
 	this->setPosition(m_position.v3());

@@ -1,5 +1,5 @@
 #include "ofApp.h"
-#include "CollisionHandler.h"
+#include "Collisions/CollisionHandler.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
