@@ -91,6 +91,8 @@ public:
 
 	/*
 	Getter Velocity
+
+	@return the velocity of the particle
 	*/
 	Vector3D getVelocity();
 
@@ -103,6 +105,8 @@ public:
 
 	/*
 	add a vector to the current position of the particle
+
+	@param newPosition, the vector added to the current position
 	*/
 	void addPosition(Vector3D newPosition);
 };

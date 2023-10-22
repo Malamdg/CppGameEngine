@@ -20,6 +20,9 @@ public:
 		m_gravity(gravity)
 	{ }
 
+	/*
+	class destructor
+	*/
 	ParticleDeplacement::~ParticleDeplacement() { }
 
 	/*

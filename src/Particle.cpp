@@ -55,9 +55,7 @@ float Particle::getInverseMass()
 
 void Particle::addForce(const Vector3D &force) 
 {
-	//std::cout << "AccumulationForces : " << m_accumForce.toString() << " + " << force.toString() << " = ";
 	m_accumForce = m_accumForce + force;
-	//std::cout << m_accumForce.toString() << std::endl;
 }
 
 void Particle::clearAccum()
@@ -106,33 +104,6 @@ void Particle::updatePosition(float duration) {
 	m_position += integrate(v, interval);
 
 	this->setPosition(m_position.v3());
-
-	/////////////////////////////////////////////////////////////
-	/// todo remove if when forces generators are implemented ///
-	/////////////////////////////////////////////////////////////
-
-	// floor is attained - add friction
-	//if (m_position.y() <= 0) {
-	//	// first time floor is attained
-	//	if (m_velocity.y() < 0) {
-	//		m_acceleration[1] = 0;
-	//		m_velocity[1] = 0;
-	//		m_position[1] = 0;
-	//	}
-	//	
-	//	// if x velocity is not null
-	//	if (m_velocity.x() > 0) {
-	//		// Add drag coefficient to simulate friction
-	//		m_velocity -= m_velocity * m_drag_coef * m_invertedMass; // divide by mass to be coherent with FPD
-	//	}
-
-	//	// Do put coefficent to 0 only once
-	//	if (m_velocity.x() <= 0) {
-	//		m_velocity[0] = 0;
-	//		m_acceleration[0] = 0;
-	//	}
-	//}
-
 }
 
 
@@ -146,5 +117,6 @@ void Particle::addPosition(Vector3D newPosition)
 {
 	m_position = m_position + newPosition;
 }
+
 Vector3D Particle::getVelocity() { return m_velocity; }
 
