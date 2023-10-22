@@ -60,7 +60,7 @@ public:
 		/* l-l0 distance computation */
 		float distance = m_l0 - direction.Norm();
 
-		if (!(direction == Vector3D()) && distance < 0)
+		if (particle->getInverseMass() != 0 && !(direction == Vector3D()) && distance < 0)
 		{
 
 			float invMass = particle->getInverseMass();

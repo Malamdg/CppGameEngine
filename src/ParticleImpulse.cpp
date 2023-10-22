@@ -30,6 +30,9 @@ public:
 	*/
 	virtual void updateForce(Particle* particle, float duration)
 	{
-		particle->addForce(m_impulsion * (1 / particle->getInverseMass()) * duration);
+		if(particle->getInverseMass() != 0)
+		{
+			particle->addForce(m_impulsion * (1 / particle->getInverseMass()) * duration);
+		}
 	}
 };

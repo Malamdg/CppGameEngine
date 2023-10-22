@@ -57,7 +57,7 @@ public:
 	{
 		Vector3D direction = (m_particle->getPosition() - particle->getPosition());
 
-		if (!(direction == Vector3D()))
+		if (particle->getInverseMass() != 0 && !(direction == Vector3D()))
 		{
 
 			float invMass = particle->getInverseMass();
