@@ -2,22 +2,23 @@
 #include "ParticleForceGenerator.h"
 #include "Vector3D.h"
 
-class ParticleDeplacement : public ParticleForceGenerator{
-	
+class ParticleDeplacement : public ParticleForceGenerator {
+
 private:
-	/* constant of gravity */
-	Vector3D m_gravity;
+
+	/* Force's Deplacement*/
+	Vector3D m_force;
 
 public:
 	/*
 	class constructor
 
-	@param gravity, the vector associated to gravity
+	@param deplacementForce, value of the force's deplacement
 	*/
-	ParticleDeplacement::ParticleDeplacement(Vector3D gravity)
-		: 
+	ParticleDeplacement::ParticleDeplacement(float deplacementForce)
+		:
 		ParticleForceGenerator(),
-		m_gravity(gravity)
+		m_force(Vector3D(deplacementForce))
 	{ }
 
 	ParticleDeplacement::~ParticleDeplacement() { }
@@ -32,7 +33,7 @@ public:
 	{
 		if (particle->getInverseMass() != 0)
 		{
-			particle->addForce(m_gravity * (1 / particle->getInverseMass()));
+			particle->addForce(m_force * (1 / particle->getInverseMass()));
 		}
 	}
 };

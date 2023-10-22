@@ -27,9 +27,12 @@ public:
 	/*
 	class constructor
 
-	@param elasticity, elasticity constant
+	@param position, the position of the point where the spring is attached
+	@param elasticity, the elasticity of the spring
+	@param lenght, the lenght of the spring
+	@param C, a coefficient
 	*/
-	SpringParticlePoint::SpringParticlePoint(Vector3D position, float elasticity = 1, float lenght = 10, float C = 0)
+	SpringParticlePoint::SpringParticlePoint(Vector3D position, float elasticity = 1, float lenght = 10, float C = 1)
 		:
 		m_pointPosition(position),
 		m_k(elasticity),
@@ -45,27 +48,42 @@ public:
 	SpringParticlePoint::~SpringParticlePoint() { }
 
 	/*
-	update the particle's gravity
+	update the particle's force
 
 	@param *particle, the particle to update
-	@param duration, frame duration when the gravity applies
+	@param duration, frame duration when the srping's force applies
 	*/
 	virtual void updateForce(Particle* particle, float duration) 
 	{
-		float invMass = particle->getInverseMass();
-		float distance = m_l0 - (m_pointPosition - particle->getPosition()).Norm();
-
-
 		Vector3D direction = (m_pointPosition - particle->getPosition());
-		direction.Normalize();
-
-		float velocityProj = particle->getVelocity() * direction;
-
-		m_w = sqrt( invMass * m_k);
-		m_z = m_C * invMass / 2 * m_w;
 		
-		float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
+		if(particle->getInverseMass() != 0 && !(direction == Vector3D()))
+		{
 
-		particle->addForce(direction * coeff * duration);
+			float invMass = particle->getInverseMass();
+			/* l-l0 distance computation */
+			float distance = m_l0 - direction.Norm();
+
+			/* Force director vector */
+			direction.Normalize();
+
+			/* Velocity of the particle on the particle-fixation axis by projection */
+			float velocityProj = particle->getVelocity() * direction;
+
+			/* Calculation of natural frequency */
+			m_w = sqrt(invMass * m_k);
+			/* Calculation of the depreciation rate */
+			m_z = m_C * invMass / 2 * m_w;
+
+			float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
+
+			/*std::cout << "Direction : " << direction.toString() << std::endl;
+			std::cout << "distance : " << distance << std::endl;
+			std::cout << "Projection : " << velocityProj << std::endl;
+			std::cout << "Force z : " << (direction * coeff * duration).z() << std::endl;
+			std::cout << "Coefficient : " << coeff << std::endl;*/
+
+			particle->addForce(direction * coeff * duration);
+		}
 	}
 };
