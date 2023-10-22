@@ -27,9 +27,12 @@ void handleCollision(std::list<Particle*> particles)
 				float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
 				float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
 
+				Vector3D firstDisplacementVector = vectorBetweenParticles * firstDisplacement;
+				Vector3D secondDisplacementVector = vectorBetweenParticles * secondDisplacement;
+
 				// This separate the two particles
-				(*firstParticle)->addPosition((vectorBetweenParticles * firstDisplacement));
-				(*secondParticle)->addPosition((vectorBetweenParticles * secondDisplacement));
+				(*firstParticle)->addPosition(firstDisplacementVector);
+				(*secondParticle)->addPosition(secondDisplacementVector);
 
 				// Then we need to add an impulse
 			}
