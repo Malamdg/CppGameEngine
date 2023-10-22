@@ -104,6 +104,8 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ElasticParticleParticle.cpp" />
+    <ClCompile Include="src\ElasticParticlePoint.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Particle.cpp" />
@@ -113,7 +115,6 @@
     <ClCompile Include="src\ParticleGravity.cpp" />
     <ClCompile Include="src\SpringParticleParticle.cpp" />
     <ClCompile Include="src\SpringParticlePoint.cpp" />
-    <ClCompile Include="src\SpringPointPoint.cpp" />
     <ClCompile Include="src\Tests.cpp" />
     <ClCompile Include="src\Vector3D.cpp" />
   </ItemGroup>

@@ -27,9 +27,12 @@ public:
 	/*
 	class constructor
 
-	@param elasticity, elasticity constant
+	@param position, the position of the point where the spring is attached
+	@param elasticity, the elasticity of the spring
+	@param lenght, the lenght of the spring
+	@param C, a coefficient
 	*/
-	SpringParticlePoint::SpringParticlePoint(Vector3D position, float elasticity = 1, float lenght = 10, float C = 0)
+	SpringParticlePoint::SpringParticlePoint(Vector3D position, float elasticity = 1, float lenght = 10, float C = 1)
 		:
 		m_pointPosition(position),
 		m_k(elasticity),
