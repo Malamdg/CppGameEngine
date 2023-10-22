@@ -9,11 +9,11 @@ private:
 	Vector3D m_velocity;
 	Vector3D m_acceleration;
 	float m_invertedMass;
-	Vector3D m_gravity;
 
 	Vector3D m_velocityInit;
 	float m_drag_coef = 0.005;
 	Vector3D m_color;
+	Vector3D m_accumForce;
 
 	/*
 	* private function to implement Euler integration
@@ -23,7 +23,7 @@ private:
 	/*
 	* private method to update acceleration given the duration of the frame
 	*/
-	void updateAcceleration(float duration);
+	void updateAcceleration();
 
 	/*
 	* private method to update velocity given the duration of the frame
@@ -50,8 +50,11 @@ public:
 	Particle(int radius = 10,
 		Vector3D position = Vector3D(),
 		Vector3D velocity = Vector3D(),
-		float invertedMass = 0,
-		Vector3D gravity = Vector3D(0, -9.8, 0));
+		float invertedMass = 0);
+
+	/*
+	* class destructor
+	*/
 	~Particle();
 
 	/*
@@ -73,6 +76,23 @@ public:
 	* @return the inverse of the particle's mass
 	*/
 	float getInverseMass();
+
+	/*
+	add a Force to the particle
+
+	@param Force, the new Force applied to the particle
+	*/
+	void addForce(const Vector3D &force);
+
+	/*
+	clear the force accumulator assigned to the particle
+	*/
+	void clearAccum();
+
+	/*
+	Getter Velocity
+	*/
+	Vector3D getVelocity();
 
 	/*
 	get the position of the particle
