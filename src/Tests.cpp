@@ -164,7 +164,7 @@ bool Tests::Vector3DNormalization()
 	vector.Normalize();
 	Vector3D intendedVector = Vector3D(5 / sqrt(86), 6 / sqrt(86), -5 / sqrt(86));
 
-	// Des erreurs d'arrondies foutent la merde, on vérifie juste que la norme de la différence est suffisament petite
+	// handle float approximation
 	if ((vector - intendedVector).Norm() < 0.001f)
 	{
 		std::cout << "Normalization : Success" << std::endl;

@@ -18,8 +18,6 @@ void handleCollision(std::list<Particle*> particles)
 			if (vectorBetweenParticles.Norm() <= sumOfRadius)
 			{
 				// Here we handle the collision between particles
-				//std::cout << "Particle " << i << " collide with particle " << y << std::endl;
-
 				float displacement = sumOfRadius - vectorBetweenParticles.Norm();
 				float firstMass = (1 / (*firstParticle)->getInverseMass());
 				float secondMass = (1 / (*secondParticle)->getInverseMass());
@@ -27,9 +25,12 @@ void handleCollision(std::list<Particle*> particles)
 				float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
 				float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
 
+				Vector3D firstDisplacementVector = vectorBetweenParticles * firstDisplacement;
+				Vector3D secondDisplacementVector = vectorBetweenParticles * secondDisplacement;
+
 				// This separate the two particles
-				(*firstParticle)->addPosition((vectorBetweenParticles * firstDisplacement));
-				(*secondParticle)->addPosition((vectorBetweenParticles * secondDisplacement));
+				(*firstParticle)->addPosition(firstDisplacementVector);
+				(*secondParticle)->addPosition(secondDisplacementVector);
 
 				// Then we need to add an impulse
 			}

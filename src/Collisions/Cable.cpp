@@ -1,32 +1,77 @@
 #include "Cable.h"
 
-Cable::Cable(Particle* firstParticle, Particle* secondParticle, float length)
-	: m_firstParticle(firstParticle),
-	  m_secondParticle(secondParticle),
+Cable::Cable(Vector3D* attachPoint, float length)
+	: m_attachPoint(attachPoint),
+	  m_attachParticle(nullptr),
+	  m_length(length)
+{ }
+
+Cable::Cable(Particle* attachParticle, float length)
+	: m_attachPoint(nullptr),
+	  m_attachParticle(attachParticle),
 	  m_length(length)
 { }
 
 Cable::~Cable() { }
 
-void Cable::Update()
+void Cable::updateForce(Particle* particle, float duration)
 {
-	Vector3D vectorBetweenParticles = m_firstParticle->getPosition() - m_secondParticle->getPosition();
+	if (m_attachPoint != nullptr) updateForPoint(particle);
+	else updateForParticle(particle);
+}
+
+void Cable::updateForPoint(Particle* particle)
+{
+	Vector3D vectorBetweenPoints = *m_attachPoint - particle->getPosition();
+
+	if (vectorBetweenPoints.Norm() > m_length)
+	{
+		float displacement = vectorBetweenPoints.Norm() - m_length;
+		vectorBetweenPoints.Normalize();
+
+		// We don't need to calculate ponderated displacement as the point is supposed unmovable
+
+		Vector3D displacementVector = vectorBetweenPoints * displacement;
+		particle->addPosition(displacementVector);
+
+		// Then we need to add an impulse
+	}
+}
+
+void Cable::updateForParticle(Particle* particle)
+{
+	Vector3D vectorBetweenParticles = m_attachParticle->getPosition() - particle->getPosition();
 	
 	if (vectorBetweenParticles.Norm() > m_length)
 	{
 		float displacement = vectorBetweenParticles.Norm() - m_length;
-		float firstMass = 1 / m_firstParticle->getInverseMass();
-		float secondMass = 1 / m_secondParticle->getInverseMass();
+		vectorBetweenParticles.Normalize();
 
-		float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
-		float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
+		if (m_attachParticle->getInverseMass() == 0)
+		{
+			Vector3D displacementVector = vectorBetweenParticles * displacement;
+			particle->addPosition(displacementVector);
+		}
+		else if (particle->getInverseMass() == 0)
+		{
+			Vector3D displacementVector = vectorBetweenParticles * displacement * -1;
+			m_attachParticle->addPosition(displacementVector);
+		}
+		else
+		{
+			float firstMass = 1 / m_attachParticle->getInverseMass();
+			float secondMass = 1 / particle->getInverseMass();
 
-		// This separate the two particles
+			float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
+			float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
 
-		// TODO : Add those two lines once the branch are merged
+			Vector3D firstDisplacementVector = vectorBetweenParticles * firstDisplacement;
+			Vector3D secondDisplacementVector = vectorBetweenParticles * secondDisplacement;
 
-		//m_firstParticle->addPosition((vectorBetweenParticles * firstDisplacement));
-		//m_secondParticle->addPosition((vectorBetweenParticles * secondDisplacement));
+			// This ensure the length of the cable is always the same
+			m_attachParticle->addPosition(firstDisplacementVector);
+			particle->addPosition(secondDisplacementVector);
+		}
 
 		// Then we need to add an impulse
 	}

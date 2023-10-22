@@ -1,32 +1,77 @@
 #include "Spindle.h"
 
-Spindle::Spindle(Particle* firstParticle, Particle* secondParticle, float length)
-	: m_firstParticle(firstParticle),
-	  m_secondParticle(secondParticle),
+Spindle::Spindle(Vector3D* attachPoint, float length)
+	: m_attachPoint(attachPoint),
+	  m_attachParticle(nullptr),
+	  m_length(length)
+{ }
+
+Spindle::Spindle(Particle* attachParticle, float length)
+	: m_attachPoint(nullptr),
+	  m_attachParticle(attachParticle),
 	  m_length(length)
 { }
 
 Spindle::~Spindle() { }
 
-void Spindle::Update()
+void Spindle::updateForce(Particle* particle, float duration)
 {
-	Vector3D vectorBetweenParticles = m_firstParticle->getPosition() - m_secondParticle->getPosition();
-	
+	if (m_attachPoint != nullptr) updateForPoint(particle);
+	else updateForParticle(particle);
+}
+
+void Spindle::updateForPoint(Particle* particle)
+{
+	Vector3D vectorBetweenPoints = *m_attachPoint - particle->getPosition();
+
+	if (vectorBetweenPoints.Norm() != m_length)
+	{
+		float displacement = vectorBetweenPoints.Norm() - m_length;
+		vectorBetweenPoints.Normalize();
+
+		// We don't need to calculate ponderated displacement as the point is supposed unmovable
+
+		Vector3D displacementVector = vectorBetweenPoints * displacement;
+		particle->addPosition(displacementVector);
+
+		// No impulse to add there because it is considered a static collision
+	}
+}
+
+void Spindle::updateForParticle(Particle* particle)
+{
+	Vector3D vectorBetweenParticles = m_attachParticle->getPosition() - particle->getPosition();
+
 	if (vectorBetweenParticles.Norm() != m_length)
 	{
 		float displacement = vectorBetweenParticles.Norm() - m_length;
-		float firstMass = 1 / m_firstParticle->getInverseMass();
-		float secondMass = 1 / m_secondParticle->getInverseMass();
+		vectorBetweenParticles.Normalize();
+		
+		if (m_attachParticle->getInverseMass() == 0)
+		{
+			Vector3D displacementVector = vectorBetweenParticles * displacement;
+			particle->addPosition(displacementVector);
+		}
+		else if (particle->getInverseMass() == 0)
+		{
+			Vector3D displacementVector = vectorBetweenParticles * displacement * -1;
+			m_attachParticle->addPosition(displacementVector);
+		}
+		else
+		{
+			float firstMass = 1 / m_attachParticle->getInverseMass();
+			float secondMass = 1 / particle->getInverseMass();
 
-		float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
-		float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
+			float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
+			float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
 
-		// This separate the two particles
+			Vector3D firstDisplacementVector = vectorBetweenParticles * firstDisplacement;
+			Vector3D secondDisplacementVector = vectorBetweenParticles * secondDisplacement;
 
-		// TODO : Add those two lines once the branch are merged
-
-		//m_firstParticle->addPosition((vectorBetweenParticles * firstDisplacement));
-		//m_secondParticle->addPosition((vectorBetweenParticles * secondDisplacement));
+			// This ensure the length of the spindle is always the same
+			m_attachParticle->addPosition(firstDisplacementVector);
+			particle->addPosition(secondDisplacementVector);
+		}
 
 		// No impulse to add there because it is considered a static collision
 	}
