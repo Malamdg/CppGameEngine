@@ -6,6 +6,7 @@
 #include "Particle.h"
 #include "Tests.h"
 #include "ParticleForceRegistry.h"
+#include "ParticleGravity.cpp"
 #include "CollisionHandler.h"
 #include "Spindle.h"
 #include "iostream"

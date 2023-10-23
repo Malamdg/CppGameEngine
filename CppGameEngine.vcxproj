@@ -116,7 +116,6 @@
     <ClCompile Include="src\Spindle.cpp" />
     <ClCompile Include="src\SpringParticleParticle.cpp" />
     <ClCompile Include="src\SpringParticlePoint.cpp" />
-    <ClCompile Include="src\SpringPointPoint.cpp" />
     <ClCompile Include="src\Tests.cpp" />
     <ClCompile Include="src\Vector3D.cpp" />
   </ItemGroup>

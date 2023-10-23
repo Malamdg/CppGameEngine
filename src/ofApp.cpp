@@ -40,19 +40,16 @@ void ofApp::setup(){
 	cam.setPosition(Vector3D(0, 0, 1500).v3());
 	cam.move(Vector3D(ofGetWidth() * .5, ofGetHeight() * .5).v3());
 
-	p = new Particle(30, Vector3D(0, 300), Vector3D(50, 0), 0);
+	p = new Particle(30, Vector3D(0, 300), Vector3D(0, 50), 30);
 	int* tmpMode = new int(mode);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
 	particles.push_back(p);
 
-	p1 = new Particle(30, Vector3D(-100, 300), Vector3D(0, 0), 10);
+	p1 = new Particle(30, Vector3D(15, 800), Vector3D(0, -50), 0);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p1, tmpMode));
 	particles.push_back(p1);
 
 	forceRegistry = new ParticleForceRegistry();
-	spindle = new Spindle(p, 10);
-
-	forceRegistry->add(p1, spindle);
 
 	// Tests
 	Tests::ExecuteTests();
@@ -65,11 +62,11 @@ void ofApp::update(){
 	for (Particle* particle : particles)
 	{
 		particle->Update();
-		handleCollision(particles);
 	}
 
 	forceRegistry->updateForces(0);
-	forceRegistry->add(p1, spindle);
+
+	handleCollision(particles);
 }
 
 //--------------------------------------------------------------
