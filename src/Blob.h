@@ -5,14 +5,14 @@
 
 class Blob {
 private:
-	Particle m_core;
+	Particle* m_core;
 	std::list<Particle*> m_particles;
 
 public:
-	Blob(Particle core = Particle());
+	Blob(Particle* core = new Particle());
 	~Blob();
 
-	Particle getCore();
+	Particle* getCore();
 	std::list<Particle*> getParticles();
 	void merge(Particle* particle);
 	void linkParticles(ParticleForceRegistry* forceRegistry);

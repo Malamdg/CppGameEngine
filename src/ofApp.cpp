@@ -35,7 +35,7 @@ void ofApp::setup(){
 	forceRegistry = new ParticleForceRegistry();
 	
 	// setup blob
-	Particle blobCore = Particle(10, Vector3D(0, 20));
+	Particle* blobCore = new Particle(10, Vector3D(0, 20));
 	blob = Blob(blobCore);
 	blob.linkParticles(forceRegistry);
 
@@ -59,11 +59,11 @@ void ofApp::update(){
 	for (Particle* particle : particles)
 	{
 		particle->Update();
-		handleCollision(particles);
 	}
 
 	forceRegistry->updateForces(0);
 	blob.linkParticles(forceRegistry);
+	handleCollision(particles);
 }
 
 //--------------------------------------------------------------
