@@ -210,7 +210,7 @@ void ofApp::mouseReleased(int x, int y, int button){
 			}
       
 			// store particle in particles and primitives lists
-			Particle* p = new Particle(10, Vector3D(), GetLaunchDirection(x, y) * particleSpeed, 10, Vector3D(0, -gravity));
+			Particle* p = new Particle(10, Vector3D(), GetLaunchDirection(x, y) * particleSpeed, 10);
 			int* tmpMode = new int(mode);
 			primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
 			particles.push_back(p);
