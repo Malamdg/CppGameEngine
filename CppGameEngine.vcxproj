@@ -104,6 +104,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Blob.cpp" />
     <ClCompile Include="src\Cable.cpp" />
     <ClCompile Include="src\CollisionHandler.cpp" />
     <ClCompile Include="src\ElasticParticleParticle.cpp" />
@@ -120,11 +121,11 @@
     <ClCompile Include="src\Spindle.cpp" />
     <ClCompile Include="src\SpringParticleParticle.cpp" />
     <ClCompile Include="src\SpringParticlePoint.cpp" />
-    <ClCompile Include="src\SpringPointPoint.cpp" />
     <ClCompile Include="src\Tests.cpp" />
     <ClCompile Include="src\Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Blob.h" />
     <ClInclude Include="src\Cable.h" />
     <ClInclude Include="src\CollisionHandler.h" />
     <ClInclude Include="src\ofApp.h" />
@@ -132,6 +133,7 @@
     <ClInclude Include="src\ParticleForceGenerator.h" />
     <ClInclude Include="src\ParticleForceRegistry.h" />
     <ClInclude Include="src\Spindle.h" />
+    <ClInclude Include="src\SpringParticleParticle.h" />
     <ClInclude Include="src\Tests.h" />
     <ClInclude Include="src\Vector3D.h" />
   </ItemGroup>
