@@ -1,37 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\Cable.cpp" />
-    <ClCompile Include="src\CollisionHandler.cpp" />
-    <ClCompile Include="src\ElasticParticleParticle.cpp" />
-    <ClCompile Include="src\ElasticParticlePoint.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\Vector3D.cpp" />
     <ClCompile Include="src\Tests.cpp" />
-    <ClCompile Include="src\Collisions\Cable.cpp" />
-    <ClCompile Include="src\Collisions\Spindle.cpp" />
-    <ClCompile Include="src\Collisions\CollisionHandler.cpp" />
+    <ClCompile Include="src\Forces\ElasticParticleParticle.cpp" />
+    <ClCompile Include="src\Forces\ElasticParticlePoint.cpp" />
+    <ClCompile Include="src\Forces\ParticleDeplacement.cpp" />
     <ClCompile Include="src\Forces\ParticleForceGenerator.cpp" />
     <ClCompile Include="src\Forces\ParticleForceRegistry.cpp" />
     <ClCompile Include="src\Forces\ParticleFriction.cpp" />
     <ClCompile Include="src\Forces\ParticleGravity.cpp" />
+    <ClCompile Include="src\Forces\ParticleImpulse.cpp" />
     <ClCompile Include="src\Forces\SpringParticleParticle.cpp" />
     <ClCompile Include="src\Forces\SpringParticlePoint.cpp" />
-    <ClCompile Include="src\Forces\SpringPointPoint.cpp" />
+    <ClCompile Include="src\Collisions\Cable.cpp" />
+    <ClCompile Include="src\Collisions\CollisionHandler.cpp" />
+    <ClCompile Include="src\Collisions\Spindle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Vector3D.h" />
     <ClInclude Include="src\Tests.h" />
-    <ClInclude Include="src\SpringParticleParticle.h" />
-    <ClInclude Include="src\Collisions\Cable.h" />
-    <ClInclude Include="src\Collisions\Spindle.h" />
-    <ClInclude Include="src\CollisionHandler.h" />
+    <ClInclude Include="src\Forces\SpringParticleParticle.h" />
     <ClInclude Include="src\Forces\ParticleForceGenerator.h" />
     <ClInclude Include="src\Forces\ParticleForceRegistry.h" />
+    <ClInclude Include="src\Collisions\Cable.h" />
+    <ClInclude Include="src\Collisions\CollisionHandler.h" />
+    <ClInclude Include="src\Collisions\Spindle.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
