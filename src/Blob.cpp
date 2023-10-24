@@ -9,10 +9,10 @@ Blob::Blob(Particle* core)
 	m_particles = std::list<Particle*>();
 
 	m_particles.push_back(m_core);
-	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(0, 100), Vector3D(), 5));
-	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(100, 0), Vector3D(), 5));
-	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(0, -100), Vector3D(), 5));
-	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(-100, 0), Vector3D(), 5));
+	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(0, 20), Vector3D(), .1));
+	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(20, 0), Vector3D(), .1));
+	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(0, -20.), Vector3D(), .1));
+	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(-20., 0), Vector3D(), .1));
 };
 
 Blob::~Blob() {}

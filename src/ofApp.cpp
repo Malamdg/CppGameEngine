@@ -1,6 +1,7 @@
 #include "ofApp.h"
 #include "Forces/ParticleForceRegistry.h"
 #include "Collisions/CollisionHandler.h"
+#include "Forces/ParticleImpulse.cpp"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -37,18 +38,16 @@ void ofApp::setup(){
 	forceRegistry = new ParticleForceRegistry();
 	m_gravity = Vector3D(0, -9.8, 0);
 
-	gravity = new ParticleGravity(m_gravity);
-
 	// setup blob
-	Particle* blobCore = new Particle(10, Vector3D(0, 200), Vector3D(), .1);
+	Particle* blobCore = new Particle(10, Vector3D(0, 200), Vector3D(), .01);
 	blob = Blob(blobCore);
 
 	int i = 0;
 	int* colorMode;
 	for (Particle* particle : blob.m_particles) {
-		colorMode = new int(0);
+		colorMode = new int(1);
 		if (i == 0) {
-			colorMode = new int(1);
+			colorMode = new int(0);
 		}
 
 		primitives.push_back(std::pair<of3dPrimitive*, int*>(particle, colorMode));
@@ -73,13 +72,13 @@ void ofApp::update(){
 
 	for (Particle* particle : particles)
 	{
-		particle->Update();
-
-		std::cout << particle->getPosition().toString() << std::endl;
+		// ParticleGravity* gravity = new ParticleGravity(m_gravity);
+		// forceRegistry->add(particle, gravity);
 	}
 
-	std::cout << std::endl;
+	cam.move((blob.getCore()->getPosition() - Vector3D(cam.getPosition())).v3());
 
+	blob.linkParticles(forceRegistry);
 	handleCollision(particles);
 }
 
@@ -111,26 +110,32 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	// Default direction +x
+	Vector3D impulse = Vector3D();
+	Vector3D impulseX = Vector3D(1000);
+	Vector3D impulseY = Vector3D(0, 100000);
 	std::cout << key << std::endl;
-	
-	Vector3D impulseDirection = Vector3D();
 	// move on arrow key press
 	switch (key)
 	{
-		case 57358: // right
-		{
-			IMR_CANDIDATEWINDOW;
-			break;
-		}
-		case 57356: // left
-		{
-			break;
-		}
+		case 57358: // stride right
+			impulse = impulseX;
+			break; 
+		case 57356: // stride left
+			impulse = impulseX * -1;
+			break;		
+		case 57357: // jump
+			impulse = impulseY;
+			break;	
+		/* case 57359: // crouch
+			impulse = impulseY * -1;
+			break;*/
 		default: 
 			return;
 	}
-
+	
+	ParticleImpulse* moveImpulse = new ParticleImpulse(impulse);
+	forceRegistry->add(blob.getCore(), moveImpulse);
 }
 
 //--------------------------------------------------------------
