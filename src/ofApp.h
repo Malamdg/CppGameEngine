@@ -55,6 +55,7 @@ class ofApp : public ofBaseApp{
 
 		Particle* p;
 		Particle* p1;
+		Particle* p2;
 
 		Spindle* spindle;
 

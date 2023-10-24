@@ -7,13 +7,15 @@ However, here it is specific to each particle, which allows greater modularity.
 Particle::Particle(int radius,
 	Vector3D position,
 	Vector3D velocity,
-	float invertedMass)
+	float invertedMass,
+	float coefficientRestitution)
 	:
 	ofSpherePrimitive(),
 	m_position(position),
 	m_velocity(velocity),
 	m_acceleration(0),
 	m_invertedMass(invertedMass),
+	m_coefficientRestitutions(coefficientRestitution),
 	m_velocityInit(velocity),
 	m_accumForce(Vector3D())
 {
@@ -144,3 +146,12 @@ void Particle::addPosition(Vector3D newPosition)
 }
 Vector3D Particle::getVelocity() { return m_velocity; }
 
+void Particle::addVelocity(Vector3D velocity)
+{
+	m_velocity = m_velocity + velocity;
+}
+
+float Particle::getCoefficientRestitution()
+{
+	return m_coefficientRestitutions;
+}

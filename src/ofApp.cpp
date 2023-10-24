@@ -40,14 +40,18 @@ void ofApp::setup(){
 	cam.setPosition(Vector3D(0, 0, 1500).v3());
 	cam.move(Vector3D(ofGetWidth() * .5, ofGetHeight() * .5).v3());
 
-	p = new Particle(30, Vector3D(0, 300), Vector3D(0, 50), 30);
+	p = new Particle(30, Vector3D(0, 300), Vector3D(0, 50), 50);
 	int* tmpMode = new int(mode);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
 	particles.push_back(p);
 
-	p1 = new Particle(30, Vector3D(15, 800), Vector3D(0, -50), 0);
+	p1 = new Particle(30, Vector3D(0, 800), Vector3D(0, -50), 50);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p1, tmpMode));
 	particles.push_back(p1);
+
+	p2 = new Particle(30, Vector3D(300, 200), Vector3D(0, 50), 50);
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(p2, tmpMode));
+	particles.push_back(p2);
 
 	forceRegistry = new ParticleForceRegistry();
 

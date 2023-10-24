@@ -23,15 +23,26 @@ void handleCollision(std::list<Particle*> particles)
 				float displacement = sumOfRadius - vectorBetweenParticles.Norm();
 				vectorBetweenParticles.Normalize();
 
+				Vector3D vRel = (*firstParticle)->getVelocity() - (*secondParticle)->getVelocity();
+
 				if ((*firstParticle)->getInverseMass() == 0)
 				{
 					Vector3D displacementVector = vectorBetweenParticles * displacement * -1;
 					(*secondParticle)->addPosition(displacementVector);
+
+					float K = (vRel * vectorBetweenParticles * ((*firstParticle)->getCoefficientRestitution() - 1)) / ((*firstParticle)->getInverseMass() + (*secondParticle)->getInverseMass());
+					Vector3D velocityModifier = vectorBetweenParticles * K * (*secondParticle)->getInverseMass();
+					(*secondParticle)->addVelocity(velocityModifier);
+
 				}
 				else if ((*secondParticle)->getInverseMass() == 0)
 				{
 					Vector3D displacementVector = vectorBetweenParticles * displacement;
 					(*firstParticle)->addPosition(displacementVector);
+
+					float K = (vRel * vectorBetweenParticles * ((*secondParticle)->getCoefficientRestitution() - 1)) / ((*firstParticle)->getInverseMass() + (*secondParticle)->getInverseMass());
+					Vector3D velocityModifier = vectorBetweenParticles * K * (*firstParticle)->getInverseMass();
+					(*firstParticle)->addVelocity(velocityModifier * -1);
 				}
 				else
 				{
@@ -47,9 +58,14 @@ void handleCollision(std::list<Particle*> particles)
 					// This separate the two particles
 					(*firstParticle)->addPosition(firstDisplacementVector);
 					(*secondParticle)->addPosition(secondDisplacementVector);
-				}
 
-				// Then we need to add an impulse
+					float firstK = (vRel * vectorBetweenParticles * ((*secondParticle)->getCoefficientRestitution() - 1)) / ((*firstParticle)->getInverseMass() + (*secondParticle)->getInverseMass());
+					float secondK = (vRel * vectorBetweenParticles * ((*firstParticle)->getCoefficientRestitution() - 1)) / ((*firstParticle)->getInverseMass() + (*secondParticle)->getInverseMass());
+					Vector3D firstVelocityModifier = vectorBetweenParticles * firstK * (*firstParticle)->getInverseMass();
+					Vector3D secondVelocityModifier = vectorBetweenParticles * secondK * (*secondParticle)->getInverseMass();
+					(*firstParticle)->addVelocity(firstVelocityModifier * -1);
+					(*secondParticle)->addVelocity(secondVelocityModifier);
+				}
 			}
 		}
 	}

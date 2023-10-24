@@ -15,6 +15,8 @@ private:
 	Vector3D m_color;
 	Vector3D m_accumForce;
 
+	float m_coefficientRestitutions = 1;
+
 	/*
 	* private function to implement Euler integration
 	*/
@@ -50,7 +52,8 @@ public:
 	Particle(int radius = 10,
 		Vector3D position = Vector3D(),
 		Vector3D velocity = Vector3D(),
-		float invertedMass = 0);
+		float invertedMass = 0,
+		float coefficientRestitution = 1);
 
 	/*
 	* class destructor
@@ -94,6 +97,8 @@ public:
 	*/
 	Vector3D getVelocity();
 
+	void addVelocity(Vector3D velocity);
+
 	/*
 	get the position of the particle
 
@@ -105,4 +110,6 @@ public:
 	add a vector to the current position of the particle
 	*/
 	void addPosition(Vector3D newPosition);
+
+	float getCoefficientRestitution();
 };
