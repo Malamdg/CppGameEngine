@@ -1,4 +1,4 @@
-#include "Particle.h"
+#include "../Particle.h"
 #include "ParticleForceGenerator.h"
 
 class ParticleForceRegistry
