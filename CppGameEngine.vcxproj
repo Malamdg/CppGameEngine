@@ -104,46 +104,40 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Cable.cpp" />
-    <ClCompile Include="src\CollisionHandler.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\Particle.cpp" />
-    <ClCompile Include="src\ParticleForceGenerator.cpp" />
-    <ClCompile Include="src\ParticleForceRegistry.cpp" />
-    <ClCompile Include="src\ParticleFriction.cpp" />
-    <ClCompile Include="src\ParticleGravity.cpp" />
-    <ClCompile Include="src\Spindle.cpp" />
-    <ClCompile Include="src\SpringParticleParticle.cpp" />
-    <ClCompile Include="src\SpringParticlePoint.cpp" />
-    <ClCompile Include="src\Tests.cpp" />
-    <ClCompile Include="src\Vector3D.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\Cable.h" />
-    <ClInclude Include="src\CollisionHandler.h" />
-    <ClInclude Include="src\Particle.h" />
-    <ClInclude Include="src\ofApp.h" />
-    <ClInclude Include="src\ParticleForceGenerator.h" />
-    <ClInclude Include="src\ParticleForceRegistry.h" />
-    <ClInclude Include="src\Spindle.h" />
-    <ClInclude Include="src\Tests.h" />
-    <ClInclude Include="src\Vector3D.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
       <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="icon.rc">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(OF_ROOT)\libs\openFrameworksCompiled\project\vs</AdditionalIncludeDirectories>
-    </ResourceCompile>
+    <ClCompile Include="src\Collisions\Cable.cpp" />
+    <ClCompile Include="src\Collisions\CollisionHandler.cpp" />
+    <ClCompile Include="src\Collisions\Spindle.cpp" />
+    <ClCompile Include="src\Forces\ElasticParticleParticle.cpp" />
+    <ClCompile Include="src\Forces\ElasticParticlePoint.cpp" />
+    <ClCompile Include="src\Forces\ParticleDeplacement.cpp" />
+    <ClCompile Include="src\Forces\ParticleForceGenerator.cpp" />
+    <ClCompile Include="src\Forces\ParticleForceRegistry.cpp" />
+    <ClCompile Include="src\Forces\ParticleFriction.cpp" />
+    <ClCompile Include="src\Forces\ParticleGravity.cpp" />
+    <ClCompile Include="src\Forces\ParticleImpulse.cpp" />
+    <ClCompile Include="src\Forces\SpringParticleParticle.cpp" />
+    <ClCompile Include="src\Forces\SpringParticlePoint.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\Particle.cpp" />
+    <ClCompile Include="src\Tests.cpp" />
+    <ClCompile Include="src\Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bin\data\T_canonBall.png" />
-    <Image Include="bin\data\T_fireBall.png" />
+    <ClInclude Include="src\Collisions\Cable.h" />
+    <ClInclude Include="src\Collisions\CollisionHandler.h" />
+    <ClInclude Include="src\Collisions\Spindle.h" />
+    <ClInclude Include="src\Forces\ParticleForceGenerator.h" />
+    <ClInclude Include="src\Forces\ParticleForceRegistry.h" />
+    <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\Particle.h" />
+    <ClInclude Include="src\Tests.h" />
+    <ClInclude Include="src\Vector3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
