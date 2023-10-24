@@ -1,56 +1,99 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\Particle.cpp" />
-    <ClCompile Include="src\Vector3D.cpp" />
-    <ClCompile Include="src\Tests.cpp" />
-    <ClCompile Include="src\Cable.cpp" />
-    <ClCompile Include="src\CollisionHandler.cpp" />
-    <ClCompile Include="src\ParticleForceGenerator.cpp" />
-    <ClCompile Include="src\ParticleForceRegistry.cpp" />
-    <ClCompile Include="src\ParticleFriction.cpp" />
-    <ClCompile Include="src\ParticleGravity.cpp" />
-    <ClCompile Include="src\Spindle.cpp" />
-    <ClCompile Include="src\SpringParticleParticle.cpp" />
-    <ClCompile Include="src\SpringParticlePoint.cpp" />
-    <ClCompile Include="src\SpringPointPoint.cpp" />
-    <ClCompile Include="src\Forces\ElasticParticleParticle.cpp" />
-    <ClCompile Include="src\Forces\ElasticParticlePoint.cpp" />
-    <ClCompile Include="src\Forces\ParticleDeplacement.cpp" />
-    <ClCompile Include="src\Forces\ParticleForceGenerator.cpp" />
-    <ClCompile Include="src\Forces\ParticleForceRegistry.cpp" />
-    <ClCompile Include="src\Forces\ParticleFriction.cpp" />
-    <ClCompile Include="src\Forces\ParticleGravity.cpp" />
-    <ClCompile Include="src\Forces\ParticleImpulse.cpp" />
-    <ClCompile Include="src\Forces\SpringParticleParticle.cpp" />
-    <ClCompile Include="src\Forces\SpringParticlePoint.cpp" />
-    <ClCompile Include="src\Collisions\Cable.cpp" />
-    <ClCompile Include="src\Collisions\CollisionHandler.cpp" />
-    <ClCompile Include="src\Collisions\Spindle.cpp" />
+    <Filter Include="src">
+      <UniqueIdentifier>{6b4cf5dc-891e-46f2-b70e-32f78985ed50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\collisions">
+      <UniqueIdentifier>{137c9549-be42-46f3-81b6-d07c0071b189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Forces">
+      <UniqueIdentifier>{794df0a6-38d4-484a-ac2e-20d30fdcca77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Particle.h" />
-    <ClInclude Include="src\ofApp.h" />
-    <ClInclude Include="src\Vector3D.h" />
-    <ClInclude Include="src\Tests.h" />
-    <ClInclude Include="src\CollisionHandler.h" />
-    <ClInclude Include="src\Cable.h" />
-    <ClInclude Include="src\ParticleForceGenerator.h" />
-    <ClInclude Include="src\ParticleForceRegistry.h" />
-    <ClInclude Include="src\Spindle.h" />
-    <ClInclude Include="src\Forces\ParticleForceGenerator.h" />
-    <ClInclude Include="src\Forces\ParticleForceRegistry.h" />
-    <ClInclude Include="src\Collisions\Cable.h" />
-    <ClInclude Include="src\Collisions\CollisionHandler.h" />
-    <ClInclude Include="src\Collisions\Spindle.h" />
+    <ClCompile Include="src\Collisions\Cable.cpp">
+      <Filter>src\collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\CollisionHandler.cpp">
+      <Filter>src\collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\Spindle.cpp">
+      <Filter>src\collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Particle.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tests.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Vector3D.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\ElasticParticleParticle.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\ElasticParticlePoint.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\ParticleDeplacement.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\ParticleForceGenerator.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\ParticleForceRegistry.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\ParticleFriction.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\ParticleGravity.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\ParticleImpulse.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\SpringParticleParticle.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\SpringParticlePoint.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="icon.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="bin\data\T_canonBall.png" />
-    <Image Include="bin\data\T_fireBall.png" />
+    <ClInclude Include="src\Collisions\Cable.h">
+      <Filter>src\collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\CollisionHandler.h">
+      <Filter>src\collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\Spindle.h">
+      <Filter>src\collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Particle.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tests.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vector3D.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\ParticleForceGenerator.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\ParticleForceRegistry.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
