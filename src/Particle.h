@@ -15,6 +15,7 @@ private:
 	Vector3D m_color;
 	Vector3D m_accumForce;
 
+	// When a collision occurs, the coefficient is used to know the amount of energy absorbed by the particle (if coeff = 1, then nothing is absorbed)
 	float m_coefficientRestitutions = 1;
 
 	/*
@@ -115,5 +116,10 @@ public:
 	*/
 	void addPosition(Vector3D newPosition);
 
+	/*
+	get the coefficient of restitution
+
+	@return the coefficient of restitution
+	*/
 	float getCoefficientRestitution();
 };
