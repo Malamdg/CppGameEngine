@@ -92,7 +92,7 @@ void Particle::updateVelocity(float duration) {
 
 	function<Vector3D(float)> a = [acceleration](float t) {return acceleration; };
 
-	//  is acceleration after integration
+	// velocity is acceleration after integration
 	m_velocity += integrate(a, interval);
 }
 
@@ -107,8 +107,6 @@ void Particle::updatePosition(float duration) {
 
 	this->setPosition(m_position.v3());
 }
-
-
 
 Vector3D Particle::getPosition()
 {

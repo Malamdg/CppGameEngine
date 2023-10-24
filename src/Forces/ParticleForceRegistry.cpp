@@ -39,7 +39,7 @@ void ParticleForceRegistry::clear()
 
 void ParticleForceRegistry::updateForces(float duration)
 {
-	// for each registration, we compute the force applied to the correponding particle
+	// for each registration, we compute the force applied to the corresponding particle
 	for (auto it = m_registry.begin(); it != m_registry.end(); it++)
 	{
 		it->Fg->updateForce(it->particle, duration);
