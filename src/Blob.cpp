@@ -4,7 +4,7 @@
 Blob::Blob(Particle* core) 
 	: 
 	m_core(core),
-	m_springCoreParticle(new SpringParticleParticle(m_core, .5, 15, .1))
+	m_springCoreParticle(new SpringParticleParticle(m_core, 7, 20, 70))
 {
 	m_particles = std::list<Particle*>();
 
