@@ -6,6 +6,7 @@
 #include "Particle.h"
 #include "Tests.h"
 #include "Blob.h"
+#include "Forces/ParticleGravity.h"
 #include "Forces/ParticleForceRegistry.h"
 #include "Collisions/CollisionHandler.h"
 #include "iostream"
@@ -48,6 +49,8 @@ class ofApp : public ofBaseApp{
 
 		ParticleForceRegistry* forceRegistry;
 		
+		ParticleGravity* gravity;
+
 		// Texts to display
 		string commandText;
 };

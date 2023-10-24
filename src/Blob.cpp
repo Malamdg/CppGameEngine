@@ -1,18 +1,18 @@
 #include "Blob.h"
 #include "Particle.h"
-#include "Forces/SpringParticleParticle.h"
 
 Blob::Blob(Particle* core) 
 	: 
-	m_core(core)
+	m_core(core),
+	m_springCoreParticle(new SpringParticleParticle(m_core, .5, 15, .1))
 {
 	m_particles = std::list<Particle*>();
 
 	m_particles.push_back(m_core);
-	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(0, 10)));
-	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(10, 0)));
-	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(0, -10)));
-	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(-10, 0)));
+	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(0, 100), Vector3D(), 5));
+	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(100, 0), Vector3D(), 5));
+	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(0, -100), Vector3D(), 5));
+	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(-100, 0), Vector3D(), 5));
 };
 
 Blob::~Blob() {}
@@ -24,8 +24,7 @@ void Blob::linkParticles(ParticleForceRegistry* forceRegistry) {
 			i++;
 			continue;
 		}
-		SpringParticleParticle* springCoreParticle = new SpringParticleParticle(m_core);
-		forceRegistry->add(particle, springCoreParticle);
+		forceRegistry->add(particle, m_springCoreParticle);
 	}
 }
 

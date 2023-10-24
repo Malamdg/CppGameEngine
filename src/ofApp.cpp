@@ -1,6 +1,5 @@
 #include "ofApp.h"
 #include "Forces/ParticleForceRegistry.h"
-#include "Forces/ParticleGravity.h"
 #include "Collisions/CollisionHandler.h"
 
 //--------------------------------------------------------------
@@ -31,17 +30,18 @@ void ofApp::setup(){
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(&floor, floorMode));
 
 	// Center cam and set origin at the bottom left corner
-	cam.setPosition(Vector3D(0, 0, 1500).v3());
-	cam.move(Vector3D(ofGetWidth() * .5, ofGetHeight() * .5).v3());
+	cam.setPosition(Vector3D(0, 0, 500).v3());
+	//cam.move(Vector3D(ofGetWidth() * .5, ofGetHeight() * .5).v3());
 	
 	// Setup Physics
 	forceRegistry = new ParticleForceRegistry();
-	m_gravity = Vector3D(0, -9.8);
+	m_gravity = Vector3D(0, -9.8, 0);
+
+	gravity = new ParticleGravity(m_gravity);
 
 	// setup blob
-	Particle* blobCore = new Particle(10, Vector3D(0, 15));
+	Particle* blobCore = new Particle(10, Vector3D(0, 200), Vector3D(), .1);
 	blob = Blob(blobCore);
-	blob.linkParticles(forceRegistry);
 
 	int i = 0;
 	int* colorMode;
@@ -59,24 +59,27 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	float duration = ofGetFrameRate() == 0. ? 0. : 1 / ofGetFrameRate(); 
-	forceRegistry->updateForces(duration);
+	float duration = ofGetFrameRate() == 0. ? 0. : 1 / ofGetFrameRate();
 
+	blob.linkParticles(forceRegistry);
 
 	//Update particles
 	for (Particle* particle : particles)
 	{
-		particle->Update();
+		//forceRegistry->add(particle, gravity);
 	}
 
-	// Refill registry
+	forceRegistry->updateForces(duration);
+
 	for (Particle* particle : particles)
 	{
-		ParticleGravity* gravity = new ParticleGravity(m_gravity);
-		forceRegistry->add(particle, gravity);
+		particle->Update();
+
+		std::cout << particle->getPosition().toString() << std::endl;
 	}
 
-	blob.linkParticles(forceRegistry);
+	std::cout << std::endl;
+
 	handleCollision(particles);
 }
 
@@ -117,7 +120,7 @@ void ofApp::keyPressed(int key){
 	{
 		case 57358: // right
 		{
-			IMR_CANDIDATEWINDOW
+			IMR_CANDIDATEWINDOW;
 			break;
 		}
 		case 57356: // left

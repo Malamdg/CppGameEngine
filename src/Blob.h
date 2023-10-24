@@ -2,10 +2,12 @@
 #include "Particle.h"
 #include "Vector3D.h"
 #include "Forces/ParticleForceRegistry.h"
+#include "Forces/SpringParticleParticle.h"
 
 class Blob {
 private:
 	Particle* m_core;
+	SpringParticleParticle* m_springCoreParticle;
 
 public:
 	std::list<Particle*> m_particles;
