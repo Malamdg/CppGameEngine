@@ -1,6 +1,6 @@
 #pragma once
-#include "ParticleForceGenerator.h"
-#include "Particle.h"
+#include "../Forces/ParticleForceGenerator.h"
+#include "../Particle.h"
 
 class Spindle : public ParticleForceGenerator
 {

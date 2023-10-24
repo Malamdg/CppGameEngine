@@ -1,6 +1,6 @@
-#include "Particle.h"
+#include "../Particle.h"
 #include "ParticleForceGenerator.h"
-#include "Vector3D.h"
+#include "../Vector3D.h"
 
 class ParticleImpulse : public ParticleForceGenerator {
 
@@ -20,6 +20,9 @@ public:
 		m_impulsion(impulse)
 	{ }
 
+	/*
+	class destructor
+	*/
 	ParticleImpulse::~ParticleImpulse() { }
 
 	/*

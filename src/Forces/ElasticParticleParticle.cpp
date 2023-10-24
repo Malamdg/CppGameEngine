@@ -1,6 +1,6 @@
-#include "Particle.h"
+#include "../Particle.h"
 #include "ParticleForceGenerator.h"
-#include "Vector3D.h"
+#include "../Vector3D.h"
 
 class ElasticParticleParticle : public ParticleForceGenerator {
 
@@ -51,7 +51,7 @@ public:
 	update the particle's force
 
 	@param particle, pointer to the particle to update
-	@param duration, frame duration when the srping's force applies
+	@param duration, frame duration when the elastic's force applies
 	*/
 	virtual void updateForce(Particle* particle, float duration)
 	{
@@ -65,14 +65,13 @@ public:
 
 			float invMass = particle->getInverseMass();
 
-
 			/* Force director vector */
 			direction.Normalize();
 
 			/* Velocity of the particle on the particle-fixation axis by projection */
 			float velocityProj = particle->getVelocity() * direction;
 
-			/* Calculation of natural frequency */
+			/* Calculation of natural pulse */
 			m_w = sqrt(invMass * m_k);
 			/* Calculation of the depreciation rate */
 			m_z = m_C * invMass / 2 * m_w;
