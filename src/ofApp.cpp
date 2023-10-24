@@ -54,14 +54,15 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	
+
+	forceRegistry->updateForces(0);
+
 	//Update particles
 	for (Particle* particle : particles)
 	{
 		particle->Update();
 	}
 
-	forceRegistry->updateForces(0);
 	blob.linkParticles(forceRegistry);
 	handleCollision(particles);
 }
