@@ -1,41 +1,33 @@
 #include "../Particle.h"
-#include "ParticleForceGenerator.h"
+#include "ParticleGravity.h"
 #include "../Vector3D.h"
 
-class ParticleGravity : public ParticleForceGenerator{
-	
-private:
-	/* constant of gravity */
-	Vector3D m_gravity;
+/*
+class constructor
 
-public:
-	/*
-	class constructor
+@param gravity, the vector associated to gravity
+*/
+ParticleGravity::ParticleGravity(Vector3D gravity)
+	: 
+	ParticleForceGenerator(),
+	m_gravity(gravity)
+{ }
 
-	@param gravity, the vector associated to gravity
-	*/
-	ParticleGravity::ParticleGravity(Vector3D gravity)
-		: 
-		ParticleForceGenerator(),
-		m_gravity(gravity)
-	{ }
+/*
+class destructor
+*/
+ParticleGravity::~ParticleGravity() { }
 
-	/*
-	class destructor
-	*/
-	ParticleGravity::~ParticleGravity() { }
+/*
+update the particle's gravity
 
-	/*
-	update the particle's gravity
-
-	@param *particle, the particle to update
-	@param duration, frame duration when the gravity applies
-	*/
-	virtual void updateForce(Particle* particle, float duration)
+@param *particle, the particle to update
+@param duration, frame duration when the gravity applies
+*/
+void ParticleGravity::updateForce(Particle* particle, float duration)
+{
+	if (particle->getInverseMass() != 0)
 	{
-		if (particle->getInverseMass() != 0)
-		{
-			particle->addForce(m_gravity * (1 / particle->getInverseMass()));
-		}
+		particle->addForce(m_gravity * (1 / particle->getInverseMass()));
 	}
-};
+}

@@ -1,7 +1,7 @@
 #pragma once
 #include "Particle.h"
 #include "Vector3D.h"
-#include "ParticleForceRegistry.h"
+#include "Forces/ParticleForceRegistry.h"
 
 class Blob {
 private:

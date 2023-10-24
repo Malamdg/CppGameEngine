@@ -38,7 +38,7 @@ class ofApp : public ofBaseApp{
 		std::list<std::pair<of3dPrimitive*, int*>> primitives;
 		std::list<Particle*> particles;
 
-		Vector3D m_initialPosition = Vector3D();
+		Vector3D m_gravity = Vector3D();
 		ofBoxPrimitive floor;
 		Blob blob;
 

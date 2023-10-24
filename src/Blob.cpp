@@ -1,6 +1,6 @@
 #include "Blob.h"
 #include "Particle.h"
-#include "SpringParticleParticle.h"
+#include "Forces/SpringParticleParticle.h"
 
 Blob::Blob(Particle* core) 
 	: 

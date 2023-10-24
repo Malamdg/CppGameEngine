@@ -1,5 +1,6 @@
 #include "ofApp.h"
-#include "ParticleForceRegistry.h"
+#include "Forces/ParticleForceRegistry.h"
+#include "Forces/ParticleGravity.h"
 #include "Collisions/CollisionHandler.h"
 
 //--------------------------------------------------------------
@@ -32,9 +33,11 @@ void ofApp::setup(){
 	// Center cam and set origin at the bottom left corner
 	cam.setPosition(Vector3D(0, 0, 1500).v3());
 	cam.move(Vector3D(ofGetWidth() * .5, ofGetHeight() * .5).v3());
-
-	forceRegistry = new ParticleForceRegistry();
 	
+	// Setup Physics
+	forceRegistry = new ParticleForceRegistry();
+	m_gravity = Vector3D(0, -9.8);
+
 	// setup blob
 	Particle* blobCore = new Particle(10, Vector3D(0, 20));
 	blob = Blob(blobCore);
@@ -56,12 +59,18 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 
-	forceRegistry->updateForces(0);
-
 	//Update particles
 	for (Particle* particle : particles)
 	{
 		particle->Update();
+	}
+
+	forceRegistry->updateForces(0);
+
+	for (Particle* particle : particles)
+	{
+		ParticleGravity* gravity = new ParticleGravity(m_gravity);
+		forceRegistry->add(particle, gravity);
 	}
 
 	blob.linkParticles(forceRegistry);
@@ -77,9 +86,14 @@ void ofApp::draw(){
 	ofSetColor(255, 255, 255);
 	ofDrawBitmapString(ofToString(commandText), 0, ofGetScreenHeight());
 	
+	int* colorMode;
+
 	// display primitives with correct color
 	for (std::pair<of3dPrimitive*, int*> primitive : primitives)
 	{
+		colorMode = primitive.second;
+		ofSetColor(colors[(*colorMode)].x(), colors[(*colorMode)].y(), colors[(*colorMode)].z());
+
 		// display primitive
 		primitive.first->draw();
 	}

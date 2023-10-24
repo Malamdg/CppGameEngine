@@ -19,6 +19,7 @@
     <ClCompile Include="src\Collisions\Cable.cpp" />
     <ClCompile Include="src\Collisions\CollisionHandler.cpp" />
     <ClCompile Include="src\Collisions\Spindle.cpp" />
+    <ClCompile Include="src\Blob.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Particle.h" />
@@ -31,6 +32,8 @@
     <ClInclude Include="src\Collisions\Cable.h" />
     <ClInclude Include="src\Collisions\CollisionHandler.h" />
     <ClInclude Include="src\Collisions\Spindle.h" />
+    <ClInclude Include="src\Blob.h" />
+    <ClInclude Include="src\Forces\ParticleGravity.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

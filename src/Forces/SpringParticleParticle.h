@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Particle.h"
+#include "../Particle.h"
 #include "ParticleForceGenerator.h"
-#include "Vector3D.h"
+#include "../Vector3D.h"
 
 class SpringParticleParticle : public ParticleForceGenerator {
 	
