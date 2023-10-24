@@ -66,6 +66,12 @@
     <ClCompile Include="src\Collisions\Spindle.cpp">
       <Filter>src\Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="src\Blob.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\Collision.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
@@ -93,6 +99,12 @@
       <Filter>src\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="src\Collisions\Spindle.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Blob.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\Collision.h">
       <Filter>src\Collisions</Filter>
     </ClInclude>
   </ItemGroup>

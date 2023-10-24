@@ -1,20 +1,22 @@
 #include "Spindle.h"
 
 Spindle::Spindle(Vector3D* attachPoint, float length)
-	: m_attachPoint(attachPoint),
+	: Collision(),
+	  m_attachPoint(attachPoint),
 	  m_attachParticle(nullptr),
 	  m_length(length)
 { }
 
 Spindle::Spindle(Particle* attachParticle, float length)
-	: m_attachPoint(nullptr),
+	: Collision(),
+	  m_attachPoint(nullptr),
 	  m_attachParticle(attachParticle),
 	  m_length(length)
 { }
 
 Spindle::~Spindle() { }
 
-void Spindle::updateForce(Particle* particle, float duration)
+void Spindle::update(Particle* particle)
 {
 	if (m_attachPoint != nullptr) updateForPoint(particle);
 	else updateForParticle(particle);

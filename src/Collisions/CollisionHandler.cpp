@@ -1,7 +1,22 @@
 #include "CollisionHandler.h"
 
-void handleCollision(std::list<Particle*> particles)
+CollisionHandler::CollisionHandler()
 {
+
+}
+
+CollisionHandler::~CollisionHandler()
+{
+
+}
+
+void CollisionHandler::handleCollision(std::list<Particle*> particles)
+{
+	for (CollisionRegistration registration : m_registry)
+	{
+		registration.collision->update(registration.particle);
+	}
+
 	for (int i = 0; i < particles.size() - 1; i++)
 	{
 		std::list<Particle*>::iterator firstParticle = particles.begin();
@@ -22,7 +37,11 @@ void handleCollision(std::list<Particle*> particles)
 
 				Vector3D vRel = (*firstParticle)->getVelocity() - (*secondParticle)->getVelocity();
 
-				if ((*firstParticle)->getInverseMass() == 0)
+				if ((*firstParticle)->getInverseMass() == 0 && (*secondParticle)->getInverseMass() == 0)
+				{
+					// If both mass are infinite we rather just ignore the collision
+				}
+				else if ((*firstParticle)->getInverseMass() == 0)
 				{
 					Vector3D displacementVector = vectorBetweenParticles * displacement * -1;
 					(*secondParticle)->addPosition(displacementVector);
@@ -69,4 +88,12 @@ void handleCollision(std::list<Particle*> particles)
 			}
 		}
 	}
+}
+
+void CollisionHandler::add(Particle* particle, Collision* collision)
+{
+	CollisionRegistration collisionRegistration;
+	collisionRegistration.particle = particle;
+	collisionRegistration.collision = collision;
+	m_registry.push_back(collisionRegistration);
 }

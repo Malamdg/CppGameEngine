@@ -1,20 +1,22 @@
 #include "Cable.h"
 
 Cable::Cable(Vector3D* attachPoint, float length)
-	: m_attachPoint(attachPoint),
+	: Collision(),
+	  m_attachPoint(attachPoint),
 	  m_attachParticle(nullptr),
 	  m_length(length)
 { }
 
 Cable::Cable(Particle* attachParticle, float length)
-	: m_attachPoint(nullptr),
+	: Collision(),
+	  m_attachPoint(nullptr),
 	  m_attachParticle(attachParticle),
 	  m_length(length)
 { }
 
 Cable::~Cable() { }
 
-void Cable::updateForce(Particle* particle, float duration)
+void Cable::update(Particle* particle)
 {
 	if (m_attachPoint != nullptr) updateForPoint(particle);
 	else updateForParticle(particle);

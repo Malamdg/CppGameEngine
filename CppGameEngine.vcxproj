@@ -109,7 +109,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Blob.cpp" />
     <ClCompile Include="src\Collisions\Cable.cpp" />
+    <ClCompile Include="src\Collisions\Collision.cpp" />
     <ClCompile Include="src\Collisions\CollisionHandler.cpp" />
     <ClCompile Include="src\Collisions\Spindle.cpp" />
     <ClCompile Include="src\Forces\ElasticParticleParticle.cpp" />
@@ -129,7 +131,9 @@
     <ClCompile Include="src\Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Blob.h" />
     <ClInclude Include="src\Collisions\Cable.h" />
+    <ClInclude Include="src\Collisions\Collision.h" />
     <ClInclude Include="src\Collisions\CollisionHandler.h" />
     <ClInclude Include="src\Collisions\Spindle.h" />
     <ClInclude Include="src\Forces\ParticleForceGenerator.h" />

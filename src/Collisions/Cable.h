@@ -1,8 +1,9 @@
 #pragma once
+#include "Collision.h"
 #include "../Forces/ParticleForceGenerator.h"
 #include "../Particle.h"
 
-class Cable : public ParticleForceGenerator
+class Cable : public Collision
 {
 private:
 /* The cable can only be linked to a Point or another Particle, never both */
@@ -40,7 +41,7 @@ public:
 	@param particle, the particle to update
  	@param duration, frame's duration
 	*/
-	void updateForce(Particle* particle, float duration = 0) override;
+	virtual void update(Particle* particle) override;
 
 protected:
 	/*
