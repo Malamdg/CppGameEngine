@@ -52,6 +52,7 @@ class ofApp : public ofBaseApp{
 		ofTexture textureVisualization;
 
 		ParticleForceRegistry* forceRegistry;
+		CollisionHandler* collisionHandler;
 
 		Particle* p;
 		Particle* p1;
