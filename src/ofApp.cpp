@@ -50,6 +50,7 @@ void ofApp::setup(){
 	particles.push_back(p1);
 
 	forceRegistry = new ParticleForceRegistry();
+	collisionHandler = new CollisionHandler();
 
 	// Tests
 	Tests::ExecuteTests();
@@ -67,7 +68,7 @@ void ofApp::update(){
 
 	forceRegistry->updateForces(0);
 
-	handleCollision(particles);
+	collisionHandler->handleCollision(particles);
 }
 
 //--------------------------------------------------------------
