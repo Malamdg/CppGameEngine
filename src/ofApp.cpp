@@ -57,7 +57,8 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	
+	fps = ofGetFrameRate();
+
 	//Update particles
 	for (Particle* particle : particles)
 	{
@@ -76,7 +77,7 @@ void ofApp::draw(){
 
 	// display command text
 	ofSetColor(255, 255, 255);
-	ofDrawBitmapString(ofToString(commandText), 0, ofGetScreenHeight());
+	ofDrawBitmapString(ofToString("Frames par second : " + to_string(fps) + "\n") + ofToString(commandText), 0, ofGetScreenHeight());
 	
 	// display primitives with correct color
 	for (std::pair<of3dPrimitive*, int*> primitive : primitives)

@@ -68,6 +68,9 @@ class ofApp : public ofBaseApp{
 		// Texts to display
 		string commandText;
 
+		// Framerate //
+		float fps;
+
 		/*
 		* Function to get launch direction from mouse
 		* 
