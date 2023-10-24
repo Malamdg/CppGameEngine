@@ -28,8 +28,11 @@ void ofApp::setup(){
 	cam.setPosition(Vector3D(0, 0, 1500).v3());
 	cam.move(Vector3D(ofGetWidth() * .5, ofGetHeight() * .5).v3());
 
-	p = new Particle(80, Vector3D(0, 200), Vector3D(), 0);
+	p = new Particle(80, Vector3D(-80, 200), Vector3D(), 0);
 	int* tmpMode = new int(mode);
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
+	particles.push_back(p);
+	p = new Particle(80, Vector3D(80, 200), Vector3D(), 0);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
 	particles.push_back(p);
 
