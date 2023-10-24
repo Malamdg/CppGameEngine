@@ -20,6 +20,9 @@ public:
 		m_impulsion(impulse)
 	{ }
 
+	/*
+	class destructor
+	*/
 	ParticleImpulse::~ParticleImpulse() { }
 
 	/*

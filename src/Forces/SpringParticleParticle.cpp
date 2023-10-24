@@ -53,12 +53,6 @@ void SpringParticleParticle::updateForce(Particle* particle, float duration)
 
 		float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
 
-		/*std::cout << "Direction : " << direction.toString() << std::endl;
-		std::cout << "distance : " << distance << std::endl;
-		std::cout << "Projection : " << velocityProj << std::endl;
-		std::cout << "Force z : " << (direction * coeff * duration).z() << std::endl;
-		std::cout << "Coefficient : " << coeff << std::endl;*/
-
 		particle->addForce(direction * coeff * duration);
 	}
 }

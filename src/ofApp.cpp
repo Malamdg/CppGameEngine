@@ -1,5 +1,6 @@
 #include "ofApp.h"
 #include "ParticleForceRegistry.h"
+#include "Collisions/CollisionHandler.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){

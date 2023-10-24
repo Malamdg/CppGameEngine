@@ -1,5 +1,5 @@
 #pragma once
-#include "ParticleForceGenerator.h"
+#include "Forces/ParticleForceGenerator.h"
 #include "Particle.h"
 
 class Cable : public ParticleForceGenerator

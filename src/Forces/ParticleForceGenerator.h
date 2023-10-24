@@ -4,8 +4,14 @@
 class ParticleForceGenerator
 {
 public:
-
+	/*
+	Class Constructor
+	*/
 	ParticleForceGenerator();
+
+	/*
+	Class Destructor
+	*/
 	~ParticleForceGenerator();
 
 	/*
