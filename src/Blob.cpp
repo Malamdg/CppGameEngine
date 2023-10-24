@@ -18,7 +18,12 @@ Blob::Blob(Particle* core)
 Blob::~Blob() {}
 
 void Blob::linkParticles(ParticleForceRegistry* forceRegistry) {
+	int i = 0;
 	for (Particle* particle : m_particles) {
+		if (i == 0) {// dont link core to itself
+			i++;
+			continue;
+		}
 		SpringParticleParticle* springCoreParticle = new SpringParticleParticle(m_core);
 		forceRegistry->add(particle, springCoreParticle);
 	}
@@ -26,10 +31,6 @@ void Blob::linkParticles(ParticleForceRegistry* forceRegistry) {
 
 Particle* Blob::getCore() {
 	return m_core;
-}
-
-std::list<Particle*> Blob::getParticles() {
-	return m_particles;
 }
 
 void Blob::merge(Particle* particle) {

@@ -39,17 +39,18 @@ void ofApp::setup(){
 	m_gravity = Vector3D(0, -9.8);
 
 	// setup blob
-	Particle* blobCore = new Particle(10, Vector3D(0, 20));
+	Particle* blobCore = new Particle(10, Vector3D(0, 15));
 	blob = Blob(blobCore);
 	blob.linkParticles(forceRegistry);
 
 	int i = 0;
 	int* colorMode;
-	for (Particle* particle : blob.getParticles()) {
+	for (Particle* particle : blob.m_particles) {
 		colorMode = new int(0);
 		if (i == 0) {
 			colorMode = new int(1);
 		}
+
 		primitives.push_back(std::pair<of3dPrimitive*, int*>(particle, colorMode));
 		particles.push_back(particle);
 		i++;
@@ -58,6 +59,9 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	float duration = ofGetFrameRate() == 0. ? 0. : 1 / ofGetFrameRate(); 
+	forceRegistry->updateForces(duration);
+
 
 	//Update particles
 	for (Particle* particle : particles)
@@ -65,8 +69,7 @@ void ofApp::update(){
 		particle->Update();
 	}
 
-	forceRegistry->updateForces(0);
-
+	// Refill registry
 	for (Particle* particle : particles)
 	{
 		ParticleGravity* gravity = new ParticleGravity(m_gravity);
@@ -96,6 +99,7 @@ void ofApp::draw(){
 
 		// display primitive
 		primitive.first->draw();
+
 	}
 
 	// end camera job
@@ -104,27 +108,26 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+
+	std::cout << key << std::endl;
+	
+	Vector3D impulseDirection = Vector3D();
 	// move on arrow key press
 	switch (key)
-	{ 
-		case 'w': 
+	{
+		case 57358: // right
+		{
+			IMR_CANDIDATEWINDOW
+			break;
+		}
+		case 57356: // left
 		{
 			break;
 		}
-		case 'e': 
-		{
-			break;
-		}
-		case 'r': 
-		{
-			break;
-		}
-		case ' ':
-		{
-			break;
-		}
-		default: break;
+		default: 
+			return;
 	}
+
 }
 
 //--------------------------------------------------------------
