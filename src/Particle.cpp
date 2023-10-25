@@ -8,7 +8,9 @@ Particle::Particle(int radius,
 	Vector3D position,
 	Vector3D velocity,
 	float invertedMass,
-	float coefficientRestitution)
+	float coefficientRestitution,
+	float frictionK1,
+	float frictionK2)
 	:
 	ofSpherePrimitive(),
 	m_position(position),
@@ -16,6 +18,8 @@ Particle::Particle(int radius,
 	m_acceleration(0),
 	m_invertedMass(invertedMass),
 	m_coefficientRestitutions(coefficientRestitution),
+	m_frictionK1(frictionK1),
+	m_frictionK2(frictionK2),
 	m_velocityInit(velocity),
 	m_accumForce(Vector3D())
 {
@@ -134,3 +138,6 @@ float Particle::getCoefficientRestitution()
 {
 	return m_coefficientRestitutions;
 }
+
+float Particle::getK1() { return m_frictionK1; }
+float Particle::getK2() { return m_frictionK2; }

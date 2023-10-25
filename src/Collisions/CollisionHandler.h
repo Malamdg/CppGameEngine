@@ -1,5 +1,7 @@
 #pragma once
 #include "Collision.h"
+#include "../Forces/ParticleForceRegistry.h"
+#include "../Forces/ParticleFriction.cpp"
 #include "../Particle.h"
 
 class Collision;
@@ -42,7 +44,7 @@ public:
    	@param particles, the particles consider
 	@param duration, frame duration
  	*/
-	void handleCollision(std::list<Particle*> particles, float duration);
+	void handleCollision(std::list<Particle*> particles, float duration, ParticleForceRegistry* registry);
 
 	/*
 	Add a Particle to Registry

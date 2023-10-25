@@ -39,7 +39,15 @@ void ofApp::setup() {
 	collisionHandler = new CollisionHandler();
 
 	m_gravity = Vector3D(0, -9.8, 0);
-	gravity = new ParticleGravity(m_gravity);
+	gravity = new ParticleGravity(Vector3D(0, -40));
+
+
+	p = new Particle(80, Vector3D(), Vector3D(), 0, 0, 3, 0.2);
+	particles.push_back(p);
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, new int(0)));
+	p1 = new Particle(30, Vector3D(10, 800), Vector3D(), 0.5);
+	particles.push_back(p1);
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(p1, new int(0)));
 
 	// setup blob
 	Particle* blobCore = new Particle(10, Vector3D(0, 100), Vector3D(), .01);
@@ -68,6 +76,8 @@ void ofApp::update() {
 
 	float duration = fps == 0 ? 0 : 1/fps;
 
+	forceRegistry->add(p1, gravity);
+
 	updateForces();
 	float deltaX = blob.getCore()->getPosition().x();
 	//Update particles
@@ -75,7 +85,7 @@ void ofApp::update() {
 		particle->Update();
 	}
 
-	collisionHandler->handleCollision(particles, duration);
+	collisionHandler->handleCollision(particles, duration, forceRegistry);
 
 	deltaX = blob.getCore()->getPosition().x() - deltaX;
 	Vector3D deltaPosCamBlob = Vector3D(cam.getPosition()) - blob.getCore()->getPosition();
