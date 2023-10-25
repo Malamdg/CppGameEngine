@@ -53,10 +53,6 @@ private:
 
 	//Colors & Textures
 	Vector3D* colors = new Vector3D[3];
-	Vector3D visualizationColor = Vector3D(0, 255, 0);
-
-	Particle* p;
-	Particle* p1;
 
 	ParticleForceRegistry* forceRegistry;
 	CollisionHandler* collisionHandler;
