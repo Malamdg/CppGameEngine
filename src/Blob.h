@@ -3,12 +3,15 @@
 #include "Vector3D.h"
 #include "Forces/ParticleForceRegistry.h"
 #include "Forces/SpringParticleParticle.h"
+#include "Collisions/Cable.h"
 
 class Blob {
 private:
-	// The particle at the centre of the blob
+	// The particle at the center of the blob
 	Particle* m_core;
+	float m_springLength;
 	SpringParticleParticle* m_springCoreParticle;
+	Cable* m_cableCoreParticle;
 
 public:
 	std::list<Particle*> m_particles;
