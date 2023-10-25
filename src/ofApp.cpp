@@ -2,7 +2,6 @@
 #include "Forces/ParticleForceRegistry.h"
 #include "Collisions/CollisionHandler.h"
 #include "Forces/ParticleDeplacement.cpp"
-#include "Forces/ParticleImpulse.cpp"
 #include "cmath"
 
 //--------------------------------------------------------------
