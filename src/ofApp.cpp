@@ -52,11 +52,11 @@ void ofApp::setup(){
 		colorMode = new int(1);
 		if (i == 0) {
 			colorMode = new int(0);
+			i++;
 		}
 
 		primitives.push_back(std::pair<of3dPrimitive*, int*>(particle, colorMode));
 		particles.push_back(particle);
-		i++;
 	}
 }
 
@@ -75,7 +75,6 @@ void ofApp::update(){
 	if (abs(deltaPosCamBlob.x()) >= viewWidth / 3) {
 		cameraPosition += Vector3D(deltaX);
 	}
-
 	cam.setPosition(cameraPosition.v3());
 
 }
@@ -88,7 +87,7 @@ void ofApp::updateForces() {
 
 	for (Particle* particle : particles)
 	{
-		//  forceRegistry->add(particle, gravity);
+		// forceRegistry->add(particle, gravity);
 	}
 
 
