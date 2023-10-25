@@ -72,7 +72,7 @@ void ofApp::update() {
 	float duration = fps == 0 ? 0 : 1/fps;
 
 	updateForces();
-	float deltaX = blob.getCore()->getPosition().x();
+	Vector3D deltaXY = blob.getCore()->getPosition();
 	//Update particles
 	for (Particle* particle : particles) {
 		particle->Update();
@@ -81,11 +81,17 @@ void ofApp::update() {
 	blobCollisionHandler->handleCollision(particles, forceRegistry, collisionHandler);
 	collisionHandler->handleCollision(particles, duration, forceRegistry);
 
-	deltaX = blob.getCore()->getPosition().x() - deltaX;
+	deltaXY = blob.getCore()->getPosition() - deltaXY;
 	Vector3D deltaPosCamBlob = Vector3D(cam.getPosition()) - blob.getCore()->getPosition();
 	if (abs(deltaPosCamBlob.x()) >= viewWidth / 3) {
-		cameraPosition += Vector3D(deltaX);
+		cameraPosition += Vector3D(deltaXY.x());
 	}
+	
+	if (abs(deltaPosCamBlob.y()) >= viewHeight / 4) {
+		cameraPosition += Vector3D(0, deltaXY.y());
+	}
+
+
 	cam.setPosition(cameraPosition.v3());
 
 }
@@ -117,7 +123,7 @@ void ofApp::draw() {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
 	// Default direction +x
-	float deplacementNorm = 100;
+	float deplacementNorm = 150;
 
 	// move on arrow key press
 	switch (key)
@@ -131,7 +137,7 @@ void ofApp::keyPressed(int key) {
 	}
 	case 57357: // jump
 	{
-		blob.getCore()->addVelocity(Vector3D(0, 100));
+		blob.getCore()->addVelocity(Vector3D(0, 50));
 		return;
 	}
 	case 's': // split blob
@@ -211,7 +217,7 @@ void ofApp::drawText() {
 	ofDrawBitmapString(ofToString(commandText), -viewWidth / 2, viewHeight / 2);
 
 	// Informative HUD 
-	movingHud = "Framerate : " + to_string(fps) + " fps\n" + "Nb Particules du Blob : " + to_string(blob.m_particles.size());
+	movingHud = "Framerate : " + to_string(fps) + " fps\n" + "Nb Particules du Blob : " + to_string(blob.m_particles.size()) + "\nCoordonees du blob: " + blob.getCore()->getPosition().toString();
 	float camX, camY;
 	camX = Vector3D(cam.getPosition()).x();
 	camY = Vector3D(cam.getPosition()).y();
@@ -251,6 +257,8 @@ void ofApp::generateFloor(std::list<std::pair<int*, Vector3D*>> layout) {
 std::list<std::pair<int*, Vector3D*>> ofApp::getLayout() {
 	return std::list<std::pair<int*, Vector3D*>> (
 		{
+			std::pair<int*, Vector3D*>(new int(1000), new Vector3D(-2000, 0)),
+			std::pair<int*, Vector3D*>(new int(1000), new Vector3D(-2000, 1000)),
 			std::pair<int*, Vector3D*>(new int(300), new Vector3D(-1500, -350)),
 			std::pair<int*, Vector3D*>(new int(200), new Vector3D(-1400, -170)),
 			std::pair<int*, Vector3D*>(new int(200), new Vector3D(-1200, -150)),
@@ -267,6 +275,8 @@ std::list<std::pair<int*, Vector3D*>> ofApp::getLayout() {
 			std::pair<int*, Vector3D*>(new int(200), new Vector3D(1000, -250)),
 			std::pair<int*, Vector3D*>(new int(200), new Vector3D(1150, -250)),
 			std::pair<int*, Vector3D*>(new int(300), new Vector3D(1500, -250)),
+			std::pair<int*, Vector3D*>(new int(1000), new Vector3D(2000, 0)),
+			std::pair<int*, Vector3D*>(new int(1000), new Vector3D(2000, 1000)),
 		}
 	);
 }
