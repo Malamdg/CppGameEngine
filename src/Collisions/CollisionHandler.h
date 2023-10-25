@@ -11,7 +11,7 @@ public:
 	Definition of the struct CollisionRegistration
 
 	particle, particle to which the collision is applied
-	collision, yhe collision
+	collision, the collision
 	*/
 	struct CollisionRegistration
 	{
