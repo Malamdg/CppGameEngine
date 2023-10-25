@@ -24,7 +24,10 @@ SpringParticleParticle::SpringParticleParticle(Particle* particle, float elastic
 /*
 class desctructor
 */
-SpringParticleParticle::~SpringParticleParticle() { }
+SpringParticleParticle::~SpringParticleParticle()
+{ 
+	delete m_particle;
+}
 
 /*
 update the particle's force
