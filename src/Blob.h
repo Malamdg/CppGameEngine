@@ -4,6 +4,7 @@
 #include "Forces/ParticleForceRegistry.h"
 #include "Forces/SpringParticleParticle.h"
 #include "Collisions/Cable.h"
+#include "Collisions/Spindle.h"
 #include "Collisions/CollisionHandler.h"
 
 class Blob {
@@ -14,40 +15,49 @@ private:
 	float m_springLength;
 	SpringParticleParticle* m_springCoreParticle;
 	Cable* m_cableCoreParticle;
-
 public:
 	std::list<Particle*> m_particles;
 
-    	/*
-    	class constructor
+    /*
+    class constructor
 
-    	@param core, the particle at the centre of the blob
-   	 */
+	@param core, the particle at the centre of the blob
+   	*/
 	Blob(Particle* core = new Particle());
 
-    	/*
+    /*
    	class destructor
-    	*/
+	*/
 	~Blob();
 
 	/*
-    	Get the core of the blob
+    Get the core of the blob
 
-    	@return a pointer to the core of the blob
-    	*/
+    @return a pointer to the core of the blob
+    */
 	Particle* getCore();
 
+	/*
+	Split the particles from the blob
+    */
+	void split();
+	
 	/*
 	Merge the particle in the blob
 
 	@param particle, the particle to add to the blob
-       	*/
-	void merge(Particle* particle);
+    */
+	void merge(Particle* particle, ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler);
         
-    	/*
-    	Link a particle to the blob
+    /*
+    Link all particles in the blob to the core
 
-    	@param forceRegistry, to create a link
-    	*/
+    @param forceRegistry, to create a link
+    */
 	void linkParticles(ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler);
+	
+	/*
+	* Link a particle to the core of the blob
+	*/
+	void linkParticle(Particle* particle, ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler);
 };

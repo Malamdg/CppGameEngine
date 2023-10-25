@@ -33,6 +33,9 @@
     <ClCompile Include="src\Collisions\CollisionHandler.cpp">
       <Filter>src\Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="src\Collisions\BlobCollisionHandler.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
     <ClCompile Include="src\Collisions\Spindle.cpp">
       <Filter>src\Collisions</Filter>
     </ClCompile>
@@ -100,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="src\Collisions\Collision.h">
       <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\BlobCollisionHandler.h" />
+          <Filter>src\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="src\Forces\ParticleForceGenerator.h">
       <Filter>src\Forces</Filter>

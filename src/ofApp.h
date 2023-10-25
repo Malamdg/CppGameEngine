@@ -9,6 +9,7 @@
 #include "Forces/ParticleGravity.h"
 #include "Forces/ParticleForceRegistry.h"
 #include "Collisions/CollisionHandler.h"
+#include "Collisions/BlobCollisionHandler.h"
 #include "iostream"
 
 class ofApp : public ofBaseApp {
@@ -16,7 +17,6 @@ class ofApp : public ofBaseApp {
 public:
 	void setup();
 	void update();
-	void updateForces();
 	void draw();
 
 	void keyPressed(int key);
@@ -30,37 +30,46 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
-
+	
 private:
-
-	//HUD && Physics
+	void drawText();
+	void updateForces();
+	/*
+	* generate floor accordingly to layout
+	*/
+	void generateFloor(std::list<std::pair<int*, Vector3D*>> layout);
+	/*
+	* get layout of floor
+	*/
+	std::list<std::pair<int*, Vector3D*>> getLayout();
+	
+	//HUD
 	float fps;
+	string commandText;
+	string movingHud;
+	Vector3D movingHudInitialPos;
+	Vector3D movingHudPos;
 
 	//Camera
 	ofCamera cam;
 	Vector3D cameraPosition;
 	float viewWidth;
+	float viewHeight;
 
 	//**Primitives**//
 	std::list<std::pair<of3dPrimitive*, int*>> primitives;
 	std::list<Particle*> particles;
 
-	Vector3D m_gravity = Vector3D();
 	ofBoxPrimitive floor;
 	Blob blob;
 
 	//Colors & Textures
-	Vector3D* colors = new Vector3D[2];
-	Vector3D visualizationColor = Vector3D(0, 255, 0);
+	Vector3D* colors = new Vector3D[3];
 
-	Particle* p;
-	Particle* p1;
-
+	// Physics
 	ParticleForceRegistry* forceRegistry;
 	CollisionHandler* collisionHandler;
+	BlobCollisionHandler* blobCollisionHandler;
 
 	ParticleGravity* gravity;
-
-	// Texts to display
-	string commandText;
 };

@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Blob.cpp" />
+    <ClCompile Include="src\Collisions\BlobCollisionHandler.cpp" />
     <ClCompile Include="src\Collisions\Cable.cpp" />
     <ClCompile Include="src\Collisions\Collision.cpp" />
     <ClCompile Include="src\Collisions\CollisionHandler.cpp" />
@@ -132,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Blob.h" />
+    <ClInclude Include="src\Collisions\BlobCollisionHandler.h" />
     <ClInclude Include="src\Collisions\Cable.h" />
     <ClInclude Include="src\Collisions\Collision.h" />
     <ClInclude Include="src\Collisions\CollisionHandler.h" />
