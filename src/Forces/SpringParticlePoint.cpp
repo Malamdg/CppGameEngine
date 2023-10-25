@@ -20,7 +20,7 @@ private:
 	/* Damping ratio */
 	float m_z;
 
-	/* Oscilation frenquency */
+	/* Oscilation pulse */
 	float m_w;
 
 public:

@@ -64,8 +64,8 @@ void Cable::updateForParticle(Particle* particle)
 			float firstMass = 1 / m_attachParticle->getInverseMass();
 			float secondMass = 1 / particle->getInverseMass();
 
-			float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
-			float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
+			float firstDisplacement = -1 * secondMass / (firstMass + secondMass) * displacement;
+			float secondDisplacement = firstMass / (firstMass + secondMass) * displacement;
 
 			Vector3D firstDisplacementVector = vectorBetweenParticles * firstDisplacement;
 			Vector3D secondDisplacementVector = vectorBetweenParticles * secondDisplacement;
@@ -74,7 +74,5 @@ void Cable::updateForParticle(Particle* particle)
 			m_attachParticle->addPosition(firstDisplacementVector);
 			particle->addPosition(secondDisplacementVector);
 		}
-
-		// Then we need to add an impulse
 	}
 }
