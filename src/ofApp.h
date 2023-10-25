@@ -16,7 +16,6 @@ class ofApp : public ofBaseApp{
 	public:
 		void setup();
 		void update();
-		void updateForces();
 		void draw();
 
 		void keyPressed(int key);
@@ -34,9 +33,7 @@ class ofApp : public ofBaseApp{
 	private:
 
 		//Camera
-		ofCamera cam; 
-		Vector3D cameraPosition;
-		float viewWidth;
+		ofCamera cam;
 
 		//**Primitives**//
 		std::list<std::pair<of3dPrimitive*, int*>> primitives;
