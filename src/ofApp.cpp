@@ -275,7 +275,7 @@ void ofApp::generateFloor(std::list<std::pair<int*, Vector3D*>> layout) {
 	int* floorMode = new int(2);
 
 	for (std::pair<int*, Vector3D*> particlePair : layout) {
-		floorParticle = new Particle((*particlePair.first), (*particlePair.second), Vector3D(), 0.);
+		floorParticle = new Particle((*particlePair.first), (*particlePair.second), Vector3D(), 0., .9f);
 		primitives.push_back(std::pair<of3dPrimitive*, int*>(floorParticle, floorMode));
 		particles.push_back(floorParticle);
 	}
