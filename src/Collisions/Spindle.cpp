@@ -18,7 +18,11 @@ Spindle::Spindle(Particle* attachParticle, float length)
 	  m_length(length)
 { }
 
-Spindle::~Spindle() { }
+Spindle::~Spindle()
+{
+	delete m_attachPoint;
+	delete m_attachParticle;
+}
 
 void Spindle::update(Particle* particle)
 {

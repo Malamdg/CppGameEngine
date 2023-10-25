@@ -1,7 +1,7 @@
 #pragma once
 #include "Collision.h"
 #include "../Forces/ParticleForceRegistry.h"
-#include "../Forces/ParticleFriction.cpp"
+#include "../Forces/ParticleFriction.h"
 #include "../Particle.h"
 
 class Collision;

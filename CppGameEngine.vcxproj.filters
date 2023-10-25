@@ -27,6 +27,24 @@
     <ClCompile Include="src\Vector3D.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Collisions\Cable.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\CollisionHandler.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\BlobCollisionHandler.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\Spindle.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Blob.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\Collision.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
     <ClCompile Include="src\Forces\ElasticParticleParticle.cpp">
       <Filter>src\Forces</Filter>
     </ClCompile>
@@ -57,22 +75,6 @@
     <ClCompile Include="src\Forces\SpringParticlePoint.cpp">
       <Filter>src\Forces</Filter>
     </ClCompile>
-    <ClCompile Include="src\Collisions\Cable.cpp">
-      <Filter>src\Collisions</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Collisions\CollisionHandler.cpp">
-      <Filter>src\Collisions</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Collisions\Spindle.cpp">
-      <Filter>src\Collisions</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Blob.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Collisions\Collision.cpp">
-      <Filter>src\Collisions</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Collisions\BlobCollisionHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
@@ -86,12 +88,6 @@
     </ClInclude>
     <ClInclude Include="src\Vector3D.h">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Forces\ParticleForceGenerator.h">
-      <Filter>src\Forces</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Forces\ParticleForceRegistry.h">
-      <Filter>src\Forces</Filter>
     </ClInclude>
     <ClInclude Include="src\Collisions\Cable.h">
       <Filter>src\Collisions</Filter>
@@ -109,7 +105,43 @@
       <Filter>src\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="src\Forces\SpringParticleParticle.h" />
+          <Filter>src\Forces</Filter>
+    </ClInclude>
     <ClInclude Include="src\Forces\ParticleGravity.h" />
+          <Filter>src\Forces</Filter>
+    </ClInclude>
     <ClInclude Include="src\Collisions\BlobCollisionHandler.h" />
+          <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\ParticleForceGenerator.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\ParticleForceRegistry.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\ParticleGravity.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\SpringParticleParticle.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\ParticleFriction.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\ParticleImpulse.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\SpringParticlePoint.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\ElasticParticleParticle.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\ElasticParticlePoint.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\ParticleDeplacement.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

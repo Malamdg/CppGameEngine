@@ -18,7 +18,11 @@ Cable::Cable(Particle* attachParticle, float length)
 	  m_length(length)
 { }
 
-Cable::~Cable() { }
+Cable::~Cable()
+{
+	delete m_attachPoint;
+	delete m_attachParticle;
+}
 
 void Cable::update(Particle* particle)
 {
