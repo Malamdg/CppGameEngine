@@ -43,6 +43,6 @@ public:
 
 		/* Force director vector */
 		direction.Normalize();
-		particle->addForce(direction*coeff);
+		particle->addForce(-direction*coeff);
 	}
 };
