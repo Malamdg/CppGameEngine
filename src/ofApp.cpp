@@ -2,6 +2,7 @@
 #include "Forces/ParticleForceRegistry.h"
 #include "Collisions/CollisionHandler.h"
 #include "Forces/ParticleDeplacement.cpp"
+#include "Forces/ParticleImpulse.cpp"
 #include "cmath"
 
 //--------------------------------------------------------------
@@ -41,8 +42,11 @@ void ofApp::setup() {
 	m_gravity = Vector3D(0, -9.8, 0);
 	gravity = new ParticleGravity(Vector3D(0, -40));
 
+	// add floor
+	generateFloor(getLayout());
+
 	// setup blob
-	Particle* blobCore = new Particle(10, Vector3D(0, 100), Vector3D(), .01);
+	Particle* blobCore = new Particle(10, Vector3D(0, 40), Vector3D(), .01);
 	blob = Blob(blobCore);
 
 	int i = 0;
@@ -57,9 +61,6 @@ void ofApp::setup() {
 		primitives.push_back(std::pair<of3dPrimitive*, int*>(particle, colorMode));
 		particles.push_back(particle);
 	}
-
-	// add floor
-	generateFloor(getLayout());
 }
 
 //--------------------------------------------------------------
@@ -116,6 +117,7 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
 	// Default direction +x
 	float deplacementNorm = 50;
+	std::cout << key << std::endl;
 
 	// move on arrow key press
 	switch (key)
@@ -125,6 +127,9 @@ void ofApp::keyPressed(int key) {
 	case 57356: // stride left
 		deplacementNorm *= -1;
 		break;
+	case 57357: // jump
+		blob.getCore()->addVelocity(Vector3D(0, 100));
+		return;
 	default:
 		return;
 	}
