@@ -3,6 +3,7 @@
 
 Blob::Blob(Particle* core)
 	:
+	// to define the characteristics of the blob
 	m_core(core),
 	m_springLength(25.),
 	m_springCoreParticle(new SpringParticleParticle(m_core, 1, m_springLength, .5)),
@@ -10,6 +11,7 @@ Blob::Blob(Particle* core)
 {
 	m_particles = std::list<Particle*>();
 
+	// to arrange the particles around the core
 	m_particles.push_back(m_core);
 	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(0, m_springLength), Vector3D(), .1));
 	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(m_springLength, 0), Vector3D(), .1));
@@ -26,7 +28,9 @@ void Blob::linkParticles(ParticleForceRegistry* forceRegistry, CollisionHandler*
 			i++;
 			continue;
 		}
+		// We add the spring between the core and the surrounding particle created to the forceregistry
 		forceRegistry->add(particle, m_springCoreParticle);
+		// We add the create a cable between the core an the surrounding particle to ensure that particle does'nt go to far 
 		collisionHandler->add(particle, m_cableCoreParticle);
 	}
 }
