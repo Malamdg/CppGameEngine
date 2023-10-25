@@ -80,7 +80,7 @@ void CollisionHandler::handleCollision(std::list<Particle*> particles, float dur
 					float velocity_proj = (*firstParticle)->getVelocity() * vectorBetweenParticles; // projection on vector n
 
 					// We want to replace the particle out of the other watever the case
-					Vector3D displacementVector = vectorBetweenParticles * displacement * -1;
+					Vector3D displacementVector = vectorBetweenParticles * displacement;
 					(*firstParticle)->addPosition(displacementVector);
 
 					// if contact is not a rest contact
