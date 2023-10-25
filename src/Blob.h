@@ -47,12 +47,17 @@ public:
 
 	@param particle, the particle to add to the blob
     */
-	void merge(Particle* particle);
+	void merge(Particle* particle, ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler);
         
     /*
-    Link a particle to the blob
+    Link all particles in the blob to the core
 
     @param forceRegistry, to create a link
     */
 	void linkParticles(ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler);
+	
+	/*
+	* Link a particle to the core of the blob
+	*/
+	void linkParticle(Particle* particle, ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler);
 };

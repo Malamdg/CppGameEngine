@@ -9,6 +9,7 @@
 #include "Forces/ParticleGravity.h"
 #include "Forces/ParticleForceRegistry.h"
 #include "Collisions/CollisionHandler.h"
+#include "Collisions/BlobCollisionHandler.h"
 #include "iostream"
 
 class ofApp : public ofBaseApp {
@@ -33,10 +34,16 @@ public:
 private:
 	void drawText();
 	void updateForces();
+	/*
+	* generate floor accordingly to layout
+	*/
 	void generateFloor(std::list<std::pair<int*, Vector3D*>> layout);
+	/*
+	* get layout of floor
+	*/
 	std::list<std::pair<int*, Vector3D*>> getLayout();
 	
-	//HUD && Physics
+	//HUD
 	float fps;
 	string commandText;
 	string movingHud;
@@ -59,8 +66,10 @@ private:
 	//Colors & Textures
 	Vector3D* colors = new Vector3D[3];
 
+	// Physics
 	ParticleForceRegistry* forceRegistry;
 	CollisionHandler* collisionHandler;
+	BlobCollisionHandler* blobCollisionHandler;
 
 	ParticleGravity* gravity;
 };

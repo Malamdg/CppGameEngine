@@ -21,6 +21,23 @@ Blob::Blob(Particle* core)
 
 Blob::~Blob() {}
 
+Particle* Blob::getCore() {
+	return m_core;
+}
+
+void Blob::split() {
+	// remove particles from m_particles except for the core
+	for (int i = 0; i < m_particles.size() - 1; i++)
+	{
+		m_particles.pop_back();
+	}
+}
+
+void Blob::merge(Particle* particle, ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler) {
+	m_particles.push_back(particle);
+	linkParticle(particle, forceRegistry, collisionHandler);
+}
+
 void Blob::linkParticles(ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler) {
 	int i = 0;
 	for (Particle* particle : m_particles) {
@@ -28,24 +45,13 @@ void Blob::linkParticles(ParticleForceRegistry* forceRegistry, CollisionHandler*
 			i++;
 			continue;
 		}
-		// We add the spring between the core and the surrounding particle created to the forceregistry
-		forceRegistry->add(particle, m_springCoreParticle);
-		// We add the create a cable between the core an the surrounding particle to ensure that particle doesn't go too far 
-		collisionHandler->add(particle, m_cableCoreParticle);
+		linkParticle(particle, forceRegistry, collisionHandler);
 	}
 }
 
-Particle* Blob::getCore() {
-	return m_core;
-}
-
-void Blob::split() {
-	// Remove all particles from blob
-	m_particles = std::list<Particle*>();
-	// Let only the core in it
-	m_particles.push_back(m_core);
-}
-
-void Blob::merge(Particle* particle) {
-	m_particles.push_back(particle);
+void Blob::linkParticle(Particle* particle, ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler) {
+	// We add the spring between the core and the surrounding particle created to the forceregistry
+	forceRegistry->add(particle, m_springCoreParticle);
+	// We add the create a cable between the core an the surrounding particle to ensure that particle doesn't go too far 
+	collisionHandler->add(particle, m_cableCoreParticle);
 }

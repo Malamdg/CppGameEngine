@@ -72,6 +72,7 @@
     <ClCompile Include="src\Collisions\Collision.cpp">
       <Filter>src\Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="src\Collisions\BlobCollisionHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
@@ -109,5 +110,6 @@
     </ClInclude>
     <ClInclude Include="src\Forces\SpringParticleParticle.h" />
     <ClInclude Include="src\Forces\ParticleGravity.h" />
+    <ClInclude Include="src\Collisions\BlobCollisionHandler.h" />
   </ItemGroup>
 </Project>

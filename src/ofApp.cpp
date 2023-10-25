@@ -11,7 +11,7 @@ void ofApp::setup() {
 	Tests::ExecuteTests();
 
 	// Set command text
-	commandText = "Bouger le blob avec les fleches directionnelles de droite et de gauche!\nSauter avec la fleche du haut!\n\'s\' pour \'splitter\' le blob; \'p\' pour faire apparaitre une particule";
+	commandText = "Bouger le blob avec les fleches directionnelles de droite et de gauche!\nSauter avec la fleche du haut!\n\'s\' pour \'separer\' le blob! (maintenir en pour separer avec un grand nombre de particules)\n\'p\' pour faire apparaitre une particule!";
 
 	// Setup lists
 	primitives = std::list<std::pair<of3dPrimitive*, int*>>(); // display primitive on each draw()
@@ -61,6 +61,8 @@ void ofApp::setup() {
 		primitives.push_back(std::pair<of3dPrimitive*, int*>(particle, colorMode));
 		particles.push_back(particle);
 	}
+
+	blobCollisionHandler = new BlobCollisionHandler(&blob);
 }
 
 //--------------------------------------------------------------
@@ -76,6 +78,7 @@ void ofApp::update() {
 		particle->Update();
 	}
 
+	blobCollisionHandler->handleCollision(particles, forceRegistry, collisionHandler);
 	collisionHandler->handleCollision(particles, duration, forceRegistry);
 
 	deltaX = blob.getCore()->getPosition().x() - deltaX;
@@ -138,7 +141,7 @@ void ofApp::keyPressed(int key) {
 	}
 	case 'p': // spawn particle
 	{
-		Particle* spawnedParticle = new Particle(10, blob.getCore()->getPosition() + Vector3D(15, 15), Vector3D(), .1);
+		Particle* spawnedParticle = new Particle(10, blob.getCore()->getPosition() + Vector3D(40, 40), Vector3D(), .1);
 		particles.push_back(spawnedParticle);
 		primitives.push_back(std::pair<Particle*, int*>(spawnedParticle, new int(1)));
 		return;
@@ -247,13 +250,23 @@ void ofApp::generateFloor(std::list<std::pair<int*, Vector3D*>> layout) {
 
 std::list<std::pair<int*, Vector3D*>> ofApp::getLayout() {
 	return std::list<std::pair<int*, Vector3D*>> (
-		{ 
+		{
+			std::pair<int*, Vector3D*>(new int(300), new Vector3D(-1500, -350)),
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(-1400, -170)),
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(-1200, -150)),
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(-1000, -250)),
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(-850, -250)),
+			std::pair<int*, Vector3D*>(new int(300), new Vector3D(-500, -250)),
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(-150, -250)),
 			std::pair<int*, Vector3D*>(new int(200), new Vector3D(0, -250)),
 			std::pair<int*, Vector3D*>(new int(200), new Vector3D(200, -150)),
 			std::pair<int*, Vector3D*>(new int(200), new Vector3D(400, -170)),
-			std::pair<int*, Vector3D*>(new int(200), new Vector3D(-150, -250)),
-			std::pair<int*, Vector3D*>(new int(300), new Vector3D(-500, -250)),
 			std::pair<int*, Vector3D*>(new int(300), new Vector3D(500, -350)),
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(600, -170)),
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(800, -150)),
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(1000, -250)),
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(1150, -250)),
+			std::pair<int*, Vector3D*>(new int(300), new Vector3D(1500, -250)),
 		}
 	);
 }
