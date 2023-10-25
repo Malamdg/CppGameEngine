@@ -76,9 +76,16 @@ void ofApp::update() {
 	}
 
 	collisionHandler->handleCollision(particles, duration);
-
+	int i = 0;
+	string msg;
 	for (Particle* particle : particles) {
-		std::cout << particle->getPosition().toString() << std::endl;
+		msg = "Particule " + to_string(i);
+		if (i == 0) {
+			msg = "Noyau";
+		}
+		msg += "\n";
+		std::cout << msg + particle->getPosition().toString() << std::endl;
+		i++;
 	}
 
 	deltaX = blob.getCore()->getPosition().x() - deltaX;

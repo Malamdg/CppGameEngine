@@ -4,6 +4,7 @@
 #include "Forces/ParticleForceRegistry.h"
 #include "Forces/SpringParticleParticle.h"
 #include "Collisions/Cable.h"
+#include "Collisions/Spindle.h"
 #include "Collisions/CollisionHandler.h"
 
 class Blob {
@@ -13,7 +14,6 @@ private:
 	float m_springLength;
 	SpringParticleParticle* m_springCoreParticle;
 	Cable* m_cableCoreParticle;
-
 public:
 	std::list<Particle*> m_particles;
 

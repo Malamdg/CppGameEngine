@@ -5,7 +5,7 @@ Blob::Blob(Particle* core)
 	:
 	m_core(core),
 	m_springLength(25.),
-	m_springCoreParticle(new SpringParticleParticle(m_core, 1, m_springLength, .5)),
+	m_springCoreParticle(new SpringParticleParticle(m_core, 15, m_springLength, 5)),
 	m_cableCoreParticle(new Cable(m_core, 2 * m_springLength))
 {
 	m_particles = std::list<Particle*>();
@@ -27,7 +27,7 @@ void Blob::linkParticles(ParticleForceRegistry* forceRegistry, CollisionHandler*
 			continue;
 		}
 		forceRegistry->add(particle, m_springCoreParticle);
-		collisionHandler->add(particle, m_cableCoreParticle);
+		//collisionHandler->add(particle, m_cableCoreParticle);
 	}
 }
 
