@@ -136,8 +136,16 @@
     <ClInclude Include="src\Collisions\Collision.h" />
     <ClInclude Include="src\Collisions\CollisionHandler.h" />
     <ClInclude Include="src\Collisions\Spindle.h" />
+    <ClInclude Include="src\Forces\ElasticParticleParticle.h" />
+    <ClInclude Include="src\Forces\ElasticParticlePoint.h" />
+    <ClInclude Include="src\Forces\ParticleDeplacement.h" />
     <ClInclude Include="src\Forces\ParticleForceGenerator.h" />
     <ClInclude Include="src\Forces\ParticleForceRegistry.h" />
+    <ClInclude Include="src\Forces\ParticleFriction.h" />
+    <ClInclude Include="src\Forces\ParticleGravity.h" />
+    <ClInclude Include="src\Forces\ParticleImpulse.h" />
+    <ClInclude Include="src\Forces\SpringParticleParticle.h" />
+    <ClInclude Include="src\Forces\SpringParticlePoint.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\Tests.h" />
