@@ -9,6 +9,8 @@
 #include "Forces/ParticleGravity.cpp"
 #include "Collisions/CollisionHandler.h"
 #include "Collisions/Spindle.h"
+#include "Collisions/Cable.h"
+#include "Forces/SpringParticleParticle.h"
 #include "iostream"
 
 class ofApp : public ofBaseApp{

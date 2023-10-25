@@ -118,14 +118,16 @@ void CollisionHandler::handleCollision(std::list<Particle*> particles, float dur
 					// Impulsion
 					float firstK = (relativeVelocity * vectorBetweenParticles * ((*secondParticle)->getCoefficientRestitution() + 1)) / ((*firstParticle)->getInverseMass() + (*secondParticle)->getInverseMass());
 					float secondK = (relativeVelocity * vectorBetweenParticles * ((*firstParticle)->getCoefficientRestitution() + 1)) / ((*firstParticle)->getInverseMass() + (*secondParticle)->getInverseMass());
-					Vector3D firstVelocityModifier = vectorBetweenParticles * firstK * (*firstParticle)->getInverseMass();
-					Vector3D secondVelocityModifier = vectorBetweenParticles * secondK * (*secondParticle)->getInverseMass();
+					Vector3D firstVelocityModifier = vectorBetweenParticles * (firstK * (*firstParticle)->getInverseMass());
+					Vector3D secondVelocityModifier = vectorBetweenParticles * (secondK * (*secondParticle)->getInverseMass());
 					(*firstParticle)->addVelocity(firstVelocityModifier * -1);
 					(*secondParticle)->addVelocity(secondVelocityModifier);
 				}
 			}
 		}
 	}
+
+	m_registry.empty();
 }
 
 void CollisionHandler::add(Particle* particle, Collision* collision)

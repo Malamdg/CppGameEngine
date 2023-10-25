@@ -28,15 +28,13 @@ void ofApp::setup(){
 	cam.setPosition(Vector3D(0, 0, 1500).v3());
 	cam.move(Vector3D(ofGetWidth() * .5, ofGetHeight() * .5).v3());
 
-	p = new Particle(80, Vector3D(-80, 200), Vector3D(), 0);
 	int* tmpMode = new int(mode);
-	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
-	particles.push_back(p);
-	p = new Particle(80, Vector3D(80, 200), Vector3D(), 0, .1);
+
+	p = new Particle(80, Vector3D(-80, 200), Vector3D(), .1);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
 	particles.push_back(p);
 
-	p1 = new Particle(30, Vector3D(80, 750), Vector3D(), .5);
+	p1 = new Particle(30, Vector3D(80, 750), Vector3D(), .8);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p1, tmpMode));
 	particles.push_back(p1);
 
@@ -54,6 +52,7 @@ void ofApp::update(){
 	fps = ofGetFrameRate();
 
 	forceRegistry->add(p1, particleGravity);
+	forceRegistry->add(p1, new SpringParticleParticle(p));
 
 	forceRegistry->updateForces(0);
 
@@ -63,7 +62,10 @@ void ofApp::update(){
 		particle->Update();
 	}
 
+	collisionHandler->add(p1, new Cable(p, 150));
+
 	if (fps != 0) collisionHandler->handleCollision(particles, 1 / fps);	
+
 }
 
 //--------------------------------------------------------------
