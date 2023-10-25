@@ -20,11 +20,7 @@ Blob::Blob(Particle* core)
 };
 
 Blob::~Blob()
-{
-	delete m_core;
-	delete m_springCoreParticle;
-	delete m_cableCoreParticle;
-}
+{ }
 
 Particle* Blob::getCore() {
 	return m_core;

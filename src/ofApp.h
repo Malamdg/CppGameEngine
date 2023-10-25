@@ -72,4 +72,12 @@ private:
 	BlobCollisionHandler* blobCollisionHandler;
 
 	ParticleGravity* gravity;
+
+	Particle* p;
+	Particle* p1;
+	Particle* p2;
+	Particle* p3;
+
+	Cable* cable;
+	Spindle* spindle;
 };
