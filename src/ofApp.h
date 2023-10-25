@@ -5,91 +5,59 @@
 #include "Vector3D.h"
 #include "Particle.h"
 #include "Tests.h"
+#include "Blob.h"
+#include "Forces/ParticleGravity.h"
 #include "Forces/ParticleForceRegistry.h"
-#include "Forces/ParticleGravity.cpp"
 #include "Collisions/CollisionHandler.h"
-#include "Collisions/Spindle.h"
-#include "Collisions/Cable.h"
-#include "Forces/SpringParticleParticle.h"
 #include "iostream"
 
-class ofApp : public ofBaseApp{
+class ofApp : public ofBaseApp {
 
-	public:
-		void setup();
-		void update();
-		void draw();
+public:
+	void setup();
+	void update();
+	void updateForces();
+	void draw();
 
-		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void mouseEntered(int x, int y);
-		void mouseExited(int x, int y);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
+	void keyPressed(int key);
+	void keyReleased(int key);
+	void mouseMoved(int x, int y);
+	void mouseDragged(int x, int y, int button);
+	void mousePressed(int x, int y, int button);
+	void mouseReleased(int x, int y, int button);
+	void mouseEntered(int x, int y);
+	void mouseExited(int x, int y);
+	void windowResized(int w, int h);
+	void dragEvent(ofDragInfo dragInfo);
+	void gotMessage(ofMessage msg);
 
-	private:
+private:
 
-		//Camera
-		ofCamera cam;
+	//HUD && Physics
+	float fps;
 
-		//**Primitives**//
-		std::list<std::pair<of3dPrimitive*, int*>> primitives;
-		std::list<Particle*> particles;
-		std::list<std::pair<ofSpherePrimitive*, int*>> preview;
+	//Camera
+	ofCamera cam;
+	Vector3D cameraPosition;
+	float viewWidth;
 
-		Vector3D m_initialPosition = Vector3D();
-		ofBoxPrimitive floor;
-		ofSpherePrimitive particleVisualization;
+	//**Primitives**//
+	std::list<std::pair<of3dPrimitive*, int*>> primitives;
+	std::list<Particle*> particles;
 
-		//Colors & Textures
-		Vector3D* colors = new Vector3D[5];
-		Vector3D visualizationColor = Vector3D(0, 255, 0);
+	Vector3D m_gravity = Vector3D();
+	ofBoxPrimitive floor;
+	Blob blob;
 
-		ofTexture* textures = new ofTexture[2];
-		ofTexture textureVisualization;
+	//Colors & Textures
+	Vector3D* colors = new Vector3D[2];
+	Vector3D visualizationColor = Vector3D(0, 255, 0);
 
-		ParticleForceRegistry* forceRegistry;
-		CollisionHandler* collisionHandler;
+	ParticleForceRegistry* forceRegistry;
+	CollisionHandler* collisionHandler;
 
-		ParticleGravity* particleGravity;
+	ParticleGravity* gravity;
 
-		Particle* p;
-		Particle* p1;
-		Particle* p2;
-
-		Spindle* spindle;
-
-		// Shooting modes
-		int mode = 0;
-
-		// Constants 
-		float gravity = 9.8;
-		
-		// Texts to display
-		string commandText;
-
-		// Framerate //
-		float fps;
-
-		/*
-		* Function to get launch direction from mouse
-		* 
-		* @param float x, mouse's x on screen
-		* @param float y, mouse's y on screen
-		* @return Vector3D, normalized shooting direction vector
-		*/
-		Vector3D GetLaunchDirection(float x, float y);
-
-		/*
-		* Method to display a previsualization of current shot
-		* 
-		* @param Vector3D initialPosition, particle's starting point from (0, 0, 0)
-		*/
-		void GeneratePrevisualization(Vector3D initialPosition = Vector3D());
-
+	// Texts to display
+	string commandText;
 };
