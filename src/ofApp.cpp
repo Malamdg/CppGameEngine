@@ -11,7 +11,7 @@ void ofApp::setup() {
 	Tests::ExecuteTests();
 
 	// Set command text
-	commandText = "Bouger le blob avec les fleches directionnelles de droite et de gauche!";
+	commandText = "Bouger le blob avec les fleches directionnelles de droite et de gauche!\nSauter avec la fleche du haut!\n\'s\' pour \'splitter\' le blob; \'p\' pour faire apparaitre une particule";
 
 	// Setup lists
 	primitives = std::list<std::pair<of3dPrimitive*, int*>>(); // display primitive on each draw()
@@ -31,15 +31,15 @@ void ofApp::setup() {
 
 	// Setup cam variables
 	cameraPosition = Vector3D(0, 0, 500);
-	float fovRad = cam.getFov() * PI / 180;
 	// Pythagoras to get displayed width with fov and z of camera 	
+	float fovRad = cam.getFov() * PI / 180;
 	viewWidth = tan(fovRad / 2) * 2 * cameraPosition.z();
+	viewHeight = viewWidth / cam.getAspectRatio();
 
 	// Setup Physics
 	forceRegistry = new ParticleForceRegistry();
 	collisionHandler = new CollisionHandler();
 
-	m_gravity = Vector3D(0, -9.8, 0);
 	gravity = new ParticleGravity(Vector3D(0, -40));
 
 	// add floor
@@ -92,13 +92,11 @@ void ofApp::draw() {
 	// begin camera job
 	cam.begin();
 
-	// display command text
-	ofSetColor(255, 255, 255);
-	ofDrawBitmapString(ofToString(commandText), -viewWidth / 2, viewWidth / 4);
-
-	int* colorMode;
+	// display texts on screen
+	drawText();
 
 	// display primitives with correct color
+	int* colorMode;
 	for (std::pair<of3dPrimitive*, int*> primitive : primitives)
 	{
 		colorMode = primitive.second;
@@ -116,8 +114,7 @@ void ofApp::draw() {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
 	// Default direction +x
-	float deplacementNorm = 50;
-	std::cout << key << std::endl;
+	float deplacementNorm = 100;
 
 	// move on arrow key press
 	switch (key)
@@ -125,11 +122,27 @@ void ofApp::keyPressed(int key) {
 	case 57358: // stride right
 		break;
 	case 57356: // stride left
+	{
 		deplacementNorm *= -1;
 		break;
+	}
 	case 57357: // jump
+	{
 		blob.getCore()->addVelocity(Vector3D(0, 100));
 		return;
+	}
+	case 's': // split blob
+	{
+		blob.split();
+		return;
+	}
+	case 'p': // spawn particle
+	{
+		Particle* spawnedParticle = new Particle(10, blob.getCore()->getPosition() + Vector3D(15, 15), Vector3D(), .1);
+		particles.push_back(spawnedParticle);
+		primitives.push_back(std::pair<Particle*, int*>(spawnedParticle, new int(1)));
+		return;
+	}
 	default:
 		return;
 	}
@@ -175,9 +188,7 @@ void ofApp::mouseExited(int x, int y) {
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h) {
-	// keep coherent display when resizing viewport
-	cam.setPosition(Vector3D(0, 0, 1500).v3());
-	cam.move(Vector3D(ofGetWidth() * .5, ofGetHeight() * .5).v3());
+
 }
 
 //--------------------------------------------------------------
@@ -191,6 +202,21 @@ void ofApp::dragEvent(ofDragInfo dragInfo) {
 }
 
 //--------------------------------------------------------------
+void ofApp::drawText() {
+	// Command Text
+	ofSetColor(255, 255, 255);
+	ofDrawBitmapString(ofToString(commandText), -viewWidth / 2, viewHeight / 2);
+
+	// Informative HUD 
+	movingHud = "Framerate : " + to_string(fps) + " fps\n" + "Nb Particules du Blob : " + to_string(blob.m_particles.size());
+	float camX, camY;
+	camX = Vector3D(cam.getPosition()).x();
+	camY = Vector3D(cam.getPosition()).y();
+	ofSetColor(	255, 125, 125);
+	ofDrawBitmapString(ofToString(movingHud), -viewWidth / 2 - 50 + camX, viewHeight / 2 + 50 + camY);
+}
+
+// ------------------------------------
 void ofApp::updateForces() {
 	float duration = ofGetFrameRate() == 0. ? 0. : 1 / ofGetFrameRate();
 

@@ -31,23 +31,28 @@ public:
 	void gotMessage(ofMessage msg);
 	
 private:
+	void drawText();
 	void updateForces();
 	void generateFloor(std::list<std::pair<int*, Vector3D*>> layout);
 	std::list<std::pair<int*, Vector3D*>> getLayout();
 	
 	//HUD && Physics
 	float fps;
+	string commandText;
+	string movingHud;
+	Vector3D movingHudInitialPos;
+	Vector3D movingHudPos;
 
 	//Camera
 	ofCamera cam;
 	Vector3D cameraPosition;
 	float viewWidth;
+	float viewHeight;
 
 	//**Primitives**//
 	std::list<std::pair<of3dPrimitive*, int*>> primitives;
 	std::list<Particle*> particles;
 
-	Vector3D m_gravity = Vector3D();
 	ofBoxPrimitive floor;
 	Blob blob;
 
@@ -58,7 +63,4 @@ private:
 	CollisionHandler* collisionHandler;
 
 	ParticleGravity* gravity;
-
-	// Texts to display
-	string commandText;
 };

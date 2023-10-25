@@ -39,6 +39,13 @@ Particle* Blob::getCore() {
 	return m_core;
 }
 
+void Blob::split() {
+	// Remove all particles from blob
+	m_particles = std::list<Particle*>();
+	// Let only the core in it
+	m_particles.push_back(m_core);
+}
+
 void Blob::merge(Particle* particle) {
 	m_particles.push_back(particle);
 }
