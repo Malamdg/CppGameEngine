@@ -27,10 +27,6 @@ void ofApp::setup() {
 	colors[0] = Vector3D(0, 0, 0);
 	colors[1] = Vector3D(255, 255, 255);
 
-	// add floor to primitive list
-	int* floorMode = new int(0);
-	primitives.push_back(std::pair<of3dPrimitive*, int*>(&floor, floorMode));
-
 	// Setup cam variables
 	cameraPosition = Vector3D(0, 0, 500);
 	float fovRad = cam.getFov() * PI / 180;
@@ -42,24 +38,32 @@ void ofApp::setup() {
 	collisionHandler = new CollisionHandler();
 
 	m_gravity = Vector3D(0, -9.8, 0);
-	gravity = new ParticleGravity(m_gravity);
+	gravity = new ParticleGravity(Vector3D(0, -40));
+
+
+	p = new Particle(80, Vector3D(), Vector3D(), 0, 0, 3, 0.2);
+	particles.push_back(p);
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, new int(0)));
+	p1 = new Particle(30, Vector3D(10, 800), Vector3D(), 0.5);
+	particles.push_back(p1);
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(p1, new int(0)));
 
 	// setup blob
-	Particle* blobCore = new Particle(10, Vector3D(0, 40), Vector3D(), .01);
-	blob = Blob(blobCore);
+	//Particle* blobCore = new Particle(10, Vector3D(0, 40), Vector3D(), .01);
+	//blob = Blob(blobCore);
 
-	int i = 0;
-	int* colorMode;
-	for (Particle* particle : blob.m_particles) {
-		colorMode = new int(1);
-		if (i == 0) {
-			colorMode = new int(0);
-			i++;
-		}
+	//int i = 0;
+	//int* colorMode;
+	//for (Particle* particle : blob.m_particles) {
+	//	colorMode = new int(1);
+	//	if (i == 0) {
+	//		colorMode = new int(0);
+	//		i++;
+	//	}
 
-		primitives.push_back(std::pair<of3dPrimitive*, int*>(particle, colorMode));
-		particles.push_back(particle);
-	}
+	//	primitives.push_back(std::pair<of3dPrimitive*, int*>(particle, colorMode));
+	//	particles.push_back(particle);
+	//}
 }
 
 //--------------------------------------------------------------
@@ -68,6 +72,8 @@ void ofApp::update() {
 
 	float duration = fps == 0 ? 0 : 1/fps;
 
+	forceRegistry->add(p1, gravity);
+
 	updateForces();
 	float deltaX = blob.getCore()->getPosition().x();
 	//Update particles
@@ -75,11 +81,7 @@ void ofApp::update() {
 		particle->Update();
 	}
 
-	collisionHandler->handleCollision(particles, duration);
-
-	for (Particle* particle : particles) {
-		std::cout << particle->getPosition().toString() << std::endl;
-	}
+	collisionHandler->handleCollision(particles, duration, forceRegistry);
 
 	deltaX = blob.getCore()->getPosition().x() - deltaX;
 	Vector3D deltaPosCamBlob = Vector3D(cam.getPosition()) - blob.getCore()->getPosition();

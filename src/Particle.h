@@ -15,6 +15,9 @@ private:
 	Vector3D m_color;
 	Vector3D m_accumForce;
 
+	float m_frictionK1;
+	float m_frictionK2;
+
 	// When a collision occurs, the coefficient is used to know the amount of energy absorbed by the particle (if coeff = 1, then nothing is absorbed)
 	float m_coefficientRestitutions = 1;
 
@@ -54,7 +57,9 @@ public:
 		Vector3D position = Vector3D(),
 		Vector3D velocity = Vector3D(),
 		float invertedMass = 0,
-		float coefficientRestitution = 1);
+		float coefficientRestitution = 1,
+		float frictionK1 = 0,
+		float frictionK2 = 0);
 
 	/*
 	* class destructor
@@ -124,4 +129,7 @@ public:
 	@return the coefficient of restitution
 	*/
 	float getCoefficientRestitution();
+
+	float getK1();
+	float getK2();
 };

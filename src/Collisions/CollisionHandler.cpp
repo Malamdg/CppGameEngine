@@ -10,7 +10,7 @@ CollisionHandler::~CollisionHandler()
 
 }
 
-void CollisionHandler::handleCollision(std::list<Particle*> particles, float duration)
+void CollisionHandler::handleCollision(std::list<Particle*> particles, float duration, ParticleForceRegistry* forceRegistry)
 {
 	for (CollisionRegistration registration : m_registry)
 	{
@@ -62,13 +62,14 @@ void CollisionHandler::handleCollision(std::list<Particle*> particles, float dur
 						float K = (relativeVelocity * vectorBetweenParticles * ((*firstParticle)->getCoefficientRestitution() + 1)) / ((*firstParticle)->getInverseMass() + (*secondParticle)->getInverseMass());
 						Vector3D velocityModifier = vectorBetweenParticles * (K * (*secondParticle)->getInverseMass());
 						(*secondParticle)->addVelocity(velocityModifier);
-						std::cout << vectorBetweenParticles.toString() << " * " << K << " * " << (*secondParticle)->getInverseMass() << " = " << velocityModifier.toString() << std::endl;
 						// the first particle is not affected according to newton's second law
 					}
 					else
 					{
 						// We garanty the velocity is 0
 						(*secondParticle)->addVelocity(vectorBetweenParticles * velocity_proj);
+
+						forceRegistry->add(*secondParticle, new ParticleFriction((*firstParticle)->getK1(), (*firstParticle)->getK2()));
 					}
 
 				}
@@ -95,6 +96,8 @@ void CollisionHandler::handleCollision(std::list<Particle*> particles, float dur
 					{
 						// We garanty the velocity is 0
 						(*firstParticle)->addVelocity(vectorBetweenParticles * velocity_proj);
+
+						forceRegistry->add(*secondParticle, new ParticleFriction((*secondParticle)->getK1(), (*firstParticle)->getK2()));
 					}
 				}
 				else
