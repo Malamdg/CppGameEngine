@@ -32,7 +32,7 @@ public:
 
 	@return the sum of the two vectors
 	*/
-	Vector3D& operator+(const Vector3D vector) const;
+	Vector3D& operator+(const Vector3D& vector) const;
 
 	/*
 	definition of operator +=
@@ -40,7 +40,7 @@ public:
 
 	@param vector, the vector added to the one to which the operation applies
 	*/
-	void operator+=(const Vector3D vector);
+	void operator+=(const Vector3D& vector);
 
 	/*
 	definition of operator -
@@ -48,7 +48,7 @@ public:
 
 	@param vector, the vector substracted to the one to which the operation applies
 	*/
-	Vector3D& operator-(const Vector3D vector) const;
+	Vector3D& operator-(const Vector3D& vector) const;
 
 	/*
 	definition of operator -=
@@ -58,7 +58,7 @@ public:
 
 	@return the difference of the two vectors
 	*/
-	void operator-=(const Vector3D vector);
+	void operator-=(const Vector3D& vector);
 
 	/*
 	definition of operator *
@@ -78,7 +78,7 @@ public:
 
 	@return the scalar product of the two vectors
 	*/
-	float operator*(const Vector3D vector) const;
+	float operator*(const Vector3D& vector) const;
 
 	/*
 	definition of operator ^
@@ -88,7 +88,7 @@ public:
 
 	@return the cross product of the two vectors
 	*/
-	Vector3D& operator^(const Vector3D vector) const;
+	Vector3D& operator^(const Vector3D& vector) const;
 
 	/*
 	definition of operator ==
@@ -98,7 +98,9 @@ public:
 
 	@return true if the vectors are the same
 	*/
-	bool operator==(const Vector3D vector) const;
+	bool operator==(const Vector3D& vector) const;
+
+	Vector3D& operator=(const Vector3D vector);
 
 	/*
 	definition of the norm (here norm2)
@@ -127,7 +129,7 @@ public:
 	
 	@return the distance between this vector and the one passed in parameters
 	*/
-	float distance(const Vector3D vector);
+	float distance(const Vector3D& vector);
 
 	/*
 	convert a vector to string

@@ -10,7 +10,7 @@ void Tests::ExecuteTests()
 
 void Tests::ExecuteVector3DTests()
 {
-	int nbOfTest = 9;
+	int nbOfTest = 10;
 	int success = 0;
 
 	std::cout << "Vector3D : " << std::endl << std::endl;
@@ -24,6 +24,7 @@ void Tests::ExecuteVector3DTests()
 	success += Vector3DNorm2();
 	success += Vector3DNormalization();
 	success += Vector3DVectorProduct();
+	success += Vector3Dfloatfloat();
 
 	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl;
 }
@@ -192,5 +193,25 @@ bool Tests::Vector3DVectorProduct()
 
 	std::cout << "Vector Product : Fail. ";
 	std::cout << "Was expecting (-35.6, -22, -62), got " + productVector.toString() << std::endl;
+	return false;
+}
+
+bool Tests::Vector3Dfloatfloat()
+{
+	Vector3D vector = Vector3D(0, 1, 0);
+	float f1 = 12.65;
+	float f2 = 16.69;
+
+	Vector3D intendedVector = Vector3D(0, f1 * f2, 0);
+	Vector3D result = vector * f1 * f2;
+
+	if (result == intendedVector)
+	{
+		std::cout << "Vector Product double float : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Vector Product : Fail. ";
+	std::cout << "Was expecting " << intendedVector.toString() << ", got " + result.toString() << std::endl;
 	return false;
 }

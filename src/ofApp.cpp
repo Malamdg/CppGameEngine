@@ -16,11 +16,6 @@ void ofApp::setup(){
 	const float floorHeight = 5;
 	floor = ofBoxPrimitive(floorWidth, floorHeight, 0);
 	floor.setPosition(Vector3D(0, -10).v3());
-	
-	// Colors & Text
-	ofDisableArbTex();
-	ofLoadImage(textures[0], "T_fireBall.png");
-	ofLoadImage(textures[1], "T_canonBall.png");
 
 	// Setup colors
 	colors[0] = Vector3D(0, 255, 0);
@@ -29,28 +24,26 @@ void ofApp::setup(){
 	colors[3] = Vector3D(125, 125, 125);
 	colors[4] = Vector3D(255, 255, 255);
 
-	// add previsualization sphere to primitive list
-	primitives.push_back(std::pair<of3dPrimitive*, int*>(&particleVisualization, &mode));
-	
-	// add floor to primitive list
-	int* floorMode = new int(3);
-	primitives.push_back(std::pair<of3dPrimitive*, int*>(&floor, floorMode));
-
 	// Center cam and set origin at the bottom left corner
 	cam.setPosition(Vector3D(0, 0, 1500).v3());
 	cam.move(Vector3D(ofGetWidth() * .5, ofGetHeight() * .5).v3());
 
-	p = new Particle(30, Vector3D(-400, 200), Vector3D(50, 50), .5);
+	p = new Particle(80, Vector3D(-80, 200), Vector3D(), 0);
 	int* tmpMode = new int(mode);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
 	particles.push_back(p);
+	p = new Particle(80, Vector3D(80, 200), Vector3D(), 0, .1);
+	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
+	particles.push_back(p);
 
-	p1 = new Particle(30, Vector3D(400, 1000), Vector3D(-50, -50), .5);
+	p1 = new Particle(30, Vector3D(80, 750), Vector3D(), .5);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p1, tmpMode));
 	particles.push_back(p1);
 
 	forceRegistry = new ParticleForceRegistry();
 	collisionHandler = new CollisionHandler();
+
+	particleGravity = new ParticleGravity(Vector3D(0, -9.8));
 
 	// Tests
 	Tests::ExecuteTests();
@@ -60,15 +53,17 @@ void ofApp::setup(){
 void ofApp::update(){
 	fps = ofGetFrameRate();
 
+	forceRegistry->add(p1, particleGravity);
+
+	forceRegistry->updateForces(0);
+
 	//Update particles
 	for (Particle* particle : particles)
 	{
 		particle->Update();
 	}
 
-	forceRegistry->updateForces(0);
-
-	collisionHandler->handleCollision(particles);
+	if (fps != 0) collisionHandler->handleCollision(particles, 1 / fps);	
 }
 
 //--------------------------------------------------------------

@@ -118,6 +118,11 @@ void Particle::addPosition(Vector3D newPosition)
 	m_position = m_position + newPosition;
 }
 
+Vector3D Particle::getAcceleration()
+{
+	return m_acceleration;
+}
+
 Vector3D Particle::getVelocity() { return m_velocity; }
 
 void Particle::addVelocity(Vector3D velocity)

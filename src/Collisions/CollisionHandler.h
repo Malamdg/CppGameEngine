@@ -19,7 +19,7 @@ public:
 
 	~CollisionHandler();
 
-	void handleCollision(std::list<Particle*> particles);
+	void handleCollision(std::list<Particle*> particles, float duration);
 
 	void add(Particle* particle, Collision* collision);
 
