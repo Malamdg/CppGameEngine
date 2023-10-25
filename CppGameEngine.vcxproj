@@ -138,6 +138,8 @@
     <ClInclude Include="src\Collisions\Spindle.h" />
     <ClInclude Include="src\Forces\ParticleForceGenerator.h" />
     <ClInclude Include="src\Forces\ParticleForceRegistry.h" />
+    <ClInclude Include="src\Forces\ParticleGravity.h" />
+    <ClInclude Include="src\Forces\SpringParticleParticle.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\Tests.h" />

@@ -16,7 +16,6 @@ class ofApp : public ofBaseApp {
 public:
 	void setup();
 	void update();
-	void updateForces();
 	void draw();
 
 	void keyPressed(int key);
@@ -30,9 +29,12 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
-
+	
 private:
-
+	void updateForces();
+	void generateFloor(std::list<std::pair<int*, Vector3D*>> layout);
+	std::list<std::pair<int*, Vector3D*>> getLayout();
+	
 	//HUD && Physics
 	float fps;
 
@@ -50,7 +52,7 @@ private:
 	Blob blob;
 
 	//Colors & Textures
-	Vector3D* colors = new Vector3D[2];
+	Vector3D* colors = new Vector3D[3];
 	Vector3D visualizationColor = Vector3D(0, 255, 0);
 
 	ParticleForceRegistry* forceRegistry;

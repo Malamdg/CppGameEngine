@@ -107,5 +107,7 @@
     <ClInclude Include="src\Collisions\Collision.h">
       <Filter>src\Collisions</Filter>
     </ClInclude>
+    <ClInclude Include="src\Forces\SpringParticleParticle.h" />
+    <ClInclude Include="src\Forces\ParticleGravity.h" />
   </ItemGroup>
 </Project>

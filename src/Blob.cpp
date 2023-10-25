@@ -6,7 +6,7 @@ Blob::Blob(Particle* core)
 	// to define the characteristics of the blob
 	m_core(core),
 	m_springLength(25.),
-	m_springCoreParticle(new SpringParticleParticle(m_core, 15, m_springLength, 5)),
+	m_springCoreParticle(new SpringParticleParticle(m_core, 1000, m_springLength, .05)),
 	m_cableCoreParticle(new Cable(m_core, 2 * m_springLength))
 {
 	m_particles = std::list<Particle*>();

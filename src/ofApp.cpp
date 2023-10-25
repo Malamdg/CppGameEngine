@@ -26,10 +26,7 @@ void ofApp::setup() {
 	// Setup colors
 	colors[0] = Vector3D(0, 0, 0);
 	colors[1] = Vector3D(255, 255, 255);
-
-	// add floor to primitive list
-	int* floorMode = new int(0);
-	primitives.push_back(std::pair<of3dPrimitive*, int*>(&floor, floorMode));
+	colors[2] = Vector3D(125, 125, 125);
 
 	// Setup cam variables
 	cameraPosition = Vector3D(0, 0, 500);
@@ -45,7 +42,7 @@ void ofApp::setup() {
 	gravity = new ParticleGravity(m_gravity);
 
 	// setup blob
-	Particle* blobCore = new Particle(10, Vector3D(0, 40), Vector3D(), .01);
+	Particle* blobCore = new Particle(10, Vector3D(0, 100), Vector3D(), .01);
 	blob = Blob(blobCore);
 
 	int i = 0;
@@ -60,6 +57,9 @@ void ofApp::setup() {
 		primitives.push_back(std::pair<of3dPrimitive*, int*>(particle, colorMode));
 		particles.push_back(particle);
 	}
+
+	// add floor
+	generateFloor(getLayout());
 }
 
 //--------------------------------------------------------------
@@ -76,17 +76,6 @@ void ofApp::update() {
 	}
 
 	collisionHandler->handleCollision(particles, duration);
-	int i = 0;
-	string msg;
-	for (Particle* particle : particles) {
-		msg = "Particule " + to_string(i);
-		if (i == 0) {
-			msg = "Noyau";
-		}
-		msg += "\n";
-		std::cout << msg + particle->getPosition().toString() << std::endl;
-		i++;
-	}
 
 	deltaX = blob.getCore()->getPosition().x() - deltaX;
 	Vector3D deltaPosCamBlob = Vector3D(cam.getPosition()) - blob.getCore()->getPosition();
@@ -97,21 +86,6 @@ void ofApp::update() {
 
 }
 
-void ofApp::updateForces() {
-	float duration = ofGetFrameRate() == 0. ? 0. : 1 / ofGetFrameRate();
-
-	blob.linkParticles(forceRegistry, collisionHandler);
-
-
-	for (Particle* particle : particles)
-	{
-		// forceRegistry->add(particle, gravity);
-	}
-
-
-	forceRegistry->updateForces(duration);
-}
-
 //--------------------------------------------------------------
 void ofApp::draw() {
 	// begin camera job
@@ -119,7 +93,7 @@ void ofApp::draw() {
 
 	// display command text
 	ofSetColor(255, 255, 255);
-	ofDrawBitmapString(ofToString(commandText), 0, ofGetScreenHeight());
+	ofDrawBitmapString(ofToString(commandText), -viewWidth / 2, viewWidth / 4);
 
 	int* colorMode;
 
@@ -209,4 +183,46 @@ void ofApp::gotMessage(ofMessage msg) {
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo) {
 
+}
+
+//--------------------------------------------------------------
+void ofApp::updateForces() {
+	float duration = ofGetFrameRate() == 0. ? 0. : 1 / ofGetFrameRate();
+
+	blob.linkParticles(forceRegistry, collisionHandler);
+
+
+	for (Particle* particle : particles)
+	{
+		// forceRegistry->add(particle, gravity);
+	}
+
+
+	forceRegistry->updateForces(duration);
+}
+
+//--------------------------------------------------------------
+void ofApp::generateFloor(std::list<std::pair<int*, Vector3D*>> layout) {
+
+	Particle* floorParticle;
+	int* floorMode = new int(2);
+
+	for (std::pair<int*, Vector3D*> particlePair : layout) {
+		floorParticle = new Particle((*particlePair.first), (*particlePair.second));
+		primitives.push_back(std::pair<of3dPrimitive*, int*>(floorParticle, floorMode));
+		particles.push_back(floorParticle);
+	}
+}
+
+std::list<std::pair<int*, Vector3D*>> ofApp::getLayout() {
+	return std::list<std::pair<int*, Vector3D*>> (
+		{ 
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(0, -250)),
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(200, -150)),
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(400, -170)),
+			std::pair<int*, Vector3D*>(new int(200), new Vector3D(-150, -250)),
+			std::pair<int*, Vector3D*>(new int(300), new Vector3D(-500, -250)),
+			std::pair<int*, Vector3D*>(new int(300), new Vector3D(500, -350)),
+		}
+	);
 }
