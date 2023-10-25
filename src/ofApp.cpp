@@ -32,16 +32,18 @@ void ofApp::setup(){
 	int* tmpMode = new int(mode);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
 	particles.push_back(p);
-	p = new Particle(80, Vector3D(80, 200), Vector3D(), 0);
+	p = new Particle(80, Vector3D(80, 200), Vector3D(), 0, .1);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, tmpMode));
 	particles.push_back(p);
 
-	p1 = new Particle(30, Vector3D(0, 800), Vector3D(0, -50), .5);
+	p1 = new Particle(30, Vector3D(80, 750), Vector3D(), .5);
 	primitives.push_back(std::pair<of3dPrimitive*, int*>(p1, tmpMode));
 	particles.push_back(p1);
 
 	forceRegistry = new ParticleForceRegistry();
 	collisionHandler = new CollisionHandler();
+
+	particleGravity = new ParticleGravity(Vector3D(0, -9.8));
 
 	// Tests
 	Tests::ExecuteTests();
@@ -51,15 +53,17 @@ void ofApp::setup(){
 void ofApp::update(){
 	fps = ofGetFrameRate();
 
+	forceRegistry->add(p1, particleGravity);
+
+	forceRegistry->updateForces(0);
+
 	//Update particles
 	for (Particle* particle : particles)
 	{
 		particle->Update();
 	}
 
-	forceRegistry->updateForces(0);
-
-	collisionHandler->handleCollision(particles);
+	if (fps != 0) collisionHandler->handleCollision(particles, 1 / fps);	
 }
 
 //--------------------------------------------------------------

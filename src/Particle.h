@@ -116,6 +116,8 @@ public:
 	*/
 	void addPosition(Vector3D newPosition);
 
+	Vector3D getAcceleration();
+
 	/*
 	get the coefficient of restitution
 

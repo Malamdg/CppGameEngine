@@ -20,13 +20,13 @@ Vector3D::Vector3D(glm::vec3 vector)
 Vector3D::~Vector3D() {}
 
 
-Vector3D & Vector3D::operator+(const Vector3D vector) const
+Vector3D & Vector3D::operator+(const Vector3D& vector) const
 {
 	return Vector3D(m_x + vector.m_x, m_y + vector.m_y, m_z + vector.m_z);
 }
 
 
-void Vector3D::operator+=(const Vector3D vector)
+void Vector3D::operator+=(const Vector3D& vector)
 {
 	m_x += vector.m_x;
 	m_y += vector.m_y;
@@ -34,13 +34,13 @@ void Vector3D::operator+=(const Vector3D vector)
 }
 
 
-Vector3D & Vector3D::operator-(const Vector3D vector) const
+Vector3D & Vector3D::operator-(const Vector3D& vector) const
 {
 	return Vector3D(m_x - vector.m_x, m_y - vector.m_y, m_z - vector.m_z);
 }
 
 
-void Vector3D::operator-=(const Vector3D vector)
+void Vector3D::operator-=(const Vector3D& vector)
 {
 	m_x -= vector.m_x;
 	m_y -= vector.m_y;
@@ -54,13 +54,13 @@ Vector3D & Vector3D::operator*(const float val) const
 }
 
 
-float Vector3D::operator*(const Vector3D vector) const
+float Vector3D::operator*(const Vector3D& vector) const
 {
 	return m_x * vector.m_x + m_y * vector.m_y + m_z * vector.m_z;
 }
 
 
-Vector3D & Vector3D::operator^(const Vector3D vector) const
+Vector3D & Vector3D::operator^(const Vector3D& vector) const
 {
 	return Vector3D(m_y * vector.m_z - m_z * vector.m_y,
 		m_z * vector.m_x - m_x * vector.m_z,
@@ -68,11 +68,20 @@ Vector3D & Vector3D::operator^(const Vector3D vector) const
 }
 
 
-bool Vector3D::operator==(const Vector3D vector) const
+bool Vector3D::operator==(const Vector3D& vector) const
 {
 	return this->m_x == vector.m_x && this->m_y == vector.m_y && this->m_z == vector.m_z && this->m_w == vector.m_w;
 }
 
+Vector3D& Vector3D::operator=(const Vector3D vector)
+{
+	this->m_x = vector.m_x;
+	this->m_y = vector.m_y;
+	this->m_z = vector.m_z;
+	this->m_w = vector.m_w;
+	
+	return *this;
+}
 
 float Vector3D::Norm()
 {
@@ -94,7 +103,7 @@ void Vector3D::Normalize()
 	m_z /= norm;
 }
 
-float Vector3D::distance(const Vector3D vector)
+float Vector3D::distance(const Vector3D& vector)
 {
 	return (*this - vector).Norm();
 }

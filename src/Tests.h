@@ -70,5 +70,11 @@ private:
 	@return true if the cross product is correctly computed
 	*/
 	static bool Vector3DVectorProduct();
+
+	/*
+	test the multiplication of a Vector3D by 2 float (at the same time)
+	@return true if the product is correctly computed
+	*/
+	static bool Vector3Dfloatfloat();
 };
 

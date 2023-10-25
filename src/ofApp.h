@@ -54,6 +54,8 @@ class ofApp : public ofBaseApp{
 		ParticleForceRegistry* forceRegistry;
 		CollisionHandler* collisionHandler;
 
+		ParticleGravity* particleGravity;
+
 		Particle* p;
 		Particle* p1;
 		Particle* p2;
