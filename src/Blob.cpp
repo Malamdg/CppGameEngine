@@ -19,7 +19,12 @@ Blob::Blob(Particle* core)
 	m_particles.push_back(new Particle(10, m_core->getPosition() + Vector3D(-m_springLength, 0), Vector3D(), .1));
 };
 
-Blob::~Blob() {}
+Blob::~Blob()
+{
+	delete m_core;
+	delete m_springCoreParticle;
+	delete m_cableCoreParticle;
+}
 
 Particle* Blob::getCore() {
 	return m_core;
