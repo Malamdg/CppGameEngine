@@ -1,16 +1,18 @@
 #pragma once
 
-#include "ofMain.h"
-#include "of3dPrimitives.h"
-#include "Vector3D.h"
-#include "Particle.h"
-#include "Tests.h"
 #include "Blob.h"
-#include "Forces/ParticleGravity.h"
-#include "Forces/ParticleForceRegistry.h"
+#include "cmath"
 #include "Collisions/CollisionHandler.h"
 #include "Collisions/BlobCollisionHandler.h"
+#include "Forces/ParticleDeplacement.h"
+#include "Forces/ParticleGravity.h"
+#include "Forces/ParticleForceRegistry.h"
 #include "iostream"
+#include "ofMain.h"
+#include "of3dPrimitives.h"
+#include "Particle.h"
+#include "Tests.h"
+#include "Vector3D.h"
 
 class ofApp : public ofBaseApp {
 

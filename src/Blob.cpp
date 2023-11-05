@@ -1,5 +1,4 @@
 #include "Blob.h"
-#include "Particle.h"
 
 Blob::Blob(Particle* core)
 	:

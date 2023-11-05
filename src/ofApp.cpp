@@ -1,8 +1,4 @@
 #include "ofApp.h"
-#include "Forces/ParticleForceRegistry.h"
-#include "Collisions/CollisionHandler.h"
-#include "Forces/ParticleDeplacement.cpp"
-#include "cmath"
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -62,28 +58,6 @@ void ofApp::setup() {
 	}
 
 	blobCollisionHandler = new BlobCollisionHandler(&blob);
-
-	// Démo cable
-
-	/*p = new Particle(30, Vector3D(150, 250), Vector3D(), 0.f, 0.f);
-	particles.push_back(p);
-	primitives.push_back(std::pair<of3dPrimitive*, int*>(p, new int(2)));
-	p1 = new Particle(10, Vector3D(150, 205), Vector3D(), 0.5f);
-	particles.push_back(p1);
-	primitives.push_back(std::pair<of3dPrimitive*, int*>(p1, new int(2)));
-
-	cable = new Cable(p, 70);*/
-
-	// Démo tige
-
-	/*p2 = new Particle(30, Vector3D(-150, 200), Vector3D(), 0.f, 0.f);
-	particles.push_back(p2);
-	primitives.push_back(std::pair<of3dPrimitive*, int*>(p2, new int(2)));
-	p3 = new Particle(10, Vector3D(-150, 155), Vector3D(), 0.5f);
-	particles.push_back(p3);
-	primitives.push_back(std::pair<of3dPrimitive*, int*>(p3, new int(2)));
-
-	spindle = new Spindle(p2, 70);*/
 }
 
 //--------------------------------------------------------------
