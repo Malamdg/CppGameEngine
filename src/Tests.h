@@ -1,7 +1,8 @@
 #pragma once
 #include "Vector3D.h"
+#include "Quaternion.h"
 
-class Tests
+static class Tests
 {
 public:
 	/*
@@ -10,6 +11,8 @@ public:
 	static void ExecuteTests();
 
 private:
+	static int nbOfTest;
+
 	// Vector3D
 
 	/*
@@ -17,6 +20,12 @@ private:
 	display the number of tests passed and the number of tests failed
 	*/
 	static void ExecuteVector3DTests();
+
+	/*
+	execute all the test on Quaternion
+	display the number of tests passed and the number of tests failed
+	*/
+	static void ExecuteQuaternionTests();
 
 	/*
 	test the construtor method of Vector3D
@@ -77,5 +86,67 @@ private:
 	@return true if the product is correctly computed
 	*/
 	static bool Vector3Dfloatfloat();
+
+	/*
+	test the constructor method of Quaternion
+	@return true if the composant of the Quaternion are null
+	*/
+	static bool QuaternionEmptyConstructor();
+
+	/*
+	
+	*/
+	static bool QuaternionEulerConstructor();
+
+	/*
+	
+	*/
+	static bool QuaternionIdentityConstructor();
+
+	/*
+	
+	*/
+	static bool QuaternionNorm();
+
+	/*
+	
+	*/
+	static bool QuaternionNegation();
+
+	/*
+	
+	*/
+	static bool QuaternionInverse();
+
+	/*
+	
+	*/
+	static bool QuaternionConjugue();
+
+	/*
+	
+	*/
+	static bool QuaternionMultiplicationBetweenQuaternions();
+
+	/*
+	
+	*/
+	static bool QuaternionMultipticationWithFloat();
+
+	/*
+	
+	*/
+	static bool QuaternionDifference();
+
+	/*
+	
+	*/
+	static bool QuaternionScalarProduct();
+
+	/*
+	
+	*/
+	static bool QuaternionExponentiation();
+
 };
 

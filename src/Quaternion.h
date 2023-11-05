@@ -16,13 +16,13 @@ private:
 public:
 
 	Quaternion(const float w = 0, const float x = 0, const float y = 0, const float z = 0);
-	Quaternion(const float w = 0, const Vector3D& v = Vector3D());
+	Quaternion(const float w, const Vector3D& v);
 	~Quaternion();
 
 	static Quaternion& Euler(const float detax, const float detay, const float detaz);
 	static Quaternion& Identity();
 
-	float Norme() const;
+	float Norm() const;
 	Quaternion& Negation()const;
 	Quaternion& Inverse()const;
 	Quaternion& Conjugue()const;
@@ -34,4 +34,12 @@ public:
 	float dot(Quaternion& q)const;
 	Quaternion& operator^(const float exp)const;
 	bool operator==(const Quaternion& q)const;
+
+	string toString() const;
+
+	float getW()const;
+	float getX()const;
+	float getY()const;
+	float getZ()const;
+	Vector3D getVector()const;
 };

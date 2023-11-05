@@ -40,7 +40,7 @@ Quaternion& Quaternion::Identity()
 	return Quaternion(1, 0, 0, 0);
 }
 
-float Quaternion::Norme() const
+float Quaternion::Norm() const
 {
 	return sqrt(m_w * m_w + m_x * m_x + m_y * m_y + m_z * m_z);
 }
@@ -52,8 +52,8 @@ Quaternion& Quaternion::Negation()const
 
 Quaternion& Quaternion::Inverse()const
 {
-	if(Norme() == 0) throw std::exception("Inverse doesn't exist for this Quaternion - null Norm Exception");
-	return Conjugue() * (1 / Norme());
+	if(Norm() == 0) throw std::exception("Inverse doesn't exist for this Quaternion - null Norm Exception");
+	return Conjugue() * (1 / Norm());
 }
 
 Quaternion& Quaternion::Conjugue()const
@@ -69,8 +69,13 @@ Quaternion& Quaternion::operator*(const float f) const
 Quaternion& Quaternion::operator*(const Quaternion& q) const
 {
 	float resw = m_w * q.m_w - m_v * q.m_v;
-	Vector3D resv = q.m_v * m_w + m_v * q.m_w + m_v ^ q.m_v;
-
+	
+	Vector3D v1 = (q.m_v * m_w);
+	Vector3D v2 = (m_v * q.m_w);
+	Vector3D v3 = (m_v ^ q.m_v);
+	
+	Vector3D resv = v1 + v2 + v3;
+	
 	return Quaternion(resw, resv);
 }
 
@@ -106,3 +111,17 @@ Quaternion& Quaternion::operator=(const Quaternion& q)
 
 	return *this;
 }
+
+string Quaternion::toString() const
+{
+	return "(" + to_string(m_w) + ", "
+		+ to_string(m_x) + ", "
+		+ to_string(m_y) + ", "
+		+ to_string(m_z) + ")";
+}
+
+float Quaternion::getW()const { return m_w; }
+float Quaternion::getX()const { return m_x; }
+float Quaternion::getY()const { return m_y; }
+float Quaternion::getZ()const { return m_z; }
+Vector3D Quaternion::getVector()const { return m_v; }
