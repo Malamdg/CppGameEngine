@@ -1,5 +1,5 @@
 #pragma once
-#include "Vector3D.h"
+#include "DataStructures/Vector3D.h"
 
 class Tests
 {

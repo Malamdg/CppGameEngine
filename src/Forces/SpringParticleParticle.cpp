@@ -1,7 +1,4 @@
 #include "SpringParticleParticle.h"
-#include "../Particle.h"
-#include "ParticleForceGenerator.h"
-#include "../Vector3D.h"
 
 /*
 class constructor
