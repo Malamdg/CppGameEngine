@@ -199,4 +199,6 @@ public:
 	glm::vec2 v2() { return glm::vec2(m_x, m_y); };
 	glm::vec3 v3() { return glm::vec3(m_x, m_y, m_z); };
 
+
+	void fixFloat();
 };

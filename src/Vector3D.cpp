@@ -7,7 +7,9 @@ Vector3D::Vector3D(const float x, const float y, const float z)
 	m_y(y),
 	m_z(z),  // w is currently set to 0 because the vectors used are for a 3-dimensional space
 	m_w(0)
-{ }
+{ 
+	fixFloat();
+}
 
 Vector3D::Vector3D(glm::vec3 vector) 
 {
@@ -31,6 +33,7 @@ void Vector3D::operator+=(const Vector3D& vector)
 	m_x += vector.m_x;
 	m_y += vector.m_y;
 	m_z += vector.m_z;
+	fixFloat();
 }
 
 
@@ -45,6 +48,7 @@ void Vector3D::operator-=(const Vector3D& vector)
 	m_x -= vector.m_x;
 	m_y -= vector.m_y;
 	m_z -= vector.m_z;
+	fixFloat();
 }
 
 
@@ -101,6 +105,7 @@ void Vector3D::Normalize()
 	m_x /= norm;
 	m_y /= norm;
 	m_z /= norm;
+	fixFloat();
 }
 
 float Vector3D::distance(const Vector3D& vector)
@@ -141,4 +146,12 @@ const float& Vector3D::operator[](int i) const
 	case 2: return m_z;
 	default: throw std::out_of_range("Bad idx passed to at()");
 	}
+}
+
+void Vector3D::fixFloat()
+{
+	if (abs(m_x) < 10e-10) m_x = .0f;
+	if (abs(m_y) < 10e-10) m_y = .0f;
+	if (abs(m_z) < 10e-10) m_z = .0f;
+	if (abs(m_w) < 10e-10) m_w = .0f;
 }
