@@ -1,8 +1,4 @@
 #include "ofApp.h"
-#include "Forces/ParticleForceRegistry.h"
-#include "Collisions/CollisionHandler.h"
-#include "Forces/ParticleDeplacement.cpp"
-#include "cmath"
 
 //--------------------------------------------------------------
 void ofApp::setup() {
