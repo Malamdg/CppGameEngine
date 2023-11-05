@@ -230,7 +230,7 @@ private:
 	test invert computation of a Matrix3
 	@return true if the inverse is correctly computed
 	*/
-	static bool Matrix3Invert();
+	static bool Matrix4Invert();
 
 
 	/*

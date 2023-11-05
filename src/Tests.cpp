@@ -222,7 +222,7 @@ bool Tests::Vector3Dfloatfloat()
 
 void Tests::ExecuteMatrix3Tests()
 {
-	int nbOfTest = 11;
+	int nbOfTest = 12;
 	int success = 0;
 
 	std::cout << "Matrix3 : " << std::endl << std::endl;
@@ -236,6 +236,7 @@ void Tests::ExecuteMatrix3Tests()
 	success += Matrix3FloatProduct();
 	success += Matrix3MatrixProduct();
 	success += Matrix3Inverse();
+	success += Matrix3Invert();
 	success += Matrix3Transpose();
 	success += Matrix3Determinant();
 
@@ -557,7 +558,7 @@ bool Tests::Matrix3Determinant()
 
 void Tests::ExecuteMatrix4Tests()
 {
-	int nbOfTest = 11;
+	int nbOfTest = 12;
 	int success = 0;
 
 	std::cout << "Matrix4 : " << std::endl << std::endl;
@@ -571,6 +572,7 @@ void Tests::ExecuteMatrix4Tests()
 	success += Matrix4FloatProduct();
 	success += Matrix4MatrixProduct();
 	success += Matrix4Inverse();
+	success += Matrix4Invert();
 	success += Matrix4Transpose();
 	success += Matrix4Determinant();
 
