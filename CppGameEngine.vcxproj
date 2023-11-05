@@ -125,6 +125,7 @@
     <ClCompile Include="src\Forces\SpringParticleParticle.cpp" />
     <ClCompile Include="src\Forces\SpringParticlePoint.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Matrix3.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\Tests.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="src\Forces\ParticleGravity.h" />
     <ClInclude Include="src\Forces\SpringParticleParticle.h" />
     <ClInclude Include="src\Forces\SpringParticlePoint.h" />
+    <ClInclude Include="src\Matrix3.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\Tests.h" />

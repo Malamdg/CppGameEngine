@@ -49,6 +49,7 @@
     <ClCompile Include="src\Forces\SpringParticlePoint.cpp">
       <Filter>Forces</Filter>
     </ClCompile>
+    <ClCompile Include="src\Matrix3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Blob.h" />
@@ -98,6 +99,7 @@
     <ClInclude Include="src\Forces\SpringParticlePoint.h">
       <Filter>Forces</Filter>
     </ClInclude>
+    <ClInclude Include="src\Matrix3.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Collisions">
