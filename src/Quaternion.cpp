@@ -81,7 +81,8 @@ Quaternion& Quaternion::operator*(const Quaternion& q) const
 
 Quaternion& Quaternion::operator-(const Quaternion& q) const
 {
-	return q * Conjugue();
+	Quaternion conj = Conjugue();
+	return q * conj;
 }
 
 float Quaternion::dot(Quaternion& q)const

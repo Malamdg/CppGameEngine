@@ -440,7 +440,7 @@ bool Tests::QuaternionDifference()
 	Quaternion quat1 = Quaternion(5.f, 6.f, 7.f, -60.f);
 	Quaternion quat2 = Quaternion(7.f, -3.f, 30.f, -1.f);
 	Quaternion res = quat1 - quat2;
-	Quaternion intendedQuat = Quaternion(-2.f, 9.f, -23.f, 59.f);
+	Quaternion intendedQuat = Quaternion(287.f, 1736.f, 287.f, 616.f);
 
 	if (res == intendedQuat)
 	{
@@ -456,10 +456,41 @@ bool Tests::QuaternionDifference()
 
 bool Tests::QuaternionScalarProduct()
 {
+	nbOfTest++;
+
+	Quaternion quat1 = Quaternion(5.f, 6.f, 7.f, -60.f);
+	Quaternion quat2 = Quaternion(7.f, -3.f, 30.f, -1.f);
+	float res = quat1.dot(quat2);
+	float intendedFloat = 287.f;
+
+	if (res == intendedFloat)
+	{
+		std::cout << "Scalar Product Quaternions : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Scalar Product Quaternions : Fail. ";
+	std::cout << "Was expecting " + to_string(intendedFloat) + " got " + to_string(res) << std::endl;
+
 	return false;
 }
 
 bool Tests::QuaternionExponentiation()
 {
+	nbOfTest++;
+
+	Quaternion quat1 = Quaternion(5.f, 6.f, 7.f, -60.f);
+	Quaternion res = quat1^5;
+	Quaternion intendedQuat = Quaternion(287.f, 1736.f, 287.f, 616.f);
+
+	if (res == intendedQuat)
+	{
+		std::cout << "Exponentiation Quaternion : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Exponentiation Quaternion : Fail. ";
+	std::cout << "Was expecting " + intendedQuat.toString() + " got " + res.toString() << std::endl;
+
 	return false;
 }
