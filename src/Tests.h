@@ -96,6 +96,11 @@ private:
 	/*
 	
 	*/
+	static bool QuaternionFromVectorConstructor();
+
+	/*
+	
+	*/
 	static bool QuaternionEulerConstructor();
 
 	/*

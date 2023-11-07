@@ -32,7 +32,11 @@ Quaternion& Quaternion::Euler(const float tetax, const float tetay, const float 
 	Quaternion qx = Quaternion(cos(tetax / 2), sin(tetax / 2), 0, 0);
 	Quaternion qy = Quaternion(cos(tetay / 2), 0, sin(tetay / 2), 0);
 	Quaternion qz = Quaternion(cos(tetaz / 2), 0, 0, sin(tetaz / 2));
-	return qx * qy * qz;
+	
+	Quaternion resq = qx * qy;
+	resq = resq * qz;
+
+	return resq;
 }
 
 Quaternion& Quaternion::Identity()
@@ -74,7 +78,8 @@ Quaternion& Quaternion::operator*(const Quaternion& q) const
 	Vector3D v2 = (m_v * q.m_w);
 	Vector3D v3 = (m_v ^ q.m_v);
 	
-	Vector3D resv = v1 + v2 + v3;
+	Vector3D resv = v1 + v2;
+	resv = resv + v3;
 	
 	return Quaternion(resw, resv);
 }

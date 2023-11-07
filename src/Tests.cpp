@@ -39,6 +39,7 @@ void Tests::ExecuteQuaternionTests()
 	std::cout << "--- Quaternion ---" << std::endl << std::endl;
 
 	success += QuaternionEmptyConstructor();
+	success += QuaternionFromVectorConstructor();
 	success += QuaternionEulerConstructor();
 	success += QuaternionIdentityConstructor();
 	success += QuaternionNorm();
@@ -254,7 +255,7 @@ bool Tests::Vector3Dfloatfloat()
 	}
 
 	std::cout << "Vector Product : Fail. ";
-	std::cout << "Was expecting " << intendedVector.toString() << ", got " + result.toString() << std::endl;
+	std::cout << "Was expecting " << intendedVector.toString() << ", got " << result.toString() << std::endl;
 	return false;
 }
 
@@ -271,7 +272,25 @@ bool Tests::QuaternionEmptyConstructor()
 	}
 
 	std::cout << "Empty Constructor : Fail. ";
-	std::cout << "Was expecting (0, 0, 0, 0), got " + quat.toString() << std::endl;
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << quat.toString() << std::endl;
+	return false;
+}
+
+bool Tests::QuaternionFromVectorConstructor()
+{
+	nbOfTest++;
+	Vector3D v = Vector3D(.5f, .5f, .5f);
+	Quaternion quat = Quaternion(.5f, v);
+	Quaternion intendedQuat = Quaternion(.5f, .5f, .5f, .5f);
+
+	if (quat == intendedQuat)
+	{
+		std::cout << "Constructor from Vector3D : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Empty Constructor : Fail. ";
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << quat.toString() << std::endl;
 	return false;
 }
 
@@ -280,7 +299,13 @@ bool Tests::QuaternionEulerConstructor()
 	nbOfTest++;
 
 	Quaternion quat = Quaternion::Euler(PI, PI / 5, PI / 20);
-	Quaternion intendedQuat = Quaternion(1, sin(PI / 2), sin(PI / 10), sin(PI / 40));
+	
+	Quaternion quatX = Quaternion(cos(PI / 2), sin(PI / 2), 0, 0);
+	Quaternion quatY = Quaternion(cos(PI / 10), 0, sin(PI / 10), 0);
+	Quaternion quatZ = Quaternion(cos(PI / 40), 0, 0, sin(PI / 40));
+
+	Quaternion intendedQuat = quatX * quatY;
+	intendedQuat = intendedQuat * quatZ;
 
 	if (quat == intendedQuat)
 	{
@@ -289,7 +314,7 @@ bool Tests::QuaternionEulerConstructor()
 	}
 
 	std::cout << "Euler Constructor : Fail. ";
-	std::cout << "Was expecting (1, " + to_string(sin(PI / 2)) + ", " + to_string(sin(PI / 10)) + ", " + to_string(sin(PI / 40)) + ")" + ", got " + quat.toString() << std::endl;
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << quat.toString() << std::endl;
 
 	return false;
 }
@@ -308,7 +333,7 @@ bool Tests::QuaternionIdentityConstructor()
 	}
 
 	std::cout << "Identity Constructor : Fail. ";
-	std::cout << "Was expecting (1, " + to_string(sin(PI / 2)) + ", " + to_string(sin(PI / 10)) + ", " + to_string(sin(PI / 40)) + ")" + ", got " + quat.toString() << std::endl;
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << quat.toString() << std::endl;
 
 	return false;
 }
@@ -327,7 +352,7 @@ bool Tests::QuaternionNorm()
 	}
 
 	std::cout << "Quaternion Norm : Fail. ";
-	std::cout << "Was expecting " + to_string(intendedNorm) + ", got " + to_string(quat.Norm()) << std::endl;
+	std::cout << "Was expecting " << to_string(intendedNorm) << ", got " << to_string(quat.Norm()) << std::endl;
 
 
 	return false;
@@ -346,7 +371,7 @@ bool Tests::QuaternionNegation()
 	}
 
 	std::cout << "Negation Quaternion : Fail. ";
-	std::cout << "Was expecting " + intendedQuat.toString() + " got " + quat.Negation().toString() << std::endl;
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << quat.Negation().toString() << std::endl;
 	return false;
 }
 
@@ -368,7 +393,7 @@ bool Tests::QuaternionInverse()
 	}
 
 	std::cout << "Inverse Quaternion : Fail. ";
-	std::cout << "Was expecting " + intendedQuat.toString() + " got " + invQuat.toString() << std::endl;
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << invQuat.toString() << std::endl;
 	
 	return false;
 }
@@ -387,7 +412,7 @@ bool Tests::QuaternionConjugue()
 	}
 
 	std::cout << "Conjugue Quaternion : Fail. ";
-	std::cout << "Was expecting " + intendedQuat.toString() + " got " + quat.Conjugue().toString() << std::endl;
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << quat.Conjugue().toString() << std::endl;
 	
 	return false;
 }
@@ -408,7 +433,7 @@ bool Tests::QuaternionMultiplicationBetweenQuaternions()
 	}
 
 	std::cout << "Product Quaternions : Fail. ";
-	std::cout << "Was expecting " + intendedQuat.toString() + " got " + res.toString() << std::endl;
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << res.toString() << std::endl;
 
 	return false;
 }
@@ -428,7 +453,7 @@ bool Tests::QuaternionMultipticationWithFloat()
 	}
 
 	std::cout << "Product Quaternion with float : Fail. ";
-	std::cout << "Was expecting " + intendedQuat.toString() + " got " + res.toString() << std::endl;
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << res.toString() << std::endl;
 
 	return false;
 }
@@ -449,7 +474,7 @@ bool Tests::QuaternionDifference()
 	}
 
 	std::cout << "Difference Quaternions : Fail. ";
-	std::cout << "Was expecting " + intendedQuat.toString() + " got " + res.toString() << std::endl;
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << res.toString() << std::endl;
 
 	return false;
 }
@@ -470,7 +495,7 @@ bool Tests::QuaternionScalarProduct()
 	}
 
 	std::cout << "Scalar Product Quaternions : Fail. ";
-	std::cout << "Was expecting " + to_string(intendedFloat) + " got " + to_string(res) << std::endl;
+	std::cout << "Was expecting " << to_string(intendedFloat) << ", got " << to_string(res) << std::endl;
 
 	return false;
 }
@@ -490,7 +515,7 @@ bool Tests::QuaternionExponentiation()
 	}
 
 	std::cout << "Exponentiation Quaternion : Fail. ";
-	std::cout << "Was expecting " + intendedQuat.toString() + " got " + res.toString() << std::endl;
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << res.toString() << std::endl;
 
 	return false;
 }
