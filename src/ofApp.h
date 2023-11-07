@@ -10,9 +10,9 @@
 #include "iostream"
 #include "ofMain.h"
 #include "of3dPrimitives.h"
+#include "DataStructures/Vector3D.h"
 #include "Particle.h"
 #include "Tests.h"
-#include "Vector3D.h"
 
 class ofApp : public ofBaseApp {
 

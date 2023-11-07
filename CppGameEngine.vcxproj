@@ -128,7 +128,7 @@
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\Tests.cpp" />
-    <ClCompile Include="src\Vector3D.cpp" />
+    <ClCompile Include="src\DataStructures\Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Blob.h" />
@@ -149,7 +149,7 @@
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\Tests.h" />
-    <ClInclude Include="src\Vector3D.h" />
+    <ClCompile Include="src\DataStructures\Vector3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
