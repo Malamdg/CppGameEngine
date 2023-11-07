@@ -1,5 +1,4 @@
 #include "Tests.h"
-#include "DataStructures/Vector3D.h"
 
 void Tests::ExecuteTests()
 {
