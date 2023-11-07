@@ -118,6 +118,15 @@ Quaternion& Quaternion::operator=(const Quaternion& q)
 	return *this;
 }
 
+bool Quaternion::EqualsWithTolerance(const Quaternion& q, const float tolerance) const
+{
+	return abs(m_w - q.m_w) < tolerance
+		&& abs(m_x - q.m_x) < tolerance
+		&& abs(m_y - q.m_y) < tolerance
+		&& abs(m_z - q.m_z) < tolerance;
+}
+
+
 string Quaternion::toString() const
 {
 	return "(" + to_string(m_w) + ", "

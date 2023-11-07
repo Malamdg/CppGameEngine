@@ -307,7 +307,7 @@ bool Tests::QuaternionEulerConstructor()
 	Quaternion intendedQuat = quatX * quatY;
 	intendedQuat = intendedQuat * quatZ;
 
-	if (quat == intendedQuat)
+	if (quat.EqualsWithTolerance(intendedQuat))
 	{
 		std::cout << "Euler Constructor : Success" << std::endl;
 		return true;

@@ -36,6 +36,8 @@ public:
 	Quaternion& operator^(const float exp)const;
 	bool operator==(const Quaternion& q)const;
 
+	bool EqualsWithTolerance(const Quaternion& q, const float tolerance = 1e-7) const;
+
 	string toString() const;
 
 	float getW()const;
