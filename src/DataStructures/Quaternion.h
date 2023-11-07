@@ -1,6 +1,7 @@
 #pragma once
 
-#include "ofApp.h"
+#include "../ofApp.h"
+#include "Vector3D.h"
 
 class Quaternion {
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "DataStructures/Vector3D.h"
-#include "Quaternion.h"
+#include "DataStructures/Quaternion.h"
 
 static class Tests
 {

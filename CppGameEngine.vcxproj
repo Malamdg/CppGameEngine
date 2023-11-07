@@ -127,7 +127,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Particle.cpp" />
-    <ClCompile Include="src\Quaternion.cpp" />
+    <ClCompile Include="src\DataStructures\Quaternion.cpp" />
     <ClCompile Include="src\Tests.cpp" />
     <ClCompile Include="src\DataStructures\Vector3D.cpp" />
   </ItemGroup>
@@ -149,7 +149,7 @@
     <ClInclude Include="src\Forces\SpringParticlePoint.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Particle.h" />
-    <ClInclude Include="src\Quaternion.h" />
+    <ClInclude Include="src\DataStructures\Quaternion.h" />
     <ClInclude Include="src\Tests.h" />
     <ClCompile Include="src\DataStructures\Vector3D.h" />
   </ItemGroup>

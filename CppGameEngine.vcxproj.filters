@@ -54,6 +54,9 @@
     <ClCompile Include="src\DataStructures\Vector3D.h">
       <Filter>DataStructures</Filter>
     </ClCompile>
+    <ClCompile Include="src\DataStructures\Quaternion.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Blob.h" />
@@ -101,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="src\Forces\SpringParticlePoint.h">
       <Filter>Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\Quaternion.h">
+      <Filter>DataStructures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
