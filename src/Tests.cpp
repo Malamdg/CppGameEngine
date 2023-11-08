@@ -285,7 +285,7 @@ bool Tests::Matrix3Zeros()
 
 bool Tests::Matrix3Id()
 {
-	Matrix3 matrix = matrix.identity();
+	Matrix3 matrix = Matrix3::identity();
 	float line1[3] = { 1, 0, 0 };
 	float line2[3] = { 0, 1, 0 };
 	float line3[3] = { 0, 0, 1 };
@@ -469,11 +469,11 @@ bool Tests::Matrix3Inverse()
 
 	if (matrix == intendedMatrix)
 	{
-		std::cout << "Scalar Product : Success" << std::endl;
+		std::cout << "Inverse : Success" << std::endl;
 		return true;
 	}
 
-	std::cout << "Scalar Product : Fail. ";
+	std::cout << "Inverse : Fail. ";
 	// std::cout << "Was expecting 24, got " + to_string(scalarProduct) << std::endl;
 	return false;
 }
@@ -521,12 +521,11 @@ bool Tests::Matrix3Transpose()
 
 	if (matrix == intendedMatrix)
 	{
-		std::cout << "Norm : Success" << std::endl;
+		std::cout << "Transpose : Success" << std::endl;
 		return true;
 	}
 
-	std::cout << "Norm : Fail. ";
-	// std::cout << "Was expecting " + to_string(intendedNorm) + ", got " + to_string(norm) << std::endl;
+	std::cout << "Transpose : Fail. ";
 	return false;
 }
 
@@ -823,11 +822,11 @@ bool Tests::Matrix4Inverse()
 
 	if (matrix == intendedMatrix)
 	{
-		std::cout << "Scalar Product : Success" << std::endl;
+		std::cout << "Inverse : Success" << std::endl;
 		return true;
 	}
 
-	std::cout << "Scalar Product : Fail. ";
+	std::cout << "Inverse : Fail. ";
 	// std::cout << "Was expecting 24, got " + to_string(scalarProduct) << std::endl;
 	return false;
 }
@@ -879,11 +878,11 @@ bool Tests::Matrix4Transpose()
 
 	if (matrix == intendedMatrix)
 	{
-		std::cout << "Norm : Success" << std::endl;
+		std::cout << "Transpose : Success" << std::endl;
 		return true;
 	}
 
-	std::cout << "Norm : Fail. ";
+	std::cout << "Transpose : Fail. ";
 	// std::cout << "Was expecting " + to_string(intendedNorm) + ", got " + to_string(norm) << std::endl;
 	return false;
 }
