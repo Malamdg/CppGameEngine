@@ -93,11 +93,6 @@ public:
 	*/
 	Matrix4& operator*(const float& lambda) const;
 
-	/*
-	* Basic operator for the product of a Vector3D by a Matrix4
-	*/
-	Vector3D& operator*(const Vector3D& v) const;
-
 	// Affect operation
 	
 	/*

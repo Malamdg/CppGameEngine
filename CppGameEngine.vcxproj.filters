@@ -50,6 +50,7 @@
       <Filter>Forces</Filter>
     </ClCompile>
     <ClCompile Include="src\Matrix3.cpp" />
+    <ClCompile Include="src\Matrix4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Blob.h" />
