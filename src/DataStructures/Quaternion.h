@@ -22,6 +22,7 @@ public:
 
 	static Quaternion& Euler(const float detax, const float detay, const float detaz);
 	static Quaternion& Identity();
+	static Quaternion& slerp(const Quaternion& q0, const Quaternion& q1, const float t);
 
 	float Norm() const;
 	Quaternion& Negation()const;

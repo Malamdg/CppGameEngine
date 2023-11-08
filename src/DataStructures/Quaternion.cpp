@@ -44,6 +44,15 @@ Quaternion& Quaternion::Identity()
 	return Quaternion(1, 0, 0, 0);
 }
 
+Quaternion& Quaternion::slerp(const Quaternion& q0, const Quaternion& q1, const float t)
+{
+	Quaternion inverseQ = q0.Inverse();
+	Quaternion q = q1 * inverseQ;
+	Quaternion expQ = q ^ t;
+
+	return q0 * expQ;
+}
+
 float Quaternion::Norm() const
 {
 	return sqrt(m_w * m_w + m_x * m_x + m_y * m_y + m_z * m_z);
@@ -97,6 +106,8 @@ float Quaternion::dot(Quaternion& q)const
 
 Quaternion& Quaternion::operator^(const float exp)const
 {
+	if (Norm() != 1) throw std::exception("Quaternion isn't a rotation - Current implementation do not consider exponentiation for Quaternion that are not roations");
+
 	float a = acos(m_w);
 	Vector3D resv = m_v * (sin(exp * a) / sin(a));
 	return Quaternion(cos(exp * a), resv);

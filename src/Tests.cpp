@@ -51,6 +51,9 @@ void Tests::ExecuteQuaternionTests()
 	success += QuaternionDifference();
 	success += QuaternionScalarProduct();
 	success += QuaternionExponentiation();
+	success += QuaternionSlerp0();
+	success += QuaternionSlerp1();
+	success += QuaternionSlerpX();
 
 	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl;
 }
@@ -298,14 +301,9 @@ bool Tests::QuaternionEulerConstructor()
 {
 	nbOfTest++;
 
-	Quaternion quat = Quaternion::Euler(PI, PI / 5, PI / 20);
+	Quaternion quat = Quaternion::Euler(3.14, -0.63, .16);
 	
-	Quaternion quatX = Quaternion(cos(PI / 2), sin(PI / 2), 0, 0);
-	Quaternion quatY = Quaternion(cos(PI / 10), 0, sin(PI / 10), 0);
-	Quaternion quatZ = Quaternion(cos(PI / 40), 0, 0, sin(PI / 40));
-
-	Quaternion intendedQuat = quatX * quatY;
-	intendedQuat = intendedQuat * quatZ;
+	Quaternion intendedQuat = Quaternion(0.0255136, 0.9477354, -0.0762285, -0.308765); // <- Valeure trouvées via https://www.andre-gaschler.com/rotationconverter/
 
 	if (quat.EqualsWithTolerance(intendedQuat))
 	{
@@ -504,11 +502,11 @@ bool Tests::QuaternionExponentiation()
 {
 	nbOfTest++;
 
-	Quaternion quat1 = Quaternion(5.f, 6.f, 7.f, -60.f);
+	Quaternion quat1 = Quaternion::Euler(3, 1, -2);
 	Quaternion res = quat1^5;
-	Quaternion intendedQuat = Quaternion(287.f, 1736.f, 287.f, 616.f);
+	Quaternion intendedQuat = Quaternion(0.77461690052, -0.31231549002, -0.53051057326, -0.144866000); // Calcul fait à la main, avec accumulation d'erreur d'approximation d'ou la tolerance relativement haute
 
-	if (res == intendedQuat)
+	if (res.EqualsWithTolerance(intendedQuat, 1e-5))
 	{
 		std::cout << "Exponentiation Quaternion : Success" << std::endl;
 		return true;
@@ -516,6 +514,70 @@ bool Tests::QuaternionExponentiation()
 
 	std::cout << "Exponentiation Quaternion : Fail. ";
 	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << res.toString() << std::endl;
+
+	return false;
+}
+
+bool Tests::QuaternionSlerp0()
+{
+	nbOfTest++;
+
+	Quaternion q0 = Quaternion::Euler(0, 0, 0);
+	Quaternion q1 = Quaternion::Euler(PI, PI, PI);
+
+	Quaternion res = Quaternion::slerp(q0, q1, 0);
+
+	if (res == q0)
+	{
+		std::cout << "Quaternion slerp 0 : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Quaternion slerp 0 : Fail. ";
+	std::cout << "Was expecting " << q0.toString() << ", got " << res.toString() << std::endl;
+
+	return false;
+}
+
+bool Tests::QuaternionSlerp1()
+{
+	nbOfTest++;
+
+	Quaternion q0 = Quaternion::Euler(0, 0, 0);
+	Quaternion q1 = Quaternion::Euler(PI, PI, PI);
+
+	Quaternion res = Quaternion::slerp(q0, q1, 1);
+
+	if (res == q1)
+	{
+		std::cout << "Quaternion slerp 1 : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Quaternion slerp 1 : Fail. ";
+	std::cout << "Was expecting " << q1.toString() << ", got " << res.toString() << std::endl;
+
+	return false;
+}
+
+bool Tests::QuaternionSlerpX()
+{
+	nbOfTest++;
+
+	Quaternion q0 = Quaternion::Euler(0, 0, 0);
+	Quaternion q1 = Quaternion::Euler(PI, PI, PI);
+	Quaternion qX = Quaternion::Euler(PI / 2, PI / 2, PI / 2);
+
+	Quaternion res = Quaternion::slerp(q0, q1, .5);
+
+	if (res == qX)
+	{
+		std::cout << "Quaternion slerp X : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Quaternion slerp X : Fail. ";
+	std::cout << "Was expecting " << qX.toString() << ", got " << res.toString() << std::endl;
 
 	return false;
 }

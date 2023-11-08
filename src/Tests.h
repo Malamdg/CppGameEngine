@@ -153,5 +153,10 @@ private:
 	*/
 	static bool QuaternionExponentiation();
 
+	/*
+	
+	*/
+	static bool QuaternionSlerp0();
+	static bool QuaternionSlerp1();
+	static bool QuaternionSlerpX();
 };
-
