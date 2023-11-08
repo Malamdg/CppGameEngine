@@ -329,23 +329,23 @@ bool Tests::AccessingAndModifyingMatrix3()
 
 bool Tests::Matrix3Addition()
 {
-	float line1[3] = { 5, 0, 0 };
-	float line2[3] = { 0, 6, 0 };
-	float line3[3] = { 0, 0, -5 };
-	float coeff1[3][3] = { *line1, *line2, *line3 };
+	float line11[3] = { 5, 0, 0 };
+	float line12[3] = { 0, 6, 0 };
+	float line13[3] = { 0, 0, -5 };
+	float coeff1[3][3] = { *line11, *line12, *line13 };
 	Matrix3 firstMatrix = Matrix3(coeff1);
 
-	float line1[3] = { 7, 0, 0 };
-	float line2[3] = { 0, -4, 0 };
-	float line3[3] = { 0, 0, -2.6 };
-	float coeff2[3][3] = { *line1, *line2, *line3 };
+	float line21[3] = { 7, 0, 0 };
+	float line22[3] = { 0, -4, 0 };
+	float line23[3] = { 0, 0, -2.6 };
+	float coeff2[3][3] = { *line21, *line22, *line23 };
 	Matrix3 secondMatrix = Matrix3(coeff2);
 
 	Matrix3 sumMatrix = firstMatrix + secondMatrix;
-	float line1[3] = { 12, 0, 0 };
-	float line2[3] = { 0, 2, 0 };
-	float line3[3] = { 0, 0, -7.6 };
-	float coeff3[3][3] = { *line1, *line2, *line3 };
+	float line31[3] = { 12, 0, 0 };
+	float line32[3] = { 0, 2, 0 };
+	float line33[3] = { 0, 0, -7.6 };
+	float coeff3[3][3] = { *line31, *line32, *line33 };
 	Matrix3 intendedMatrix = Matrix3(coeff3);
 
 	if (sumMatrix == intendedMatrix)
@@ -361,23 +361,23 @@ bool Tests::Matrix3Addition()
 
 bool Tests::Matrix3Soustraction()
 {
-	float line1[3] = { 5, 1, 1 };
-	float line2[3] = { 2, 6, 1 };
-	float line3[3] = { 2, 2, -5 };
-	float coeff1[3][3] = { *line1, *line2, *line3 };
+	float line11[3] = { 5, 1, 1 };
+	float line12[3] = { 2, 6, 1 };
+	float line13[3] = { 2, 2, -5 };
+	float coeff1[3][3] = { *line11, *line12, *line13 };
 	Matrix3 firstMatrix = Matrix3(coeff1);
 
-	float line1[3] = { 7, 3, 3 };
-	float line2[3] = { -4, -4, 3 };
-	float line3[3] = { -4, -4, -2.6 };
-	float coeff2[3][3] = { *line1, *line2, *line3 };
+	float line21[3] = { 7, 3, 3 };
+	float line22[3] = { -4, -4, 3 };
+	float line23[3] = { -4, -4, -2.6 };
+	float coeff2[3][3] = { *line21, *line22, *line23 };
 	Matrix3 secondMatrix = Matrix3(coeff2);
 
 	Matrix3 subMatrix = firstMatrix - secondMatrix;
-	float line1[3] = { 2, -2, -2 };
-	float line2[3] = { 6, 10, -2 };
-	float line3[3] = { 6, 6, -2.4 };
-	float coeff3[3][3] = { *line1, *line2, *line3 };
+	float line31[3] = { 2, -2, -2 };
+	float line32[3] = { 6, 10, -2 };
+	float line33[3] = { 6, 6, -2.4 };
+	float coeff3[3][3] = { *line31, *line32, *line33 };
 	Matrix3 intendedMatrix = Matrix3(coeff3);
 
 	if (subMatrix == intendedMatrix)
@@ -393,18 +393,18 @@ bool Tests::Matrix3Soustraction()
 
 bool Tests::Matrix3FloatProduct()
 {
-	float line1[3] = { 1, 0, 0 };
-	float line2[3] = { 0, 1, 0 };
-	float line3[3] = { 0, 0, 1 };
-	float coeff[3][3] = { *line1, *line2, *line3 };
+	float line11[3] = { 1, 0, 0 };
+	float line12[3] = { 0, 1, 0 };
+	float line13[3] = { 0, 0, 1 };
+	float coeff[3][3] = { *line11, *line12, *line13 };
 	Matrix3 matrix = Matrix3(coeff);
 	float f1 = 12.65;
 	float f2 = 16.69;
 
-	float line1[3] = { f1 * f2, 0, 0 };
-	float line2[3] = { 0, f1 * f2, 0 };
-	float line3[3] = { 0, 0, f1 * f2 };
-	float coeff2[3][3] = { *line1, *line2, *line3 };
+	float line21[3] = { f1 * f2, 0, 0 };
+	float line22[3] = { 0, f1 * f2, 0 };
+	float line23[3] = { 0, 0, f1 * f2 };
+	float coeff2[3][3] = { *line21, *line22, *line23 };
 	Matrix3 intendedMatrix = Matrix3(coeff2);
 	Matrix3 result = matrix * f1 * f2;
 
@@ -421,26 +421,26 @@ bool Tests::Matrix3FloatProduct()
 
 bool Tests::Matrix3MatrixProduct()
 {
-	float line1[3] = { 5, 1, 3 };
-	float line2[3] = { 2, 6, 0 };
-	float line3[3] = { -4, 0.1, -5 };
-	float coeff1[3][3] = { *line1, *line2, *line3 };
+	float line11[3] = { 5, 1, 3 };
+	float line12[3] = { 2, 6, 0 };
+	float line13[3] = { -4, 0.1, -5 };
+	float coeff1[3][3] = { *line11, *line12, *line13 };
 	Matrix3 firstMatrix = Matrix3(coeff1);
 
-	float line1[3] = { 7, 3.1, 6 };
-	float line2[3] = { 0.5, -4, -1 };
-	float line3[3] = { -0.5, 1, -2.6 };
-	float coeff2[3][3] = { *line1, *line2, *line3 };
+	float line21[3] = { 7, 3.1, 6 };
+	float line22[3] = { 0.5, -4, -1 };
+	float line23[3] = { -0.5, 1, -2.6 };
+	float coeff2[3][3] = { *line21, *line22, *line23 };
 	Matrix3 secondMatrix = Matrix3(coeff2);
 
 	Matrix3 productMatrix = firstMatrix * secondMatrix;
-	float line1[3] = { 34, 14.5, 21.2 };
-	float line2[3] = { 17, -17.8, 6 };
-	float line3[3] = { -25.45, -17.8, -11.1 };
-	float coeff3[3][3] = { *line1, *line2, *line3 };
+	float line31[3] = { 34, 14.5, 21.2 };
+	float line32[3] = { 17, -17.8, 6 };
+	float line33[3] = { -25.45, -17.8, -11.1 };
+	float coeff3[3][3] = { *line31, *line32, *line33 };
 	Matrix3 intendedMatrix = Matrix3(coeff3);
 
-	if (productVector == intendedMatrix)
+	if (productMatrix == intendedMatrix)
 	{
 		std::cout << "Matrix x Matrix Product : Success" << std::endl;
 		return true;
@@ -453,16 +453,16 @@ bool Tests::Matrix3MatrixProduct()
 
 bool Tests::Matrix3Inverse()
 {
-	float line1[3] = { 5, 1, 3 };
-	float line2[3] = { 2, 6, 0 };
-	float line3[3] = { -4, 0.1, -5 };
-	float coeff1[3][3] = { *line1, *line2, *line3 };
+	float line11[3] = { 5, 1, 3 };
+	float line12[3] = { 2, 6, 0 };
+	float line13[3] = { -4, 0.1, -5 };
+	float coeff1[3][3] = { *line11, *line12, *line13 };
 	Matrix3 matrix = Matrix3(coeff1);
 
-	float line1[3] = { 0.44510385756676557863, -0.07863501483679525222, 0.26706231454005934718 };
-	float line2[3] = { -0.14836795252225519287, 0.19287833827893175073, -0.089020771513353115725 };
-	float line3[3] = { -0.35905044510385756677, 0.06676557863501483679, -0.41543026706231454006 };
-	float coeff2[3][3] = { *line1, *line2, *line3 };
+	float line21[3] = { 0.44510385756676557863, -0.07863501483679525222, 0.26706231454005934718 };
+	float line22[3] = { -0.14836795252225519287, 0.19287833827893175073, -0.089020771513353115725 };
+	float line23[3] = { -0.35905044510385756677, 0.06676557863501483679, -0.41543026706231454006 };
+	float coeff2[3][3] = { *line21, *line22, *line23 };
 	Matrix3 intendedMatrix = Matrix3(coeff2);
 
 	matrix = matrix.inverse();
@@ -480,16 +480,16 @@ bool Tests::Matrix3Inverse()
 
 bool Tests::Matrix3Invert()
 {
-	float line1[3] = { 5, 1, 3 };
-	float line2[3] = { 2, 6, 0 };
-	float line3[3] = { -4, 0.1, -5 };
-	float coeff1[3][3] = { *line1, *line2, *line3 };
+	float line11[3] = { 5, 1, 3 };
+	float line12[3] = { 2, 6, 0 };
+	float line13[3] = { -4, 0.1, -5 };
+	float coeff1[3][3] = { *line11, *line12, *line13 };
 	Matrix3 matrix = Matrix3(coeff1);
 
-	float line1[3] = { 0.44510385756676557863, -0.07863501483679525222, 0.26706231454005934718 };
-	float line2[3] = { -0.14836795252225519287, 0.19287833827893175073, -0.089020771513353115725 };
-	float line3[3] = { -0.35905044510385756677, 0.06676557863501483679, -0.41543026706231454006 };
-	float coeff2[3][3] = { *line1, *line2, *line3 };
+	float line21[3] = { 0.44510385756676557863, -0.07863501483679525222, 0.26706231454005934718 };
+	float line22[3] = { -0.14836795252225519287, 0.19287833827893175073, -0.089020771513353115725 };
+	float line23[3] = { -0.35905044510385756677, 0.06676557863501483679, -0.41543026706231454006 };
+	float coeff2[3][3] = { *line21, *line22, *line23 };
 	Matrix3 intendedMatrix = Matrix3(coeff2);
 
 	matrix.invert();
@@ -507,16 +507,16 @@ bool Tests::Matrix3Invert()
 
 bool Tests::Matrix3Transpose()
 {
-	float line1[3] = { 5, 1, 3 };
-	float line2[3] = { 2, 6, 0 };
-	float line3[3] = { -4, 0.1, -5 };
-	float coeff1[3][3] = { *line1, *line2, *line3 };
+	float line11[3] = { 5, 1, 3 };
+	float line12[3] = { 2, 6, 0 };
+	float line13[3] = { -4, 0.1, -5 };
+	float coeff1[3][3] = { *line11, *line12, *line13 };
 	Matrix3 matrix = Matrix3(coeff1);
 
-	float line1[3] = { 5, 2, -4 };
-	float line2[3] = { 1, 6, 0.1 };
-	float line3[3] = { 3, 0, -5 };
-	float coeff2[3][3] = { *line1, *line2, *line3 };
+	float line21[3] = { 5, 2, -4 };
+	float line22[3] = { 1, 6, 0.1 };
+	float line23[3] = { 3, 0, -5 };
+	float coeff2[3][3] = { *line21, *line22, *line23 };
 	Matrix3 intendedMatrix = Matrix3(coeff2);
 
 	if (matrix == intendedMatrix)
@@ -585,7 +585,6 @@ bool Tests::Matrix4EmtpyConstructor()
 	float line1[4] = { 0 };
 	float line2[4] = { 0 };
 	float line3[4] = { 0 };
-	float line3[4] = { 0 };
 	float line4[4] = { 0 };
 	float coeff[4][4] = { *line1, *line2, *line3, *line4 };
 	Matrix4 intendedMatrix = Matrix4(coeff);
@@ -607,7 +606,6 @@ bool Tests::Matrix4Zeros()
 	float line1[4] = { 0 };
 	float line2[4] = { 0 };
 	float line3[4] = { 0 };
-	float line3[4] = { 0 };
 	float line4[4] = { 0 };
 	float coeff[4][4] = { *line1, *line2, *line3, *line4 };
 	Matrix4 intendedMatrix = Matrix4(coeff);
@@ -625,7 +623,7 @@ bool Tests::Matrix4Zeros()
 
 bool Tests::Matrix4Id()
 {
-	Matrix4 matrix = matrix.idendity();
+	Matrix4 matrix = matrix.identity();
 	float line1[4] = { 1, 0, 0, 0 };
 	float line2[4] = { 0, 1, 0, 0 };
 	float line3[4] = { 0, 0, 1, 0 };
@@ -644,7 +642,7 @@ bool Tests::Matrix4Id()
 	return false;
 }
 
-bool Tests::AccessingAndModifyingMatrix3()
+bool Tests::AccessingAndModifyingMatrix4()
 {
 	Matrix4 matrix = Matrix4();
 	float line1[4] = { 5, 0, 0, 0 };
@@ -672,26 +670,26 @@ bool Tests::AccessingAndModifyingMatrix3()
 
 bool Tests::Matrix4Addition()
 {
-	float line1[4] = { 5, 0, 0, 0 };
-	float line2[4] = { 0, 6, 0, 0 };
-	float line3[4] = { 0, 0, -5, 0 };
-	float line4[4] = { 0, 0, 0, -8 };
-	float coeff1[4][4] = { *line1, *line2, *line3, *line4 };
+	float line11[4] = { 5, 0, 0, 0 };
+	float line12[4] = { 0, 6, 0, 0 };
+	float line13[4] = { 0, 0, -5, 0 };
+	float line14[4] = { 0, 0, 0, -8 };
+	float coeff1[4][4] = { *line11, *line12, *line13, *line14 };
 	Matrix4 firstMatrix = Matrix4(coeff1);
 
-	float line1[4] = { 7, 0, 0, 0 };
-	float line2[4] = { 0, -4, 0, 0 };
-	float line3[4] = { 0, 0, -2.6, 0 };
-	float line4[4] = { 0, 0, 0, 1 };
-	float coeff2[4][4] = { *line1, *line2, *line3, *line4 };
+	float line21[4] = { 7, 0, 0, 0 };
+	float line22[4] = { 0, -4, 0, 0 };
+	float line23[4] = { 0, 0, -2.6, 0 };
+	float line24[4] = { 0, 0, 0, 1 };
+	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
 	Matrix4 secondMatrix = Matrix4(coeff2);
 
 	Matrix4 sumMatrix = firstMatrix + secondMatrix;
-	float line1[4] = { 12, 0, 0, 0 };
-	float line2[4] = { 0, 2, 0, 0 };
-	float line3[4] = { 0, 0, -7.6, 0 };
-	float line4[4] = { 0, 0, 0, -7 };
-	float coeff3[4][4] = { *line1, *line2, *line3, *line4 };
+	float line31[4] = { 12, 0, 0, 0 };
+	float line32[4] = { 0, 2, 0, 0 };
+	float line33[4] = { 0, 0, -7.6, 0 };
+	float line34[4] = { 0, 0, 0, -7 };
+	float coeff3[4][4] = { *line31, *line32, *line33, *line34 };
 	Matrix4 intendedMatrix = Matrix4(coeff3);
 
 	if (sumMatrix == intendedMatrix)
@@ -707,26 +705,26 @@ bool Tests::Matrix4Addition()
 
 bool Tests::Matrix4Soustraction()
 {
-	float line1[4] = { 5, 1, 1, 1 };
-	float line2[4] = { 2, 6, 1, 2 };
-	float line3[4] = { 2, 2, -5, 1 };
-	float line4[4] = { 2, 2, -5, 2 };
-	float coeff1[4][4] = { *line1, *line2, *line3, *line4 };
+	float line11[4] = { 5, 1, 1, 1 };
+	float line12[4] = { 2, 6, 1, 2 };
+	float line13[4] = { 2, 2, -5, 1 };
+	float line14[4] = { 2, 2, -5, 2 };
+	float coeff1[4][4] = { *line11, *line12, *line13, *line14 };
 	Matrix4 firstMatrix = Matrix4(coeff1);
 
-	float line1[4] = { 7, 3, 3, 1 };
-	float line2[4] = { -4, -4, 3, 2 };
-	float line3[4] = { -4, -4, -2.6, 1 };
-	float line4[4] = { 2, 2, -5, 2 };
-	float coeff2[4][4] = { *line1, *line2, *line3, *line4 };
+	float line21[4] = { 7, 3, 3, 1 };
+	float line22[4] = { -4, -4, 3, 2 };
+	float line23[4] = { -4, -4, -2.6, 1 };
+	float line24[4] = { 2, 2, -5, 2 };
+	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
 	Matrix4 secondMatrix = Matrix4(coeff2);
 
 	Matrix4 subMatrix = firstMatrix - secondMatrix;
-	float line1[4] = { 2, -2, -2, 0 };
-	float line2[4] = { 6, 10, -2, 0 };
-	float line3[4] = { 6, 6, -2.4, 0 };
-	float line4[4] = { 0, 0, 0, 0 };
-	float coeff3[4][4] = { *line1, *line2, *line3, *line4 };
+	float line31[4] = { 2, -2, -2, 0 };
+	float line32[4] = { 6, 10, -2, 0 };
+	float line33[4] = { 6, 6, -2.4, 0 };
+	float line34[4] = { 0, 0, 0, 0 };
+	float coeff3[4][4] = { *line31, *line32, *line33, *line34 };
 	Matrix4 intendedMatrix = Matrix4(coeff3);
 
 	if (subMatrix == intendedMatrix)
@@ -742,20 +740,20 @@ bool Tests::Matrix4Soustraction()
 
 bool Tests::Matrix4FloatProduct()
 {
-	float line1[4] = { 1, 0, 0, 0 };
-	float line2[4] = { 0, 1, 0, 0 };
-	float line3[4] = { 0, 0, 1, 0 };
-	float line4[4] = { 0, 0, 0, 1 };
-	float coeff[4][4] = { *line1, *line2, *line3, *line4 };
+	float line11[4] = { 1, 0, 0, 0 };
+	float line12[4] = { 0, 1, 0, 0 };
+	float line13[4] = { 0, 0, 1, 0 };
+	float line14[4] = { 0, 0, 0, 1 };
+	float coeff[4][4] = { *line11, *line12, *line13, *line14 };
 	Matrix4 matrix = Matrix4(coeff);
 	float f1 = 12.65;
 	float f2 = 16.69;
 
-	float line1[4] = { f1 * f2, 0, 0, 0 };
-	float line2[4] = { 0, f1 * f2, 0, 0 };
-	float line3[4] = { 0, 0, f1 * f2, 0 };
-	float line4[4] = { 0, 0, 0, f1 * f2 };
-	float coeff2[4][4] = { *line1, *line2, *line3, *line4 };
+	float line21[4] = { f1 * f2, 0, 0, 0 };
+	float line22[4] = { 0, f1 * f2, 0, 0 };
+	float line23[4] = { 0, 0, f1 * f2, 0 };
+	float line24[4] = { 0, 0, 0, f1 * f2 };
+	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
 	Matrix4 intendedMatrix = Matrix4(coeff2);
 	Matrix4 result = matrix * f1 * f2;
 
@@ -772,29 +770,29 @@ bool Tests::Matrix4FloatProduct()
 
 bool Tests::Matrix4MatrixProduct()
 {
-	float line1[4] = { 5, 1, 3, 1 };
-	float line2[4] = { 2, 6, 0, 2 };
-	float line3[4] = { -4, 0.1, -5, 1 };
-	float line4[4] = { 0, 0, 0, 1 };
-	float coeff1[4][4] = { *line1, *line2, *line3, *line4 };
+	float line11[4] = { 5, 1, 3, 1 };
+	float line12[4] = { 2, 6, 0, 2 };
+	float line13[4] = { -4, 0.1, -5, 1 };
+	float line14[4] = { 0, 0, 0, 1 };
+	float coeff1[4][4] = { *line11, *line12, *line13, *line14 };
 	Matrix4 firstMatrix = Matrix4(coeff1);
 
-	float line1[4] = { 7, 3.1, 6, 3 };
-	float line2[4] = { 0.5, -4, -1, -1 };
-	float line3[4] = { -0.5, 1, -2.6, -4 };
-	float line4[4] = { 0, 0, 0, 1 };
-	float coeff2[4][4] = { *line1, *line2, *line3, *line4 };
+	float line21[4] = { 7, 3.1, 6, 3 };
+	float line22[4] = { 0.5, -4, -1, -1 };
+	float line23[4] = { -0.5, 1, -2.6, -4 };
+	float line24[4] = { 0, 0, 0, 1 };
+	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
 	Matrix4 secondMatrix = Matrix4(coeff2);
 
 	Matrix4 productMatrix = firstMatrix * secondMatrix;
-	float line1[4] = { 34, 14.5, 21.2, 3 };
-	float line2[4] = { 17, -17.8, 6, 2 };
-	float line3[4] = { -25.45, -17.8, -11.1, 8.9 };
-	float line4[4] = { 0, 0, 0, 1 };
-	float coeff3[4][4] = { *line1, *line2, *line3, *line4 };
+	float line31[4] = { 34, 14.5, 21.2, 3 };
+	float line32[4] = { 17, -17.8, 6, 2 };
+	float line33[4] = { -25.45, -17.8, -11.1, 8.9 };
+	float line34[4] = { 0, 0, 0, 1 };
+	float coeff3[4][4] = { *line31, *line32, *line33, *line34 };
 	Matrix4 intendedMatrix = Matrix4(coeff3);
 
-	if (productVector == intendedMatrix)
+	if (productMatrix == intendedMatrix)
 	{
 		std::cout << "Matrix x Matrix Product : Success" << std::endl;
 		return true;
@@ -807,18 +805,18 @@ bool Tests::Matrix4MatrixProduct()
 
 bool Tests::Matrix4Inverse()
 {
-	float line1[4] = { 6, 1, 3, 1 };
-	float line2[4] = { 2, 6, 0, 2 };
-	float line3[4] = { 1, 0, 4, 2 };
-	float line4[4] = { -1, 3, 1, -7 };
-	float coeff1[4][4] = { *line1, *line2, *line3, *line4 };
+	float line11[4] = { 6, 1, 3, 1 };
+	float line12[4] = { 2, 6, 0, 2 };
+	float line13[4] = { 1, 0, 4, 2 };
+	float line14[4] = { -1, 3, 1, -7 };
+	float coeff1[4][4] = { *line11, *line12, *line13, *line14 };
 	Matrix4 matrix = Matrix4(coeff1);
 
-	float line1[4] = { 0.1946564885496183206, -0.022900763358778625956, -0.14122137404580152672, -0.019083969465648854957 };
-	float line2[4] = { -0.047709923664122137444, 0.15267175572519083976, 0.024809160305343511478, 0.043893129770992366284 };
-	float line3[4] = { -0.022900763358778625957, -0.02671755725190839695, 0.25190839694656488551, 0.061068702290076335884 };
-	float line4[4] = { -0.051526717557251908393, 0.064885496183206106879, 0.066793893129770992326, -0.11259541984732824429 };
-	float coeff2[3][3] = { *line1, *line2, *line3, *line4 };
+	float line21[4] = { 0.1946564885496183206, -0.022900763358778625956, -0.14122137404580152672, -0.019083969465648854957 };
+	float line22[4] = { -0.047709923664122137444, 0.15267175572519083976, 0.024809160305343511478, 0.043893129770992366284 };
+	float line23[4] = { -0.022900763358778625957, -0.02671755725190839695, 0.25190839694656488551, 0.061068702290076335884 };
+	float line24[4] = { -0.051526717557251908393, 0.064885496183206106879, 0.066793893129770992326, -0.11259541984732824429 };
+	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
 	Matrix4 intendedMatrix = Matrix4(coeff2);
 
 	matrix = matrix.inverse();
@@ -836,18 +834,18 @@ bool Tests::Matrix4Inverse()
 
 bool Tests::Matrix4Invert()
 {
-	float line1[4] = { 6, 1, 3, 1 };
-	float line2[4] = { 2, 6, 0, 2 };
-	float line3[4] = { 1, 0, 4, 2 };
-	float line4[4] = { -1, 3, 1, -7 };
-	float coeff1[4][4] = { *line1, *line2, *line3, *line4 };
+	float line11[4] = { 6, 1, 3, 1 };
+	float line12[4] = { 2, 6, 0, 2 };
+	float line13[4] = { 1, 0, 4, 2 };
+	float line14[4] = { -1, 3, 1, -7 };
+	float coeff1[4][4] = { *line11, *line12, *line13, *line14 };
 	Matrix4 matrix = Matrix4(coeff1);
 
-	float line1[4] = { 0.1946564885496183206, -0.022900763358778625956, -0.14122137404580152672, -0.019083969465648854957 };
-	float line2[4] = { -0.047709923664122137444, 0.15267175572519083976, 0.024809160305343511478, 0.043893129770992366284 };
-	float line3[4] = { -0.022900763358778625957, -0.02671755725190839695, 0.25190839694656488551, 0.061068702290076335884 };
-	float line4[4] = { -0.051526717557251908393, 0.064885496183206106879, 0.066793893129770992326, -0.11259541984732824429 };
-	float coeff2[3][3] = { *line1, *line2, *line3, *line4 };
+	float line21[4] = { 0.1946564885496183206, -0.022900763358778625956, -0.14122137404580152672, -0.019083969465648854957 };
+	float line22[4] = { -0.047709923664122137444, 0.15267175572519083976, 0.024809160305343511478, 0.043893129770992366284 };
+	float line23[4] = { -0.022900763358778625957, -0.02671755725190839695, 0.25190839694656488551, 0.061068702290076335884 };
+	float line24[4] = { -0.051526717557251908393, 0.064885496183206106879, 0.066793893129770992326, -0.11259541984732824429 };
+	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
 	Matrix4 intendedMatrix = Matrix4(coeff2);
 
 	matrix.invert();
@@ -865,18 +863,18 @@ bool Tests::Matrix4Invert()
 
 bool Tests::Matrix4Transpose()
 {
-	float line1[4] = { 6, 1, 3, 1 };
-	float line2[4] = { 2, 6, 0, 2 };
-	float line3[4] = { 1, 0, 4, 2 };
-	float line4[4] = { -1, 3, 1, -7 };
-	float coeff1[4][4] = { *line1, *line2, *line3, *line4 };
+	float line11[4] = { 6, 1, 3, 1 };
+	float line12[4] = { 2, 6, 0, 2 };
+	float line13[4] = { 1, 0, 4, 2 };
+	float line14[4] = { -1, 3, 1, -7 };
+	float coeff1[4][4] = { *line11, *line12, *line13, *line14 };
 	Matrix4 matrix = Matrix4(coeff1);
 
-	float line1[4] = { 6, 2, 1, -1 };
-	float line2[4] = { 1, 6, 0, 3 };
-	float line3[4] = { 3, 0, 4, 1 };
-	float line4[4] = { 1, 2, 2, -7 };
-	float coeff2[4][4] = { *line1, *line2, *line3, *line4 };
+	float line21[4] = { 6, 2, 1, -1 };
+	float line22[4] = { 1, 6, 0, 3 };
+	float line23[4] = { 3, 0, 4, 1 };
+	float line24[4] = { 1, 2, 2, -7 };
+	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
 	Matrix4 intendedMatrix = Matrix4(coeff2);
 
 	if (matrix == intendedMatrix)

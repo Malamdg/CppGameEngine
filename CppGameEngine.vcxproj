@@ -148,6 +148,7 @@
     <ClInclude Include="src\Forces\SpringParticleParticle.h" />
     <ClInclude Include="src\Forces\SpringParticlePoint.h" />
     <ClInclude Include="src\Matrix3.h" />
+    <ClInclude Include="src\Matrix4.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\Tests.h" />

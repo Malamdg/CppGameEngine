@@ -100,6 +100,7 @@
       <Filter>Forces</Filter>
     </ClInclude>
     <ClInclude Include="src\Matrix3.h" />
+    <ClInclude Include="src\Matrix4.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Collisions">
