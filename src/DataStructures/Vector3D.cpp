@@ -1,6 +1,5 @@
 #include "Vector3D.h"
 
-
 Vector3D::Vector3D(const float x, const float y, const float z)
 	:
 	m_x(x),

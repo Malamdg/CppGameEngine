@@ -1,6 +1,6 @@
 #pragma once
 #include "Particle.h"
-#include "Vector3D.h"
+#include "DataStructures/Vector3D.h"
 #include "Forces/ParticleForceRegistry.h"
 #include "Forces/SpringParticleParticle.h"
 #include "Collisions/Cable.h"
