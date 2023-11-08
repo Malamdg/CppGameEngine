@@ -91,10 +91,16 @@ private:
 	static void ExecuteMatrix3Tests();
 
 	/*
-	test the construtor method of Matrix3
+	test the empty constructor method of Matrix3
 	@return true if the Matrix3 created is ((0, 0, 0), (0, 0, 0), (0, 0, 0))
 	*/
 	static bool Matrix3EmtpyConstructor();
+
+	/*
+	test the constructor method of Matrix3 with Vector3D
+	@return true if the Matrix3 is correctly created
+	*/
+	static bool Matrix3VectorConstructor();
 
 	/*
 	test the zeros method of Matrix3

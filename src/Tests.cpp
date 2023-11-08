@@ -228,6 +228,7 @@ void Tests::ExecuteMatrix3Tests()
 	std::cout << "Matrix3 : " << std::endl << std::endl;
 
 	success += Matrix3EmtpyConstructor();
+	success += Matrix3VectorConstructor();
 	success += Matrix3Zeros();
 	success += Matrix3Id();
 	success += AccessingAndModifyingMatrix3();
@@ -259,6 +260,28 @@ bool Tests::Matrix3EmtpyConstructor()
 	}
 
 	std::cout << "Empty Constructor : Fail. " << std::endl;
+	return false;
+}
+
+bool Tests::Matrix3VectorConstructor()
+{
+	Vector3D vec1 = Vector3D(1, 1, 1);
+	Vector3D vec2 = Vector3D(-1, 1, -1);
+	Vector3D vec3 = Vector3D(0.5, 1, 0.5);
+	Matrix3 matrix = Matrix3(vec1, vec2, vec3);
+	float line1[3] = { 1, 1, 1 };
+	float line2[3] = { -1, 1, -1 };
+	float line3[3] = { 0.5, 1, 0.5 };
+	float coeff[3][3] = { *line1, *line2, *line3 };
+	Matrix3 intendedMatrix = Matrix3(coeff);
+
+	if (matrix == intendedMatrix)
+	{
+		std::cout << "Vector Constructor : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Vector Constructor : Fail. " << std::endl;
 	return false;
 }
 
