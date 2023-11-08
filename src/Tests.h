@@ -1,6 +1,6 @@
 #pragma once
-#include "Matrix3.h"
-#include "Matrix4.h"
+#include "DataStructures/Matrix3.h"
+#include "DataStructures/Matrix4.h"
 #include "DataStructures/Vector3D.h"
 
 class Tests
