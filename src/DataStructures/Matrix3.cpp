@@ -276,28 +276,25 @@ bool Matrix3::operator==(const Matrix3& matrix)
 			}
 		}
 	}
-
 	return isEqual;
 }
 
 float* Matrix3::operator[](int i)
 {
-	switch (i)
-	{
-	case 0: return m_coefficients[i];
-	case 1: return m_coefficients[i];
-	case 2: return m_coefficients[i];
-	default: throw std::out_of_range("Bad idx passed to at()");
+	if (i >= 0 && i < m_size) {
+		return m_coefficients[i];
+	}
+	else {
+		throw std::out_of_range("Bad idx passed to operator[]");
 	}
 }
 
-const float* Matrix3::operator[](int i) const 
+const float* Matrix3::operator[](int i) const
 {
-	switch (i)
-	{
-	case 0: return m_coefficients[i];
-	case 1: return m_coefficients[i];
-	case 2: return m_coefficients[i];
-	default: throw std::out_of_range("Bad idx passed to at()");
+	if (i >= 0 && i < m_size) {
+		return m_coefficients[i];
 	}
-};
+	else {
+		throw std::out_of_range("Bad idx passed to operator[]");
+	}
+}
