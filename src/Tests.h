@@ -1,7 +1,7 @@
 #pragma once
-#include "Vector3D.h"
 #include "Matrix3.h"
 #include "Matrix4.h"
+#include "DataStructures/Vector3D.h"
 
 class Tests
 {

@@ -1,6 +1,4 @@
-#include "../Particle.h"
 #include "ParticleGravity.h"
-#include "../Vector3D.h"
 
 /*
 class constructor

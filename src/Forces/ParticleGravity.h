@@ -1,6 +1,6 @@
 #include "../Particle.h"
 #include "ParticleForceGenerator.h"
-#include "../Vector3D.h"
+#include "../DataStructures/Vector3D.h"
 
 class ParticleGravity : public ParticleForceGenerator{
 	
