@@ -285,7 +285,7 @@ bool Tests::Matrix3Zeros()
 
 bool Tests::Matrix3Id()
 {
-	Matrix3 matrix = matrix.idendity();
+	Matrix3 matrix = matrix.identity();
 	float line1[3] = { 1, 0, 0 };
 	float line2[3] = { 0, 1, 0 };
 	float line3[3] = { 0, 0, 1 };
@@ -526,7 +526,7 @@ bool Tests::Matrix3Transpose()
 	}
 
 	std::cout << "Norm : Fail. ";
-	std::cout << "Was expecting " + to_string(intendedNorm) + ", got " + to_string(norm) << std::endl;
+	// std::cout << "Was expecting " + to_string(intendedNorm) + ", got " + to_string(norm) << std::endl;
 	return false;
 }
 
