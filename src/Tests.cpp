@@ -27,7 +27,7 @@ void Tests::ExecuteVector3DTests()
 	success += Vector3DVectorProduct();
 	success += Vector3Dfloatfloat();
 
-	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl;
+	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl << std::endl;
 }
 
 bool Tests::Vector3DEmtpyConstructor()
@@ -240,7 +240,7 @@ void Tests::ExecuteMatrix3Tests()
 	success += Matrix3Transpose();
 	success += Matrix3Determinant();
 
-	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl;
+	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl << std::endl;
 }
 
 bool Tests::Matrix3EmtpyConstructor()
@@ -258,8 +258,7 @@ bool Tests::Matrix3EmtpyConstructor()
 		return true;
 	}
 
-	std::cout << "Empty Constructor : Fail. ";
-	//std::cout << "Was expecting (0, 0, 0), got " + matrix.toString() << std::endl;
+	std::cout << "Empty Constructor : Fail. " << std::endl;
 	return false;
 }
 
@@ -278,8 +277,7 @@ bool Tests::Matrix3Zeros()
 		return true;
 	}
 
-	std::cout << "Zeros : Fail. ";
-	// std::cout << "Was expecting (0, 0, 0), got " + matrix.toString() << std::endl;
+	std::cout << "Zeros : Fail. " << std::endl;
 	return false;
 }
 
@@ -298,8 +296,7 @@ bool Tests::Matrix3Id()
 		return true;
 	}
 
-	std::cout << "Identity : Fail. ";
-	// std::cout << "Was expecting (0, 0, 0), got " + matrix.toString() << std::endl;
+	std::cout << "Identity : Fail. " << std::endl;
 	return false;
 }
 
@@ -312,6 +309,7 @@ bool Tests::AccessingAndModifyingMatrix3()
 	float coeff[3][3] = { *line1, *line2, *line3 };
 	Matrix3 intendedMatrix = Matrix3(coeff);
 
+	matrix.zeros();
 	matrix[0][0] = 5;
 	matrix[1][1] = 6;
 	matrix[2][2] = -5;
@@ -322,8 +320,7 @@ bool Tests::AccessingAndModifyingMatrix3()
 		return true;
 	}
 
-	std::cout << "Access and Modification : Fail. ";
-	// std::cout << "Was expecting (5, 6, -5), got " + matrix.toString() << std::endl;
+	std::cout << "Access and Modification : Fail. " << std::endl;
 	return false;
 }
 
@@ -354,8 +351,7 @@ bool Tests::Matrix3Addition()
 		return true;
 	}
 
-	std::cout << "Addition : Fail. ";
-	// std::cout << "Was expecting (12, 2, -7.6), got " + sumMatrix.toString() << std::endl;
+	std::cout << "Addition : Fail. " << std::endl;
 	return false;
 }
 
@@ -374,7 +370,7 @@ bool Tests::Matrix3Soustraction()
 	Matrix3 secondMatrix = Matrix3(coeff2);
 
 	Matrix3 subMatrix = firstMatrix - secondMatrix;
-	float line31[3] = { 2, -2, -2 };
+	float line31[3] = { -2, -2, -2 };
 	float line32[3] = { 6, 10, -2 };
 	float line33[3] = { 6, 6, -2.4 };
 	float coeff3[3][3] = { *line31, *line32, *line33 };
@@ -386,8 +382,7 @@ bool Tests::Matrix3Soustraction()
 		return true;
 	}
 
-	std::cout << "Soustraction : Fail. ";
-	// std::cout << "Was expecting (-2, 10, -2.4), got " + subMatrix.toString() << std::endl;
+	std::cout << "Soustraction : Fail. " << std::endl;
 	return false;
 }
 
@@ -414,8 +409,7 @@ bool Tests::Matrix3FloatProduct()
 		return true;
 	}
 
-	std::cout << "Matrix Product double float : Fail. ";
-	// std::cout << "Was expecting " << intendedMatrix.toString() << ", got " + result.toString() << std::endl;
+	std::cout << "Matrix Product double float : Fail. " << std::endl;
 	return false;
 }
 
@@ -446,8 +440,7 @@ bool Tests::Matrix3MatrixProduct()
 		return true;
 	}
 
-	std::cout << "Matrix x Matrix Product : Fail. ";
-	// std::cout << "Was expecting (-35.6, -22, -62), got " + productVector.toString() << std::endl;
+	std::cout << "Matrix x Matrix Product : Fail. " << std::endl;
 	return false;
 }
 
@@ -473,8 +466,7 @@ bool Tests::Matrix3Inverse()
 		return true;
 	}
 
-	std::cout << "Inverse : Fail. ";
-	// std::cout << "Was expecting 24, got " + to_string(scalarProduct) << std::endl;
+	std::cout << "Inverse : Fail. " << std::endl;
 	return false;
 }
 
@@ -500,8 +492,7 @@ bool Tests::Matrix3Invert()
 		return true;
 	}
 
-	std::cout << "Inverse Computation : Fail. ";
-	// std::cout << "Was expecting 24, got " + to_string(scalarProduct) << std::endl;
+	std::cout << "Inverse Computation : Fail. " << std::endl;
 	return false;
 }
 
@@ -525,7 +516,7 @@ bool Tests::Matrix3Transpose()
 		return true;
 	}
 
-	std::cout << "Transpose : Fail. ";
+	std::cout << "Transpose : Fail. " << std::endl;
 	return false;
 }
 
@@ -546,8 +537,7 @@ bool Tests::Matrix3Determinant()
 		return true;
 	}
 
-	std::cout << "Determinant : Fail. ";
-	// std::cout << "Was expecting 86, got " + to_string(norm) << std::endl;
+	std::cout << "Determinant : Fail. " << std::endl;
 	return false;
 }
 
@@ -575,7 +565,7 @@ void Tests::ExecuteMatrix4Tests()
 	success += Matrix4Transpose();
 	success += Matrix4Determinant();
 
-	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl;
+	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl << std::endl;
 }
 
 bool Tests::Matrix4EmtpyConstructor()
@@ -594,8 +584,7 @@ bool Tests::Matrix4EmtpyConstructor()
 		return true;
 	}
 
-	std::cout << "Empty Constructor : Fail. ";
-	//std::cout << "Was expecting (0, 0, 0), got " + matrix.toString() << std::endl;
+	std::cout << "Empty Constructor : Fail. " << std::endl;
 	return false;
 }
 
@@ -615,8 +604,7 @@ bool Tests::Matrix4Zeros()
 		return true;
 	}
 
-	std::cout << "Zeros : Fail. ";
-	// std::cout << "Was expecting (0, 0, 0), got " + matrix.toString() << std::endl;
+	std::cout << "Zeros : Fail. " << std::endl;
 	return false;
 }
 
@@ -636,8 +624,7 @@ bool Tests::Matrix4Id()
 		return true;
 	}
 
-	std::cout << "Identity : Fail. ";
-	// std::cout << "Was expecting (0, 0, 0), got " + matrix.toString() << std::endl;
+	std::cout << "Identity : Fail. " << std::endl;
 	return false;
 }
 
@@ -662,8 +649,7 @@ bool Tests::AccessingAndModifyingMatrix4()
 		return true;
 	}
 
-	std::cout << "Access and Modification : Fail. ";
-	// std::cout << "Was expecting (5, 6, -5), got " + matrix.toString() << std::endl;
+	std::cout << "Access and Modification : Fail. " << std::endl;
 	return false;
 }
 
@@ -697,8 +683,7 @@ bool Tests::Matrix4Addition()
 		return true;
 	}
 
-	std::cout << "Addition : Fail. ";
-	// std::cout << "Was expecting (12, 2, -7.6), got " + sumMatrix.toString() << std::endl;
+	std::cout << "Addition : Fail. " << std::endl;
 	return false;
 }
 
@@ -732,8 +717,7 @@ bool Tests::Matrix4Soustraction()
 		return true;
 	}
 
-	std::cout << "Soustraction : Fail. ";
-	// std::cout << "Was expecting (-2, 10, -2.4), got " + subMatrix.toString() << std::endl;
+	std::cout << "Soustraction : Fail. " << std::endl;
 	return false;
 }
 
@@ -762,8 +746,7 @@ bool Tests::Matrix4FloatProduct()
 		return true;
 	}
 
-	std::cout << "Matrix Product double float : Fail. ";
-	// std::cout << "Was expecting " << intendedMatrix.toString() << ", got " + result.toString() << std::endl;
+	std::cout << "Matrix Product double float : Fail. " << std::endl;
 	return false;
 }
 
@@ -797,8 +780,7 @@ bool Tests::Matrix4MatrixProduct()
 		return true;
 	}
 
-	std::cout << "Matrix x Matrix Product : Fail. ";
-	// std::cout << "Was expecting (-35.6, -22, -62), got " + productVector.toString() << std::endl;
+	std::cout << "Matrix x Matrix Product : Fail. " << std::endl;
 	return false;
 }
 
@@ -827,7 +809,6 @@ bool Tests::Matrix4Inverse()
 	}
 
 	std::cout << "Inverse : Fail. ";
-	// std::cout << "Was expecting 24, got " + to_string(scalarProduct) << std::endl;
 	return false;
 }
 
@@ -856,7 +837,6 @@ bool Tests::Matrix4Invert()
 	}
 
 	std::cout << "Inverse Computation : Fail. ";
-	// std::cout << "Was expecting 24, got " + to_string(scalarProduct) << std::endl;
 	return false;
 }
 
@@ -883,7 +863,6 @@ bool Tests::Matrix4Transpose()
 	}
 
 	std::cout << "Transpose : Fail. ";
-	// std::cout << "Was expecting " + to_string(intendedNorm) + ", got " + to_string(norm) << std::endl;
 	return false;
 }
 
@@ -906,7 +885,6 @@ bool Tests::Matrix4Determinant()
 	}
 
 	std::cout << "Determinant : Fail. ";
-	// std::cout << "Was expecting 86, got " + to_string(norm) << std::endl;
 	return false;
 }
 
