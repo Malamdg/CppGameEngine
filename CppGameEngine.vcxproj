@@ -139,6 +139,9 @@
     <ClInclude Include="src\Collisions\Collision.h" />
     <ClInclude Include="src\Collisions\CollisionHandler.h" />
     <ClInclude Include="src\Collisions\Spindle.h" />
+    <ClInclude Include="src\Datastructures\Matrix3.h" />
+    <ClInclude Include="src\Datastructures\Matrix4.h" />
+	<ClCompile Include="src\DataStructures\Vector3D.h" />
     <ClInclude Include="src\Forces\ElasticParticleParticle.h" />
     <ClInclude Include="src\Forces\ElasticParticlePoint.h" />
     <ClInclude Include="src\Forces\ParticleDeplacement.h" />
@@ -148,12 +151,9 @@
     <ClInclude Include="src\Forces\ParticleGravity.h" />
     <ClInclude Include="src\Forces\SpringParticleParticle.h" />
     <ClInclude Include="src\Forces\SpringParticlePoint.h" />
-    <ClInclude Include="src\Datastructures\Matrix3.h" />
-    <ClInclude Include="src\Datastructures\Matrix4.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\Tests.h" />
-    <ClCompile Include="src\DataStructures\Vector3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
