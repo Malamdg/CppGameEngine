@@ -21,9 +21,6 @@
     <ClCompile Include="src\Collisions\Spindle.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
-    <ClCompile Include="src\DataStructures\Vector3D.cpp">
-      <Filter>DataStructures</Filter>
-    </ClCompile>
     <ClCompile Include="src\Forces\ElasticParticleParticle.cpp">
       <Filter>Forces</Filter>
     </ClCompile>
@@ -51,10 +48,10 @@
     <ClCompile Include="src\Forces\SpringParticlePoint.cpp">
       <Filter>Forces</Filter>
     </ClCompile>
-    <ClCompile Include="src\DataStructures\Vector3D.h">
+    <ClCompile Include="src\DataStructures\Quaternion.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="src\DataStructures\Quaternion.cpp">
+    <ClCompile Include="src\DataStructures\Vector3D.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
   </ItemGroup>
@@ -106,6 +103,9 @@
       <Filter>Forces</Filter>
     </ClInclude>
     <ClInclude Include="src\DataStructures\Quaternion.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\Vector3D.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
   </ItemGroup>
