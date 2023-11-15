@@ -5,6 +5,13 @@ void ofApp::setup() {
 	// Tests
 	Tests::ExecuteTests();
 
+	// Light
+	directionalLight.setDirectional();
+	directionalLight.setSpecularColor(ofColor(255));
+	directionalLight.setDiffuseColor(ofColor(255));
+	directionalLight.setAmbientColor(ofColor(100));
+	directionalLight.rotateDeg(45, glm::vec3(1, 1, 1));
+
 	// Set command text
 	commandText = "Bouger le blob avec les fleches directionnelles de droite et de gauche!\nSauter avec la fleche du haut!\n\'s\' pour \'separer\' le blob! (maintenir en pour separer avec un grand nombre de particules)\n\'p\' pour faire apparaitre une particule!";
 
@@ -65,7 +72,7 @@ void ofApp::update() {
 	fps = ofGetFrameRate();
 
 	float duration = fps == 0 ? 0 : 1/fps;
-
+	
 	// forceRegistry->add(p1, gravity);
 	// forceRegistry->add(p3, gravity);
 
@@ -99,12 +106,17 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+
+	ofEnableDepthTest();
+
+	directionalLight.enable();
+
 	// begin camera job
 	cam.begin();
 
 	// display texts on screen
 	drawText();
-
+	
 	// display primitives with correct color
 	int* colorMode;
 	for (std::pair<of3dPrimitive*, int*> primitive : primitives)
@@ -119,6 +131,11 @@ void ofApp::draw() {
 
 	// end camera job
 	cam.end();
+
+	directionalLight.disable();
+	
+	ofDisableDepthTest();
+
 }
 
 //--------------------------------------------------------------
