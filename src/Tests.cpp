@@ -303,9 +303,9 @@ bool Tests::QuaternionEulerConstructor()
 
 	Quaternion quat = Quaternion::Euler(3.14, -0.63, .16);
 	
-	Quaternion intendedQuat = Quaternion(0.0255136, 0.9477354, -0.0762285, -0.308765); // <- Valeure trouvées via https://www.andre-gaschler.com/rotationconverter/
+	Quaternion intendedQuat = Quaternion(0.0255136, 0.9477354, -0.0762533, -0.308765); // <- Valeur trouvées via https://www.andre-gaschler.com/rotationconverter/
 
-	if (quat.EqualsWithTolerance(intendedQuat))
+	if (quat.EqualsWithTolerance(intendedQuat, 10e-5))
 	{
 		std::cout << "Euler Constructor : Success" << std::endl;
 		return true;
@@ -564,20 +564,20 @@ bool Tests::QuaternionSlerpX()
 {
 	nbOfTest++;
 
-	Quaternion q0 = Quaternion::Euler(0, 0, 0);
-	Quaternion q1 = Quaternion::Euler(PI, PI, PI);
-	Quaternion qX = Quaternion::Euler(PI / 2, PI / 2, PI / 2);
+	Quaternion q0 = Quaternion(1, 0, 0, 0);
+	Quaternion q1 = Quaternion(0.086, -0.030, -0.934, -0.345);
+	Quaternion intendedQuat = Quaternion(0.7368853371, -0.0203559485, -0.6337485312, -0.2340934082); // Valeur trouvées via https://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/slerp/index.htm
 
 	Quaternion res = Quaternion::slerp(q0, q1, .5);
 
-	if (res == qX)
+	if (res.EqualsWithTolerance(intendedQuat))
 	{
 		std::cout << "Quaternion slerp X : Success" << std::endl;
 		return true;
 	}
 
 	std::cout << "Quaternion slerp X : Fail. ";
-	std::cout << "Was expecting " << qX.toString() << ", got " << res.toString() << std::endl;
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << res.toString() << std::endl;
 
 	return false;
 }
