@@ -126,6 +126,8 @@
     <ClCompile Include="src\Forces\SpringParticleParticle.cpp" />
     <ClCompile Include="src\Forces\SpringParticlePoint.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Datastructures\Matrix3.cpp" />
+    <ClCompile Include="src\Datastructures\Matrix4.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\DataStructures\Quaternion.cpp" />
@@ -138,7 +140,9 @@
     <ClInclude Include="src\Collisions\Collision.h" />
     <ClInclude Include="src\Collisions\CollisionHandler.h" />
     <ClInclude Include="src\Collisions\Spindle.h" />
-    <ClInclude Include="src\DataStructures\Vector3D.h" />
+    <ClInclude Include="src\Datastructures\Matrix3.h" />
+    <ClInclude Include="src\Datastructures\Matrix4.h" />
+	<ClCompile Include="src\DataStructures\Vector3D.h" />
     <ClInclude Include="src\Forces\ElasticParticleParticle.h" />
     <ClInclude Include="src\Forces\ElasticParticlePoint.h" />
     <ClInclude Include="src\Forces\ParticleDeplacement.h" />
