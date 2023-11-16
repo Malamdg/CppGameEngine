@@ -32,19 +32,10 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
-	
+
 private:
 	void drawText();
-	void updateForces();
-	/*
-	* generate floor accordingly to layout
-	*/
-	void generateFloor(std::list<std::pair<int*, Vector3D*>> layout);
-	/*
-	* get layout of floor
-	*/
-	std::list<std::pair<int*, Vector3D*>> getLayout();
-	
+
 	//HUD
 	float fps;
 	string commandText;
@@ -61,28 +52,15 @@ private:
 	float viewWidth;
 	float viewHeight;
 
-	//**Primitives**//
-	std::list<std::pair<of3dPrimitive*, int*>> primitives;
-	std::list<Particle*> particles;
+	//Primitives
+	list<std::pair<of3dPrimitive*, int>> primitives;
 
-	ofBoxPrimitive floor;
-	Blob blob;
+	//Colors
+	ofColor* colors;
+	int noir = 0;
+	int blanc = 1;
+	int gris = 2;
+	int cyan = 3;
+	int magenta = 4;
 
-	//Colors & Textures
-	Vector3D* colors = new Vector3D[3];
-
-	// Physics
-	ParticleForceRegistry* forceRegistry;
-	CollisionHandler* collisionHandler;
-	BlobCollisionHandler* blobCollisionHandler;
-
-	ParticleGravity* gravity;
-
-	Particle* p;
-	Particle* p1;
-	Particle* p2;
-	Particle* p3;
-
-	Cable* cable;
-	Spindle* spindle;
 };
