@@ -4,141 +4,61 @@
 
 class Matrix3 
 {
-private:
-	// Coefficients of the matrix
-	float m_coefficients[3][3];
-
-	// Determinent of the matrix
-	float m_det;
-
-	// Calculate the determinent and store the value in m_det
-	void updateDet();
-
 public:
-	// Constant size of lines and columns
 	static const int m_size = 3;
+
+	Matrix3();
 	
-	// Constructors
+	Matrix3(float coeff[9]);
 
-	/*
-	* Constructor from Vector3D, can be used as an empty constructor
-	*/
-	Matrix3(Vector3D column1 = Vector3D(), Vector3D column2 = Vector3D(), Vector3D column3 = Vector3D());
+	Matrix3(Vector3D col1, Vector3D col2, Vector3D col3);
 	
-	/*
-	* Constructor from float array array
-	*/
-	Matrix3(float coefficients[3][3]);
-
-	/*
-	* Constructor from const float array array
-	*/
-	Matrix3(const float coefficients[3][3]);
-
-	/*
-	* Destructor of class
-	*/
 	~Matrix3();
 
-	// Basic matrices
-	static Matrix3 identity();
-	static Matrix3 zeros();
+	static Matrix3 Identity();
 
-	// Basic operation on matrix
+	static Matrix3 Zeros();
+
+	float& at(int i, int j);
+
+	const float& at(int i, int j) const;
+
+	Matrix3 & operator*(const Matrix3& m) const;
+
+	Vector3D & operator*(const Vector3D& v) const;
+
+	Matrix3 & operator*(const float& f) const;
+
+	Matrix3 & operator+(const Matrix3& m) const;
+
+	Matrix3 & operator-(const Matrix3& m) const;
+
+	bool operator==(const Matrix3& m) const;
 	
-	/*
-	* Get determinant of this
-	*/
-	float det();
-	
-	/*
-	* Method to invert this
-	*/
+	bool operator!=(const Matrix3& m) const;
+
+	void operator*=(const float& f);
+
+	void operator*=(const Matrix3& m);
+
+	void operator+=(const Matrix3& m);
+
+	void operator-=(const Matrix3& m);
+
+	float getDeterminant();
+
 	void invert();
-	
-	/*
-	* Function to get the inverse of this
-	*/
-	Matrix3 inverse();
-	
-	/*
-	* Method to transpose this
-	*/
+
+	Matrix3 Inverse();
+
 	void transpose();
 
-	/*
-	* Function to get transposed this
-	*/
-	Matrix3 transposedMatrix();
-
-	// Operations between matrix and other
+	Matrix3 Transposed();
 	
-	/*
-	* Basic operator for the sum between two Matrix3
-	*/
-	Matrix3& operator+(const Matrix3& matrix) const;
-	
-	/*
-	* Basic operator for the difference between two Matrix3
-	*/
-	Matrix3& operator-(const Matrix3& matrix) const;
-	
-	/*
-	* Basic operator for the product of two Matrix3
-	*/
-	Matrix3& operator*(const Matrix3& matrix) const;
+	string toString() const;
 
-	/*
-	* Basic operator for the product of a Matrix3 by a scalar
-	*/
-	Matrix3& operator*(const float& lambda) const;
+private:
+	float m_coeffs[9];
 
-	/*
-	* Basic operator for the product of a Vector3D by a Matrix3
-	*/
-	Vector3D& operator*(const Vector3D& v) const;
-
-	// Affect operation
-	
-	/*
-	* Affects the value of the sum with another Matrix3 to this
-	*/
-	void operator+=(const Matrix3& matrix);
-	
-	/*
-	* Affects the value of the difference between this and another Matrix3 to this
-	*/
-	void operator-=(const Matrix3& matrix);
-
-
-	/*
-	* Affects the value of the product (right side) of this and another Matrix3 to this
-	* i.e. this = this * matrix
-	*/
-	void operator*=(const Matrix3& matrix);
-
-	/*
-	* Affects the value of the product of this by a scalar to this  	
-	*/
-	void operator*=(const float& lambda);
-	
-	// Equality test
-
-	/*
-	* Return whether matrices are equal in value or not
-	*/
-	bool operator==(const Matrix3& matrix);
-
-	// Accessors
-	
-	/*
-	* Setter accessor for the indexed line
-	*/
-	float* operator[](int i);
-
-
-	/*
-	* Getter accessor for the indexed line
-	*/
-	const float* operator[](int i) const;
+	float getCofactor(int i, int j);
 };

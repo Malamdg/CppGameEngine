@@ -141,7 +141,7 @@
     <ClInclude Include="src\Collisions\Spindle.h" />
     <ClInclude Include="src\Datastructures\Matrix3.h" />
     <ClInclude Include="src\Datastructures\Matrix4.h" />
-	<ClCompile Include="src\DataStructures\Vector3D.h" />
+    <ClCompile Include="src\DataStructures\Vector3D.h" />
     <ClInclude Include="src\Forces\ElasticParticleParticle.h" />
     <ClInclude Include="src\Forces\ElasticParticlePoint.h" />
     <ClInclude Include="src\Forces\ParticleDeplacement.h" />
