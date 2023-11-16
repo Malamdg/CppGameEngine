@@ -109,6 +109,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Addons\ofSkyBox\ofxCubeMap.cpp" />
+    <ClCompile Include="src\Addons\ofSkyBox\ofxSkyBox.cpp" />
     <ClCompile Include="src\Blob.cpp" />
     <ClCompile Include="src\Collisions\BlobCollisionHandler.cpp" />
     <ClCompile Include="src\Collisions\Cable.cpp" />
@@ -132,6 +134,8 @@
     <ClCompile Include="src\Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Addons\ofSkyBox\ofxCubeMap.h" />
+    <ClInclude Include="src\Addons\ofSkyBox\ofxSkyBox.h" />
     <ClInclude Include="src\Blob.h" />
     <ClInclude Include="src\Collisions\BlobCollisionHandler.h" />
     <ClInclude Include="src\Collisions\Cable.h" />

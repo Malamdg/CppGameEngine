@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ofApp.h"
+#include "OfMain.h";
 #include "Vector3D.h"
 
 class Quaternion {
@@ -183,4 +183,6 @@ public:
 	@return the Vector3D
 	*/
 	Vector3D getVector()const;
+
+	glm::quat q() { return glm::quat(m_w, m_x, m_y, m_z); };
 };

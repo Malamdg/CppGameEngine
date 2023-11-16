@@ -11,8 +11,11 @@
 #include "ofMain.h"
 #include "of3dPrimitives.h"
 #include "DataStructures/Vector3D.h"
+#include "DataStructures/Quaternion.h"
 #include "Particle.h"
 #include "Tests.h"
+
+#include "Addons/ofSkyBox/ofxSkyBox.h"
 
 class ofApp : public ofBaseApp {
 
@@ -62,5 +65,12 @@ private:
 	int gris = 2;
 	int cyan = 3;
 	int magenta = 4;
+
+	//SkyBox
+	ofxSkyBox skybox;
+	ofVec3f skyboxCenter;
+
+	//Fullscreen
+	bool fullscreen = false;
 
 };

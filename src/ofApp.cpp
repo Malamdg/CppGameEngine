@@ -33,10 +33,14 @@ void ofApp::setup() {
 	colors[4] = ofColor(250, 10, 200);
 
 	ofSpherePrimitive* laSpherePourTester = new ofSpherePrimitive();
-	laSpherePourTester->setRadius(10);
-	laSpherePourTester->setPosition(0, 0, -100);
+	laSpherePourTester->setRadius(6);
+	laSpherePourTester->setPosition(0, 0, -10);
 	primitives.push_back(std::pair<of3dPrimitive*, int>(laSpherePourTester, magenta));
-	
+
+	//SkyBox
+	skyboxCenter = ofVec3f(0, 0, 0);
+	skybox.load();
+
 	// Setup cam variables
 	cameraPosition = Vector3D(0, 0, 500);
 	// Pythagoras to get displayed width with fov and z of camera 	
@@ -64,6 +68,9 @@ void ofApp::draw() {
 	// begin camera job
 	cam.begin();
 
+	// draw Skybox
+	skybox.draw();
+
 	// display texts on screen
 	drawText();
 	
@@ -88,30 +95,89 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
+	fps = ofGetFrameRate();
+
+	float duration = fps == 0 ? 0 : 1 / fps;
+
+	float rotationX = 0;
+	float rotationY = 0;
 
 	// move on arrow key press
 	switch (key)
 	{
-	case 57358: // stride right
+	case 57356: // Arrow left
 	{
+		rotationY = duration;
 		break;
 	}
-	case 57356: // stride left
+	case 57357: // Arrow up
 	{
+		rotationX = duration;
 		break;
 	}
-	case 57357: // jump
+	case 57358: // Arrow right
 	{
-		return;
+		rotationY = -duration;
+		break;
+	}
+	case 57359: // Arrow down
+	{
+		rotationX = -duration;
+		break;
+	}
+	case 'q':
+	case 'a':
+	{
+		cam.truck(-10 * duration);
+		break;
+	}
+	case 'z':
+	case 'w':
+	{
+		cam.dolly(- 10 * duration);
+		break;
+	}
+	case 'd':
+	{
+		cam.truck(10 * duration);
+		break;
+	}
+	case 's':
+	{
+		cam.dolly(10 * duration);
+		break;
+	}
+	case 'r':
+	{
+		cam.boom(10 * duration);
+		break;
+	}
+	case 'e' :
+	{
+		cam.boom(-10 * duration);
+		break;
 	}
 	default:
 		return;
 	}
+
+	cam.tiltRad(rotationX);
+	glm::quat rotation = Quaternion::Euler(0, rotationY, 0).q();
+	glm::quat orientiation = cam.getGlobalOrientation();
+
+	cam.setGlobalOrientation(orientiation * rotation);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
-
+	switch (key)
+	{
+	case 'f': //FullScreen
+	{
+		fullscreen = !fullscreen;
+		ofSetFullscreen(fullscreen);
+	}
+	}
 }
 
 //--------------------------------------------------------------
