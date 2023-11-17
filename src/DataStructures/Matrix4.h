@@ -1,139 +1,70 @@
 #pragma once
 
-#include "Vector3D.h"
+#include "Matrix3.h"
 
 class Matrix4
 {
-private:
-	// Coefficients of the matrix
-	float m_coefficients[4][4];
-
-	// Determinent of the matrix
-	float m_det;
-
-	// Calculate the determinent and store the value in m_det
-	void updateDet();
-
 public:
-	// Constant size of lines and columns
 	static const int m_size = 4;
-	
-	// Constructors
 
-	/*
-	* Constructor from Vector3D, can be used as an empty constructor
-	*/
-	Matrix4(Vector3D column1 = Vector3D(), Vector3D column2 = Vector3D(), Vector3D column3 = Vector3D(), Vector3D column4 = Vector3D());
-	
-	/*
-	* Constructor from float array array
-	*/
-	Matrix4(float coefficients[4][4]);
+	Matrix4();
 
-	/*
-	* Constructor from const float array array
-	*/
-	Matrix4(const float coefficients[4][4]);
+	Matrix4(float coeff[16]);
 
-	/*
-	* Destructor of class
-	*/
 	~Matrix4();
 
-	// Basic matrices
-	static Matrix4 identity();
-	static Matrix4 zeros();
+	static Matrix4 Identity();
 
-	// Basic operation on matrix
-	
-	/*
-	* Get determinant of this
-	*/
-	float det();
-	
-	/*
-	* Method to invert this
-	*/
+	static Matrix4 Zeros();
+
+	float& at(int i, int j);
+
+	const float& at(int i, int j) const;
+
+	Matrix4& operator*(const Matrix4& m) const;
+
+	Matrix4& operator*(const float& f) const;
+
+	Matrix4& operator+(const Matrix4& m) const;
+
+	Matrix4& operator-(const Matrix4& m) const;
+
+	bool operator==(const Matrix4& m) const;
+
+	bool operator!=(const Matrix4& m) const;
+
+	void operator*=(const float& f);
+
+	void operator*=(const Matrix4& m);
+
+	void operator+=(const Matrix4& m);
+
+	void operator-=(const Matrix4& m);
+
+	float getDeterminant();
+
 	void invert();
-	
-	/*
-	* Function to get the inverse of this
-	*/
-	Matrix4 inverse();
-	
-	/*
-	* Method to transpose this
-	*/
+
+	Matrix4 Inverse();
+
 	void transpose();
 
-	/*
-	* Function to get transposed this
-	*/
-	Matrix4 transposedMatrix();
+	Matrix4 Transposed();
 
-	// Operations between matrix and other
-	
-	/*
-	* Basic operator for the sum between two Matrix4
-	*/
-	Matrix4& operator+(const Matrix4& matrix) const;
-	
-	/*
-	* Basic operator for the difference between two Matrix4
-	*/
-	Matrix4& operator-(const Matrix4& matrix) const;
-	
-	/*
-	* Basic operator for the product of two Matrix4
-	*/
-	Matrix4& operator*(const Matrix4& matrix) const;
+	string toString() const;
 
-	/*
-	* Basic operator for the product of a Matrix4 by a scalar
-	*/
-	Matrix4& operator*(const float& lambda) const;
+	static bool cmpf(float A, float B, float epsilon = 10e-5);
+private:
+	float m_coeffs[16];
 
-	// Affect operation
-	
-	/*
-	* Affects the value of the sum with another Matrix4 to this
-	*/
-	void operator+=(const Matrix4& matrix);
-	
-	/*
-	* Affects the value of the difference between this and another Matrix4 to this
-	*/
-	void operator-=(const Matrix4& matrix);
+	float getCofactor(int i, int j);
 
+	int findColumnMax(int j_col);
 
-	/*
-	* Affects the value of the product (right side) of this and another Matrix4 to this
-	* i.e. this = this * matrix
-	*/
-	void operator*=(const Matrix4& matrix);
+	void swapLines(int i1, int i2);
 
-	/*
-	* Affects the value of the product of this by a scalar to this  	
-	*/
-	void operator*=(const float& lambda);
-	
-	// Equality test
+	void multiplyLineByScalar(int i, float x);
 
-	/*
-	* Return whether matrices are equal in value or not
-	*/
-	bool operator==(const Matrix4& matrix);
+	void addLineMultipleToTargetLine(int i_target, int i_other, float coeff);
 
-	// Accessors
-	
-	/*
-	* Setter accessor for the indexed line
-	*/
-	float* operator[](int i);
-
-
-	/*
-	* Getter accessor for the indexed line
-	*/
-	const float* operator[](int i) const;
 };

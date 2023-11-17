@@ -1,6 +1,5 @@
 #include "Matrix3.h"
 
-
 // Public
 Matrix3::Matrix3() 
 {
@@ -334,8 +333,6 @@ float Matrix3::getCofactor(int i, int j)
 			idx++;
 		}
 	}
-
-	float cofactor = 0;
 
 	return direction * ((matrix2[0] * matrix2[3]) - (matrix2[1] * matrix2[2]));
 }
