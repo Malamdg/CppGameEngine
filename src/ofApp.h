@@ -52,6 +52,9 @@ private:
 	Vector3D movingHudInitialPos;
 	Vector3D movingHudPos;
 
+	//Lights
+	ofLight directionalLight;
+
 	//Camera
 	ofCamera cam;
 	Vector3D cameraPosition;
