@@ -42,9 +42,6 @@ void ofApp::setup() {
 	skybox.load();
 
 	//Camera
-	//cam = ofxFirstPersonCamera();
-	//cam.enableControl();
-	//cam.movespeed = .001;
 	cam.setPosition(0, 0, 0);
 	cam.setFarClip(15000);
 
