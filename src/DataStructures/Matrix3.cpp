@@ -124,16 +124,14 @@ Vector3D & Matrix3::operator*(const Vector3D& v) const
 
 bool Matrix3::operator==(const Matrix3& matrix) const
 {
-	bool isEqual = true;
 	for (int i = 0; i < m_size; i++) {
 		for (int j = 0; j < m_size; j++) {
-			isEqual = (this->at(i,j) == matrix.at(i,j));
-			if (!isEqual) {
-				return isEqual;
+			if (!cmpf(this->at(i, j), matrix.at(i, j))) {
+				return false;
 			}
 		}
 	}
-	return isEqual;
+	return true;
 }
 
 bool Matrix3::operator!=(const Matrix3& matrix) const
@@ -234,47 +232,36 @@ void Matrix3::invert() {
 
 	// Inversion stocked in var
 	float coeff;
-	Matrix3 sumLinesMatrix;
 
-	/// Gaussian elimination ///
+	/// Gaussian elimination - Gauss-Jordan algorithm ///
 
-	// First step
-	// Make the matrix into an upper triangle
-	for (int i = 0; i < m_size; i++) {
-		sumLinesMatrix = Matrix3::Identity();
-		
-		// Store the current diagonal coeff value, is non null by definition
-		coeff = A.at(i, i);
+	int r, k;
+	r = -1;
 
-		// Get 1 on current line's diagonal coefficient
-		for (int j = i; j < m_size; j++) {
-			A.at(i, j) *= 1 / coeff; // divide all line by coefficient
+	for (int j = 0; j < m_size; j++) {
+		k = A.findColumnMax(j);
+		if (A.at(k, j) == 0) {
+			continue;
 		}
 
-		// Build line operation
-		for (int k = i + 1; k < m_size; k++) {
-			sumLinesMatrix.at(k, i) = -1 / A.at(k, k);
+		r++;
+		coeff = 1 / A.at(k, j);
+		A.multiplyLineByScalar(k, coeff);
+		I.multiplyLineByScalar(k, coeff);
+
+		if (k != r) {
+			A.swapLines(k, r);
+			I.swapLines(k, r);
 		}
 
-		// Apply the line operation
-		A = sumLinesMatrix * A;
-		I = sumLinesMatrix * I;
-	}
-
-	// Step 2
-	// Make the matrix into identity
-	for (int i = m_size - 1; i > 0; i--) 
-	{
-		Matrix3 sumLinesMatrix = Matrix3::Identity();
-
-		// Build line operation
-		for (int k = i - 1; k < m_size; k++) {
-			sumLinesMatrix.at(k, i) = -1 / A.at(k, k);
+		for (int i = 0; i < m_size; i++) {
+			if (i == r) {
+				continue;
+			}
+			coeff = -A.at(i,j);
+			A.addLineMultipleToTargetLine(i, r, coeff);
+			I.addLineMultipleToTargetLine(i, r, coeff);
 		}
-
-		// Apply the line operation
-		A = sumLinesMatrix * A;
-		I = sumLinesMatrix * I;
 	}
 
 	// Apply inversion on this
@@ -322,22 +309,24 @@ string Matrix3::toString() const
 	buffer += "]";
 	return buffer;
 }
+
+// Private
 float Matrix3::getCofactor(int i, int j)
 {
 	float matrix2[4] = {};
 	float direction = ((i + j) % 2) == 0 ? 1 : -1;
 	int idx = 0;
-	for (int i_ = 0; i_ < m_size; i_++) 
+	for (int i_ = 0; i_ < m_size; i_++)
 	{
 		// Skip i-th line
 		if (i == i_) {
 			continue;
 		}
 
-		for (int j_ = 0; j_ < m_size; j_++) 
+		for (int j_ = 0; j_ < m_size; j_++)
 		{
 			// Skip j-th column
-			if (j == j_) 
+			if (j == j_)
 			{
 				continue;
 			}
@@ -349,4 +338,46 @@ float Matrix3::getCofactor(int i, int j)
 	float cofactor = 0;
 
 	return direction * ((matrix2[0] * matrix2[3]) - (matrix2[1] * matrix2[2]));
+}
+
+int Matrix3::findColumnMax(int j_col)
+{
+	int i_max = j_col;
+
+	// won't return any index over the column's one 
+	for (int i = j_col; i < m_size; i++) {
+		if (this->at(i, j_col) >= this->at(i_max, j_col)) {
+			i_max = i;
+		}
+	}
+
+	return i_max;
+}
+
+void Matrix3::swapLines(int i1, int i2) 
+{
+	for (int j = 0; j < m_size; j++) {
+		float tmpBuffer = this->at(i1, j);
+		this->at(i1, j) = this->at(i2, j);
+		this->at(i2, j) = tmpBuffer;
+	}
+}
+
+void Matrix3::multiplyLineByScalar(int i, float x) 
+{
+	for (int j = 0; j < m_size; j++) {
+		this->at(i, j) *= x;
+	}
+}
+
+void Matrix3::addLineMultipleToTargetLine(int i_target, int i_other, float coeff) 
+{
+	for (int j = 0; j < m_size; j++) {
+		this->at(i_target, j) += coeff * this->at(i_other, j);
+	}
+}
+
+bool Matrix3::cmpf(float A, float B, float epsilon)
+{
+	return (fabs(A - B) < epsilon);
 }

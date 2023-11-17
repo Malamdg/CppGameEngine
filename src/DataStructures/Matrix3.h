@@ -61,4 +61,14 @@ private:
 	float m_coeffs[9];
 
 	float getCofactor(int i, int j);
+
+	int findColumnMax(int j_col);
+
+	void swapLines(int i1, int i2);
+
+	void multiplyLineByScalar(int i, float x);
+
+	void addLineMultipleToTargetLine(int i_target, int i_other, float coeff);
+
+	static bool cmpf(float A, float B, float epsilon = 10e-5);
 };
