@@ -41,12 +41,12 @@ void ofApp::setup() {
 	skyboxCenter = ofVec3f(0, 0, 0);
 	skybox.load();
 
-	// Setup cam variables
-	cameraPosition = Vector3D(0, 0, 500);
-	// Pythagoras to get displayed width with fov and z of camera 	
-	float fovRad = cam.getFov() * PI / 180;
-	viewWidth = tan(fovRad / 2) * 2 * cameraPosition.z();
-	viewHeight = viewWidth / cam.getAspectRatio();
+	//Camera
+	//cam = ofxFirstPersonCamera();
+	//cam.enableControl();
+	//cam.movespeed = .001;
+	cam.setPosition(0, 0, 0);
+	cam.setFarClip(15000);
 
 }
 
@@ -70,6 +70,8 @@ void ofApp::draw() {
 
 	// draw Skybox
 	skybox.draw();
+
+	ofDrawGrid(10.0f, 10, true);
 
 	// display texts on screen
 	drawText();
@@ -95,77 +97,7 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-	fps = ofGetFrameRate();
 
-	float duration = fps == 0 ? 0 : 1 / fps;
-
-	float rotationX = 0;
-	float rotationY = 0;
-
-	// move on arrow key press
-	switch (key)
-	{
-	case 57356: // Arrow left
-	{
-		rotationY = duration;
-		break;
-	}
-	case 57357: // Arrow up
-	{
-		rotationX = duration;
-		break;
-	}
-	case 57358: // Arrow right
-	{
-		rotationY = -duration;
-		break;
-	}
-	case 57359: // Arrow down
-	{
-		rotationX = -duration;
-		break;
-	}
-	case 'q':
-	case 'a':
-	{
-		cam.truck(-10 * duration);
-		break;
-	}
-	case 'z':
-	case 'w':
-	{
-		cam.dolly(- 10 * duration);
-		break;
-	}
-	case 'd':
-	{
-		cam.truck(10 * duration);
-		break;
-	}
-	case 's':
-	{
-		cam.dolly(10 * duration);
-		break;
-	}
-	case 'r':
-	{
-		cam.boom(10 * duration);
-		break;
-	}
-	case 'e' :
-	{
-		cam.boom(-10 * duration);
-		break;
-	}
-	default:
-		return;
-	}
-
-	cam.tiltRad(rotationX);
-	glm::quat rotation = Quaternion::Euler(0, rotationY, 0).q();
-	glm::quat orientiation = cam.getGlobalOrientation();
-
-	cam.setGlobalOrientation(orientiation * rotation);
 }
 
 //--------------------------------------------------------------
@@ -192,7 +124,7 @@ void ofApp::mouseDragged(int x, int y, int button) {
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button) {
-
+	cam.toggleControl();
 }
 
 //--------------------------------------------------------------

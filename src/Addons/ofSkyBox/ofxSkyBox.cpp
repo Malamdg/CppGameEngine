@@ -51,7 +51,7 @@ void ofxSkyBox::draw() {
     	glPushMatrix();
 
 
-	 Draw_Skybox(0, 0, 0, 100, 100, 100);
+	 Draw_Skybox(0, 0, 0, 2048, 2048, 2048);
 
 
 

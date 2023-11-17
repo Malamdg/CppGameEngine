@@ -16,6 +16,7 @@
 #include "Tests.h"
 
 #include "Addons/ofSkyBox/ofxSkyBox.h"
+#include "Addons/ofFirstPersonCamera/ofxFirstPersonCamera.h"
 
 class ofApp : public ofBaseApp {
 
@@ -50,7 +51,7 @@ private:
 	ofLight directionalLight;
 
 	//Camera
-	ofCamera cam;
+	ofxFirstPersonCamera cam;
 	Vector3D cameraPosition;
 	float viewWidth;
 	float viewHeight;

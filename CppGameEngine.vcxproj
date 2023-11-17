@@ -109,6 +109,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.cpp" />
     <ClCompile Include="src\Addons\ofSkyBox\ofxCubeMap.cpp" />
     <ClCompile Include="src\Addons\ofSkyBox\ofxSkyBox.cpp" />
     <ClCompile Include="src\Blob.cpp" />
@@ -134,6 +135,7 @@
     <ClCompile Include="src\Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.h" />
     <ClInclude Include="src\Addons\ofSkyBox\ofxCubeMap.h" />
     <ClInclude Include="src\Addons\ofSkyBox\ofxSkyBox.h" />
     <ClInclude Include="src\Blob.h" />

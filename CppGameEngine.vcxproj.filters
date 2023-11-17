@@ -60,6 +60,9 @@
     <ClCompile Include="src\Addons\ofSkyBox\ofxSkyBox.cpp">
       <Filter>Addons\ofSkyBox</Filter>
     </ClCompile>
+    <ClCompile Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.cpp">
+      <Filter>Addons\ofFirstPersonCamera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Blob.h" />
@@ -120,6 +123,9 @@
     <ClInclude Include="src\Addons\ofSkyBox\ofxSkyBox.h">
       <Filter>Addons\ofSkyBox</Filter>
     </ClInclude>
+    <ClInclude Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.h">
+      <Filter>Addons\ofFirstPersonCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Collisions">
@@ -136,6 +142,9 @@
     </Filter>
     <Filter Include="Addons\ofSkyBox">
       <UniqueIdentifier>{bba909f5-2276-41f2-ac1c-825ea8709ae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Addons\ofFirstPersonCamera">
+      <UniqueIdentifier>{ab797d9f-b13c-461f-a693-0186406317ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
