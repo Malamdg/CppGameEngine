@@ -1,5 +1,5 @@
 #pragma once
-#include "Vector3D.h"
+#include "DataStructures/Vector3D.h"
 #include "DataStructures/Matrix3.h"
 #include "DataStructures/Matrix4.h"
 #include "DataStructures/Quaternion.h"
@@ -333,5 +333,3 @@ private:
 	static bool QuaternionSlerp1();
 	static bool QuaternionSlerpX();
 };
-};
-
