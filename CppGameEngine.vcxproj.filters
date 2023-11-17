@@ -27,6 +27,9 @@
     <ClCompile Include="src\Datastructures\Matrix4.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
+    <ClCompile Include="src\DataStructures\Quaternion.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
     <ClCompile Include="src\DataStructures\Vector3D.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
@@ -56,12 +59,6 @@
     </ClCompile>
     <ClCompile Include="src\Forces\SpringParticlePoint.cpp">
       <Filter>Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DataStructures\Quaternion.cpp">
-      <Filter>DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DataStructures\Vector3D.cpp">
-      <Filter>DataStructures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,7 +93,6 @@
     <ClInclude Include="src\DataStructures\Vector3D.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
-    <ClCompile Include="src\DataStructures\Vector3D.h">
       <Filter>DataStructures</Filter>
     </ClCompile>
     <ClInclude Include="src\Forces\ElasticParticleParticle.h">
@@ -125,12 +121,6 @@
     </ClInclude>
     <ClInclude Include="src\Forces\SpringParticlePoint.h">
       <Filter>Forces</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DataStructures\Quaternion.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DataStructures\Vector3D.h">
-      <Filter>DataStructures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
