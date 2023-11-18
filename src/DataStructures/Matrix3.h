@@ -138,13 +138,13 @@ public:
 	void operator*=(const Matrix3& m);
 
 	/*
-	Redefinition of *= operator (in place sum with a matrix)
+	Redefinition of += operator (in place sum with a matrix)
 	@param m, the other matrix
 	*/
 	void operator+=(const Matrix3& m);
 
 	/*
-	Redefinition of *= operator (in place difference with a matrix)
+	Redefinition of -= operator (in place difference with a matrix)
 	@param m, the other matrix
 	*/
 	void operator-=(const Matrix3& m);
