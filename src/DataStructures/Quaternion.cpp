@@ -108,7 +108,7 @@ float Quaternion::dot(Quaternion& q)const
 
 Quaternion& Quaternion::operator^(const float exp)const
 {
-	if (Norm() != 1) throw std::exception("Quaternion isn't a rotation - Current implementation do not consider exponentiation for Quaternion that are not roations");
+	if (abs(Norm() - 1) > 10e-10) throw std::exception("Quaternion isn't a rotation - Current implementation do not consider exponentiation for Quaternion that are not roations");
 
 	float a = acos(m_w);
 	Vector3D resv = m_v * (sin(exp * a) / sin(a));
@@ -169,4 +169,6 @@ Matrix3 Quaternion::matrixFromQuaternion() const
 	coefficient[8] = 1 - 2 * (m_x * m_x + m_y * m_y);
 
 	Matrix3 mq = Matrix3(coefficient);
+
+	return mq;
 }
