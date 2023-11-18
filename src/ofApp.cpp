@@ -21,7 +21,8 @@ void ofApp::setup() {
 	commandText = "";
 
 	// Setup lists
-	primitives = std::list<std::pair<of3dPrimitive*, int>>(); // display primitive on each draw()
+	primitives = list<pair<of3dPrimitive*, int>>(); // display primitive on each draw()
+	rigidBodies = list<RigidBody*>();
 
 	//Colors
 	colors = new ofColor[10];
@@ -34,15 +35,15 @@ void ofApp::setup() {
 
 	ofSpherePrimitive* laSpherePourTester = new ofSpherePrimitive();
 	laSpherePourTester->setRadius(6);
-	laSpherePourTester->setPosition(0, 0, -10);
-	primitives.push_back(std::pair<of3dPrimitive*, int>(laSpherePourTester, magenta));
+	laSpherePourTester->setPosition(0, 0, 0);
+	primitives.push_back(pair<of3dPrimitive*, int>(laSpherePourTester, magenta));
 
 	//SkyBox
 	skyboxCenter = ofVec3f(0, 0, 0);
 	skybox.load();
 
 	//Camera
-	cam.setPosition(0, 0, 0);
+	cam.setPosition(0, 0, 10);
 	cam.setFarClip(15000);
 
 }
@@ -51,7 +52,14 @@ void ofApp::setup() {
 void ofApp::update() {
 	fps = ofGetFrameRate();
 
-	float duration = fps == 0 ? 0 : 1/fps;
+	duration = fps == 0 ? 0 : 1/fps;
+
+	for (RigidBody* rb : rigidBodies)
+	{
+		rb->addForce(Vector3D(0, -9.8f, 0));
+		rb->Update();
+	}
+
 
 }
 
@@ -67,14 +75,15 @@ void ofApp::draw() {
 
 	// draw Skybox
 	skybox.draw();
+	ofEnableDepthTest();
 
 	ofDrawGrid(10.0f, 10, true);
 
 	// display texts on screen
-	drawText();
-	
+	//drawText();
+
 	// display primitives with correct color
-	for (std::pair<of3dPrimitive*, int> primitive : primitives)
+	for (pair<of3dPrimitive*, int> primitive : primitives)
 	{
 		ofSetColor(colors[primitive.second]);
 
@@ -90,11 +99,20 @@ void ofApp::draw() {
 	
 	ofDisableDepthTest();
 
+	std::stringstream strm;
+	strm << "framerate : " << fps << "    |    Masse : " << rbMasse;
+	ofSetWindowTitle(strm.str());
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-
+	switch (key)
+	{
+	case ' ':
+	{
+		rbMasse += duration*4;
+	}
+	}
 }
 
 //--------------------------------------------------------------
@@ -105,7 +123,23 @@ void ofApp::keyReleased(int key) {
 	{
 		fullscreen = !fullscreen;
 		ofSetFullscreen(fullscreen);
+		break;
 	}
+	case ' ': //Lauch RigidBody
+		Vector3D position = cam.getPosition();
+		Vector3D direction = (position * -1);
+		direction.Normalize();
+		float velocity = 50;
+
+		RigidBody* rb = new RigidBody(new ofBoxPrimitive(2, 2, 2), Vector3D(),
+			position, direction * velocity,
+			1/rbMasse, .1f);
+		
+		rigidBodies.push_back(rb);
+		primitives.push_back(pair<of3dPrimitive*, int>(rb->getPrimitives(), cyan));
+		
+		rbMasse = 0;
+		break;
 	}
 }
 
@@ -146,7 +180,7 @@ void ofApp::windowResized(int w, int h) {
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg) {
-
+	
 }
 
 //--------------------------------------------------------------

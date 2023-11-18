@@ -63,6 +63,13 @@
     <ClCompile Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.cpp">
       <Filter>Addons\ofFirstPersonCamera</Filter>
     </ClCompile>
+    <ClCompile Include="src\RigidBody.cpp" />
+    <ClCompile Include="src\DataStructures\Matrix3.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataStructures\Matrix4.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Blob.h" />
@@ -125,6 +132,13 @@
     </ClInclude>
     <ClInclude Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.h">
       <Filter>Addons\ofFirstPersonCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RigidBody.h" />
+    <ClInclude Include="src\DataStructures\Matrix3.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\Matrix4.h">
+      <Filter>DataStructures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

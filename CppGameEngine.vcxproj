@@ -118,6 +118,8 @@
     <ClCompile Include="src\Collisions\Collision.cpp" />
     <ClCompile Include="src\Collisions\CollisionHandler.cpp" />
     <ClCompile Include="src\Collisions\Spindle.cpp" />
+    <ClCompile Include="src\DataStructures\Matrix3.cpp" />
+    <ClCompile Include="src\DataStructures\Matrix4.cpp" />
     <ClCompile Include="src\DataStructures\Vector3D.cpp" />
     <ClCompile Include="src\Forces\ElasticParticleParticle.cpp" />
     <ClCompile Include="src\Forces\ElasticParticlePoint.cpp" />
@@ -145,6 +147,8 @@
     <ClInclude Include="src\Collisions\Collision.h" />
     <ClInclude Include="src\Collisions\CollisionHandler.h" />
     <ClInclude Include="src\Collisions\Spindle.h" />
+    <ClInclude Include="src\DataStructures\Matrix3.h" />
+    <ClInclude Include="src\DataStructures\Matrix4.h" />
     <ClInclude Include="src\DataStructures\Vector3D.h" />
     <ClInclude Include="src\Forces\ElasticParticleParticle.h" />
     <ClInclude Include="src\Forces\ElasticParticlePoint.h" />

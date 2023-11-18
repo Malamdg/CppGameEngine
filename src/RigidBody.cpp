@@ -75,7 +75,7 @@ float RigidBody::getK1() { return m_frictionK1; }
 
 float RigidBody::getK2() { return m_frictionK2; }
 
-Vector3D RigidBody::integrate(function<Vector3D(float)> f, float interval[2], int N = 100)
+Vector3D RigidBody::integrate(function<Vector3D(float)> f, float interval[2], int N)
 {
 	// interval over which we integrate
 	float h = (interval[1] - interval[0]) / N;
@@ -118,3 +118,5 @@ void RigidBody::updatePosition(float duration)
 
 	m_primitive->setPosition(m_position.v3());
 }
+
+of3dPrimitive* RigidBody::getPrimitives() const { return m_primitive; }
