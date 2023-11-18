@@ -63,6 +63,7 @@
     <ClCompile Include="src\DataStructures\Vector3D.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
+    <ClCompile Include="src\RigidBody.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Blob.h" />
@@ -126,6 +127,7 @@
     <ClInclude Include="src\DataStructures\Vector3D.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
+    <ClInclude Include="src\RigidBody.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Collisions">

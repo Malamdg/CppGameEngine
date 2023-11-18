@@ -2,6 +2,7 @@
 
 void Quaternion::fixFloat()
 {
+	// threshold at 10e-10, under this value we consider that the coordinate is null
 	if (abs(m_x) < 10e-10) m_x = .0f;
 	if (abs(m_y) < 10e-10) m_y = .0f;
 	if (abs(m_z) < 10e-10) m_z = .0f;
@@ -29,6 +30,7 @@ Quaternion::~Quaternion() { }
 
 Quaternion& Quaternion::Euler(const float tetax, const float tetay, const float tetaz)
 {
+	// compute the three coordinate of the quaternion according to the angle 
 	Quaternion qx = Quaternion(cos(tetax / 2), sin(tetax / 2), 0, 0);
 	Quaternion qy = Quaternion(cos(tetay / 2), 0, sin(tetay / 2), 0);
 	Quaternion qz = Quaternion(cos(tetaz / 2), 0, 0, sin(tetaz / 2));

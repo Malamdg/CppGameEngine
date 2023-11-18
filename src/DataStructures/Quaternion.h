@@ -42,8 +42,8 @@ public:
 
 	@param detax, rotation according to the first axis
 	@param detay, rotation according to the second axis
-		@param detaz, rotation according to the third axis
-		@return quaternion associated to the rotation
+	@param detaz, rotation according to the third axis
+	@return quaternion associated to the rotation
 	*/
 	static Quaternion& Euler(const float detax, const float detay, const float detaz);
 	/*
@@ -52,7 +52,15 @@ public:
 	@return identity
 	*/
 	static Quaternion& Identity();
-
+	
+	/*
+	Spherical Linear Interpolation of two Quaternions
+ 
+ 	@param q0, the first quaternion
+	@param q1, the second quaternion
+ 	@param t, fraction to keep
+ 	@return the queternion interpolated
+	*/
 	static Quaternion& slerp(const Quaternion& q0, const Quaternion& q1, const float t);
 
 	/*

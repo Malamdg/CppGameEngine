@@ -1,181 +1,40 @@
 #include "Matrix4.h"
 
-
-// Private
-
-void Matrix4::updateDet() 
-{
-	m_det = m_coefficients[0][0] * (m_coefficients[1][1] * m_coefficients[2][2] - m_coefficients[2][1] * m_coefficients[1][2]) 
-		- m_coefficients[1][0] * (m_coefficients[0][1] * m_coefficients[2][2] - m_coefficients[2][1] * m_coefficients[0][2])
-		+ m_coefficients[2][0] * (m_coefficients[0][1] * m_coefficients[1][2] - m_coefficients[1][1] * m_coefficients[0][2])
-	; // METTRE A JOUR
-}
-
-
 // Public
-Matrix4::Matrix4(float coefficients[4][4])
+Matrix4::Matrix4()
 {
-	for (int i = 0; i < m_size; i++) {
-		for (int j = 0; j < m_size; j++) {
-			m_coefficients[i][j] = coefficients[i][j];
+	for (int i = 0; i < m_size; i++)
+	{
+		for (int j = 0; j < m_size; j++)
+		{
+			m_coeffs[4 * i + j] = 0.f;
 		}
 	}
-
-	updateDet();
 }
 
-Matrix4::Matrix4(const float coefficients[4][4])
+Matrix4::Matrix4(float coefficients[16])
 {
-	for (int i = 0; i < m_size; i++) {
-		for (int j = 0; j < m_size; j++) {
-			m_coefficients[i][j] = coefficients[i][j];
-		}
+	for (int i = 0; i < m_size * m_size; i++)
+	{
+		m_coeffs[i] = coefficients[i];
 	}
-
-	updateDet();
-}
-
-Matrix4::Matrix4(Vector3D column1, Vector3D column2, Vector3D column3, Vector3D column4)
-{
-	for (int i = 0; i < m_size; i++) {
-		for (int j = 0; j < m_size; j++) {
-			switch (i) {
-			case 1:
-				m_coefficients[i][j] = column2[j];
-				break;
-			case 2:
-				m_coefficients[i][j] = column3[j];
-				break;
-			case 3:
-				m_coefficients[i][j] = column4[j];
-				break;
-			default:
-				m_coefficients[i][j] = column1[j];
-				break;
-			}
-		}
-	}
-
-	updateDet();
 }
 
 Matrix4::~Matrix4() {}
 
-Matrix4 Matrix4::identity()
+Matrix4 Matrix4::Identity()
 {
-	Matrix4 matrix = Matrix4::zeros();
+	Matrix4 matrix = Matrix4::Zeros();
 	for (int i = 0; i < Matrix4::m_size; i++) {
-		matrix[i][i] = 1.f;
+		matrix.at(i, i) = 1.f;
 	}
 
 	return matrix;
 }
 
-Matrix4 Matrix4::zeros()
+Matrix4 Matrix4::Zeros()
 {
 	return Matrix4();
-}
-
-float Matrix4::det()
-{
-	return m_det;
-}
-
-
-// METTRE A JOUR
-void Matrix4::invert() {
-	if (m_det == 0.f) {
-		throw std::out_of_range("Non invertible matrix, det = 0 !");
-	}
-
-	// Augmented matrix 
-	Matrix4 A = Matrix4(m_coefficients);
-	Matrix4 I = Matrix4::identity();
-
-	// Inversion stocked in var
-	int permutIndex;
-	float coeff;
-	Matrix4 swapLinesMatrix, sumLinesMatrix;
-
-	// Gaussian elimination
-	for (int i = 0; i < m_size; i++) {
-		// Set the value for the current permutation index
-		permutIndex = (i + 1) % 3;
-		// Setup the matrix to put 0 on i-th column 
-		sumLinesMatrix = Matrix4::identity();
-		
-		while(A[i][i] == 0.f && i != m_size - 1) {
-			// Will break algorithm if we do so
-			if (permutIndex < i) {
-				break;
-			}
-
-			// Setup permutation matrix to swap lines with product
-			swapLinesMatrix = Matrix4::identity();
-			swapLinesMatrix[i][i] = 0.f;
-			swapLinesMatrix[i][permutIndex] = 1.f;
-			swapLinesMatrix[permutIndex][permutIndex] = 0.f;
-			swapLinesMatrix[permutIndex][i] = 1.f;
-			
-			// Swap lines
-			A *= swapLinesMatrix;
-			I *= swapLinesMatrix;
-
-			permutIndex = (permutIndex + 1) % 3;
-		}
-
-		// Store the current diagonal coeff value, is non null by definition
-		coeff = A[i][i];
-
-		// Get 1 on current line's diagonal coefficient
-		for (int j = i; j < m_size; j++) {
-			A[i][j] *= 1 / coeff; // divide all line by coefficient
-		}
-
-		// Build the matrix to put the 0 on the i-th column except for the diagonal
-		for (int k = 0; k < m_size; k++) {
-			if (k == i) {
-				continue;
-			}
-
-			sumLinesMatrix[k][i] = -1 / A[k][k];
-		}
-
-		// Apply the line operation
-		A *= sumLinesMatrix;
-		I *= sumLinesMatrix;
-	}
-
-	//apply inversion on this
-	for (int i = 0; i < m_size; i++) {
-		for (int j = 0; j < m_size; j++) {
-			m_coefficients[i][j] = I[i][j];
-		}
-	}
-}
-
-Matrix4 Matrix4::inverse() {
-	Matrix4 inv = Matrix4(m_coefficients);
-	inv.invert();
-	
-	return inv;
-}
-
-void Matrix4::transpose() {
-	Matrix4 aRef = Matrix4(m_coefficients);
-	for (int i = 0; i < m_size; i++) {
-		for (int j = i + 1; j < m_size; j++) {
-			m_coefficients[i][j] = aRef[j][i];
-			m_coefficients[j][i] = aRef[i][j];
-		}
-	}
-}
-
-Matrix4 Matrix4::transposedMatrix() {
-	Matrix4 transposed = Matrix4(m_coefficients);
-	transposed.transpose();
-	
-	return transposed;
 }
 
 Matrix4& Matrix4::operator+(const Matrix4& matrix) const
@@ -183,7 +42,7 @@ Matrix4& Matrix4::operator+(const Matrix4& matrix) const
 	Matrix4 sumResult = Matrix4();
 	for (int i = 0; i < m_size; i++) {
 		for (int j = 0; j < m_size; j++) {
-			sumResult[i][j] = m_coefficients[i][j] + matrix[i][j];
+			sumResult.at(i, j) = this->at(i, j) + matrix.at(i, j);
 		}
 	}
 
@@ -192,7 +51,14 @@ Matrix4& Matrix4::operator+(const Matrix4& matrix) const
 
 Matrix4& Matrix4::operator-(const Matrix4& matrix) const
 {
-	return Matrix4(m_coefficients) + (matrix * -1);
+	Matrix4 subResult = Matrix4();
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
+			subResult.at(i, j) = this->at(i, j) - matrix.at(i, j);
+		}
+	}
+
+	return subResult;
 }
 
 Matrix4& Matrix4::operator*(const Matrix4& matrix) const
@@ -201,7 +67,7 @@ Matrix4& Matrix4::operator*(const Matrix4& matrix) const
 	for (int i = 0; i < m_size; i++) {
 		for (int j = 0; j < m_size; j++) {
 			for (int k = 0; k < m_size; k++) {
-				productResult[i][j] += m_coefficients[i][k]*matrix[k][j];
+				productResult.at(i, j) += this->at(i, k) * matrix.at(k, j);
 			}
 		}
 	}
@@ -209,91 +75,274 @@ Matrix4& Matrix4::operator*(const Matrix4& matrix) const
 	return productResult;
 }
 
-Matrix4& Matrix4::operator*(const float& lambda) const 
+Matrix4& Matrix4::operator*(const float& lambda) const
 {
 	Matrix4 productResult = Matrix4();
 	for (int i = 0; i < m_size; i++) {
 		for (int j = 0; j < m_size; j++) {
-			productResult[i][j] = lambda * m_coefficients[i][j];
+			productResult.at(i, j) = lambda * this->at(i, j);
 		}
 	}
 
 	return productResult;
 }
 
-void Matrix4::operator+=(const Matrix4& matrix) 
+bool Matrix4::operator==(const Matrix4& matrix) const
 {
 	for (int i = 0; i < m_size; i++) {
 		for (int j = 0; j < m_size; j++) {
-			m_coefficients[i][j] += matrix[i][j];
-		}
-	}
-}
-
-void Matrix4::operator-=(const Matrix4& matrix) 
-{
-	for (int i = 0; i < m_size; i++) {
-		for (int j = 0; j < m_size; j++) {
-			m_coefficients[i][j] -= matrix[i][j];
-		}
-	}
-}
-
-void Matrix4::operator*=(const Matrix4& matrix) 
-{
-	Matrix4 prod = Matrix4(m_coefficients) * matrix;
-	for (int i = 0; i < m_size; i++) {
-		for (int j = 0; j < m_size; j++) {
-			m_coefficients[i][j] = prod[i][j];
-		}
-	}
-}
-
-void Matrix4::operator*=(const float& lambda) 
-{
-	Matrix4 prod = Matrix4(m_coefficients) * lambda;
-	for (int i = 0; i < m_size; i++) {
-		for (int j = 0; j < m_size; j++) {
-			m_coefficients[i][j] = prod[i][j];
-		}
-	}
-}
-
-bool Matrix4::operator==(const Matrix4& matrix) 
-{
-	bool isEqual = true;
-	for (int i = 0; i < m_size; i++) {
-		for (int j = 0; j < m_size; j++) {
-			isEqual = (m_coefficients[i][j] == matrix[i][j]);
-			if (!isEqual) {
-				return isEqual;
+			if (!cmpf(this->at(i, j), matrix.at(i, j))) {
+				return false;
 			}
 		}
 	}
-
-	return isEqual;
+	return true;
 }
 
-float* Matrix4::operator[](int i)
+bool Matrix4::operator!=(const Matrix4& matrix) const
 {
-	switch (i)
-	{
-	case 0: return m_coefficients[i];
-	case 1: return m_coefficients[i];
-	case 2: return m_coefficients[i];
-	case 3: return m_coefficients[i];
-	default: throw std::out_of_range("Bad idx passed to at()");
+	bool isDifferent = true;
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
+			isDifferent = (this->at(i, j) != matrix.at(i, j));
+			if (!isDifferent) {
+				return isDifferent;
+			}
+		}
+	}
+	return isDifferent;
+}
+
+void Matrix4::operator+=(const Matrix4& matrix)
+{
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
+			this->at(i, j) += matrix.at(i, j);
+		}
 	}
 }
 
-const float* Matrix4::operator[](int i) const 
+void Matrix4::operator-=(const Matrix4& matrix)
 {
-	switch (i)
-	{
-	case 0: return m_coefficients[i];
-	case 1: return m_coefficients[i];
-	case 2: return m_coefficients[i];
-	case 3: return m_coefficients[i];
-	default: throw std::out_of_range("Bad idx passed to at()");
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
+			this->at(i, j) -= matrix.at(i, j);
+		}
 	}
-};
+}
+
+void Matrix4::operator*=(const Matrix4& matrix)
+{
+	Matrix4 prod = Matrix4(m_coeffs) * matrix;
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
+			this->at(i, j) = prod.at(i, j);
+		}
+	}
+}
+
+void Matrix4::operator*=(const float& lambda)
+{
+	Matrix4 prod = Matrix4(m_coeffs) * lambda;
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
+			this->at(i, j) = prod.at(i, j);
+		}
+	}
+}
+
+float& Matrix4::at(int i, int j)
+{
+	if (i < 0 || i > m_size || j < 0 || j > m_size) {
+		throw std::out_of_range("Bad idx passed to at()");
+	}
+
+	return m_coeffs[i * 4 + j];
+}
+
+const float& Matrix4::at(int i, int j) const
+{
+	if (i < 0 || i >= m_size || j < 0 || j >= m_size) {
+		throw std::out_of_range("Bad idx passed to at");
+	}
+
+	return m_coeffs[i * 4 + j];
+}
+
+float Matrix4::getDeterminant()
+{
+	float det = 0.f;
+	for (int i = 0; i < m_size; i++)
+	{
+		det += this->at(i, 0) * getCofactor(i, 0);
+	}
+
+	return det;
+}
+
+void Matrix4::invert() {
+	if (getDeterminant() == 0.f) {
+		return;
+	}
+
+	float coeffs[16] = {};
+
+	for (int i = 0; i < m_size * m_size; i++) {
+		coeffs[i] = m_coeffs[i];
+	}
+
+	// Augmented matrix 
+	Matrix4 A = Matrix4(coeffs);
+	Matrix4 I = Matrix4::Identity();
+
+	// Inversion stocked in var
+	float coeff;
+
+	/// Gaussian elimination - Gauss-Jordan algorithm ///
+
+	int r, k;
+	r = -1;
+
+	for (int j = 0; j < m_size; j++) {
+		k = A.findColumnMax(j);
+		if (A.at(k, j) == 0) {
+			continue;
+		}
+
+		r++;
+		coeff = 1 / A.at(k, j);
+		A.multiplyLineByScalar(k, coeff);
+		I.multiplyLineByScalar(k, coeff);
+
+		if (k != r) {
+			A.swapLines(k, r);
+			I.swapLines(k, r);
+		}
+
+		for (int i = 0; i < m_size; i++) {
+			if (i == r) {
+				continue;
+			}
+			coeff = -A.at(i, j);
+			A.addLineMultipleToTargetLine(i, r, coeff);
+			I.addLineMultipleToTargetLine(i, r, coeff);
+		}
+	}
+
+	// Apply inversion on this
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
+			this->at(i, j) = I.at(i, j);
+		}
+	}
+}
+
+Matrix4 Matrix4::Inverse() {
+	Matrix4 inv = Matrix4(m_coeffs);
+	inv.invert();
+
+	return inv;
+}
+
+void Matrix4::transpose() {
+	Matrix4 aRef = Matrix4(m_coeffs);
+	for (int i = 0; i < m_size; i++) {
+		for (int j = i + 1; j < m_size; j++) {
+			this->at(i, j) = aRef.at(j, i);
+			this->at(j, i) = aRef.at(i, j);
+		}
+	}
+}
+
+Matrix4 Matrix4::Transposed() {
+	Matrix4 transposed = Matrix4(m_coeffs);
+	transposed.transpose();
+
+	return transposed;
+}
+
+string Matrix4::toString() const
+{
+	string buffer = "[\n";
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
+			buffer += to_string(m_coeffs[4 * i + j]);
+			buffer += (j == m_size - 1) ? "\n" : ",";
+		}
+	}
+
+	buffer += "]";
+	return buffer;
+}
+
+// Private
+float Matrix4::getCofactor(int i, int j)
+{
+	float coeffs[9] = {};
+	float direction = ((i + j) % 2) == 0 ? 1 : -1;
+	int idx = 0;
+	for (int i_ = 0; i_ < m_size; i_++)
+	{
+		// Skip i-th line
+		if (i == i_) {
+			continue;
+		}
+
+		for (int j_ = 0; j_ < m_size; j_++)
+		{
+			// Skip j-th column
+			if (j == j_)
+			{
+				continue;
+			}
+			coeffs[idx] = this->at(i_, j_);
+			idx++;
+		}
+	}
+
+	Matrix3 comatrix = Matrix3(coeffs);
+
+	return direction * comatrix.getDeterminant();
+}
+
+int Matrix4::findColumnMax(int j_col)
+{
+	int i_max = j_col;
+
+	// won't return any index over the column's one 
+	for (int i = j_col; i < m_size; i++) {
+		if (this->at(i, j_col) >= this->at(i_max, j_col)) {
+			i_max = i;
+		}
+	}
+
+	return i_max;
+}
+
+void Matrix4::swapLines(int i1, int i2)
+{
+	for (int j = 0; j < m_size; j++) {
+		float tmpBuffer = this->at(i1, j);
+		this->at(i1, j) = this->at(i2, j);
+		this->at(i2, j) = tmpBuffer;
+	}
+}
+
+void Matrix4::multiplyLineByScalar(int i, float x)
+{
+	for (int j = 0; j < m_size; j++) {
+		this->at(i, j) *= x;
+	}
+}
+
+void Matrix4::addLineMultipleToTargetLine(int i_target, int i_other, float coeff)
+{
+	for (int j = 0; j < m_size; j++) {
+		this->at(i_target, j) += coeff * this->at(i_other, j);
+	}
+}
+
+bool Matrix4::cmpf(float A, float B, float epsilon)
+{
+	return (fabs(A - B) < epsilon);
+}

@@ -4,7 +4,7 @@ void Tests::ExecuteTests()
 {
 	ExecuteVector3DTests();
 	ExecuteMatrix3Tests();
-	//ExecuteMatrix4Tests();
+	ExecuteMatrix4Tests();
 	ExecuteQuaternionTests();
 }
 
@@ -30,7 +30,7 @@ void Tests::ExecuteVector3DTests()
 	success += Vector3DVectorProduct();
 	success += Vector3Dfloatfloat();
 
-	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl;
+	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl << std::endl;
 }
 
 void Tests::ExecuteQuaternionTests()
@@ -305,7 +305,7 @@ bool Tests::QuaternionEulerConstructor()
 
 	Quaternion quat = Quaternion::Euler(3.14, -0.63, .16);
 	
-	Quaternion intendedQuat = Quaternion(0.0255136, 0.9477354, -0.0762533, -0.308765); // <- Valeur trouvées via https://www.andre-gaschler.com/rotationconverter/
+	Quaternion intendedQuat = Quaternion(0.0255136, 0.9477354, -0.0762533, -0.308765); // <- Valeur trouvï¿½es via https://www.andre-gaschler.com/rotationconverter/
 
 	if (quat.EqualsWithTolerance(intendedQuat, 10e-5))
 	{
@@ -506,7 +506,7 @@ bool Tests::QuaternionExponentiation()
 
 	Quaternion quat1 = Quaternion::Euler(3, 1, -2);
 	Quaternion res = quat1^5;
-	Quaternion intendedQuat = Quaternion(0.77461690052, -0.31231549002, -0.53051057326, -0.144866000); // Calcul fait à la main, avec accumulation d'erreur d'approximation d'ou la tolerance relativement haute
+	Quaternion intendedQuat = Quaternion(0.77461690052, -0.31231549002, -0.53051057326, -0.144866000); // Calcul fait ï¿½ la main, avec accumulation d'erreur d'approximation d'ou la tolerance relativement haute
 
 	if (res.EqualsWithTolerance(intendedQuat, 1e-5))
 	{
@@ -568,7 +568,7 @@ bool Tests::QuaternionSlerpX()
 
 	Quaternion q0 = Quaternion(1, 0, 0, 0);
 	Quaternion q1 = Quaternion(0.086, -0.030, -0.934, -0.345);
-	Quaternion intendedQuat = Quaternion(0.7368853371, -0.0203559485, -0.6337485312, -0.2340934082); // Valeur trouvées via https://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/slerp/index.htm
+	Quaternion intendedQuat = Quaternion(0.7368853371, -0.0203559485, -0.6337485312, -0.2340934082); // Valeur trouvï¿½es via https://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/slerp/index.htm
 
 	Quaternion res = Quaternion::slerp(q0, q1, .5);
 
@@ -583,7 +583,6 @@ bool Tests::QuaternionSlerpX()
 
 	return false;
 }
-
 
 ////////// Matrix3 //////////
 
@@ -617,10 +616,10 @@ void Tests::ExecuteMatrix3Tests()
 bool Tests::Matrix3EmtpyConstructor()
 {
 	Matrix3 matrix = Matrix3();
-	float coeff[9] = {
-		0,0,0,
-		0,0,0,
-		0,0,0
+	float coeff[9] = { 
+		0,0,0, 
+		0,0,0, 
+		0,0,0 
 	};
 
 	Matrix3 intendedMatrix = Matrix3(coeff);
@@ -644,7 +643,7 @@ bool Tests::Matrix3VectorConstructor()
 	Vector3D vec3 = Vector3D(0.5, 1, 0.5);
 	Matrix3 matrix = Matrix3(vec1, vec2, vec3);
 	float coeffs[9] = {
-		1, 1, 1,
+		1, 1, 1, 
 		-1, 1, -1,
 		0.5, 1, 0.5
 	};
@@ -665,7 +664,7 @@ bool Tests::Matrix3VectorConstructor()
 bool Tests::Matrix3Zeros()
 {
 	Matrix3 matrix = matrix.Zeros();
-
+	
 	float coeffs[9] = {
 		0,0,0,
 		0,0,0,
@@ -711,7 +710,7 @@ bool Tests::Matrix3Id()
 bool Tests::AccessingAndModifyingMatrix3()
 {
 	Matrix3 matrix = Matrix3();
-	float coeff[9] = {
+	float coeff[9] = { 
 		5.f,0,0,
 		0, 6.f,0,
 		0,0,-5.f
@@ -719,9 +718,9 @@ bool Tests::AccessingAndModifyingMatrix3()
 
 	Matrix3 intendedMatrix = Matrix3(coeff);
 
-	matrix.at(0, 0) = 5.f;
-	matrix.at(1, 1) = 6.f;
-	matrix.at(2, 2) = -5.f;
+	matrix.at(0,0) = 5.f;
+	matrix.at(1,1) = 6.f;
+	matrix.at(2,2) = -5.f;
 
 	if (matrix == intendedMatrix)
 	{
@@ -878,9 +877,9 @@ bool Tests::Matrix3Addition()
 
 	Matrix3 firstMatrix = Matrix3(coeff1);
 
-	float coeff2[9] = {
-		7, 0, 0,
-		0, -4, 0,
+	float coeff2[9] = { 
+		7, 0, 0, 
+		0, -4, 0, 
 		0, 0, -2.6
 	};
 	Matrix3 secondMatrix = Matrix3(coeff2);
@@ -910,30 +909,30 @@ bool Tests::Matrix3Addition()
 bool Tests::Matrix3Soustraction()
 {
 
-	float coeff1[9] =
-	{
+	float coeff1[9] = 
+	{ 
 		5, 1, 1,
 		2, 6, 1,
-		2, 2, -5
+		2, 2, -5 
 	};
 
 	Matrix3 firstMatrix = Matrix3(coeff1);
 
-	float coeff2[9] =
-	{
-		7, 3, 3 ,
-		-4, -4, 3,
-		-4, -4, -2.6
+	float coeff2[9] = 
+	{ 
+		7, 3, 3 , 
+		-4, -4, 3, 
+		-4, -4, -2.6 
 	};
 	Matrix3 secondMatrix = Matrix3(coeff2);
 
 	Matrix3 subMatrix = firstMatrix - secondMatrix;
 
-	float coeff3[9] =
-	{
-		-2, -2, -2,
-		6, 10, -2,
-		6, 6, -2.4
+	float coeff3[9] = 
+	{ 
+		-2, -2, -2, 
+		6, 10, -2, 
+		6, 6, -2.4 
 	};
 	Matrix3 intendedMatrix = Matrix3(coeff3);
 
@@ -994,7 +993,7 @@ bool Tests::Matrix3Invert()
 		-0.35905044510385756677, 0.06676557863501483679, -0.41543026706231454006
 	};
 	Matrix3 intendedMatrix = Matrix3(coeff2);
-
+	
 	matrix.invert();
 
 	if (matrix == intendedMatrix)
@@ -1011,19 +1010,19 @@ bool Tests::Matrix3Invert()
 
 bool Tests::Matrix3Inverse()
 {
-	float coeff1[9] =
-	{
-		5, 1, 3,
-		2, 6, 0,
+	float coeff1[9] = 
+	{ 
+		5, 1, 3, 
+		2, 6, 0, 
 		-4, 0.1, -5
 	};
 	Matrix3 matrix = Matrix3(coeff1);
 
-	float coeff2[9] =
-	{
-		0.44510385756676557863, -0.07863501483679525222, 0.26706231454005934718,
+	float coeff2[9] = 
+	{ 
+		0.44510385756676557863, -0.07863501483679525222, 0.26706231454005934718, 
 		-0.14836795252225519287, 0.19287833827893175073, -0.089020771513353115725,
-		-0.35905044510385756677, 0.06676557863501483679, -0.41543026706231454006
+		-0.35905044510385756677, 0.06676557863501483679, -0.41543026706231454006 
 	};
 	Matrix3 intendedMatrix = Matrix3(coeff2);
 
@@ -1043,19 +1042,19 @@ bool Tests::Matrix3Inverse()
 
 bool Tests::Matrix3Transpose()
 {
-	float coeff1[9] =
-	{
-		5, 1, 3,
-		2, 6, 0,
-		-4, 0.1, -5
+	float coeff1[9] = 
+	{ 
+		5, 1, 3, 
+		2, 6, 0, 
+		-4, 0.1, -5 
 	};
 	Matrix3 matrix = Matrix3(coeff1);
 
-	float coeff2[9] =
-	{
-		5, 2, -4,
-		1, 6, 0.1,
-		3, 0, -5
+	float coeff2[9] = 
+	{ 
+		5, 2, -4, 
+		1, 6, 0.1, 
+		3, 0, -5 
 	};
 	Matrix3 intendedMatrix = Matrix3(coeff2);
 
@@ -1075,19 +1074,19 @@ bool Tests::Matrix3Transpose()
 
 bool Tests::Matrix3Transposed()
 {
-	float coeff1[9] =
-	{
-		5, 1, 3,
-		2, 6, 0,
-		-4, 0.1, -5
+	float coeff1[9] = 
+	{ 
+		5, 1, 3, 
+		2, 6, 0, 
+		-4, 0.1, -5 
 	};
 	Matrix3 matrix = Matrix3(coeff1);
 
-	float coeff2[9] =
-	{
-		5, 2, -4,
-		1, 6, 0.1,
-		3, 0, -5
+	float coeff2[9] = 
+	{ 
+		5, 2, -4, 
+		1, 6, 0.1, 
+		3, 0, -5 
 	};
 	Matrix3 intendedMatrix = Matrix3(coeff2);
 
@@ -1105,349 +1104,466 @@ bool Tests::Matrix3Transposed()
 	return false;
 }
 
-
-
 ////////// Matrix4 //////////
 
-//void Tests::ExecuteMatrix4Tests()
-//{
-//	int nbOfTest = 12;
-//	int success = 0;
-//
-//	std::cout << "Matrix4 : " << std::endl << std::endl;
-//
-//	success += Matrix4EmtpyConstructor();
-//	success += Matrix4Zeros();
-//	success += Matrix4Id();
-//	success += AccessingAndModifyingMatrix4();
-//	success += Matrix4Addition();
-//	success += Matrix4Soustraction();
-//	success += Matrix4FloatProduct();
-//	success += Matrix4MatrixProduct();
-//	success += Matrix4Inverse();
-//	success += Matrix4Invert();
-//	success += Matrix4Transpose();
-//	success += Matrix4Determinant();
-//
-//	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl << std::endl;
-//}
-//
-//bool Tests::Matrix4EmtpyConstructor()
-//{
-//	Matrix4 matrix = Matrix4();
-//	float line1[4] = { 0 };
-//	float line2[4] = { 0 };
-//	float line3[4] = { 0 };
-//	float line4[4] = { 0 };
-//	float coeff[4][4] = { *line1, *line2, *line3, *line4 };
-//	Matrix4 intendedMatrix = Matrix4(coeff);
-//
-//	if (matrix == intendedMatrix)
-//	{
-//		std::cout << "Empty Constructor : Success" << std::endl;
-//		return true;
-//	}
-//
-//	std::cout << "Empty Constructor : Fail. " << std::endl;
-//	return false;
-//}
-//
-//bool Tests::Matrix4Zeros()
-//{
-//	Matrix4 matrix = matrix.zeros();
-//	float line1[4] = { 0 };
-//	float line2[4] = { 0 };
-//	float line3[4] = { 0 };
-//	float line4[4] = { 0 };
-//	float coeff[4][4] = { *line1, *line2, *line3, *line4 };
-//	Matrix4 intendedMatrix = Matrix4(coeff);
-//
-//	if (matrix == intendedMatrix)
-//	{
-//		std::cout << "Zeros : Success" << std::endl;
-//		return true;
-//	}
-//
-//	std::cout << "Zeros : Fail. " << std::endl;
-//	return false;
-//}
-//
-//bool Tests::Matrix4Id()
-//{
-//	Matrix4 matrix = matrix.identity();
-//	float line1[4] = { 1, 0, 0, 0 };
-//	float line2[4] = { 0, 1, 0, 0 };
-//	float line3[4] = { 0, 0, 1, 0 };
-//	float line4[4] = { 0, 0, 0, 1 };
-//	float coeff[4][4] = { *line1, *line2, *line3, *line4 };
-//	Matrix4 intendedMatrix = Matrix4(coeff);
-//
-//	if (matrix == intendedMatrix)
-//	{
-//		std::cout << "Identity : Success" << std::endl;
-//		return true;
-//	}
-//
-//	std::cout << "Identity : Fail. " << std::endl;
-//	return false;
-//}
-//
-//bool Tests::AccessingAndModifyingMatrix4()
-//{
-//	Matrix4 matrix = Matrix4();
-//	float line1[4] = { 5, 0, 0, 0 };
-//	float line2[4] = { 0, 6, 0, 0 };
-//	float line3[4] = { 0, 0, -5, 0 };
-//	float line4[4] = { 0, 0, 0, -8 };
-//	float coeff[4][4] = { *line1, *line2, *line3, *line4 };
-//	Matrix4 intendedMatrix = Matrix4(coeff);
-//
-//	matrix[0][0] = 5;
-//	matrix[1][1] = 6;
-//	matrix[2][2] = -5;
-//	matrix[3][3] = -8;
-//
-//	if (matrix == intendedMatrix)
-//	{
-//		std::cout << "Access and Modification : Success" << std::endl;
-//		return true;
-//	}
-//
-//	std::cout << "Access and Modification : Fail. " << std::endl;
-//	return false;
-//}
-//
-//bool Tests::Matrix4Addition()
-//{
-//	float line11[4] = { 5, 0, 0, 0 };
-//	float line12[4] = { 0, 6, 0, 0 };
-//	float line13[4] = { 0, 0, -5, 0 };
-//	float line14[4] = { 0, 0, 0, -8 };
-//	float coeff1[4][4] = { *line11, *line12, *line13, *line14 };
-//	Matrix4 firstMatrix = Matrix4(coeff1);
-//
-//	float line21[4] = { 7, 0, 0, 0 };
-//	float line22[4] = { 0, -4, 0, 0 };
-//	float line23[4] = { 0, 0, -2.6, 0 };
-//	float line24[4] = { 0, 0, 0, 1 };
-//	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
-//	Matrix4 secondMatrix = Matrix4(coeff2);
-//
-//	Matrix4 sumMatrix = firstMatrix + secondMatrix;
-//	float line31[4] = { 12, 0, 0, 0 };
-//	float line32[4] = { 0, 2, 0, 0 };
-//	float line33[4] = { 0, 0, -7.6, 0 };
-//	float line34[4] = { 0, 0, 0, -7 };
-//	float coeff3[4][4] = { *line31, *line32, *line33, *line34 };
-//	Matrix4 intendedMatrix = Matrix4(coeff3);
-//
-//	if (sumMatrix == intendedMatrix)
-//	{
-//		std::cout << "Addition : Success" << std::endl;
-//		return true;
-//	}
-//
-//	std::cout << "Addition : Fail. " << std::endl;
-//	return false;
-//}
-//
-//bool Tests::Matrix4Soustraction()
-//{
-//	float line11[4] = { 5, 1, 1, 1 };
-//	float line12[4] = { 2, 6, 1, 2 };
-//	float line13[4] = { 2, 2, -5, 1 };
-//	float line14[4] = { 2, 2, -5, 2 };
-//	float coeff1[4][4] = { *line11, *line12, *line13, *line14 };
-//	Matrix4 firstMatrix = Matrix4(coeff1);
-//
-//	float line21[4] = { 7, 3, 3, 1 };
-//	float line22[4] = { -4, -4, 3, 2 };
-//	float line23[4] = { -4, -4, -2.6, 1 };
-//	float line24[4] = { 2, 2, -5, 2 };
-//	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
-//	Matrix4 secondMatrix = Matrix4(coeff2);
-//
-//	Matrix4 subMatrix = firstMatrix - secondMatrix;
-//	float line31[4] = { 2, -2, -2, 0 };
-//	float line32[4] = { 6, 10, -2, 0 };
-//	float line33[4] = { 6, 6, -2.4, 0 };
-//	float line34[4] = { 0, 0, 0, 0 };
-//	float coeff3[4][4] = { *line31, *line32, *line33, *line34 };
-//	Matrix4 intendedMatrix = Matrix4(coeff3);
-//
-//	if (subMatrix == intendedMatrix)
-//	{
-//		std::cout << "Soustraction : Success" << std::endl;
-//		return true;
-//	}
-//
-//	std::cout << "Soustraction : Fail. " << std::endl;
-//	return false;
-//}
-//
-//bool Tests::Matrix4FloatProduct()
-//{
-//	float line11[4] = { 1, 0, 0, 0 };
-//	float line12[4] = { 0, 1, 0, 0 };
-//	float line13[4] = { 0, 0, 1, 0 };
-//	float line14[4] = { 0, 0, 0, 1 };
-//	float coeff[4][4] = { *line11, *line12, *line13, *line14 };
-//	Matrix4 matrix = Matrix4(coeff);
-//	float f1 = 12.65;
-//	float f2 = 16.69;
-//
-//	float line21[4] = { f1 * f2, 0, 0, 0 };
-//	float line22[4] = { 0, f1 * f2, 0, 0 };
-//	float line23[4] = { 0, 0, f1 * f2, 0 };
-//	float line24[4] = { 0, 0, 0, f1 * f2 };
-//	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
-//	Matrix4 intendedMatrix = Matrix4(coeff2);
-//	Matrix4 result = matrix * f1 * f2;
-//
-//	if (result == intendedMatrix)
-//	{
-//		std::cout << "Matrix Product double float : Success" << std::endl;
-//		return true;
-//	}
-//
-//	std::cout << "Matrix Product double float : Fail. " << std::endl;
-//	return false;
-//}
-//
-//bool Tests::Matrix4MatrixProduct()
-//{
-//	float line11[4] = { 5, 1, 3, 1 };
-//	float line12[4] = { 2, 6, 0, 2 };
-//	float line13[4] = { -4, 0.1, -5, 1 };
-//	float line14[4] = { 0, 0, 0, 1 };
-//	float coeff1[4][4] = { *line11, *line12, *line13, *line14 };
-//	Matrix4 firstMatrix = Matrix4(coeff1);
-//
-//	float line21[4] = { 7, 3.1, 6, 3 };
-//	float line22[4] = { 0.5, -4, -1, -1 };
-//	float line23[4] = { -0.5, 1, -2.6, -4 };
-//	float line24[4] = { 0, 0, 0, 1 };
-//	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
-//	Matrix4 secondMatrix = Matrix4(coeff2);
-//
-//	Matrix4 productMatrix = firstMatrix * secondMatrix;
-//	float line31[4] = { 34, 14.5, 21.2, 3 };
-//	float line32[4] = { 17, -17.8, 6, 2 };
-//	float line33[4] = { -25.45, -17.8, -11.1, 8.9 };
-//	float line34[4] = { 0, 0, 0, 1 };
-//	float coeff3[4][4] = { *line31, *line32, *line33, *line34 };
-//	Matrix4 intendedMatrix = Matrix4(coeff3);
-//
-//	if (productMatrix == intendedMatrix)
-//	{
-//		std::cout << "Matrix x Matrix Product : Success" << std::endl;
-//		return true;
-//	}
-//
-//	std::cout << "Matrix x Matrix Product : Fail. " << std::endl;
-//	return false;
-//}
-//
-//bool Tests::Matrix4Inverse()
-//{
-//	float line11[4] = { 6, 1, 3, 1 };
-//	float line12[4] = { 2, 6, 0, 2 };
-//	float line13[4] = { 1, 0, 4, 2 };
-//	float line14[4] = { -1, 3, 1, -7 };
-//	float coeff1[4][4] = { *line11, *line12, *line13, *line14 };
-//	Matrix4 matrix = Matrix4(coeff1);
-//
-//	float line21[4] = { 0.1946564885496183206, -0.022900763358778625956, -0.14122137404580152672, -0.019083969465648854957 };
-//	float line22[4] = { -0.047709923664122137444, 0.15267175572519083976, 0.024809160305343511478, 0.043893129770992366284 };
-//	float line23[4] = { -0.022900763358778625957, -0.02671755725190839695, 0.25190839694656488551, 0.061068702290076335884 };
-//	float line24[4] = { -0.051526717557251908393, 0.064885496183206106879, 0.066793893129770992326, -0.11259541984732824429 };
-//	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
-//	Matrix4 intendedMatrix = Matrix4(coeff2);
-//
-//	matrix = matrix.inverse();
-//
-//	if (matrix == intendedMatrix)
-//	{
-//		std::cout << "Inverse : Success" << std::endl;
-//		return true;
-//	}
-//
-//	std::cout << "Inverse : Fail. ";
-//	return false;
-//}
-//
-//bool Tests::Matrix4Invert()
-//{
-//	float line11[4] = { 6, 1, 3, 1 };
-//	float line12[4] = { 2, 6, 0, 2 };
-//	float line13[4] = { 1, 0, 4, 2 };
-//	float line14[4] = { -1, 3, 1, -7 };
-//	float coeff1[4][4] = { *line11, *line12, *line13, *line14 };
-//	Matrix4 matrix = Matrix4(coeff1);
-//
-//	float line21[4] = { 0.1946564885496183206, -0.022900763358778625956, -0.14122137404580152672, -0.019083969465648854957 };
-//	float line22[4] = { -0.047709923664122137444, 0.15267175572519083976, 0.024809160305343511478, 0.043893129770992366284 };
-//	float line23[4] = { -0.022900763358778625957, -0.02671755725190839695, 0.25190839694656488551, 0.061068702290076335884 };
-//	float line24[4] = { -0.051526717557251908393, 0.064885496183206106879, 0.066793893129770992326, -0.11259541984732824429 };
-//	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
-//	Matrix4 intendedMatrix = Matrix4(coeff2);
-//
-//	matrix.invert();
-//
-//	if (matrix == intendedMatrix)
-//	{
-//		std::cout << "Inverse Computation : Success" << std::endl;
-//		return true;
-//	}
-//
-//	std::cout << "Inverse Computation : Fail. ";
-//	return false;
-//}
-//
-//bool Tests::Matrix4Transpose()
-//{
-//	float line11[4] = { 6, 1, 3, 1 };
-//	float line12[4] = { 2, 6, 0, 2 };
-//	float line13[4] = { 1, 0, 4, 2 };
-//	float line14[4] = { -1, 3, 1, -7 };
-//	float coeff1[4][4] = { *line11, *line12, *line13, *line14 };
-//	Matrix4 matrix = Matrix4(coeff1);
-//
-//	float line21[4] = { 6, 2, 1, -1 };
-//	float line22[4] = { 1, 6, 0, 3 };
-//	float line23[4] = { 3, 0, 4, 1 };
-//	float line24[4] = { 1, 2, 2, -7 };
-//	float coeff2[4][4] = { *line21, *line22, *line23, *line24 };
-//	Matrix4 intendedMatrix = Matrix4(coeff2);
-//
-//	if (matrix == intendedMatrix)
-//	{
-//		std::cout << "Transpose : Success" << std::endl;
-//		return true;
-//	}
-//
-//	std::cout << "Transpose : Fail. ";
-//	return false;
-//}
-//
-//bool Tests::Matrix4Determinant()
-//{
-//	float line1[4] = { 6, 1, 3, 1 };
-//	float line2[4] = { 2, 6, 0, 2 };
-//	float line3[4] = { 1, 0, 4, 2 };
-//	float line4[4] = { -1, 3, 1, -7 };
-//	float coeff1[4][4] = { *line1, *line2, *line3, *line4 };
-//	Matrix4 matrix = Matrix4(coeff1);
-//
-//	float det = -1048;
-//	float compute_det = matrix.det();
-//
-//	if (det == compute_det)
-//	{
-//		std::cout << "Determinant : Success" << std::endl;
-//		return true;
-//	}
-//
-//	std::cout << "Determinant : Fail. ";
-//	return false;
-//}
+void Tests::ExecuteMatrix4Tests()
+{
+	int nbOfTest = 14;
+	int success = 0;
+
+	std::cout << "Matrix4 : " << std::endl << std::endl;
+
+	success += Matrix4EmtpyConstructor();
+	success += Matrix4Zeros();
+	success += Matrix4Id();
+	success += AccessingAndModifyingMatrix4();
+	success += Matrix4Addition();
+	success += Matrix4Soustraction();
+	success += Matrix4MatrixProduct();
+	success += Matrix4FloatProduct();
+	success += Matrix4DoubleFloatProduct();
+	success += Matrix4Determinant();
+	success += Matrix4Invert();
+	success += Matrix4Inverse();
+	success += Matrix4Transpose();
+	success += Matrix4Transposed();
+
+
+	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl << std::endl;
+}
+
+bool Tests::Matrix4EmtpyConstructor()
+{
+	Matrix4 matrix = Matrix4();
+
+	float coeff[16] = { 
+		0, 0, 0, 0, 
+		0, 0, 0, 0, 
+		0, 0, 0, 0, 
+		0, 0, 0, 0 
+	};
+
+	Matrix4 intendedMatrix = Matrix4(coeff);
+
+	if (matrix == intendedMatrix)
+	{
+		std::cout << "Empty Constructor : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Empty Constructor : Fail. " << std::endl;
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + matrix.toString() << std::endl;
+	return false;
+}
+
+bool Tests::Matrix4Zeros()
+{
+	Matrix4 matrix = Matrix4::Zeros();
+
+	float coeff[16] = {
+	0, 0, 0, 0,
+	0, 0, 0, 0,
+	0, 0, 0, 0,
+	0, 0, 0, 0
+	};
+	Matrix4 intendedMatrix = Matrix4(coeff);
+
+	if (matrix == intendedMatrix)
+	{
+		std::cout << "Zeros : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Zeros : Fail. " << std::endl;
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + matrix.toString() << std::endl;
+	return false;
+}
+
+bool Tests::Matrix4Id()
+{
+	Matrix4 matrix = Matrix4::Identity();
+
+	float coeff[16] = {
+	1, 0, 0, 0,
+	0, 1, 0, 0,
+	0, 0, 1, 0,
+	0, 0, 0, 1
+	};
+	Matrix4 intendedMatrix = Matrix4(coeff);
+
+	if (matrix == intendedMatrix)
+	{
+		std::cout << "Identity : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Identity : Fail. " << std::endl;
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + matrix.toString() << std::endl;
+	return false;
+}
+
+bool Tests::AccessingAndModifyingMatrix4()
+{
+	Matrix4 matrix = Matrix4();
+
+	float coeff[16] = {
+	5, 0, 0, 0,
+	0, 6, 0, 0,
+	0, 0, -5, 0,
+	0, 0, 0, -8
+	};
+	Matrix4 intendedMatrix = Matrix4(coeff);
+
+	matrix.at(0,0) = 5;
+	matrix.at(1,1) = 6;
+	matrix.at(2,2) = -5;
+	matrix.at(3,3) = -8;
+
+	if (matrix == intendedMatrix)
+	{
+		std::cout << "Access and Modification : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Access and Modification : Fail. " << std::endl;
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + matrix.toString() << std::endl;
+	return false;
+}
+
+bool Tests::Matrix4Addition()
+{
+
+	float coeff1[16] = {
+	5, 0, 0, 0,
+	0, 6, 0, 0,
+	0, 0, -5, 0,
+	0, 0, 0, -8
+	};
+	Matrix4 firstMatrix = Matrix4(coeff1);
+
+
+	float coeff2[16] = {
+	7, 0, 0, 0,
+	0, -4, 0, 0,
+	0, 0, -2.6, 0,
+	0, 0, 0, 1
+	};
+	Matrix4 secondMatrix = Matrix4(coeff2);
+
+	float coeff[16] = {
+	12, 0, 0, 0,
+	0, 2, 0, 0,
+	0, 0, -7.6, 0,
+	0, 0, 0, -7
+	};
+	Matrix4 intendedMatrix = Matrix4(coeff);
+
+	Matrix4 sumMatrix = firstMatrix + secondMatrix;
+
+	if (sumMatrix == intendedMatrix)
+	{
+		std::cout << "Addition : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Addition : Fail. " << std::endl;
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + sumMatrix.toString() << std::endl;
+	return false;
+}
+
+bool Tests::Matrix4Soustraction()
+{
+	float coeff1[16] = { 
+		5, 1, 1, 1,
+		2, 6, 1, 2, 
+		2, 2, -5, 1,
+		2, 2, -5, 2 
+	};
+	Matrix4 firstMatrix = Matrix4(coeff1);
+
+	float coeff2[16] = { 
+		7, 3, 3, 1, 
+		-4, -4, 3, 2,
+		-4, -4, -2.6, 1,
+		2, 2, -5, 2
+	};
+	Matrix4 secondMatrix = Matrix4(coeff2);
+
+	Matrix4 subMatrix = firstMatrix - secondMatrix;
+
+	float coeff[16] = { 
+		-2, -2, -2, 0,
+		6, 10, -2, 0,
+		6, 6, -2.4, 0,
+		0, 0, 0, 0 
+	};
+	Matrix4 intendedMatrix = Matrix4(coeff);
+
+	if (subMatrix == intendedMatrix)
+	{
+		std::cout << "Soustraction : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Soustraction : Fail. " << std::endl;
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + subMatrix.toString() << std::endl;
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + subMatrix.toString() << std::endl;
+}
+
+bool Tests::Matrix4MatrixProduct()
+{
+	float coeff1[16] = {
+		5, 1, 3, 1, 
+		2, 6, 0, 2, 
+		-4, 0.1, -5, 1,
+		0, 0, 0, 1 
+	};
+	Matrix4 firstMatrix = Matrix4(coeff1);
+
+	float coeff2[16] = { 
+		7, 3.1, 6, 3,
+		0.5, -4, -1, -1, 
+		-0.5, 1, -2.6, -4, 
+		0, 0, 0, 1 
+	};
+	Matrix4 secondMatrix = Matrix4(coeff2);
+
+	Matrix4 productMatrix = firstMatrix * secondMatrix;
+
+	float coeff[16] = { 
+		34, 14.5, 21.2, 3, 
+		17, -17.8, 6, 2, 
+		-25.45, -17.8, -11.1, 8.9, 
+		0, 0, 0, 1 
+	};
+	Matrix4 intendedMatrix = Matrix4(coeff);
+
+	if (productMatrix == intendedMatrix)
+	{
+		std::cout << "Matrix x Matrix Product : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Matrix x Matrix Product : Fail. " << std::endl;
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + productMatrix.toString() << std::endl;
+	return false;
+}
+
+bool Tests::Matrix4FloatProduct()
+{
+	Matrix4 matrix = Matrix4::Identity();
+	float f1 = 12.65;
+
+	float coeff2[16] = {
+		f1, 0, 0, 0, 
+		0, f1, 0, 0,
+		0, 0, f1, 0, 
+		0, 0, 0, f1
+	};
+	Matrix4 intendedMatrix = Matrix4(coeff2);
+	Matrix4 result = matrix * f1;
+
+	if (result == intendedMatrix)
+	{
+		std::cout << "Matrix Product float : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Matrix Product float : Fail. " << std::endl;
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + result.toString() << std::endl;
+	return false;
+}
+
+bool Tests::Matrix4DoubleFloatProduct()
+{
+	Matrix4 matrix = Matrix4::Identity();
+	
+	float f1 = 12.65;
+	float f2 = 16.69;
+
+	float coeff2[16] = {
+		f1 * f2, 0, 0, 0,
+		0, f1 * f2, 0, 0,
+		0, 0, f1 * f2, 0,
+		0, 0, 0, f1 * f2
+	};
+	Matrix4 intendedMatrix = Matrix4(coeff2);
+	Matrix4 result = matrix * (f1 * f2);
+
+	if (result == intendedMatrix)
+	{
+		std::cout << "Matrix Product double float : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Matrix Product double float : Fail. " << std::endl;
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + result.toString() << std::endl;
+	return false;
+}
+
+bool Tests::Matrix4Determinant()
+{
+	float coeff1[16] = {
+		6, 1, 3, 1,
+		2, 6, 0, 2,
+		1, 0, 4, 2,
+		-1, 3, 1, -7
+	};
+	Matrix4 matrix = Matrix4(coeff1);
+
+	float det = -1048;
+	float compute_det = matrix.getDeterminant();
+
+	if (Matrix4::cmpf(det, compute_det))
+	{
+		std::cout << "Determinant : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Determinant : Fail. ";
+	std::cout << "Expected :" + to_string(det) << std::endl;
+	std::cout << "Got : " + to_string(compute_det) << std::endl;
+	return false;
+}
+
+bool Tests::Matrix4Invert()
+{
+	float coeff1[16] = {
+		6, 1, 3, 1,
+		2, 6, 0, 2,
+		1, 0, 4, 2,
+		-1, 3, 1, -7
+	};
+	Matrix4 matrix = Matrix4(coeff1);
+
+	float coeff2[16] = {
+		0.1946564885496183206, -0.022900763358778625956, -0.14122137404580152672, -0.019083969465648854957,
+		-0.047709923664122137444, 0.15267175572519083976, 0.024809160305343511478, 0.043893129770992366284,
+		-0.022900763358778625957, -0.02671755725190839695, 0.25190839694656488551, 0.061068702290076335884,
+		-0.051526717557251908393, 0.064885496183206106879, 0.066793893129770992326, -0.11259541984732824429
+	};
+	Matrix4 intendedMatrix = Matrix4(coeff2);
+
+	matrix.invert();
+
+	if (matrix == intendedMatrix)
+	{
+		std::cout << "Invert matrix : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Invert matrix : Fail. ";
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + matrix.toString() << std::endl;
+	return false;
+}
+
+bool Tests::Matrix4Inverse()
+{
+	float coeff1[16] = {
+		6, 1, 3, 1,
+		2, 6, 0, 2,
+		1, 0, 4, 2,
+		-1, 3, 1, -7 
+	};
+	Matrix4 matrix = Matrix4(coeff1);
+
+	float coeff2[16] = { 
+		0.1946564885496183206, -0.022900763358778625956, -0.14122137404580152672, -0.019083969465648854957, 
+		-0.047709923664122137444, 0.15267175572519083976, 0.024809160305343511478, 0.043893129770992366284, 
+		-0.022900763358778625957, -0.02671755725190839695, 0.25190839694656488551, 0.061068702290076335884, 
+		-0.051526717557251908393, 0.064885496183206106879, 0.066793893129770992326, -0.11259541984732824429 
+	};
+	Matrix4 intendedMatrix = Matrix4(coeff2);
+
+	matrix = matrix.Inverse();
+
+	if (matrix == intendedMatrix)
+	{
+		std::cout << "Inversed matrix : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Inversed matrix : Fail. ";
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + matrix.toString() << std::endl;
+	return false;
+}
+
+bool Tests::Matrix4Transpose()
+{
+	float coeff1[16] = { 
+		6, 1, 3, 1,
+		2, 6, 0, 2,
+		1, 0, 4, 2,
+		-1, 3, 1, -7 
+	};
+	Matrix4 matrix = Matrix4(coeff1);
+
+	float coeff2[16] = {
+		6, 2, 1, -1,
+		1, 6, 0, 3,
+		3, 0, 4, 1,
+		1, 2, 2, -7
+	};
+	Matrix4 intendedMatrix = Matrix4(coeff2);
+
+	matrix.transpose();
+
+	if (matrix == intendedMatrix)
+	{
+		std::cout << "Transpose : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Transpose : Fail. ";
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + intendedMatrix.toString() << std::endl;
+	return false;
+}
+
+bool Tests::Matrix4Transposed()
+{
+	float coeff1[16] = { 
+		6, 1, 3, 1,
+		2, 6, 0, 2,
+		1, 0, 4, 2,
+		-1, 3, 1, -7 
+	};
+	Matrix4 matrix = Matrix4(coeff1);
+
+	float coeff2[16] = {
+		6, 2, 1, -1,
+		1, 6, 0, 3,
+		3, 0, 4, 1,
+		1, 2, 2, -7
+	};
+	Matrix4 intendedMatrix = Matrix4(coeff2);
+
+	matrix = matrix.Transposed();
+
+	if (matrix == intendedMatrix)
+	{
+		std::cout << "Transpose : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Transpose : Fail. ";
+	std::cout << "Expected :" + intendedMatrix.toString() << std::endl;
+	std::cout << "Got : " + intendedMatrix.toString() << std::endl;
+	return false;
+}
+
+
+
+
