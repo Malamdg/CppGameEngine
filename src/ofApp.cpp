@@ -127,12 +127,11 @@ void ofApp::keyReleased(int key) {
 	}
 	case ' ': //Lauch RigidBody
 		Vector3D position = cam.getPosition();
-		Vector3D direction = (position * -1);
-		direction.Normalize();
+		Vector3D lauchDirection = cam.getLookAtDir();
 		float velocity = 50;
 
 		RigidBody* rb = new RigidBody(new ofBoxPrimitive(2, 2, 2), Vector3D(),
-			position, direction * velocity,
+			position, lauchDirection * velocity,
 			1/rbMasse, .1f);
 		
 		rigidBodies.push_back(rb);
