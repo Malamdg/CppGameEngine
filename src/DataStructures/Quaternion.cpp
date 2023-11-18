@@ -108,7 +108,8 @@ float Quaternion::dot(Quaternion& q)const
 
 Quaternion& Quaternion::operator^(const float exp)const
 {
-	if (abs(Norm() - 1) > 10e-10) throw std::exception("Quaternion isn't a rotation - Current implementation do not consider exponentiation for Quaternion that are not roations");
+	// C est une tolerance elevee mais c est ce qu il faut
+	if (abs(Norm() - 1) > 10e-3) throw std::exception("Quaternion isn't a rotation - Current implementation do not consider exponentiation for Quaternion that are not roations");
 
 	float a = acos(m_w);
 	Vector3D resv = m_v * (sin(exp * a) / sin(a));
