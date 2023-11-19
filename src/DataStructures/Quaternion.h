@@ -2,6 +2,7 @@
 
 #include "../ofApp.h"
 #include "Vector3D.h"
+#include "Matrix3.h"
 
 class Quaternion {
 
@@ -183,4 +184,6 @@ public:
 	@return the Vector3D
 	*/
 	Vector3D getVector()const;
+
+	Matrix3 matrixFromQuaternion() const;
 };
