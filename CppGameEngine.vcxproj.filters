@@ -63,7 +63,22 @@
     <ClCompile Include="src\DataStructures\Vector3D.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
+    <ClCompile Include="src\Addons\ofSkyBox\ofxCubeMap.cpp">
+      <Filter>Addons\ofSkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofSkyBox\ofxSkyBox.cpp">
+      <Filter>Addons\ofSkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.cpp">
+      <Filter>Addons\ofFirstPersonCamera</Filter>
+    </ClCompile>
     <ClCompile Include="src\RigidBody.cpp" />
+    <ClCompile Include="src\DataStructures\Matrix3.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataStructures\Matrix4.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Blob.h" />
@@ -127,7 +142,22 @@
     <ClInclude Include="src\DataStructures\Vector3D.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
+    <ClInclude Include="src\Addons\ofSkyBox\ofxCubeMap.h">
+      <Filter>Addons\ofSkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofSkyBox\ofxSkyBox.h">
+      <Filter>Addons\ofSkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.h">
+      <Filter>Addons\ofFirstPersonCamera</Filter>
+    </ClInclude>
     <ClInclude Include="src\RigidBody.h" />
+    <ClInclude Include="src\DataStructures\Matrix3.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\Matrix4.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Collisions">
@@ -138,6 +168,15 @@
     </Filter>
     <Filter Include="DataStructures">
       <UniqueIdentifier>{daf6a8ae-ad09-4eed-9fc4-97b7c3e3ccb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Addons">
+      <UniqueIdentifier>{b8f9d56b-19ec-4034-ba55-d6a0444a9117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Addons\ofSkyBox">
+      <UniqueIdentifier>{bba909f5-2276-41f2-ac1c-825ea8709ae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Addons\ofFirstPersonCamera">
+      <UniqueIdentifier>{ab797d9f-b13c-461f-a693-0186406317ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
