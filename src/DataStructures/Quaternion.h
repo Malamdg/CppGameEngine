@@ -185,5 +185,5 @@ public:
 	*/
 	Vector3D getVector()const;
 
-	Matrix3 matrixFromQuaternion() const;
+	//Matrix3 matrixFromQuaternion() const;
 };

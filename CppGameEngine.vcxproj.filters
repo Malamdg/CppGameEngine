@@ -21,13 +21,10 @@
     <ClCompile Include="src\Collisions\Spindle.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
-	<ClCompile Include="src\Datastructures\Matrix3.cpp">
-	  <Filter>DataStructures</Filter>
+    <ClCompile Include="src\Datastructures\Matrix3.cpp">
+      <Filter>DataStructures</Filter>
     </ClCompile>
     <ClCompile Include="src\Datastructures\Matrix4.cpp">
-	  <Filter>DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DataStructures\Vector3D.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
     <ClCompile Include="src\Forces\ElasticParticleParticle.cpp">
@@ -63,21 +60,24 @@
     <ClCompile Include="src\DataStructures\Vector3D.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="src\Addons\ofSkyBox\ofxCubeMap.cpp">
-      <Filter>Addons\ofSkyBox</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Addons\ofSkyBox\ofxSkyBox.cpp">
-      <Filter>Addons\ofSkyBox</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.cpp">
-      <Filter>Addons\ofFirstPersonCamera</Filter>
-    </ClCompile>
     <ClCompile Include="src\RigidBody.cpp" />
     <ClCompile Include="src\DataStructures\Matrix3.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
     <ClCompile Include="src\DataStructures\Matrix4.cpp">
       <Filter>DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataStructures\Vector3D.cpp">
+      <Filter>DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.cpp">
+      <Filter>Addons\ofFirstPersonCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofSkyBox\ofxCubeMap.cpp">
+      <Filter>Addons\ofSkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofSkyBox\ofxSkyBox.cpp">
+      <Filter>Addons\ofSkyBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,15 +100,6 @@
     <ClInclude Include="src\Collisions\Spindle.h">
       <Filter>Collisions</Filter>
     </ClInclude>
-	<ClCompile Include="src\Datastructures\Matrix3.h">
-	  <Filter>DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Datastructures\Matrix4.h">
-	  <Filter>DataStructures</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DataStructures\Vector3D.h">
-      <Filter>DataStructures</Filter>
-    </ClCompile>
     <ClInclude Include="src\Forces\ElasticParticleParticle.h">
       <Filter>Forces</Filter>
     </ClInclude>
@@ -139,24 +130,24 @@
     <ClInclude Include="src\DataStructures\Quaternion.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
-    <ClInclude Include="src\DataStructures\Vector3D.h">
-      <Filter>DataStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Addons\ofSkyBox\ofxCubeMap.h">
-      <Filter>Addons\ofSkyBox</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Addons\ofSkyBox\ofxSkyBox.h">
-      <Filter>Addons\ofSkyBox</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.h">
-      <Filter>Addons\ofFirstPersonCamera</Filter>
-    </ClInclude>
     <ClInclude Include="src\RigidBody.h" />
     <ClInclude Include="src\DataStructures\Matrix3.h">
       <Filter>DataStructures</Filter>
     </ClInclude>
     <ClInclude Include="src\DataStructures\Matrix4.h">
       <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\Vector3D.h">
+      <Filter>DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.h">
+      <Filter>Addons\ofFirstPersonCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofSkyBox\ofxCubeMap.h">
+      <Filter>Addons\ofSkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofSkyBox\ofxSkyBox.h">
+      <Filter>Addons\ofSkyBox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

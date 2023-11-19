@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vector3D.h"
+#include "Quaternion.h"
 
 class Matrix3 
 {
@@ -27,6 +28,8 @@ public:
 	@param col3, a vector3D corresponding to the matrix's third column
 	*/
 	Matrix3(Vector3D col1, Vector3D col2, Vector3D col3);
+
+	static Matrix3& FromQuaternion(const Quaternion& q);	
 
 	/*
 	class destructor
