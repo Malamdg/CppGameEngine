@@ -116,4 +116,6 @@ Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 100);
 
 	float getK1();
 	float getK2();
+
+	of3dPrimitive* getPrimitives() const;
 };

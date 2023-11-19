@@ -1,18 +1,25 @@
 #pragma once
 
-#include "Blob.h"
+#include "iostream"
+#include "ofMain.h"
 #include "cmath"
+#include "ofxGui/src/ofxGui.h"
+
+#include "Blob.h"
 #include "Collisions/CollisionHandler.h"
 #include "Collisions/BlobCollisionHandler.h"
 #include "Forces/ParticleDeplacement.h"
 #include "Forces/ParticleGravity.h"
 #include "Forces/ParticleForceRegistry.h"
-#include "iostream"
-#include "ofMain.h"
 #include "of3dPrimitives.h"
 #include "DataStructures/Vector3D.h"
+#include "DataStructures/Quaternion.h"
 #include "Particle.h"
+#include "RigidBody.h"
 #include "Tests.h"
+
+#include "Addons/ofSkyBox/ofxSkyBox.h"
+#include "Addons/ofFirstPersonCamera/ofxFirstPersonCamera.h"
 
 class ofApp : public ofBaseApp {
 
@@ -32,21 +39,13 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
-	
+
 private:
 	void drawText();
-	void updateForces();
-	/*
-	* generate floor accordingly to layout
-	*/
-	void generateFloor(std::list<std::pair<int*, Vector3D*>> layout);
-	/*
-	* get layout of floor
-	*/
-	std::list<std::pair<int*, Vector3D*>> getLayout();
-	
+
 	//HUD
 	float fps;
+	float duration;
 	string commandText;
 	string movingHud;
 	Vector3D movingHudInitialPos;
@@ -56,33 +55,31 @@ private:
 	ofLight directionalLight;
 
 	//Camera
-	ofCamera cam;
+	ofxFirstPersonCamera cam;
 	Vector3D cameraPosition;
 	float viewWidth;
 	float viewHeight;
 
-	//**Primitives**//
-	std::list<std::pair<of3dPrimitive*, int*>> primitives;
-	std::list<Particle*> particles;
+	//Primitives
+	list<std::pair<of3dPrimitive*, int>> primitives;
 
-	ofBoxPrimitive floor;
-	Blob blob;
+	//RigidBodies
+	list<RigidBody*> rigidBodies;
+	float rbMasse = 0;
 
-	//Colors & Textures
-	Vector3D* colors = new Vector3D[3];
+	//Colors
+	ofColor* colors;
+	int noir = 0;
+	int blanc = 1;
+	int gris = 2;
+	int cyan = 3;
+	int magenta = 4;
 
-	// Physics
-	ParticleForceRegistry* forceRegistry;
-	CollisionHandler* collisionHandler;
-	BlobCollisionHandler* blobCollisionHandler;
+	//SkyBox
+	ofxSkyBox skybox;
+	ofVec3f skyboxCenter;
 
-	ParticleGravity* gravity;
+	//Fullscreen
+	bool fullscreen = false;
 
-	Particle* p;
-	Particle* p1;
-	Particle* p2;
-	Particle* p3;
-
-	Cable* cable;
-	Spindle* spindle;
 };
