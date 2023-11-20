@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DataStructures/Vector3D.h"
+#include "DataStructures/Quaternion.h"
 
 class RigidBody
 {
@@ -11,8 +12,10 @@ private:
 	Vector3D m_centerOfMass;
 
 	Vector3D m_position;
+	Vector3D m_direction;
 	Vector3D m_velocity;
 	Vector3D m_acceleration;
+	Quaternion m_angularVelocity;
 	float m_invertedMass;
 
 	float m_drag_coef;
@@ -33,6 +36,7 @@ public:
 	RigidBody(of3dPrimitive* primitive = new ofBoxPrimitive(),
 		Vector3D centerOfMass = Vector3D(),
 		Vector3D position = Vector3D(),
+		Vector3D direction = Vector3D(1, 0, 0),
 		Vector3D initVelocity = Vector3D(),
 		float invertedMass = 0,
 		float dragCoeff = 0,
