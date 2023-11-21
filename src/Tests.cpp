@@ -45,11 +45,13 @@ void Tests::ExecuteQuaternionTests()
 	success += QuaternionEulerConstructor();
 	success += QuaternionIdentityConstructor();
 	success += QuaternionNorm();
+	success += QuaternionNormalize();
 	success += QuaternionNegation();
 	success += QuaternionInverse();
 	success += QuaternionConjugue();
 	success += QuaternionMultiplicationBetweenQuaternions();
 	success += QuaternionMultipticationWithFloat();
+	success += QuaternionSum();
 	success += QuaternionDifference();
 	success += QuaternionScalarProduct();
 	success += QuaternionExponentiation();
@@ -358,6 +360,27 @@ bool Tests::QuaternionNorm()
 	return false;
 }
 
+bool Tests::QuaternionNormalize()
+{
+	nbOfTest++;
+
+	Quaternion quat = Quaternion(1, sin(PI / 2), sin(PI / 10), sin(PI / 40));
+	quat.Normalize();
+	float intendedNorm = 1;
+
+	if (abs(quat.Norm() - intendedNorm) < 10e-6)
+	{
+		std::cout << "Quaternion Normalize : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Quaternion Norm : Fail. ";
+	std::cout << "Was expecting " << to_string(intendedNorm) << " for the quaternion's norm, got " << to_string(quat.Norm()) << std::endl;
+
+
+	return false;
+}
+
 bool Tests::QuaternionNegation()
 {
 	nbOfTest++;
@@ -474,6 +497,27 @@ bool Tests::QuaternionDifference()
 	}
 
 	std::cout << "Difference Quaternions : Fail. ";
+	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << res.toString() << std::endl;
+
+	return false;
+}
+
+bool Tests::QuaternionSum()
+{
+	nbOfTest++;
+
+	Quaternion quat1 = Quaternion(5.f, 6.f, 7.f, -60.f);
+	Quaternion quat2 = Quaternion(7.f, -3.f, 30.f, -1.f);
+	Quaternion res = quat1 + quat2;
+	Quaternion intendedQuat = Quaternion(12.f, 3.f, 37.f, -61.f);
+
+	if (res == intendedQuat)
+	{
+		std::cout << "Sum Quaternions : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Sums Quaternions : Fail. ";
 	std::cout << "Was expecting " << intendedQuat.toString() << ", got " << res.toString() << std::endl;
 
 	return false;

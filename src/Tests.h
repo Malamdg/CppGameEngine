@@ -319,6 +319,12 @@ private:
 	static bool QuaternionNorm();
 
 	/*
+	test the normalization for the Quaternion
+	@return true if the normalization is correctly computed
+	*/
+	static bool QuaternionNormalize();
+
+	/*
 	test the computation of the Quaternion's negation
 	@return true if the negation is correctly computed
 	*/
@@ -347,6 +353,12 @@ private:
 	@return true if the product is correctly computed
 	*/
 	static bool QuaternionMultipticationWithFloat();
+
+	/*
+	test the sum of two Quaternions
+	@return true if the sum is correctly computed
+	*/
+	static bool QuaternionSum();
 
 	/*
 	test the difference between two Quaternions
