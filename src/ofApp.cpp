@@ -132,6 +132,7 @@ void ofApp::keyReleased(int key) {
 
 		RigidBody* rb = new RigidBody(new ofBoxPrimitive(2, 2, 2), Vector3D(),
 			position, lauchDirection * velocity,
+			Quaternion::Identity(), Vector3D(PI, 0, 0),
 			1/rbMasse, .1f);
 		
 		rigidBodies.push_back(rb);

@@ -63,6 +63,16 @@ float Quaternion::Norm() const
 	return sqrt(m_w * m_w + m_x * m_x + m_y * m_y + m_z * m_z);
 }
 
+void Quaternion::Normalize()
+{
+	float norm = Norm();
+
+	m_w = m_w / norm;
+	m_x = m_x / norm;
+	m_y = m_y / norm;
+	m_z = m_z / norm;
+}
+
 Quaternion& Quaternion::Negation()const
 {
 	return Quaternion(-m_w, -m_x, -m_y, -m_z);

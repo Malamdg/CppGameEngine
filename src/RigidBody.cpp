@@ -41,6 +41,7 @@ void RigidBody::Update()
 		updateAcceleration();
 		updateVelocity(duration);
 		updatePosition(duration);
+		updateOrientation(duration);
 	}
 }
 
@@ -131,6 +132,7 @@ void RigidBody::updateOrientation(float duration)
 	Quaternion angularVariation = (fromAngularVelocity * m_orientation) * (duration / 2);
 
 	m_orientation = m_orientation + angularVariation;
+	m_orientation.Normalize();
 	m_matrixOrientation = Matrix3::FromQuaternion(m_orientation);
 
 	m_primitive->setOrientation(m_orientation.q());
