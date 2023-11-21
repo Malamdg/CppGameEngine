@@ -78,7 +78,7 @@ public:
 	Matrix4& operator*(const float& f) const;
 
 	/*
-	Product bewteen a Matrix and a float
+	Product bewteen a Matrix and a Vector3D
 	@param v, the Vector3D which is multiplied by the matrix : matrix * v
 
 	@return the product's result 
