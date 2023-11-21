@@ -95,6 +95,11 @@ Quaternion& Quaternion::operator*(const Quaternion& q) const
 	return Quaternion(resw, resv);
 }
 
+Quaternion& Quaternion::operator+(const Quaternion& q) const
+{
+	return Quaternion(m_w + q.m_w, m_x + q.m_x, m_y + q.m_y, m_z + q.m_z);
+}
+
 Quaternion& Quaternion::operator-(const Quaternion& q) const
 {
 	Quaternion conj = Conjugue();

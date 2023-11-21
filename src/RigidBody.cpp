@@ -3,8 +3,9 @@
 RigidBody::RigidBody(of3dPrimitive* primitive,
 	Vector3D centerOfMass,
 	Vector3D position,
-	Vector3D direction,
 	Vector3D initVelocity,
+	Quaternion orientation,
+	Vector3D initAngVelocity,
 	float invertedMass,
 	float dragCoeff,
 	float frictionK1,
@@ -13,9 +14,10 @@ RigidBody::RigidBody(of3dPrimitive* primitive,
 	: m_primitive(primitive),
 	m_centerOfMass(centerOfMass),
 	m_position(position),
-	m_direction(direction),
 	m_velocity(initVelocity),
-	m_angularVelocity(Quaternion::Identity()),
+	m_orientation(orientation),
+	m_matrixOrientation(Matrix3::FromQuaternion(orientation)),
+	m_angularVelocity(initAngVelocity),
 	m_invertedMass(invertedMass),
 	m_drag_coef(dragCoeff),
 	m_frictionK1(frictionK1),
@@ -120,6 +122,18 @@ void RigidBody::updatePosition(float duration)
 	m_position += integrate(v, interval);
 
 	m_primitive->setPosition(m_position.v3());
+}
+
+void RigidBody::updateOrientation(float duration)
+{
+	Quaternion fromAngularVelocity = Quaternion(0, m_angularVelocity);
+
+	Quaternion angularVariation = (fromAngularVelocity * m_orientation) * (duration / 2);
+
+	m_orientation = m_orientation + angularVariation;
+	m_matrixOrientation = Matrix3::FromQuaternion(m_orientation);
+
+	m_primitive->setOrientation(m_orientation.q());
 }
 
 of3dPrimitive* RigidBody::getPrimitives() const { return m_primitive; }

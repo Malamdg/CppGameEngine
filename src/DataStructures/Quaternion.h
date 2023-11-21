@@ -110,6 +110,13 @@ public:
 	*/
 	Quaternion& operator*(const Quaternion& q) const;
 	/*
+	Define the operator + between two quaternions
+
+	@param q, the quaternion for the sum
+	@return the sum
+	*/
+	Quaternion& operator+(const Quaternion& q) const;
+	/*
 	Define the operator - between two quaternions
 
 	@param q, the quaternion for the substraction
@@ -185,5 +192,5 @@ public:
 	*/
 	Vector3D getVector()const;
 
-	//Matrix3 matrixFromQuaternion() const;
+	glm::quat q() { return glm::quat(m_w, m_x, m_y, m_z); }
 };

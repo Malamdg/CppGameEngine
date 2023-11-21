@@ -2,6 +2,7 @@
 
 #include "DataStructures/Vector3D.h"
 #include "DataStructures/Quaternion.h"
+#include "DataStructures/Matrix3.h"
 
 class RigidBody
 {
@@ -12,11 +13,14 @@ private:
 	Vector3D m_centerOfMass;
 
 	Vector3D m_position;
-	Vector3D m_direction;
 	Vector3D m_velocity;
 	Vector3D m_acceleration;
-	Quaternion m_angularVelocity;
 	float m_invertedMass;
+
+	Quaternion m_orientation;
+	Matrix3 m_matrixOrientation;
+	Vector3D m_angularVelocity;
+	Vector3D m_angularAcceleration;
 
 	float m_drag_coef;
 	Vector3D m_accumForce;
@@ -36,8 +40,9 @@ public:
 	RigidBody(of3dPrimitive* primitive = new ofBoxPrimitive(),
 		Vector3D centerOfMass = Vector3D(),
 		Vector3D position = Vector3D(),
-		Vector3D direction = Vector3D(1, 0, 0),
 		Vector3D initVelocity = Vector3D(),
+		Quaternion orientation = Quaternion::Identity(),
+		Vector3D initAngVelocity = Vector3D(),
 		float invertedMass = 0,
 		float dragCoeff = 0,
 		float frictionK1 = 0,
@@ -61,6 +66,12 @@ Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 100);
 	* private method to update position given the duration of the frame
 	*/
 	void updatePosition(float duration);
+
+	/*
+	* private method to update orientation given the duration of the frame
+	*/
+	void updateOrientation(float duration);
+
 	/*
 	* public method to be called in ofMain's update
 	* do the update job to the particle
