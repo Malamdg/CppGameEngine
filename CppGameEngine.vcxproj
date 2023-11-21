@@ -128,6 +128,8 @@
     <ClCompile Include="src\Forces\ParticleGravity.cpp" />
     <ClCompile Include="src\Forces\SpringParticleParticle.cpp" />
     <ClCompile Include="src\Forces\SpringParticlePoint.cpp" />
+    <ClCompile Include="src\Level.cpp" />
+    <ClCompile Include="src\LevelPhase1.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Datastructures\Matrix3.cpp" />
     <ClCompile Include="src\Datastructures\Matrix4.cpp" />
@@ -159,6 +161,8 @@
     <ClInclude Include="src\Forces\ParticleGravity.h" />
     <ClInclude Include="src\Forces\SpringParticleParticle.h" />
     <ClInclude Include="src\Forces\SpringParticlePoint.h" />
+    <ClInclude Include="src\Level.h" />
+    <ClInclude Include="src\LevelPhase1.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\DataStructures\Quaternion.h" />

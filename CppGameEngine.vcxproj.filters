@@ -79,6 +79,8 @@
     <ClCompile Include="src\Addons\ofSkyBox\ofxSkyBox.cpp">
       <Filter>Addons\ofSkyBox</Filter>
     </ClCompile>
+    <ClCompile Include="src\Level.cpp" />
+    <ClCompile Include="src\LevelPhase1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Blob.h" />
@@ -149,6 +151,8 @@
     <ClInclude Include="src\Addons\ofSkyBox\ofxSkyBox.h">
       <Filter>Addons\ofSkyBox</Filter>
     </ClInclude>
+    <ClInclude Include="src\Level.h" />
+    <ClInclude Include="src\LevelPhase1.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Collisions">
