@@ -1,6 +1,6 @@
 #pragma once
 #include "Collision.h"
-#include "../Forces/ParticleForceGenerator.h"
+#include "../Forces/ForceGenerator.h"
 #include "../Particle.h"
 
 class Spindle : public Collision

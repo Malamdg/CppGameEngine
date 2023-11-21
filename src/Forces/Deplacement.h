@@ -1,10 +1,8 @@
 #pragma once
 
-#include "../Particle.h"
-#include "ParticleForceGenerator.h"
-#include "../DataStructures/Vector3D.h"
+#include "ForceGenerator.h"
 
-class ParticleDeplacement : public ParticleForceGenerator {
+class Deplacement : public ForceGenerator {
 
 private:
 
@@ -17,12 +15,12 @@ public:
 
 	@param deplacementForce, value of the force's deplacement
 	*/
-	ParticleDeplacement(float deplacementForce);
+	Deplacement(float deplacementForce);
 
 	/*
 	class desctructor
 	*/
-	~ParticleDeplacement();
+	~Deplacement();
 
 	/*
 	update the particle's force
@@ -31,4 +29,5 @@ public:
 	@param duration, frame duration when the force applies
 	*/
 	virtual void updateForce(Particle* particle, float duration);
+	virtual void updateForce(RigidBody* rb, float duration);
 };

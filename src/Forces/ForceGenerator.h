@@ -1,18 +1,19 @@
 #pragma once
 #include "../Particle.h"
+#include "../RigidBody.h"
 
-class ParticleForceGenerator
+class ForceGenerator
 {
 public:
 	/*
 	Class Constructor
 	*/
-	ParticleForceGenerator();
+	ForceGenerator();
 
 	/*
 	Class Destructor
 	*/
-	~ParticleForceGenerator();
+	~ForceGenerator();
 
 	/*
 	update the particle's force
@@ -21,4 +22,12 @@ public:
 	@param duration, frame duration when the force applies
 	*/
 	virtual void updateForce(Particle* particle, float duration = 0);
+
+	/*
+	update the rigidBody's force
+
+	@param *rb, the rigidbody to update
+	@param duration, frame duration when the force applies
+	*/
+	virtual void updateForce(RigidBody* rb, float duration = 0);
 };

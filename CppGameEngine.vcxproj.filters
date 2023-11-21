@@ -27,31 +27,25 @@
     <ClCompile Include="src\Datastructures\Matrix4.cpp">
       <Filter>DataStructures</Filter>
     </ClCompile>
-    <ClCompile Include="src\Forces\ElasticParticleParticle.cpp">
+    <ClCompile Include="src\Forces\Elastic.cpp">
       <Filter>Forces</Filter>
     </ClCompile>
-    <ClCompile Include="src\Forces\ElasticParticlePoint.cpp">
+    <ClCompile Include="src\Forces\Deplacement.cpp">
       <Filter>Forces</Filter>
     </ClCompile>
-    <ClCompile Include="src\Forces\ParticleDeplacement.cpp">
+    <ClCompile Include="src\Forces\ForceGenerator.cpp">
       <Filter>Forces</Filter>
     </ClCompile>
-    <ClCompile Include="src\Forces\ParticleForceGenerator.cpp">
+    <ClCompile Include="src\Forces\ForceRegistry.cpp">
       <Filter>Forces</Filter>
     </ClCompile>
-    <ClCompile Include="src\Forces\ParticleForceRegistry.cpp">
+    <ClCompile Include="src\Forces\Friction.cpp">
       <Filter>Forces</Filter>
     </ClCompile>
-    <ClCompile Include="src\Forces\ParticleFriction.cpp">
+    <ClCompile Include="src\Forces\Gravity.cpp">
       <Filter>Forces</Filter>
     </ClCompile>
-    <ClCompile Include="src\Forces\ParticleGravity.cpp">
-      <Filter>Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Forces\SpringParticleParticle.cpp">
-      <Filter>Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Forces\SpringParticlePoint.cpp">
+    <ClCompile Include="src\Forces\Spring.cpp">
       <Filter>Forces</Filter>
     </ClCompile>
     <ClCompile Include="src\DataStructures\Quaternion.cpp">
@@ -100,31 +94,25 @@
     <ClInclude Include="src\Collisions\Spindle.h">
       <Filter>Collisions</Filter>
     </ClInclude>
-    <ClInclude Include="src\Forces\ElasticParticleParticle.h">
+    <ClInclude Include="src\Forces\Elastic.h">
       <Filter>Forces</Filter>
     </ClInclude>
-    <ClInclude Include="src\Forces\ElasticParticlePoint.h">
+    <ClInclude Include="src\Forces\Deplacement.h">
       <Filter>Forces</Filter>
     </ClInclude>
-    <ClInclude Include="src\Forces\ParticleDeplacement.h">
+    <ClInclude Include="src\Forces\ForceGenerator.h">
       <Filter>Forces</Filter>
     </ClInclude>
-    <ClInclude Include="src\Forces\ParticleForceGenerator.h">
+    <ClInclude Include="src\Forces\ForceRegistry.h">
       <Filter>Forces</Filter>
     </ClInclude>
-    <ClInclude Include="src\Forces\ParticleForceRegistry.h">
+    <ClInclude Include="src\Forces\Friction.h">
       <Filter>Forces</Filter>
     </ClInclude>
-    <ClInclude Include="src\Forces\ParticleFriction.h">
+    <ClInclude Include="src\Forces\Gravity.h">
       <Filter>Forces</Filter>
     </ClInclude>
-    <ClInclude Include="src\Forces\ParticleGravity.h">
-      <Filter>Forces</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Forces\SpringParticleParticle.h">
-      <Filter>Forces</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Forces\SpringParticlePoint.h">
+    <ClInclude Include="src\Forces\Spring.h">
       <Filter>Forces</Filter>
     </ClInclude>
     <ClInclude Include="src\DataStructures\Quaternion.h">

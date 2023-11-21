@@ -5,7 +5,7 @@ Blob::Blob(Particle* core)
 	// to define the characteristics of the blob
 	m_core(core),
 	m_springLength(25.),
-	m_springCoreParticle(new SpringParticleParticle(m_core, 1000, m_springLength, .05)),
+	m_springCoreParticle(new Spring(m_core, 1000, m_springLength, .05)),
 	m_cableCoreParticle(new Cable(m_core, 2 * m_springLength))
 {
 	m_particles = std::list<Particle*>();
@@ -33,12 +33,12 @@ void Blob::split() {
 	}
 }
 
-void Blob::merge(Particle* particle, ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler) {
+void Blob::merge(Particle* particle, ForceRegistry* forceRegistry, CollisionHandler* collisionHandler) {
 	m_particles.push_back(particle);
 	linkParticle(particle, forceRegistry, collisionHandler);
 }
 
-void Blob::linkParticles(ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler) {
+void Blob::linkParticles(ForceRegistry* forceRegistry, CollisionHandler* collisionHandler) {
 	int i = 0;
 	for (Particle* particle : m_particles) {
 		if (i == 0) {// dont link core to itself
@@ -49,7 +49,7 @@ void Blob::linkParticles(ParticleForceRegistry* forceRegistry, CollisionHandler*
 	}
 }
 
-void Blob::linkParticle(Particle* particle, ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler) {
+void Blob::linkParticle(Particle* particle, ForceRegistry* forceRegistry, CollisionHandler* collisionHandler) {
 	// We add the spring between the core and the surrounding particle created to the forceregistry
 	forceRegistry->add(particle, m_springCoreParticle);
 	// We add the create a cable between the core an the surrounding particle to ensure that particle doesn't go too far 
