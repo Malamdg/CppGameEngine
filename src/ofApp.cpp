@@ -33,11 +33,6 @@ void ofApp::setup() {
 	colors[3] = ofColor(10, 200, 250);
 	colors[4] = ofColor(250, 10, 200);
 
-	ofSpherePrimitive* laSpherePourTester = new ofSpherePrimitive();
-	laSpherePourTester->setRadius(6);
-	laSpherePourTester->setPosition(0, 0, 0);
-	primitives.push_back(pair<of3dPrimitive*, int>(laSpherePourTester, magenta));
-
 	//SkyBox
 	skyboxCenter = ofVec3f(0, 0, 0);
 	skybox.load();
@@ -132,7 +127,7 @@ void ofApp::keyReleased(int key) {
 
 		RigidBody* rb = new RigidBody(new ofBoxPrimitive(2, 2, 2), Vector3D(),
 			position, lauchDirection * velocity,
-			Quaternion::Identity(), Vector3D(PI, 0, 0),
+			Quaternion::Identity(), Vector3D(0, PI, 0),
 			1/rbMasse, .1f);
 		
 		rigidBodies.push_back(rb);
