@@ -37,6 +37,21 @@ private:
 	
 
 public:
+	/*
+	class constructor
+
+	@param primitive, primitive for the RigidBody
+ 	@param centerOfMass, mass' center of the RigidBody
+ 	@param position, the position of the Rigidbody
+  	@param initVelocity, the initial velocity
+   	@param orientation, the orientation of the Rigidbody (it is not a particle so the direction matters)
+    	@param initAngVelocity, the initial angular velocity of the RigidBody (it is not a particle so the angular velocity)
+     	@param invertedMass, inverted mass of the RigidBody
+        @param dragCoeff,
+   	@param frictionK1, first coefficient of friction
+    	@param frictionK2, second coefficient of friction
+     	@param coeffRestitutions, coeffecient of restitution ; the coefficient is used to know the amount of energy absorbed by the particle (if coeff = 1, then nothing is absorbed)
+	*/
 	RigidBody(of3dPrimitive* primitive = new ofBoxPrimitive(),
 		Vector3D centerOfMass = Vector3D(),
 		Vector3D position = Vector3D(),
@@ -49,39 +64,50 @@ public:
 		float frictionK2 = 0,
 		float coeffRestitutions = 1);
 
+	/*
+	class destructor
+	*/
 	~RigidBody();
-Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 100);
+
+
+	Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 100);
 
 	/*
-	* private method to update acceleration given the duration of the frame
+	private method to update acceleration given the duration of the frame
 	*/
 	void updateAcceleration();
 
 	/*
-	* private method to update velocity given the duration of the frame
+	private method to update velocity given the duration of the frame
+
+  	@param duration, duration of the frame
 	*/
 	void updateVelocity(float duration);
 
 	/*
-	* private method to update position given the duration of the frame
+	private method to update position given the duration of the frame
+	
+  	@param duration, duration of the frame
 	*/
 	void updatePosition(float duration);
 
 	/*
-	* private method to update orientation given the duration of the frame
-	*/
+	private method to update orientation given the duration of the frame
+	
+  	@param duration, duration of the frame
+ 	*/
 	void updateOrientation(float duration);
 
 	/*
-	* public method to be called in ofMain's update
-	* do the update job to the particle
+	public method to be called in ofMain's update
+	do the update job to the particle
 	*/
 	void Update();
 
 	/*
-	* get the inverse of the particle's
-	*
-	* @return the inverse of the particle's mass
+	get the inverse of the particle's
+	
+	@return the inverse of the particle's mass
 	*/
 	float getInverseMass();
 
@@ -129,8 +155,23 @@ Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 100);
 	*/
 	float getCoefficientRestitution();
 
+	/*
+	get the first coefficient of friction
+
+	@return the first coefficient of friction
+	*/
 	float getK1();
+	/*
+	get the second coefficient of friction
+
+	@return the second coefficient of friction
+	*/
 	float getK2();
 
+	/*
+	get the primitives
+
+	@return the primitive
+	*/
 	of3dPrimitive* getPrimitives() const;
 };
