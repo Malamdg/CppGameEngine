@@ -22,6 +22,7 @@ void ofApp::setup() {
 
 	// Setup lists
 	primitives = list<pair<of3dPrimitive*, int>>(); // display primitive on each draw()
+	centersMass = list<pair<of3dPrimitive*, int>>();
 	rigidBodies = list<RigidBody*>();
 
 	//Colors
@@ -32,6 +33,7 @@ void ofApp::setup() {
 	colors[2] = ofColor(100, 100, 100);
 	colors[3] = ofColor(10, 200, 250);
 	colors[4] = ofColor(250, 10, 200);
+	colors[5] = ofColor(255, 0, 0);
 
 	//SkyBox
 	skyboxCenter = ofVec3f(0, 0, 0);
@@ -84,8 +86,18 @@ void ofApp::draw() {
 
 		// display primitive
 		primitive.first->draw();
-
 	}
+
+	// display centers of mass above the primitives
+	ofDisableDepthTest();
+	for (pair<of3dPrimitive*, int> centerMass : centersMass)
+	{
+		ofSetColor(colors[centerMass.second]);
+
+		// display primitive
+		centerMass.first->draw();
+	}
+	ofEnableDepthTest();
 
 	// end camera job
 	cam.end();
@@ -125,13 +137,30 @@ void ofApp::keyReleased(int key) {
 		Vector3D lauchDirection = cam.getLookAtDir();
 		float velocity = 50;
 
-		RigidBody* rb = new RigidBody(new ofBoxPrimitive(2, 2, 2), Vector3D(),
+		list<pair<of3dPrimitive*, Vector3D>> rbPrimitives = list<pair<of3dPrimitive*, Vector3D>> 
+		{ 
+			{new ofBoxPrimitive(2, 2, 2), Vector3D(1, 1, 1)},
+			{new ofCylinderPrimitive(2, 2, 8, 8), Vector3D(-1, 0, -1)}
+		};
+		
+
+		RigidBody* rb = new RigidBody(rbPrimitives,
 			position, lauchDirection * velocity,
 			Quaternion::Identity(), Vector3D(0, PI, 0),
 			1/rbMasse, .1f);
 		
 		rigidBodies.push_back(rb);
-		primitives.push_back(pair<of3dPrimitive*, int>(rb->getPrimitives(), cyan));
+
+		bool first = true;
+		for(of3dPrimitive* primitive : rb->getPrimitives())
+		{
+			if (first) 
+			{
+				centersMass.push_back(pair<of3dPrimitive*, int>(primitive, red));
+				first = false;
+			}
+			else primitives.push_back(pair<of3dPrimitive*, int>(primitive, cyan));
+		}
 		
 		rbMasse = 0;
 		break;

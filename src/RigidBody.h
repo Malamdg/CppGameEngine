@@ -7,10 +7,11 @@
 class RigidBody
 {
 private:
-	of3dPrimitive* m_primitive; // Only one for now, if we want to expand it to create complex objects, we can turn this into a list later
+	list<of3dPrimitive*> m_primitives;
 
 	// Deplacement du centre de masse depuis la position
-	Vector3D m_centerOfMass;
+	//Vector3D m_centerOfMass;
+	ofSpherePrimitive* m_centerMass;
 
 	Vector3D m_position;
 	Vector3D m_velocity;
@@ -37,8 +38,8 @@ private:
 	
 
 public:
-	RigidBody(of3dPrimitive* primitive = new ofBoxPrimitive(),
-		Vector3D centerOfMass = Vector3D(),
+	RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives = list<pair<of3dPrimitive*, Vector3D>>(),
+		//Vector3D centerOfMass = Vector3D(),
 		Vector3D position = Vector3D(),
 		Vector3D initVelocity = Vector3D(),
 		Quaternion orientation = Quaternion::Identity(),
@@ -132,5 +133,5 @@ Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 100);
 	float getK1();
 	float getK2();
 
-	of3dPrimitive* getPrimitives() const;
+	list<of3dPrimitive*> getPrimitives() const;
 };
