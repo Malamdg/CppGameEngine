@@ -50,9 +50,12 @@ Quaternion& Quaternion::slerp(const Quaternion& q0, const Quaternion& q1, const 
 {
 	Quaternion inverseQ = q0.Inverse();
 	Quaternion q = q1 * inverseQ;
-	Quaternion expQ = q ^ t;
-
-	return q0 * expQ;
+	try
+	{
+		Quaternion expQ = q ^ t;
+		return q0 * expQ;
+	}
+	catch (exception e) {}
 }
 
 float Quaternion::Norm() const
