@@ -1,8 +1,6 @@
 #pragma once
 
-#include "../ofApp.h"
 #include "Vector3D.h"
-#include "Matrix3.h"
 
 class Quaternion {
 
