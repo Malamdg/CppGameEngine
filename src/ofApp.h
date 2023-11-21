@@ -61,7 +61,8 @@ private:
 	float viewHeight;
 
 	//Primitives
-	list<std::pair<of3dPrimitive*, int>> primitives;
+	list<pair<of3dPrimitive*, int>> primitives;
+	list<pair<of3dPrimitive*, int>> centersMass;
 
 	//RigidBodies
 	list<RigidBody*> rigidBodies;
@@ -69,11 +70,12 @@ private:
 
 	//Colors
 	ofColor* colors;
-	int noir = 0;
-	int blanc = 1;
-	int gris = 2;
+	int black = 0;
+	int white = 1;
+	int grey = 2;
 	int cyan = 3;
 	int magenta = 4;
+	int red = 5;
 
 	//SkyBox
 	ofxSkyBox skybox;
