@@ -68,6 +68,9 @@ public:
 	*/
 	float Norm() const;
 
+	/*
+	Normalize the Quaternion
+	*/
 	void Normalize();
 	/*
 	Compute the negation of the Quaternion
