@@ -20,7 +20,7 @@ public:
 	@param y the ordinate
 	@param z the depth
 	*/
-	Vector3D(const float x = 0, const float y = 0, const float z = 0);
+	Vector3D(const float x = 0, const float y = 0, const float z = 0, const float w = 0);
 	Vector3D(glm::vec3 vector);
 	~Vector3D();
 
@@ -180,6 +180,20 @@ public:
 	*/
 	void z(float f);
   
+	/*
+	get the w component of a vector
+
+	@return the component
+	*/
+	float w()const;
+
+	/*
+	set the w component of a vector
+
+	@param f, the new value for the component
+	*/
+	void w(float f);
+
 	/*
 	set the component of a vector
 	set the i-th coordinate of the vector

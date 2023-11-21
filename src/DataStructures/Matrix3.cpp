@@ -238,7 +238,7 @@ float Matrix3::getDeterminant()
 }
 
 void Matrix3::invert() {
-	if (getDeterminant() == 0.f) {
+	if (cmpf(getDeterminant(), 0.f)) {
 		return;
 	}
 

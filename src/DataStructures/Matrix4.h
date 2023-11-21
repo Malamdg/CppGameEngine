@@ -78,6 +78,14 @@ public:
 	Matrix4& operator*(const float& f) const;
 
 	/*
+	Product bewteen a Matrix and a float
+	@param v, the Vector3D which is multiplied by the matrix : matrix * v
+
+	@return the product's result 
+	*/
+	Vector3D& operator*(const Vector3D& v) const;
+
+	/*
 	Sum of two Matrix
 	@param m, the second matrix
 
