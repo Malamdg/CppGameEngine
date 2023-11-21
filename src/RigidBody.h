@@ -7,10 +7,11 @@
 class RigidBody
 {
 private:
-	of3dPrimitive* m_primitive; // Only one for now, if we want to expand it to create complex objects, we can turn this into a list later
+	list<of3dPrimitive*> m_primitives;
 
 	// Deplacement du centre de masse depuis la position
-	Vector3D m_centerOfMass;
+	//Vector3D m_centerOfMass;
+	ofSpherePrimitive* m_centerMass;
 
 	Vector3D m_position;
 	Vector3D m_velocity;
@@ -37,23 +38,24 @@ private:
 	
 
 public:
+	
+		
 	/*
 	class constructor
 
-	@param primitive, primitive for the RigidBody
- 	@param centerOfMass, mass' center of the RigidBody
+	@param primitives, list of primitives and relatives position in the rigidbody
  	@param position, the position of the Rigidbody
   	@param initVelocity, the initial velocity
    	@param orientation, the orientation of the Rigidbody (it is not a particle so the direction matters)
-    	@param initAngVelocity, the initial angular velocity of the RigidBody (it is not a particle so the angular velocity)
+    	@param initAngVelocity, the initial angular velocity of the RigidBody (it is not a particle so the angular velocity matters)
      	@param invertedMass, inverted mass of the RigidBody
         @param dragCoeff,
    	@param frictionK1, first coefficient of friction
     	@param frictionK2, second coefficient of friction
      	@param coeffRestitutions, coeffecient of restitution ; the coefficient is used to know the amount of energy absorbed by the particle (if coeff = 1, then nothing is absorbed)
 	*/
-	RigidBody(of3dPrimitive* primitive = new ofBoxPrimitive(),
-		Vector3D centerOfMass = Vector3D(),
+	RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives = list<pair<of3dPrimitive*, Vector3D>>(),
+		//Vector3D centerOfMass = Vector3D(),
 		Vector3D position = Vector3D(),
 		Vector3D initVelocity = Vector3D(),
 		Quaternion orientation = Quaternion::Identity(),
@@ -171,7 +173,7 @@ public:
 	/*
 	get the primitives
 
-	@return the primitive
+	@return the list of primitives
 	*/
-	of3dPrimitive* getPrimitives() const;
+	list<of3dPrimitive*> getPrimitives() const;
 };

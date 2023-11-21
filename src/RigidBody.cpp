@@ -1,7 +1,7 @@
 #include "RigidBody.h"
 
-RigidBody::RigidBody(of3dPrimitive* primitive,
-	Vector3D centerOfMass,
+RigidBody::RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives,
+	//Vector3D centerOfMass,
 	Vector3D position,
 	Vector3D initVelocity,
 	Quaternion orientation,
@@ -11,8 +11,8 @@ RigidBody::RigidBody(of3dPrimitive* primitive,
 	float frictionK1,
 	float frictionK2,
 	float coeffRestitutions)
-	: m_primitive(primitive),
-	m_centerOfMass(centerOfMass),
+	: m_primitives(),
+	//m_centerOfMass(centerOfMass),
 	m_position(position),
 	m_velocity(initVelocity),
 	m_orientation(orientation),
@@ -23,11 +23,23 @@ RigidBody::RigidBody(of3dPrimitive* primitive,
 	m_frictionK1(frictionK1),
 	m_frictionK2(frictionK2),
 	m_coeffRestitutions(coeffRestitutions)
-{}
+{
+	m_centerMass = new ofSpherePrimitive();
+	m_centerMass->setRadius(.25);
+
+	m_primitives.push_back(m_centerMass);
+	
+	for (pair<of3dPrimitive*, Vector3D> primitive : primitives)
+	{
+		primitive.first->setParent(*m_centerMass);
+		primitive.first->setPosition(primitive.second.v3());
+
+		m_primitives.push_back(primitive.first);
+	}
+}
 
 RigidBody::~RigidBody()
 {
-	delete m_primitive;
 }
 
 void RigidBody::Update()
@@ -122,7 +134,7 @@ void RigidBody::updatePosition(float duration)
 	// position is velocity after integration
 	m_position += integrate(v, interval);
 
-	m_primitive->setPosition(m_position.v3());
+	m_centerMass->setPosition(m_position.v3());
 }
 
 void RigidBody::updateOrientation(float duration)
@@ -135,7 +147,7 @@ void RigidBody::updateOrientation(float duration)
 	m_orientation.Normalize();
 	m_matrixOrientation = Matrix3::FromQuaternion(m_orientation);
 
-	m_primitive->setOrientation(m_orientation.q());
+	m_centerMass->setOrientation(m_orientation.q());
 }
 
-of3dPrimitive* RigidBody::getPrimitives() const { return m_primitive; }
+list<of3dPrimitive*> RigidBody::getPrimitives() const { return m_primitives; }
