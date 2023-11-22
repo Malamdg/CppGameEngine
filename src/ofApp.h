@@ -44,7 +44,7 @@ public:
 
 private:
 	void drawText();
-	void addToList(RigidBody* rb);
+	void addToList(RigidBody* rb, int mode);
 
 	//HUD
 	float fps;
@@ -70,7 +70,7 @@ private:
 	//RigidBodies
 	list<RigidBody*> rigidBodies;
 	int objectIndex = 0;
-	float keyHold = 0;
+	float keyHold = 1;
 
 	RigidBody* rigidObjects;
 
@@ -97,6 +97,10 @@ private:
 	Friction* airFriction;
 	Spring* springZero;
 	Elastic* elasticZero;
+
+	list<RigidBody*> rbWithSpring = list<RigidBody*>();
+	list<RigidBody*> rbWithElastic = list<RigidBody*>();
+	int forceMode = 0;
 
 	// Grid toggle
 	bool drawGrid = true;

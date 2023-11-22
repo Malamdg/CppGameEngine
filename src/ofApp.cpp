@@ -44,7 +44,7 @@ void ofApp::setup() {
 	cam.setFarClip(15000);
 
 	//Rigid bodies
-	rigidObjects = new RigidBody[6];
+	rigidObjects = new RigidBody[5];
 
 	list<pair<of3dPrimitive*, Vector3D>> tablePrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
@@ -107,7 +107,7 @@ void ofApp::setup() {
 	gravity = new Gravity(Vector3D(0, -9.8, 0));
 	airFriction = new Friction(.1, .1);
 	springZero = new Spring(new Vector3D(), 20, 3, .8);
-	elasticZero = new Elastic(new Vector3D(), 40, 3, .8);
+	elasticZero = new Elastic(new Vector3D(), 40, 10, .8);
 }
 
 //--------------------------------------------------------------
@@ -118,12 +118,13 @@ void ofApp::update() {
 
 	for (RigidBody* rb : rigidBodies)
 	{
-		/*forceRegistry->add(rb, gravity);
+		forceRegistry->add(rb, gravity);
 		forceRegistry->add(rb, airFriction);
-		forceRegistry->add(rb, springZero);*/
-		//forceRegistry->add(rb, elasticZero);
-
 	}
+
+	for (RigidBody* rb : rbWithSpring) forceRegistry->add(rb, springZero);
+	for (RigidBody* rb : rbWithElastic) forceRegistry->add(rb, elasticZero);
+
 	forceRegistry->updateForces(duration);
 
 	for (RigidBody* rb : rigidBodies) rb->Update();
@@ -176,8 +177,9 @@ void ofApp::draw() {
 	ofDisableDepthTest();
 
 	string objectType = "";
+	string forceType = "";
 
-	switch ((int)objectIndex)
+	switch (objectIndex)
 	{
 		case 0:
 			objectType = "Table";
@@ -194,10 +196,27 @@ void ofApp::draw() {
 		case 4:
 			objectType = "Guitar";
 			break;
+		case 5:
+			objectType = "Ladder - controlable mass     |     Mass : " + to_string(keyHold);
+			break;
 	};
 
+	switch (forceMode)
+	{
+		case 0:
+			forceType = "None";
+			break;
+		case 1:
+			forceType = "Spring";
+			break;
+		case 2:
+			forceType = "Elastic";
+			break;
+	}
+
 	std::stringstream strm;
-	strm << "framerate : " << fps << "    |    Objet : " << objectType;
+	strm << " Objet : " << objectType << "     |     Additional Force : " << forceType;
+	strm << "     |     framerate : " << fps;
 	ofSetWindowTitle(strm.str());
 }
 
@@ -206,7 +225,7 @@ void ofApp::keyPressed(int key) {
 	switch (key)
 	{
 		case ' ':
-			keyHold = MIN(keyHold + duration * 4, 4);
+			keyHold += duration * 4;
 	}
 }
 
@@ -220,7 +239,11 @@ void ofApp::keyReleased(int key) {
 			break;
 
 		case 'c':
-			objectIndex = (objectIndex + 1) % 5;
+			objectIndex = (objectIndex + 1) % 6;
+			break;
+
+		case'v':
+			forceMode = (forceMode + 1) % 3;
 			break;
 
 		case 'g':
@@ -240,17 +263,29 @@ void ofApp::keyReleased(int key) {
 				{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 8, 0)},
 				{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 12, 0)},
 			};
-			RigidBody* weightedLadder = new RigidBody(weightedLadderPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(30, 0, 0));
+			RigidBody* tester = new RigidBody(weightedLadderPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(PI, 0, 0));
 
-			addToList(weightedLadder);
+			addToList(tester, 0);
 
-
-			RigidBody* rb = new RigidBody(rigidObjects[objectIndex]);
+			RigidBody* rb;
+			if (objectIndex < 5) rb = new RigidBody(rigidObjects[objectIndex]);
+			else
+			{
+				list <pair<of3dPrimitive*, Vector3D>> weightedLadderPrimitives = list<pair<of3dPrimitive*, Vector3D>>
+				{
+					{new ofBoxPrimitive(1.5, 16, 1.5), Vector3D(2, 8, 0)},
+					{new ofBoxPrimitive(1.5, 16, 1.5), Vector3D(-2, 8, 0)},
+					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 4, 0)},
+					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 8, 0)},
+					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 12, 0)},
+				};
+				rb = new RigidBody(weightedLadderPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / keyHold);
+			}
 			rb->setPosition(position);
 
-			addToList(rb);
+			addToList(rb, forceMode);
 		
-			keyHold = 0;
+			keyHold = 1;
 			break;
 	}
 }
@@ -315,9 +350,11 @@ void ofApp::drawText() {
 	ofDrawBitmapString(ofToString(movingHud), -viewWidth / 2 - 50 + camX, viewHeight / 2 + 50 + camY);
 }
 
-void ofApp::addToList(RigidBody* rb)
+void ofApp::addToList(RigidBody* rb, int mode)
 {
 	rigidBodies.push_back(rb);
+	if (mode == 1) rbWithSpring.push_back(rb);
+	if (mode == 2) rbWithElastic.push_back(rb);
 
 	bool first = true;
 	for (of3dPrimitive* primitive : rb->getPrimitives())
