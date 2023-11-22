@@ -52,16 +52,58 @@ public:
 	@param duration, frame duration when the spring's force applies
 	*/
 	void updateForce(Particle* particle, float duration);
+	/*
+	update the RigidBody's force
+
+	@param *rb, the RigidBody to update
+	@param duration, frame duration when the spring's force applies
+	*/
 	void updateForce(RigidBody* rb, float duration);
 
 
 private:
+	/*
+	update the object's force when it is linked to a point
+
+	@param *particle, the particle to update
+	@param duration, frame duration when the spring's force applies
+	*/
 	void updateForPoint(Particle* particle, float duration);
+	/*
+	update the object's force when it is linked to a point
+
+	@param *rb, the RigidBody to update
+	@param duration, frame duration when the spring's force applies
+	*/
 	void updateForPoint(RigidBody* rb, float duration);
 
+	/*
+	update the object's force when it is linked to a particle
+
+	@param *particle, the particle to update
+	@param duration, frame duration when the spring's force applies
+	*/
 	void updateForParticle(Particle* particle, float duration);
+	/*
+	update the object's force when it is linked to a particle
+
+	@param *rb, the RigidBody to update
+	@param duration, frame duration when the spring's force applies
+	*/
 	void updateForParticle(RigidBody* rb, float duration);
 
-	void updateForRigidBody(Particle* particle, float duration);
+	/*
+	update the object's force when it is linked to a RigidBody
+
+	@param *particle, the particle to update
+	@param duration, frame duration when the spring's force applies
+	*/
+	void updateForRigidBody(Particle* particle, float duration);	
+	/*
+	update the object's force when it is linked to a RigidBody
+
+	@param *rb, the RigidBody to update
+	@param duration, frame duration when the spring's force applies
+	*/
 	void updateForRigidBody(RigidBody* rb, float duration);
 };
