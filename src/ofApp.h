@@ -42,6 +42,7 @@ public:
 
 private:
 	void drawText();
+	void addToList(RigidBody* rb);
 
 	//HUD
 	float fps;
@@ -67,6 +68,12 @@ private:
 	//RigidBodies
 	list<RigidBody*> rigidBodies;
 	float rbMasse = 0;
+
+	list<pair<of3dPrimitive*, Vector3D>> table;
+	list<pair<of3dPrimitive*, Vector3D>> chair;
+	list<pair<of3dPrimitive*, Vector3D>> bottle;
+	list<pair<of3dPrimitive*, Vector3D>> car;
+	list<pair<of3dPrimitive*, Vector3D>> guitar;
 
 	//Colors
 	ofColor* colors;
