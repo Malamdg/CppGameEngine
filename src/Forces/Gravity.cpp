@@ -26,13 +26,15 @@ void Gravity::updateForce(Particle* particle, float duration)
 {
 	if (particle->getInverseMass() != 0)
 	{
-		particle->addForce(m_gravity * (1 / particle->getInverseMass()));
+		Vector3D gravity = m_gravity * (1 / particle->getInverseMass());
+		particle->addForce(gravity);
 	}
 }
-void Gravity::updateForce(RigidBody* rb, float duration)
+void Gravity::updateForce(RigidBody* rb, float duration, Vector3D *rbPoint)
 {
 	if (rb->getInverseMass() != 0)
 	{
-		rb->addForce(m_gravity * (1 / rb->getInverseMass()));
+		Vector3D gravity = m_gravity * (1 / rb->getInverseMass());
+		rb->addForce(gravity);
 	}
 }

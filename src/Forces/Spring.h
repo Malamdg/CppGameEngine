@@ -58,7 +58,7 @@ public:
 	@param *rb, the RigidBody to update
 	@param duration, frame duration when the spring's force applies
 	*/
-	void updateForce(RigidBody* rb, float duration);
+	void updateForce(RigidBody* rb, float duration, Vector3D* rbPoint = new Vector3D());
 
 
 private:
@@ -75,7 +75,7 @@ private:
 	@param *rb, the RigidBody to update
 	@param duration, frame duration when the spring's force applies
 	*/
-	void updateForPoint(RigidBody* rb, float duration);
+	void updateForPoint(RigidBody* rb, float duration, Vector3D* rbPoint = new Vector3D());
 
 	/*
 	update the object's force when it is linked to a particle
@@ -90,7 +90,7 @@ private:
 	@param *rb, the RigidBody to update
 	@param duration, frame duration when the spring's force applies
 	*/
-	void updateForParticle(RigidBody* rb, float duration);
+	void updateForParticle(RigidBody* rb, float duration, Vector3D* rbPoint = new Vector3D());
 
 	/*
 	update the object's force when it is linked to a RigidBody
@@ -98,12 +98,12 @@ private:
 	@param *particle, the particle to update
 	@param duration, frame duration when the spring's force applies
 	*/
-	void updateForRigidBody(Particle* particle, float duration);	
+	void updateForRigidBody(Particle* particle, float duration);
 	/*
 	update the object's force when it is linked to a RigidBody
 
 	@param *rb, the RigidBody to update
 	@param duration, frame duration when the spring's force applies
 	*/
-	void updateForRigidBody(RigidBody* rb, float duration);
+	void updateForRigidBody(RigidBody* rb, float duration, Vector3D* rbPoint = new Vector3D());
 };

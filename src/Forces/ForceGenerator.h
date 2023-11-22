@@ -29,5 +29,5 @@ public:
 	@param *rb, the rigidbody to update
 	@param duration, frame duration when the force applies
 	*/
-	virtual void updateForce(RigidBody* rb, float duration = 0);
+	virtual void updateForce(RigidBody* rb,  float duration = 0, Vector3D* rbPoint = new Vector3D());
 };

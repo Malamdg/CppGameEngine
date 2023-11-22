@@ -3,6 +3,7 @@
 #include "DataStructures/Vector3D.h"
 #include "DataStructures/Quaternion.h"
 #include "DataStructures/Matrix3.h"
+#include "DataStructures/Matrix4.h"
 
 class RigidBody
 {
@@ -19,12 +20,18 @@ private:
 	float m_invertedMass;
 
 	Quaternion m_orientation;
+	
 	Matrix3 m_matrixOrientation;
+
+	Matrix3 m_invertedInertiaTensor;
+	
 	Vector3D m_angularVelocity;
+
 	Vector3D m_angularAcceleration;
 
-	float m_drag_coef;
+	float m_radius;
 	Vector3D m_accumForce;
+	Vector3D m_accumTorque;
 
 	float m_frictionK1;
 	float m_frictionK2;
@@ -32,14 +39,8 @@ private:
 	// When a collision occurs, the coefficient is used to know the amount of energy absorbed by the RigidBody (if coeff = 1, then nothing is absorbed)
 	float m_coeffRestitutions = 1;
 
-	/*
-	* private function to implement Euler integration
-	*/
-	
-
 public:
 	
-		
 	/*
 	class constructor
 
@@ -48,11 +49,11 @@ public:
   	@param initVelocity, the initial velocity
    	@param orientation, the orientation of the Rigidbody (it is not a RigidBody so the direction matters)
 	@param initAngVelocity, the initial angular velocity of the RigidBody (it is not a RigidBody so the angular velocity matters)
-    	@param invertedMass, inverted mass of the RigidBody
-    	@param dragCoeff,
+    @param invertedMass, inverted mass of the RigidBody
+    @param dragCoeff,
    	@param frictionK1, first coefficient of friction
-    	@param frictionK2, second coefficient of friction
-    	@param coeffRestitutions, coeffecient of restitution ; the coefficient is used to know the amount of energy absorbed by the RigidBody (if coeff = 1, then nothing is absorbed)
+    @param frictionK2, second coefficient of friction
+    @param coeffRestitutions, coeffecient of restitution ; the coefficient is used to know the amount of energy absorbed by the RigidBody (if coeff = 1, then nothing is absorbed)
 	*/
 	RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives = list<pair<of3dPrimitive*, Vector3D>>(),
 		//Vector3D centerOfMass = Vector3D(),
@@ -61,10 +62,11 @@ public:
 		Quaternion orientation = Quaternion::Identity(),
 		Vector3D initAngVelocity = Vector3D(),
 		float invertedMass = 0,
-		float dragCoeff = 0,
+		float radius = 0,
 		float frictionK1 = 0,
 		float frictionK2 = 0,
-		float coeffRestitutions = 1);
+		float coeffRestitutions = 1
+	);
 
 	/*
 	class constructor from a RigidBody
@@ -127,11 +129,11 @@ public:
 	float getInverseMass();
 
 	/*
-	add a Force to the RigidBody
-
+	add a Force to the RigidBody on the center of mass
+	if local point is diff from 0,0 then it generates a torque
 	@param Force, the new Force applied to the RigidBody
 	*/
-	void addForce(const Vector3D& force);
+	void addForce(const Vector3D& force, const Vector3D& localPoint = Vector3D());
 
 	/*
 	clear the force accumulator assigned to the RigidBody

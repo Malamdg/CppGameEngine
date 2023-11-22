@@ -41,5 +41,5 @@ public:
 	@param *rb, the RigidBody to update
 	@param duration, frame duration when the friction applies
 	*/
-	void updateForce(RigidBody* rb, float duration) override;
+	void updateForce(RigidBody* rb, float duration, Vector3D* rbPoint = new Vector3D()) override;
 };

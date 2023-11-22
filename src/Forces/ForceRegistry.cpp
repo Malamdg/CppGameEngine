@@ -19,13 +19,15 @@ void ForceRegistry::add(Particle* particle, ForceGenerator* Fg)
 	// add the registration to the registry
 	m_particleRegistry.push_back(forceRegistration);
 }
-void ForceRegistry::add(RigidBody* rb, ForceGenerator* Fg)
+
+void ForceRegistry::add(RigidBody* rb, ForceGenerator* Fg, Vector3D* rbPoint)
 {
 	// Create a new registration
 	RigidBodyForceRegistration forceRegistration;
 	// filling the registration
 	forceRegistration.rigidbody = rb;
 	forceRegistration.Fg = Fg;
+	forceRegistration.rbPoint = rbPoint;
 	// add the registration to the registry
 	m_rigidBodyRegistry.push_back(forceRegistration);
 }
@@ -69,7 +71,7 @@ void ForceRegistry::updateForces(float duration)
 	// for each registration, we compute the force applied to the corresponding rigidbody
 	for (auto it = m_rigidBodyRegistry.begin(); it != m_rigidBodyRegistry.end(); it++)
 	{
-		it->Fg->updateForce(it->rigidbody, duration);
+		it->Fg->updateForce(it->rigidbody, duration, it->rbPoint);
 	}
 
 	m_particleRegistry.clear();

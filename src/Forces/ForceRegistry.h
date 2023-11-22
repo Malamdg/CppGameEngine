@@ -18,6 +18,7 @@ public:
 		Particle* particle;
 		ForceGenerator* Fg;
 	};
+
 	/*
 	Definition of the struct ParticleForceRegistration
 
@@ -28,7 +29,9 @@ public:
 	{
 		RigidBody* rigidbody;
 		ForceGenerator* Fg;
+		Vector3D* rbPoint;
 	};
+
 
 	/*
 	Create the type Registry
@@ -68,8 +71,8 @@ public:
 	@param rb, the RigidBody to add
 	@param Fg, the Force Generator associated to the RigidBody
 	*/
-	void add(RigidBody* rb, ForceGenerator* Fg);
-
+	void add(RigidBody* rb, ForceGenerator* Fg, Vector3D* rbPoint = new Vector3D());
+	
 	/*
 	Remove a Particle from the Registry
 

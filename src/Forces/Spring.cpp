@@ -48,11 +48,11 @@ void Spring::updateForce(Particle* particle, float duration)
 	else if (m_particle != nullptr) updateForParticle(particle, duration);
 	else updateForRigidBody(particle, duration);
 }
-void Spring::updateForce(RigidBody* rb, float duration)
+void Spring::updateForce(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
 	if (m_pointPosition != nullptr) updateForPoint(rb, duration);
 	else if (m_particle != nullptr) updateForParticle(rb, duration);
-	else updateForRigidBody(rb, duration);
+	else updateForRigidBody(rb, duration, rbPoint);
 }
 
 
@@ -83,7 +83,7 @@ void Spring::updateForPoint(Particle* particle, float duration)
 		particle->addForce(res);
 	}
 }
-void Spring::updateForPoint(RigidBody* rb, float duration)
+void Spring::updateForPoint(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
 	Vector3D direction = (*m_pointPosition - rb->getPosition());
 
@@ -108,7 +108,7 @@ void Spring::updateForPoint(RigidBody* rb, float duration)
 
 
 		Vector3D res = direction * coeff;
-		rb->addForce(res);
+		rb->addForce(res, (*rbPoint));
 	}
 }
 
@@ -139,7 +139,7 @@ void Spring::updateForParticle(Particle* particle, float duration)
 		particle->addForce(res);
 	}
 }
-void Spring::updateForParticle(RigidBody* rb, float duration)
+void Spring::updateForParticle(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
 	Vector3D direction = (m_particle->getPosition() - rb->getPosition());
 
@@ -163,7 +163,7 @@ void Spring::updateForParticle(RigidBody* rb, float duration)
 		float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
 
 		Vector3D res = direction * coeff;
-		rb->addForce(res);
+		rb->addForce(res, (*rbPoint));
 	}
 }
 
@@ -194,7 +194,7 @@ void Spring::updateForRigidBody(Particle* particle, float duration)
 		particle->addForce(res);
 	}
 }
-void Spring::updateForRigidBody(RigidBody* rb, float duration)
+void Spring::updateForRigidBody(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
 	Vector3D direction = (m_rigidBody->getPosition() - rb->getPosition());
 
@@ -218,6 +218,6 @@ void Spring::updateForRigidBody(RigidBody* rb, float duration)
 		float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
 
 		Vector3D res = direction * coeff;
-		rb->addForce(res);
+		rb->addForce(res, (*rbPoint));
 	}
 }

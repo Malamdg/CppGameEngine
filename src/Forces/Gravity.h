@@ -33,5 +33,5 @@ public:
 	@param *rb, the RigidBody to update
 	@param duration, frame duration when the gravity applies
 	*/
-	virtual void updateForce(RigidBody* rb, float duration);
+	virtual void updateForce(RigidBody* rb, float duration, Vector3D* rbPoint = new Vector3D());
 };

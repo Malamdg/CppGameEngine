@@ -7,7 +7,7 @@ RigidBody::RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives,
 	Quaternion orientation,
 	Vector3D initAngVelocity,
 	float invertedMass,
-	float dragCoeff,
+	float radius,
 	float frictionK1,
 	float frictionK2,
 	float coeffRestitutions)
@@ -19,7 +19,7 @@ RigidBody::RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives,
 	m_matrixOrientation(Matrix3::FromQuaternion(orientation)),
 	m_angularVelocity(initAngVelocity),
 	m_invertedMass(invertedMass),
-	m_drag_coef(dragCoeff),
+	m_radius(radius),
 	m_frictionK1(frictionK1),
 	m_frictionK2(frictionK2),
 	m_coeffRestitutions(coeffRestitutions)
@@ -36,6 +36,9 @@ RigidBody::RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives,
 
 		m_primitives.push_back(primitive.first);
 	}
+
+	m_invertedInertiaTensor = Matrix3::Identity() * (.4 * m_radius * m_radius);
+	m_invertedInertiaTensor.invert();
 }
 
 RigidBody::RigidBody(RigidBody& rb)
@@ -45,10 +48,11 @@ RigidBody::RigidBody(RigidBody& rb)
 	m_matrixOrientation(rb.m_matrixOrientation),
 	m_angularVelocity(rb.m_angularVelocity),
 	m_invertedMass(rb.m_invertedMass),
-	m_drag_coef(rb.m_drag_coef),
+	m_radius(rb.m_radius),
 	m_frictionK1(rb.m_frictionK1),
 	m_frictionK2(rb.m_frictionK2),
-	m_coeffRestitutions(rb.m_coeffRestitutions)
+	m_coeffRestitutions(rb.m_coeffRestitutions),
+	m_invertedInertiaTensor(rb.m_invertedInertiaTensor)
 {
 	m_centerMass = new ofSpherePrimitive();
 	m_centerMass->setRadius(.25);
@@ -94,16 +98,22 @@ void RigidBody::Update()
 
 float RigidBody::getInverseMass() { return m_invertedMass; }
 
-void RigidBody::addForce(const Vector3D& force)
+void RigidBody::addForce(const Vector3D& force, const Vector3D& localPoint)
 {
 	m_accumForce = m_accumForce + force;
+	Vector3D torque = localPoint ^ force;
+	m_accumTorque = m_accumTorque + torque;
 }
 
 void RigidBody::clearAccum()
 {
 	m_accumForce[0] = 0;
 	m_accumForce[1] = 0;
-	m_accumForce[2] = 0;
+	m_accumForce[2] = 0;	
+
+	m_accumTorque[0] = 0;
+	m_accumTorque[1] = 0;
+	m_accumTorque[2] = 0;
 }
 
 Vector3D RigidBody::getVelocity() { return m_velocity; }
@@ -149,6 +159,7 @@ Vector3D RigidBody::integrate(function<Vector3D(float)> f, float interval[2], in
 void RigidBody::updateAcceleration()
 {
 	m_acceleration = m_accumForce * m_invertedMass;
+	m_angularAcceleration = m_invertedInertiaTensor * m_accumTorque;
 	clearAccum();
 }
 
@@ -157,11 +168,17 @@ void RigidBody::updateVelocity(float duration)
 	float interval[2] = { 0.0, duration };
 
 	Vector3D acceleration = m_acceleration;
+	Vector3D angularAcceleration = m_acceleration;
 
 	function<Vector3D(float)> a = [acceleration](float t) {return acceleration; };
+	function<Vector3D(float)> a_angular = [angularAcceleration](float t) {return angularAcceleration; };
 
 	// velocity is acceleration after integration
 	m_velocity += integrate(a, interval);
+	
+	float damp = pow(.75, duration);
+    m_angularVelocity = m_angularVelocity * damp;
+	m_angularVelocity = m_angularVelocity + m_angularAcceleration * duration;
 }
 
 void RigidBody::updatePosition(float duration)
@@ -188,6 +205,10 @@ void RigidBody::updateOrientation(float duration)
 	m_orientation = m_orientation + angularVariation;
 	m_orientation.Normalize();
 	m_matrixOrientation = Matrix3::FromQuaternion(m_orientation);
+	
+	m_invertedInertiaTensor = m_matrixOrientation * m_invertedInertiaTensor;
+	Matrix3 invRot = m_matrixOrientation.Inverse();
+	m_invertedInertiaTensor = m_invertedInertiaTensor * invRot;
 
 	m_centerMass->setOrientation(m_orientation.q());
 }

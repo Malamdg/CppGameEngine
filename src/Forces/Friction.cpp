@@ -20,7 +20,8 @@ void Friction::updateForce(Particle* particle, float duration)
 	direction.Normalize();
 	particle->addForce(direction * (-coeff));
 }
-void Friction::updateForce(RigidBody* rb, float duration)
+
+void Friction::updateForce(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
 	m_velocity = rb->getVelocity();
 	float norm_v = m_velocity.Norm();
@@ -34,5 +35,5 @@ void Friction::updateForce(RigidBody* rb, float duration)
 	direction.Normalize();
 	
 	Vector3D res = direction * (-coeff);
-	rb->addForce(res);
+	rb->addForce(res, (*rbPoint));
 }

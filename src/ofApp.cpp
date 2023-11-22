@@ -54,7 +54,7 @@ void ofApp::setup() {
 		{new ofBoxPrimitive(.5, 7, .5), Vector3D(7.75, -2.5, -3.75)},
 		{new ofBoxPrimitive(.5, 7, .5), Vector3D(-7.75, -2.5, -3.75)}
 	};
-	RigidBody table = RigidBody(tablePrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 6.f);
+	RigidBody table = RigidBody(tablePrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 6.f, 8.f);
 	rigidObjects[0] = table;
 
 	list <pair<of3dPrimitive*, Vector3D>> chairPrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -66,7 +66,7 @@ void ofApp::setup() {
 		{new ofBoxPrimitive(.5, 4, .5), Vector3D(1.75, -2, -1.75)},
 		{new ofBoxPrimitive(.5, 4, .5), Vector3D(-1.75, -2, -1.75)}
 	};
-	RigidBody chair = RigidBody(chairPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 2.5);
+	RigidBody chair = RigidBody(chairPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 2.5, 4.5f);
 	rigidObjects[1] = chair;
 
 	list <pair<of3dPrimitive*, Vector3D>> bottlePrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -75,7 +75,7 @@ void ofApp::setup() {
 		{new ofConePrimitive(.5, -1, 16, 16), Vector3D(0, 1.25, 0)},
 		{new ofCylinderPrimitive(.2, 1.5, 16, 16), Vector3D(0, 1, 0)},
 	};
-	RigidBody bottle = RigidBody(bottlePrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1);
+	RigidBody bottle = RigidBody(bottlePrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1, 1.75f);
 	rigidObjects[2] = bottle;
 
 	list <pair<of3dPrimitive*, Vector3D>> carPrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -87,7 +87,7 @@ void ofApp::setup() {
 		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, -9, 8)},
 		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, -9, -8)},
 	};
-	RigidBody car = RigidBody(carPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 1200.f);
+	RigidBody car = RigidBody(carPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 1200.f, 10.5f);
 	rigidObjects[3] = car;
 
 	list <pair<of3dPrimitive*, Vector3D>> guitarPrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -97,7 +97,7 @@ void ofApp::setup() {
 		{new ofBoxPrimitive(1, .6, 5), Vector3D(0, 0, -4)},
 		{new ofBoxPrimitive(1.5, 1, 2), Vector3D(0, 0, -7)},
 	};
-	RigidBody guitar = RigidBody(guitarPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), .5);
+	RigidBody guitar = RigidBody(guitarPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), .5, 4.f);
 	rigidObjects[4] = guitar;
 
 
@@ -106,7 +106,7 @@ void ofApp::setup() {
 
 	gravity = new Gravity(Vector3D(0, -9.8, 0));
 	airFriction = new Friction(.1, .1);
-	springZero = new Spring(new Vector3D(), 20, 3, .8);
+	springZero = new Spring(new Vector3D(), 50, 32, .8);
 	elasticZero = new Elastic(new Vector3D(), 40, 10, .8);
 }
 
@@ -122,8 +122,10 @@ void ofApp::update() {
 		forceRegistry->add(rb, airFriction);
 	}
 
-	for (RigidBody* rb : rbWithSpring) forceRegistry->add(rb, springZero);
-	for (RigidBody* rb : rbWithElastic) forceRegistry->add(rb, elasticZero);
+	Vector3D* attachPoint = new Vector3D(10, 0, 0);
+
+	for (RigidBody* rb : rbWithSpring) forceRegistry->add(rb, springZero, attachPoint);
+	for (RigidBody* rb : rbWithElastic) forceRegistry->add(rb, elasticZero, attachPoint);
 
 	forceRegistry->updateForces(duration);
 
@@ -253,19 +255,8 @@ void ofApp::keyReleased(int key) {
 		case ' ': //Lauch RigidBody
 			Vector3D position = cam.getPosition();
 			Vector3D lauchDirection = cam.getLookAtDir();
-			float velocity = 50;
-
-			list <pair<of3dPrimitive*, Vector3D>> weightedLadderPrimitives = list<pair<of3dPrimitive*, Vector3D>>
-			{
-				{new ofBoxPrimitive(1.5, 16, 1.5), Vector3D(2, 8, 0)},
-				{new ofBoxPrimitive(1.5, 16, 1.5), Vector3D(-2, 8, 0)},
-				{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 4, 0)},
-				{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 8, 0)},
-				{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 12, 0)},
-			};
-			RigidBody* tester = new RigidBody(weightedLadderPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(PI, 0, 0));
-
-			addToList(tester, 0);
+			// float velocity = 200000;
+			float velocity = 0;
 
 			RigidBody* rb;
 			if (objectIndex < 5) rb = new RigidBody(rigidObjects[objectIndex]);
@@ -279,9 +270,13 @@ void ofApp::keyReleased(int key) {
 					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 8, 0)},
 					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 12, 0)},
 				};
-				rb = new RigidBody(weightedLadderPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / keyHold);
+				rb = new RigidBody(weightedLadderPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / keyHold, 8.f);
 			}
 			rb->setPosition(position);
+
+			Vector3D spawnImpulse = lauchDirection * velocity;
+
+			rb->addForce(spawnImpulse, Vector3D(1, 0, 0));
 
 			addToList(rb, forceMode);
 		
