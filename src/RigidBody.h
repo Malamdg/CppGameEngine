@@ -79,7 +79,7 @@ public:
 	~RigidBody();
 
 	/*
-	* private function to implement Euler integration
+	function to implement Euler integration
 
  	@param f, the function to integrate
   	@param interval[2], integration terminals
