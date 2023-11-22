@@ -55,8 +55,15 @@ RigidBody::RigidBody(RigidBody& rb)
 
 	m_primitives.push_back(m_centerMass);
 
+	bool firstPrimitive = true;
 	for (of3dPrimitive* primitive : rb.m_primitives)
 	{
+		if (firstPrimitive)
+		{
+			firstPrimitive = false;
+			continue;
+		}
+
 		of3dPrimitive* primitiveCopy = new of3dPrimitive(*primitive);
 
 		primitiveCopy->setParent(*m_centerMass);
