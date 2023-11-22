@@ -27,12 +27,19 @@ public:
 	*/
 	~Friction();
 
-		/*
+	/*
 	update the particle's force
 
 	@param *particle, the particle to update
 	@param duration, frame duration when the friction applies
 	*/
 	void updateForce(Particle* particle, float duration) override;
+
+	/*
+	update the RigidBody's force
+
+	@param *rb, the RigidBody to update
+	@param duration, frame duration when the friction applies
+	*/
 	void updateForce(RigidBody* rb, float duration) override;
 };
