@@ -3,7 +3,7 @@
 #include "iostream"
 #include "ofMain.h"
 #include "cmath"
-#include "ofxGui/src/ofxGui.h"
+#include "ofxGui.h"
 
 #include "Blob.h"
 #include "Collisions/CollisionHandler.h"
@@ -45,6 +45,7 @@ public:
 private:
 	void drawText();
 	void addToList(RigidBody* rb, int mode);
+	void displayWindowTitle();
 
 	//HUD
 	float fps;
@@ -53,6 +54,15 @@ private:
 	string movingHud;
 	Vector3D movingHudInitialPos;
 	Vector3D movingHudPos;
+
+	ofxPanel gui;
+	ofxTextField text1;
+	ofxTextField text2;
+	ofxTextField text3;
+	ofxTextField text4;
+	ofxTextField text5;
+	ofxTextField text6;
+	ofxTextField text7;
 
 	//Lights
 	ofLight directionalLight;

@@ -10,6 +10,16 @@ void ofApp::setup() {
 
 	if (response == 'o') Tests::ExecuteTests();
 
+	//HUD
+	gui.setup();
+	gui.add(text1.setup("Mouvement camera", "ZQSD + AE"));
+	gui.add(text2.setup("Change RigidBody", "C"));
+	gui.add(text3.setup("Change Force", "V"));
+	gui.add(text4.setup("Lauch RigidBody", "Space"));
+	gui.add(text5.setup("Toggle Grid", "G"));
+	gui.add(text6.setup("Toggle FullScreen", "F"));
+	gui.add(text7.setup("Toggle Focus", "Clic gauche"));
+
 	// Light
 	directionalLight.setDirectional();
 	directionalLight.setSpecularColor(ofColor(255));
@@ -178,48 +188,9 @@ void ofApp::draw() {
 	
 	ofDisableDepthTest();
 
-	string objectType = "";
-	string forceType = "";
+	displayWindowTitle();
 
-	switch (objectIndex)
-	{
-		case 0:
-			objectType = "Table";
-			break;
-		case 1:
-			objectType = "Chair";
-			break;
-		case 2:
-			objectType = "Bottle";
-			break;
-		case 3:
-			objectType = "Car";
-			break;
-		case 4:
-			objectType = "Guitar";
-			break;
-		case 5:
-			objectType = "Ladder - controlable mass     |     Mass : " + to_string(keyHold);
-			break;
-	};
-
-	switch (forceMode)
-	{
-		case 0:
-			forceType = "None";
-			break;
-		case 1:
-			forceType = "Spring";
-			break;
-		case 2:
-			forceType = "Elastic";
-			break;
-	}
-
-	std::stringstream strm;
-	strm << " Objet : " << objectType << "     |     Additional Force : " << forceType;
-	strm << "     |     framerate : " << fps;
-	ofSetWindowTitle(strm.str());
+	gui.draw();
 }
 
 //--------------------------------------------------------------
@@ -361,4 +332,50 @@ void ofApp::addToList(RigidBody* rb, int mode)
 		}
 		else primitives.push_back(pair<of3dPrimitive*, int>(primitive, cyan));
 	}
+}
+
+void ofApp::displayWindowTitle()
+{
+	string objectType = "";
+	string forceType = "";
+
+	switch (objectIndex)
+	{
+	case 0:
+		objectType = "Table";
+		break;
+	case 1:
+		objectType = "Chair";
+		break;
+	case 2:
+		objectType = "Bottle";
+		break;
+	case 3:
+		objectType = "Car";
+		break;
+	case 4:
+		objectType = "Guitar";
+		break;
+	case 5:
+		objectType = "Ladder - controlable mass     |     Mass : " + to_string(keyHold);
+		break;
+	};
+
+	switch (forceMode)
+	{
+	case 0:
+		forceType = "None";
+		break;
+	case 1:
+		forceType = "Spring";
+		break;
+	case 2:
+		forceType = "Elastic";
+		break;
+	}
+
+	std::stringstream strm;
+	strm << " Objet : " << objectType << "     |     Additional Force : " << forceType;
+	strm << "     |     framerate : " << fps;
+	ofSetWindowTitle(strm.str());
 }
