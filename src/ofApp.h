@@ -64,6 +64,7 @@ private:
 	ofxTextField text5;
 	ofxTextField text6;
 	ofxTextField text7;
+	ofxTextField text8;
 
 	//Lights
 	ofLight directionalLight;
@@ -77,6 +78,7 @@ private:
 	//Primitives
 	list<pair<of3dPrimitive*, int>> primitives;
 	list<pair<of3dPrimitive*, int>> centersMass;
+	list<pair<of3dPrimitive*, int>> impulses;
 
 	//RigidBodies
 	list<RigidBody*> rigidBodies;
@@ -115,6 +117,7 @@ private:
 
 	RigidBody* lastLaunched;
 
-	// Grid toggle
+	// System boolean
+	bool pause = false;
 	bool drawGrid = true;
 };
