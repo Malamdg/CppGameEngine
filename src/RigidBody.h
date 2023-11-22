@@ -49,11 +49,11 @@ public:
   	@param initVelocity, the initial velocity
    	@param orientation, the orientation of the Rigidbody (it is not a RigidBody so the direction matters)
 	@param initAngVelocity, the initial angular velocity of the RigidBody (it is not a RigidBody so the angular velocity matters)
-    @param invertedMass, inverted mass of the RigidBody
-    @param dragCoeff,
+    	@param invertedMass, inverted mass of the RigidBody
+    	@param dragCoeff,
    	@param frictionK1, first coefficient of friction
-    @param frictionK2, second coefficient of friction
-    @param coeffRestitutions, coeffecient of restitution ; the coefficient is used to know the amount of energy absorbed by the RigidBody (if coeff = 1, then nothing is absorbed)
+    	@param frictionK2, second coefficient of friction
+    	@param coeffRestitutions, coeffecient of restitution ; the coefficient is used to know the amount of energy absorbed by the RigidBody (if coeff = 1, then nothing is absorbed)
 	*/
 	RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives = list<pair<of3dPrimitive*, Vector3D>>(),
 		//Vector3D centerOfMass = Vector3D(),
@@ -213,5 +213,11 @@ public:
 	*/
 	list<of3dPrimitive*> getPrimitives() const;
 
+	/*
+	add a primitive to the RigidBody (to change its shape)
+
+	@param primitive, the primitive to add
+ 	@param position, the position of the primitive
+	*/
 	void addPrimitive(of3dPrimitive* primitive, Vector3D position);
 };
