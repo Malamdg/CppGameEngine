@@ -77,6 +77,13 @@ public:
 	@param Fg, the Force Generator associated to the particle
 	*/
 	void remove(Particle* particle, ForceGenerator* Fg);
+
+	/*
+	Remove a RigidBody from the Registry
+
+	@param RigidBody, the RigidBody to remove
+	@param Fg, the Force Generator associated to the RigidBody
+	*/
 	void remove(RigidBody* rb, ForceGenerator* Fg);
 
 	/*
