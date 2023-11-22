@@ -226,8 +226,7 @@ void ofApp::keyReleased(int key) {
 		case ' ': //Lauch RigidBody
 			Vector3D position = cam.getPosition();
 			Vector3D lauchDirection = cam.getLookAtDir();
-			// float velocity = 200000;
-			float velocity = 0;
+			float impulse = getImpulse();
 
 			RigidBody* rb;
 			if (objectIndex < 5) rb = new RigidBody(rigidObjects[objectIndex]);
@@ -245,12 +244,16 @@ void ofApp::keyReleased(int key) {
 			}
 			rb->setPosition(position);
 
-			Vector3D spawnImpulse = lauchDirection * velocity;
+			Vector3D spawnImpulse = lauchDirection * impulse;
 
-			rb->addForce(spawnImpulse, Vector3D(1, 0, 0));
+			Vector3D impulsePoint = Vector3D((float)rand() * 10.f / (float)RAND_MAX, (float)rand() * 10.f / (float)RAND_MAX, (float)rand() * 10.f / (float)RAND_MAX);
+
+			rb->addForce(spawnImpulse, impulsePoint);
 
 			addToList(rb, forceMode);
 		
+			lastLaunched = rb;
+
 			keyHold = 1;
 			break;
 	}
@@ -378,4 +381,33 @@ void ofApp::displayWindowTitle()
 	strm << " Objet : " << objectType << "     |     Additional Force : " << forceType;
 	strm << "     |     framerate : " << fps;
 	ofSetWindowTitle(strm.str());
+}
+
+float ofApp::getImpulse()
+{
+	float impulse = 0;
+
+	switch (objectIndex)
+	{
+	case 0:
+		impulse = 30000;
+		break;
+	case 1:
+		impulse = 10000;
+		break;
+	case 2:
+		impulse = 2000;
+		break;
+	case 3:
+		impulse = 3000000;
+		break;
+	case 4:
+		impulse = 10000;
+		break;
+	case 5:
+		impulse = 50000;
+		break;
+	};
+
+	return impulse;
 }

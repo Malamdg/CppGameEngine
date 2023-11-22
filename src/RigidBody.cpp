@@ -37,7 +37,7 @@ RigidBody::RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives,
 		m_primitives.push_back(primitive.first);
 	}
 
-	m_invertedInertiaTensor = Matrix3::Identity() * (.4 * m_radius * m_radius);
+	m_invertedInertiaTensor = Matrix3::Identity() * (.4 * (1 / m_invertedMass) * m_radius * m_radius);
 	m_invertedInertiaTensor.invert();
 }
 
@@ -205,10 +205,6 @@ void RigidBody::updateOrientation(float duration)
 	m_orientation = m_orientation + angularVariation;
 	m_orientation.Normalize();
 	m_matrixOrientation = Matrix3::FromQuaternion(m_orientation);
-	
-	m_invertedInertiaTensor = m_matrixOrientation * m_invertedInertiaTensor;
-	Matrix3 invRot = m_matrixOrientation.Inverse();
-	m_invertedInertiaTensor = m_invertedInertiaTensor * invRot;
 
 	m_centerMass->setOrientation(m_orientation.q());
 }

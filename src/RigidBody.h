@@ -175,6 +175,12 @@ public:
 	*/
 	void addPosition(Vector3D position);
 
+	Vector3D getAngularVelocity() { return m_angularVelocity; }
+	Vector3D getAngularAcceleration() { return m_angularAcceleration; }
+
+	Matrix3 getInvertedInertiaTensor() { return m_invertedInertiaTensor; }
+	Vector3D getAccumTorque() { return m_accumTorque; }
+
 	/*
 	get the Acceleration of the RigidBody
 
