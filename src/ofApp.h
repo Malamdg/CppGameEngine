@@ -65,6 +65,7 @@ private:
 	ofxTextField text6;
 	ofxTextField text7;
 	ofxTextField text8;
+	ofxTextField text9;
 
 	//Lights
 	ofLight directionalLight;
@@ -120,4 +121,5 @@ private:
 	// System boolean
 	bool pause = false;
 	bool drawGrid = true;
+	bool toggleImpulse = true;
 };

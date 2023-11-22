@@ -18,6 +18,7 @@ void ofApp::setup() {
 	gui.add(text3.setup("Change Force", "V"));
 	gui.add(text4.setup("Lauch RigidBody", "Space"));
 	gui.add(text5.setup("Toggle Grid", "G"));
+	gui.add(text9.setup("Toggle Impulse", "B"));
 	gui.add(text6.setup("Toggle FullScreen", "F"));
 	gui.add(text7.setup("Toggle Focus", "Clic gauche"));
 
@@ -234,6 +235,10 @@ void ofApp::keyReleased(int key) {
 			drawGrid = !drawGrid;
 			break;
 
+		case 'b':
+			toggleImpulse = !toggleImpulse;
+			break;
+
 		case 'p':
 			pause = !pause;
 			break;
@@ -263,12 +268,14 @@ void ofApp::keyReleased(int key) {
 
 			Vector3D impulsePoint = Vector3D((float)rand() * 10.f / (float)RAND_MAX, (float)rand() * 10.f / (float)RAND_MAX, (float)rand() * 10.f / (float)RAND_MAX);
 
-			rb->addForce(spawnImpulse, impulsePoint);
+			if (toggleImpulse)
+			{
+				rb->addForce(spawnImpulse, impulsePoint);
 
-			ofSpherePrimitive* impulsePrimitive = new ofSpherePrimitive(.25f, 16);
-			rb->addPrimitive(impulsePrimitive, impulsePoint);
-			impulses.push_back({ impulsePrimitive, magenta });
-
+				ofSpherePrimitive* impulsePrimitive = new ofSpherePrimitive(.25f, 16);
+				rb->addPrimitive(impulsePrimitive, impulsePoint);
+				impulses.push_back({ impulsePrimitive, magenta });
+			}
 			addToList(rb, forceMode);
 		
 			lastLaunched = rb;
@@ -397,7 +404,7 @@ void ofApp::displayWindowTitle()
 	}
 
 	std::stringstream strm;
-	strm << " Objet : " << objectType << "     |     Additional Force : " << forceType;
+	strm << " Objet : " << objectType << "     |     Initial Impulse : " << to_string(toggleImpulse) << "     |     Additional Force : " << forceType;
 	strm << "     |     framerate : " << fps;
 	ofSetWindowTitle(strm.str());
 }
