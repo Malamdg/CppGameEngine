@@ -67,13 +67,10 @@ private:
 
 	//RigidBodies
 	list<RigidBody*> rigidBodies;
-	float rbMasse = 0;
+	int objectIndex = 0;
+	float keyHold = 0;
 
-	list<pair<of3dPrimitive*, Vector3D>> table;
-	list<pair<of3dPrimitive*, Vector3D>> chair;
-	list<pair<of3dPrimitive*, Vector3D>> bottle;
-	list<pair<of3dPrimitive*, Vector3D>> car;
-	list<pair<of3dPrimitive*, Vector3D>> guitar;
+	RigidBody* rigidObjects;
 
 	//Colors
 	ofColor* colors;

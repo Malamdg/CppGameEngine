@@ -44,7 +44,9 @@ void ofApp::setup() {
 	cam.setFarClip(15000);
 
 	//Rigid bodies
-	table = list<pair<of3dPrimitive*, Vector3D>>
+	rigidObjects = new RigidBody[5];
+
+	list<pair<of3dPrimitive*, Vector3D>> tablePrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
 		{new ofBoxPrimitive(16, .5, 8), Vector3D(0, 1, 0)},
 		{new ofBoxPrimitive(.5, 7, .5), Vector3D(7.75, -2.5, 3.75)},
@@ -52,10 +54,10 @@ void ofApp::setup() {
 		{new ofBoxPrimitive(.5, 7, .5), Vector3D(7.75, -2.5, -3.75)},
 		{new ofBoxPrimitive(.5, 7, .5), Vector3D(-7.75, -2.5, -3.75)}
 	};
-	RigidBody* rbTable = new RigidBody(table);
-	//addToList(rbTable);
+	RigidBody table = RigidBody(tablePrimitives, Vector3D(-40, 0, 0));
+	rigidObjects[0] = table;
 
-	chair = list<pair<of3dPrimitive*, Vector3D>>
+	list <pair<of3dPrimitive*, Vector3D>> chairPrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
 		{new ofBoxPrimitive(4, .5, 4), Vector3D(0, 0, 0)},
 		{new ofBoxPrimitive(4, 5, .5), Vector3D(0, 2.5, -1.75)},
@@ -64,19 +66,19 @@ void ofApp::setup() {
 		{new ofBoxPrimitive(.5, 4, .5), Vector3D(1.75, -2, -1.75)},
 		{new ofBoxPrimitive(.5, 4, .5), Vector3D(-1.75, -2, -1.75)}
 	};
-	RigidBody* rbChair = new RigidBody(chair);
-	//addToList(rbChair);
+	RigidBody chair = RigidBody(chairPrimitives, Vector3D(-15, 0, 0));
+	rigidObjects[1] = chair;
 
-	bottle = list<pair<of3dPrimitive*, Vector3D>>
+	list <pair<of3dPrimitive*, Vector3D>> bottlePrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
 		{new ofCylinderPrimitive(.5, 2, 16, 16), Vector3D(0, -.25, 0)},
 		{new ofConePrimitive(.5, -1, 16, 16), Vector3D(0, 1.25, 0)},
 		{new ofCylinderPrimitive(.2, 1.5, 16, 16), Vector3D(0, 1, 0)},
 	};
-	RigidBody* rbBottle = new RigidBody(bottle);
-	//addToList(rbBottle);
+	RigidBody bottle = RigidBody(bottlePrimitives, Vector3D());
+	rigidObjects[2] = bottle;
 
-	car = list<pair<of3dPrimitive*, Vector3D>>
+	list <pair<of3dPrimitive*, Vector3D>> carPrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
 		{new ofBoxPrimitive(8, 15, 30), Vector3D(2, 0, 0)},
 		{new ofBoxPrimitive(8, 15, 15), Vector3D(10, 0, 0)},
@@ -85,18 +87,18 @@ void ofApp::setup() {
 		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, -9, 8)},
 		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, -9, -8)},
 	};
-	RigidBody* rbCar = new RigidBody(car);
-	//addToList(rbCar);
+	RigidBody car = RigidBody(carPrimitives, Vector3D(15, 0, 0));
+	rigidObjects[3] = car;
 
-	guitar = list<pair<of3dPrimitive*, Vector3D>>
+	list <pair<of3dPrimitive*, Vector3D>> guitarPrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
 		{new ofCylinderPrimitive(2.5, 1, 16, 16), Vector3D(0, 0, 3)},
 		{new ofCylinderPrimitive(2, 1, 16, 16), Vector3D()},
 		{new ofBoxPrimitive(1, .6, 5), Vector3D(0, 0, -4)},
 		{new ofBoxPrimitive(1.5, 1, 2), Vector3D(0, 0, -7)},
 	};
-	RigidBody* rbGuitar = new RigidBody(guitar);
-	//addToList(rbGuitar);
+	RigidBody guitar = RigidBody(guitarPrimitives, Vector3D(40, 0, 0));
+	rigidObjects[4] = guitar;
 }
 
 //--------------------------------------------------------------
@@ -160,8 +162,29 @@ void ofApp::draw() {
 	
 	ofDisableDepthTest();
 
+	string objectType = "";
+
+	switch ((int)objectIndex)
+	{
+		case 0:
+			objectType = "Table";
+			break;
+		case 1:
+			objectType = "Chair";
+			break;
+		case 2:
+			objectType = "Bottle";
+			break;
+		case 3:
+			objectType = "Car";
+			break;
+		case 4:
+			objectType = "Guitar";
+			break;
+	};
+
 	std::stringstream strm;
-	strm << "framerate : " << fps << "    |    Masse : " << rbMasse;
+	strm << "framerate : " << fps << "    |    Objet : " << objectType;
 	ofSetWindowTitle(strm.str());
 }
 
@@ -169,10 +192,8 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
 	switch (key)
 	{
-	case ' ':
-	{
-		rbMasse += duration*4;
-	}
+		case ' ':
+			keyHold = MIN(keyHold + duration * 4, 4);
 	}
 }
 
@@ -180,35 +201,27 @@ void ofApp::keyPressed(int key) {
 void ofApp::keyReleased(int key) {
 	switch (key)
 	{
-	case 'f': //FullScreen
-	{
-		fullscreen = !fullscreen;
-		ofSetFullscreen(fullscreen);
-		break;
-	}
-	case ' ': //Lauch RigidBody
-		Vector3D position = cam.getPosition();
-		Vector3D lauchDirection = cam.getLookAtDir();
-		float velocity = 50;
+		case 'f': //FullScreen
+			fullscreen = !fullscreen;
+			ofSetFullscreen(fullscreen);
+			break;
 
-		list<pair<of3dPrimitive*, Vector3D>> rbPrimitives = list<pair<of3dPrimitive*, Vector3D>> 
-		{ 
-			{new ofBoxPrimitive(2, 2, 2), Vector3D(1, 1, 1)},
-			{new ofCylinderPrimitive(2, 2, 8, 8), Vector3D(-1, 0, -1)}
-		};
-		
+		case 'c':
+			objectIndex = (objectIndex + 1) % 5;
+			break;
 
-		RigidBody* rb = new RigidBody(rbPrimitives,
-			position, lauchDirection * velocity,
-			Quaternion::Identity(), Vector3D(0, PI, 0),
-			1/rbMasse, .1f);
-		
-		rigidBodies.push_back(rb);
+		case ' ': //Lauch RigidBody
+			Vector3D position = cam.getPosition();
+			Vector3D lauchDirection = cam.getLookAtDir();
+			float velocity = 50;
 
-		addToList(rb);
+			RigidBody* tableCopy = new RigidBody(rigidObjects[(int) keyHold]);
+			tableCopy->setPosition(position);
+
+			addToList(tableCopy);
 		
-		rbMasse = 0;
-		break;
+			keyHold = 0;
+			break;
 	}
 }
 
@@ -224,7 +237,7 @@ void ofApp::mouseDragged(int x, int y, int button) {
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button) {
-	cam.toggleControl();
+	if (button == 0) cam.toggleControl();
 }
 
 //--------------------------------------------------------------
