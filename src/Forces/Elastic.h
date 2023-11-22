@@ -37,7 +37,24 @@ public:
 	@param C, a coefficient value
 	*/
 	Elastic(Vector3D* position, float elasticity = 1, float lenght = 10, float C = 1);
+	/*
+	class constructor
+
+	@param particle, the other particle linked to the Elastic
+	@param elasticity, the elasticity of the spring
+	@param lenght, the lenght of the spring
+	@param C, a coefficient value
+	*/
 	Elastic(Particle* particle, float elasticity = 1, float lenght = 10, float C = 1);
+
+	/*
+	class constructor
+
+	@param rb, the other RigidBody linked to the Elastic
+	@param elasticity, the elasticity of the spring
+	@param lenght, the lenght of the spring
+	@param C, a coefficient value
+	*/
 	Elastic(RigidBody* rb, float elasticity = 1, float lenght = 10, float C = 1);
 
 	/*
@@ -46,22 +63,64 @@ public:
 	~Elastic();
 
 	/*
-	update the particle's force
+	update the object's force
 
 	@param particle, pointer to the particle to update
-	@param duration, frame duration when the srping's force applies
+	@param duration, frame duration when the spring's force applies
 	*/
 	virtual void updateForce(Particle* particle, float duration);
+	/*
+	update the object's force
+
+	@param rb, pointer to the RigidBody to update
+	@param duration, frame duration when the elastic's force applies
+	*/
 	virtual void updateForce(RigidBody* rb, float duration);
 
 
 private:
+	/*
+	update the object's force in case it is linked to a point
+
+	@param particle, pointer to the particle to update
+	@param duration, frame duration when the elastic's force applies
+	*/
 	void updateForPoint(Particle* particle, float duration);
+	/*
+	update the object's force in case it is linked to a point
+
+	@param rb, pointer to the RigidBody to update
+	@param duration, frame duration when the elastic's force applies
+	*/
 	void updateForPoint(RigidBody* rb, float duration);
 
+	/*
+	update the object's force in case it is linked to a particle
+
+	@param particle, pointer to the particle to update
+	@param duration, frame duration when the elastic's force applies
+	*/
 	void updateForParticle(Particle* particle, float duration);
+	/*
+	update the object's force in case it is linked to a particle
+
+	@param rb, pointer to the RigidBody to update
+	@param duration, frame duration when the elastic's force applies
+	*/
 	void updateForParticle(RigidBody* rb, float duration);
 
+	/*
+	update the object's force in case it is linked to a RigidBody
+
+	@param particle, pointer to the particle to update
+	@param duration, frame duration when the elastic's force applies
+	*/
 	void updateForRigidBody(Particle* particle, float duration);
+	/*
+	update the object's force in case it is linked to a RigidBody
+
+	@param rb, pointer to the RigidBody to update
+	@param duration, frame duration when the elastic's force applies
+	*/
 	void updateForRigidBody(RigidBody* rb, float duration);
 };
