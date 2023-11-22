@@ -15,8 +15,7 @@ note that the `myApps` dir is not the only solution you have, you can put your p
 
 ## Download 
 ### Still WIP <!--- Will be removed as soon the first release is done -->
-
-Download the version corresponding to the wanted phase of the project from the [Releases page](https://github.com/Malamdg/CppGameEngine/releases)
+<!--- Download the version corresponding to the wanted phase of the project from the [Releases page](https://github.com/Malamdg/CppGameEngine/releases) --> 
 
 # Compilation
 From Visual Studio :
