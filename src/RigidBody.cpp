@@ -37,8 +37,7 @@ RigidBody::RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives,
 		m_primitives.push_back(primitive.first);
 	}
 
-	m_invertedInertiaTensor = Matrix3::Identity() * (.4 * m_radius * m_radius);
-	m_invertedInertiaTensor.invert();
+	m_invertedInertiaTensor = Matrix3::Identity() * (2.5 * m_invertedMass / (m_radius * m_radius));
 }
 
 RigidBody::RigidBody(RigidBody& rb)
@@ -102,6 +101,7 @@ void RigidBody::addForce(const Vector3D& force, const Vector3D& localPoint)
 {
 	m_accumForce = m_accumForce + force;
 	Vector3D torque = localPoint ^ force;
+	std::cout << localPoint.toString() << "^" << force.toString() << "=" << torque.toString() << std::endl;
 	m_accumTorque = m_accumTorque + torque;
 }
 
@@ -142,6 +142,25 @@ float RigidBody::getCoefficientRestitution() { return m_coeffRestitutions; }
 float RigidBody::getK1() { return m_frictionK1; }
 
 float RigidBody::getK2() { return m_frictionK2; }
+
+Vector3D RigidBody::getPointWorldPosition(Vector3D* localPoint)
+{
+	// Apply object's rotation inverse
+	Matrix3 inverseRot = m_matrixOrientation.Inverse();
+	Vector3D worldPosition = inverseRot * (*localPoint);
+	
+	// Is a translatable point
+	worldPosition.w(1);
+
+	// Translate the point back to have world (0,0,0) as origin
+	Matrix4 inverseTranslation = Matrix4::Identity();
+	inverseTranslation.at(0, 3) = m_position.x();
+	inverseTranslation.at(1, 3) = m_position.y();
+	inverseTranslation.at(2, 3) = m_position.z();
+	worldPosition = inverseTranslation * worldPosition;
+
+	return worldPosition;
+}
 
 Vector3D RigidBody::integrate(function<Vector3D(float)> f, float interval[2], int N)
 {
@@ -205,10 +224,6 @@ void RigidBody::updateOrientation(float duration)
 	m_orientation = m_orientation + angularVariation;
 	m_orientation.Normalize();
 	m_matrixOrientation = Matrix3::FromQuaternion(m_orientation);
-	
-	m_invertedInertiaTensor = m_matrixOrientation * m_invertedInertiaTensor;
-	Matrix3 invRot = m_matrixOrientation.Inverse();
-	m_invertedInertiaTensor = m_invertedInertiaTensor * invRot;
 
 	m_centerMass->setOrientation(m_orientation.q());
 }

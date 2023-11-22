@@ -85,7 +85,8 @@ void Spring::updateForPoint(Particle* particle, float duration)
 }
 void Spring::updateForPoint(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
-	Vector3D direction = (*m_pointPosition - rb->getPosition());
+	Vector3D worldPoint = rb->getPointWorldPosition(rbPoint);
+	Vector3D direction = ((*m_pointPosition) - worldPoint);
 
 	if (rb->getInverseMass() != 0 && !(direction == Vector3D()))
 	{
@@ -141,7 +142,8 @@ void Spring::updateForParticle(Particle* particle, float duration)
 }
 void Spring::updateForParticle(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
-	Vector3D direction = (m_particle->getPosition() - rb->getPosition());
+	Vector3D worldPoint = rb->getPointWorldPosition(rbPoint);
+	Vector3D direction = ((*m_pointPosition) - worldPoint);
 
 	if (rb->getInverseMass() != 0 && !(direction == Vector3D()))
 	{
@@ -196,7 +198,8 @@ void Spring::updateForRigidBody(Particle* particle, float duration)
 }
 void Spring::updateForRigidBody(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
-	Vector3D direction = (m_rigidBody->getPosition() - rb->getPosition());
+	Vector3D worldPoint = rb->getPointWorldPosition(rbPoint);
+	Vector3D direction = (m_rigidBody->getPosition() - worldPoint);
 
 	if (rb->getInverseMass() != 0 && !(direction == Vector3D()))
 	{

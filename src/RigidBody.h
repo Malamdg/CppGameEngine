@@ -24,7 +24,7 @@ private:
 	Matrix3 m_matrixOrientation;
 
 	Matrix3 m_invertedInertiaTensor;
-	
+		
 	Vector3D m_angularVelocity;
 
 	Vector3D m_angularAcceleration;
@@ -201,6 +201,10 @@ public:
 	@return the second coefficient of friction
 	*/
 	float getK2();
+
+	// Get a given local point coordinates in world coordinates
+	// @return the Vector3D of point in coordinates
+	Vector3D getPointWorldPosition(Vector3D* localPoint);
 
 	/*
 	get the primitives

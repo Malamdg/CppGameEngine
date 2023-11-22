@@ -106,7 +106,7 @@ void ofApp::setup() {
 
 	gravity = new Gravity(Vector3D(0, -9.8, 0));
 	airFriction = new Friction(.1, .1);
-	springZero = new Spring(new Vector3D(), 50, 32, .8);
+	springZero = new Spring(new Vector3D(), 100, 32, .8);
 	elasticZero = new Elastic(new Vector3D(), 40, 10, .8);
 }
 
@@ -122,7 +122,7 @@ void ofApp::update() {
 		forceRegistry->add(rb, airFriction);
 	}
 
-	Vector3D* attachPoint = new Vector3D(10, 0, 0);
+	Vector3D* attachPoint = new Vector3D(0, 0, 16);
 
 	for (RigidBody* rb : rbWithSpring) forceRegistry->add(rb, springZero, attachPoint);
 	for (RigidBody* rb : rbWithElastic) forceRegistry->add(rb, elasticZero, attachPoint);
@@ -255,9 +255,8 @@ void ofApp::keyReleased(int key) {
 		case ' ': //Lauch RigidBody
 			Vector3D position = cam.getPosition();
 			Vector3D lauchDirection = cam.getLookAtDir();
-			// float velocity = 200000;
-			float velocity = 0;
-
+			float impulseNorm = 200000;
+			
 			RigidBody* rb;
 			if (objectIndex < 5) rb = new RigidBody(rigidObjects[objectIndex]);
 			else
@@ -274,7 +273,7 @@ void ofApp::keyReleased(int key) {
 			}
 			rb->setPosition(position);
 
-			Vector3D spawnImpulse = lauchDirection * velocity;
+			Vector3D spawnImpulse = lauchDirection * impulseNorm;
 
 			rb->addForce(spawnImpulse, Vector3D(1, 0, 0));
 
