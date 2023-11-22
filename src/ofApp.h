@@ -9,6 +9,8 @@
 #include "Collisions/CollisionHandler.h"
 #include "Collisions/BlobCollisionHandler.h"
 #include "Forces/Deplacement.h"
+#include "Forces/Spring.h"
+#include "Forces/Elastic.h"
 #include "Forces/Gravity.h"
 #include "Forces/ForceRegistry.h"
 #include "of3dPrimitives.h"
@@ -90,5 +92,13 @@ private:
 
 	//Fullscreen
 	bool fullscreen = false;
+
+	//Physics
+	ForceRegistry* forceRegistry;
+
+	Gravity* gravity;
+	Friction* airFriction;
+	Spring* springZero;
+	Elastic* elasticZero;
 
 };

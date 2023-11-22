@@ -97,6 +97,14 @@ void ofApp::setup() {
 	};
 	RigidBody* rbGuitar = new RigidBody(guitar);
 	//addToList(rbGuitar);
+
+	//Setup Physics
+	forceRegistry = new ForceRegistry();
+
+	gravity = new Gravity(Vector3D(0, -9.8, 0));
+	airFriction = new Friction(.1, .1);
+	springZero = new Spring(new Vector3D(), 20, 3, .8);
+	elasticZero = new Elastic(new Vector3D(), 40, 3, .8);
 }
 
 //--------------------------------------------------------------
@@ -107,11 +115,15 @@ void ofApp::update() {
 
 	for (RigidBody* rb : rigidBodies)
 	{
-		rb->addForce(Vector3D(0, -9.8f, 0));
-		rb->Update();
+		forceRegistry->add(rb, gravity);
+		forceRegistry->add(rb, airFriction);
+		forceRegistry->add(rb, springZero);
+		//forceRegistry->add(rb, elasticZero);
+
 	}
+	forceRegistry->updateForces(duration);
 
-
+	for (RigidBody* rb : rigidBodies) rb->Update();
 }
 
 //--------------------------------------------------------------
@@ -189,6 +201,7 @@ void ofApp::keyReleased(int key) {
 	case ' ': //Lauch RigidBody
 		Vector3D position = cam.getPosition();
 		Vector3D lauchDirection = cam.getLookAtDir();
+		Vector3D rotation = Vector3D(0, PI, 0);
 		float velocity = 50;
 
 		list<pair<of3dPrimitive*, Vector3D>> rbPrimitives = list<pair<of3dPrimitive*, Vector3D>> 
@@ -200,7 +213,7 @@ void ofApp::keyReleased(int key) {
 
 		RigidBody* rb = new RigidBody(rbPrimitives,
 			position, lauchDirection * velocity,
-			Quaternion::Identity(), Vector3D(0, PI, 0),
+			Quaternion::Identity(), rotation,
 			1/rbMasse, .1f);
 		
 		rigidBodies.push_back(rb);

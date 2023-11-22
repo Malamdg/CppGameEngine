@@ -100,11 +100,14 @@ float Vector3D::Norm2()
 
 void Vector3D::Normalize()
 {
-	float norm = this->Norm();
-	m_x /= norm;
-	m_y /= norm;
-	m_z /= norm;
-	fixFloat();
+	if(!(*this == Vector3D()))
+	{
+		float norm = this->Norm();
+		m_x /= norm;
+		m_y /= norm;
+		m_z /= norm;
+		fixFloat();
+	}
 }
 
 float Vector3D::distance(const Vector3D& vector)
