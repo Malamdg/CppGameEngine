@@ -29,7 +29,7 @@ private:
 	float m_frictionK1;
 	float m_frictionK2;
 
-	// When a collision occurs, the coefficient is used to know the amount of energy absorbed by the particle (if coeff = 1, then nothing is absorbed)
+	// When a collision occurs, the coefficient is used to know the amount of energy absorbed by the RigidBody (if coeff = 1, then nothing is absorbed)
 	float m_coeffRestitutions = 1;
 
 	/*
@@ -46,13 +46,13 @@ public:
 	@param primitives, list of primitives and relatives position in the rigidbody
  	@param position, the position of the Rigidbody
   	@param initVelocity, the initial velocity
-   	@param orientation, the orientation of the Rigidbody (it is not a particle so the direction matters)
-	@param initAngVelocity, the initial angular velocity of the RigidBody (it is not a particle so the angular velocity matters)
+   	@param orientation, the orientation of the Rigidbody (it is not a RigidBody so the direction matters)
+	@param initAngVelocity, the initial angular velocity of the RigidBody (it is not a RigidBody so the angular velocity matters)
     	@param invertedMass, inverted mass of the RigidBody
     	@param dragCoeff,
    	@param frictionK1, first coefficient of friction
     	@param frictionK2, second coefficient of friction
-    	@param coeffRestitutions, coeffecient of restitution ; the coefficient is used to know the amount of energy absorbed by the particle (if coeff = 1, then nothing is absorbed)
+    	@param coeffRestitutions, coeffecient of restitution ; the coefficient is used to know the amount of energy absorbed by the RigidBody (if coeff = 1, then nothing is absorbed)
 	*/
 	RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives = list<pair<of3dPrimitive*, Vector3D>>(),
 		//Vector3D centerOfMass = Vector3D(),
@@ -115,54 +115,69 @@ public:
 
 	/*
 	public method to be called in ofMain's update
-	do the update job to the particle
+	do the update job to the RigidBody
 	*/
 	void Update();
 
 	/*
-	get the inverse of the particle's
+	get the inverse of the RigidBody's
 	
-	@return the inverse of the particle's mass
+	@return the inverse of the RigidBody's mass
 	*/
 	float getInverseMass();
 
 	/*
-	add a Force to the particle
+	add a Force to the RigidBody
 
-	@param Force, the new Force applied to the particle
+	@param Force, the new Force applied to the RigidBody
 	*/
 	void addForce(const Vector3D& force);
 
 	/*
-	clear the force accumulator assigned to the particle
+	clear the force accumulator assigned to the RigidBody
 	*/
 	void clearAccum();
 
 	/*
 	Getter Velocity
 
-	@return the velocity of the particle
+	@return the velocity of the RigidBody
 	*/
 	Vector3D getVelocity();
 
+	/*
+	To add a velocity to the current velocity
+
+	@param velocity, the velocity to add
+	*/
 	void addVelocity(Vector3D velocity);
 
 	/*
-	get the position of the particle
+	get the position of the RigidBody
 
-	@return the position of the particle
+	@return the position of the RigidBody
 	*/
 	Vector3D getPosition();
 
+	/*
+	To set the position of the RigidBody
+
+	@param position, the new positions
+	*/
 	void setPosition(Vector3D position);
 
 	/*
-	add a vector to the current position of the particle
+	add a vector to the current position of the RigidBody
 
 	@param position, the vector added to the current position
 	*/
 	void addPosition(Vector3D position);
 
+	/*
+	get the Acceleration of the RigidBody
+
+	@return the Acceleration of the RigidBody
+	*/
 	Vector3D getAcceleration();
 
 	/*
