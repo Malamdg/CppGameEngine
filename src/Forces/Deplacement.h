@@ -29,5 +29,12 @@ public:
 	@param duration, frame duration when the force applies
 	*/
 	virtual void updateForce(Particle* particle, float duration);
+
+	/*
+	update the RigidBody's force
+
+	@param *rb, the RigidBody to update
+	@param duration, frame duration when the force applies
+	*/
 	virtual void updateForce(RigidBody* rb, float duration);
 };
