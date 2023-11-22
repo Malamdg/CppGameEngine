@@ -37,7 +37,23 @@ public:
 	@param C, a coefficient
 	*/
 	Spring(Vector3D* position, float elasticity = 1, float lenght = 10, float C = 1);
+	/*
+	class constructor
+
+	@param particle, the other particle linked to the Elastic
+	@param elasticity, the elasticity of the spring
+	@param lenght, the lenght of the spring
+	@param C, a coefficient
+	*/
 	Spring(Particle* particle, float elasticity = 1, float lenght = 10, float C = 1);
+	/*
+	class constructor
+
+	@param rb, the other RigidBody linked to the Elastic
+	@param elasticity, the elasticity of the spring
+	@param lenght, the lenght of the spring
+	@param C, a coefficient
+	*/
 	Spring(RigidBody* rb, float elasticity = 1, float lenght = 10, float C = 1);
 
 	/*
