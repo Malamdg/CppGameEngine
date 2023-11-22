@@ -101,7 +101,6 @@ void RigidBody::addForce(const Vector3D& force, const Vector3D& localPoint)
 {
 	m_accumForce = m_accumForce + force;
 	Vector3D torque = localPoint ^ force;
-	std::cout << localPoint.toString() << "^" << force.toString() << "=" << torque.toString() << std::endl;
 	m_accumTorque = m_accumTorque + torque;
 }
 
@@ -195,7 +194,7 @@ void RigidBody::updateVelocity(float duration)
 	// velocity is acceleration after integration
 	m_velocity += integrate(a, interval);
 	
-	float damp = pow(.75, duration);
+	float damp = pow(.6, duration);
     m_angularVelocity = m_angularVelocity * damp;
 	m_angularVelocity = m_angularVelocity + m_angularAcceleration * duration;
 }

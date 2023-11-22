@@ -116,8 +116,8 @@ void ofApp::setup() {
 
 	gravity = new Gravity(Vector3D(0, -9.8, 0));
 	airFriction = new Friction(.1, .1);
-	springZero = new Spring(new Vector3D(), 100, 32, .8);
-	elasticZero = new Elastic(new Vector3D(), 40, 10, .8);
+	springZero = new Spring(new Vector3D(), 20, 32, .8);
+	elasticZero = new Elastic(new Vector3D(), 60, 10, .8);
 }
 
 //--------------------------------------------------------------
@@ -132,7 +132,7 @@ void ofApp::update() {
 		forceRegistry->add(rb, airFriction);
 	}
 
-	Vector3D* attachPoint = new Vector3D(0, 0, 16);
+	Vector3D* attachPoint = new Vector3D(1, 1, 1);
 
 	for (RigidBody* rb : rbWithSpring) forceRegistry->add(rb, springZero, attachPoint);
 	for (RigidBody* rb : rbWithElastic) forceRegistry->add(rb, elasticZero, attachPoint);

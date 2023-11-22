@@ -75,7 +75,7 @@ public:
 	@param rb, pointer to the RigidBody to update
 	@param duration, frame duration when the elastic's force applies
 	*/
-	virtual void updateForce(RigidBody* rb, float duration);
+	virtual void updateForce(RigidBody* rb, float duration, Vector3D* rbPoint = new Vector3D());
 
 
 private:
@@ -92,7 +92,7 @@ private:
 	@param rb, pointer to the RigidBody to update
 	@param duration, frame duration when the elastic's force applies
 	*/
-	void updateForPoint(RigidBody* rb, float duration);
+	void updateForPoint(RigidBody* rb, float duration, Vector3D* rbPoint = new Vector3D());
 
 	/*
 	update the object's force in case it is linked to a particle
@@ -107,7 +107,7 @@ private:
 	@param rb, pointer to the RigidBody to update
 	@param duration, frame duration when the elastic's force applies
 	*/
-	void updateForParticle(RigidBody* rb, float duration);
+	void updateForParticle(RigidBody* rb, float duration, Vector3D* rbPoint = new Vector3D());
 
 	/*
 	update the object's force in case it is linked to a RigidBody
@@ -122,5 +122,5 @@ private:
 	@param rb, pointer to the RigidBody to update
 	@param duration, frame duration when the elastic's force applies
 	*/
-	void updateForRigidBody(RigidBody* rb, float duration);
+	void updateForRigidBody(RigidBody* rb, float duration, Vector3D* rbPoint = new Vector3D());
 };

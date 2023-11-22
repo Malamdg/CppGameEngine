@@ -50,8 +50,8 @@ void Spring::updateForce(Particle* particle, float duration)
 }
 void Spring::updateForce(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
-	if (m_pointPosition != nullptr) updateForPoint(rb, duration);
-	else if (m_particle != nullptr) updateForParticle(rb, duration);
+	if (m_pointPosition != nullptr) updateForPoint(rb, duration, rbPoint);
+	else if (m_particle != nullptr) updateForParticle(rb, duration, rbPoint);
 	else updateForRigidBody(rb, duration, rbPoint);
 }
 
@@ -143,7 +143,7 @@ void Spring::updateForParticle(Particle* particle, float duration)
 void Spring::updateForParticle(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
 	Vector3D worldPoint = rb->getPointWorldPosition(rbPoint);
-	Vector3D direction = ((*m_pointPosition) - worldPoint);
+	Vector3D direction = (m_particle->getPosition() - worldPoint);
 
 	if (rb->getInverseMass() != 0 && !(direction == Vector3D()))
 	{

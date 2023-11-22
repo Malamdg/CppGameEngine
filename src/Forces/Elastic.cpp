@@ -48,11 +48,11 @@ void Elastic::updateForce(Particle* particle, float duration)
 	else updateForRigidBody(particle, duration);
 }
 
-void Elastic::updateForce(RigidBody* rb, float duration)
+void Elastic::updateForce(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
-	if (m_pointPosition != nullptr) updateForPoint(rb, duration);
-	else if (m_particle != nullptr) updateForParticle(rb, duration);
-	else updateForRigidBody(rb, duration);
+	if (m_pointPosition != nullptr) updateForPoint(rb, duration, rbPoint);
+	else if (m_particle != nullptr) updateForParticle(rb, duration, rbPoint);
+	else updateForRigidBody(rb, duration, rbPoint);
 }
 
 void Elastic::updateForPoint(Particle* particle, float duration)
@@ -87,9 +87,10 @@ void Elastic::updateForPoint(Particle* particle, float duration)
 		particle->addForce(res);
 	}
 }
-void Elastic::updateForPoint(RigidBody* rb, float duration)
+void Elastic::updateForPoint(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
-	Vector3D direction = (*m_pointPosition - rb->getPosition());
+	Vector3D worldPoint = rb->getPointWorldPosition(rbPoint);
+	Vector3D direction = ((*m_pointPosition) - worldPoint);
 
 	/* l-l0 distance computation */
 	float distance = m_l0 - direction.Norm();
@@ -116,7 +117,7 @@ void Elastic::updateForPoint(RigidBody* rb, float duration)
 		Vector3D res = direction * coeff;
 		res = res * duration;
 
-		rb->addForce(res);
+		rb->addForce(res, (*rbPoint));
 	}
 }
 
@@ -151,9 +152,10 @@ void Elastic::updateForParticle(Particle* particle, float duration)
 		particle->addForce(res);
 	}
 }
-void Elastic::updateForParticle(RigidBody* rb, float duration)
+void Elastic::updateForParticle(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
-	Vector3D direction = (m_particle->getPosition() - rb->getPosition());
+	Vector3D worldPoint = rb->getPointWorldPosition(rbPoint);
+	Vector3D direction = (m_particle->getPosition() - worldPoint);
 
 	/* l-l0 distance computation */
 	float distance = m_l0 - direction.Norm();
@@ -179,7 +181,7 @@ void Elastic::updateForParticle(RigidBody* rb, float duration)
 		Vector3D res = direction * coeff;
 		res = res * duration;
 
-		rb->addForce(res);
+		rb->addForce(res, (*rbPoint));
 	}
 }
 
@@ -214,9 +216,10 @@ void Elastic::updateForRigidBody(Particle* particle, float duration)
 		particle->addForce(res);
 	}
 }
-void Elastic::updateForRigidBody(RigidBody* rb, float duration)
+void Elastic::updateForRigidBody(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
-	Vector3D direction = (m_rigidBody->getPosition() - rb->getPosition());
+	Vector3D worldPoint = rb->getPointWorldPosition(rbPoint);
+	Vector3D direction = (m_rigidBody->getPosition() - worldPoint);
 
 	/* l-l0 distance computation */
 	float distance = m_l0 - direction.Norm();
@@ -242,6 +245,6 @@ void Elastic::updateForRigidBody(RigidBody* rb, float duration)
 		Vector3D res = direction * coeff;
 		res = res * duration;
 
-		rb->addForce(res);
+		rb->addForce(res, (*rbPoint));
 	}
 }
