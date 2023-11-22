@@ -66,18 +66,11 @@ public:
 		float frictionK2 = 0,
 		float coeffRestitutions = 1);
 
-	/*
-	class destructor
-	*/
+	RigidBody(RigidBody& rb);
+
 	~RigidBody();
 
-	/*
-	* private function to implement Euler integration
 
-  	@param f, the function to integrate
-   	@param interval[2], integration terminals
-       	@param N, steps number
-	*/
 	Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 100);
 
 	/*
