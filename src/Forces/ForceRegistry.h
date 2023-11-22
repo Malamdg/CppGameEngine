@@ -61,6 +61,13 @@ public:
 	@param Fg, the Force Generator associated to the particle
 	*/
 	void add(Particle* particle, ForceGenerator* Fg);
+
+	/*
+	Add a RigidBody to Registry
+
+	@param rb, the RigidBody to add
+	@param Fg, the Force Generator associated to the RigidBody
+	*/
 	void add(RigidBody* rb, ForceGenerator* Fg);
 
 	/*
