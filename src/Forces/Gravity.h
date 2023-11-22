@@ -26,5 +26,12 @@ public:
 	@param duration, frame duration when the gravity applies
 	*/
 	virtual void updateForce(Particle* particle, float duration);
+
+	/*
+	update the RigidBody's gravity
+
+	@param *rb, the RigidBody to update
+	@param duration, frame duration when the gravity applies
+	*/
 	virtual void updateForce(RigidBody* rb, float duration);
 };
