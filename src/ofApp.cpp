@@ -43,6 +43,60 @@ void ofApp::setup() {
 	cam.setPosition(0, 0, 10);
 	cam.setFarClip(15000);
 
+	//Rigid bodies
+	table = list<pair<of3dPrimitive*, Vector3D>>
+	{
+		{new ofBoxPrimitive(16, .5, 8), Vector3D(0, 1, 0)},
+		{new ofBoxPrimitive(.5, 7, .5), Vector3D(7.75, -2.5, 3.75)},
+		{new ofBoxPrimitive(.5, 7, .5), Vector3D(-7.75, -2.5, 3.75)},
+		{new ofBoxPrimitive(.5, 7, .5), Vector3D(7.75, -2.5, -3.75)},
+		{new ofBoxPrimitive(.5, 7, .5), Vector3D(-7.75, -2.5, -3.75)}
+	};
+	RigidBody* rbTable = new RigidBody(table);
+	//addToList(rbTable);
+
+	chair = list<pair<of3dPrimitive*, Vector3D>>
+	{
+		{new ofBoxPrimitive(4, .5, 4), Vector3D(0, 0, 0)},
+		{new ofBoxPrimitive(4, 5, .5), Vector3D(0, 2.5, -1.75)},
+		{new ofBoxPrimitive(.5, 4, .5), Vector3D(1.75, -2, 1.75)},
+		{new ofBoxPrimitive(.5, 4, .5), Vector3D(-1.75, -2, 1.75)},
+		{new ofBoxPrimitive(.5, 4, .5), Vector3D(1.75, -2, -1.75)},
+		{new ofBoxPrimitive(.5, 4, .5), Vector3D(-1.75, -2, -1.75)}
+	};
+	RigidBody* rbChair = new RigidBody(chair);
+	//addToList(rbChair);
+
+	bottle = list<pair<of3dPrimitive*, Vector3D>>
+	{
+		{new ofCylinderPrimitive(.5, 2, 16, 16), Vector3D(0, -.25, 0)},
+		{new ofConePrimitive(.5, -1, 16, 16), Vector3D(0, 1.25, 0)},
+		{new ofCylinderPrimitive(.2, 1.5, 16, 16), Vector3D(0, 1, 0)},
+	};
+	RigidBody* rbBottle = new RigidBody(bottle);
+	//addToList(rbBottle);
+
+	car = list<pair<of3dPrimitive*, Vector3D>>
+	{
+		{new ofBoxPrimitive(8, 15, 30), Vector3D(2, 0, 0)},
+		{new ofBoxPrimitive(8, 15, 15), Vector3D(10, 0, 0)},
+		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, 9, 8)},
+		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, 9, -8)},
+		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, -9, 8)},
+		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, -9, -8)},
+	};
+	RigidBody* rbCar = new RigidBody(car);
+	//addToList(rbCar);
+
+	guitar = list<pair<of3dPrimitive*, Vector3D>>
+	{
+		{new ofCylinderPrimitive(2.5, 1, 16, 16), Vector3D(0, 0, 3)},
+		{new ofCylinderPrimitive(2, 1, 16, 16), Vector3D()},
+		{new ofBoxPrimitive(1, .6, 5), Vector3D(0, 0, -4)},
+		{new ofBoxPrimitive(1.5, 1, 2), Vector3D(0, 0, -7)},
+	};
+	RigidBody* rbGuitar = new RigidBody(guitar);
+	//addToList(rbGuitar);
 }
 
 //--------------------------------------------------------------
@@ -151,16 +205,7 @@ void ofApp::keyReleased(int key) {
 		
 		rigidBodies.push_back(rb);
 
-		bool first = true;
-		for(of3dPrimitive* primitive : rb->getPrimitives())
-		{
-			if (first) 
-			{
-				centersMass.push_back(pair<of3dPrimitive*, int>(primitive, red));
-				first = false;
-			}
-			else primitives.push_back(pair<of3dPrimitive*, int>(primitive, cyan));
-		}
+		addToList(rb);
 		
 		rbMasse = 0;
 		break;
@@ -225,4 +270,20 @@ void ofApp::drawText() {
 	camY = Vector3D(cam.getPosition()).y();
 	ofSetColor(	255, 125, 125);
 	ofDrawBitmapString(ofToString(movingHud), -viewWidth / 2 - 50 + camX, viewHeight / 2 + 50 + camY);
+}
+
+void ofApp::addToList(RigidBody* rb)
+{
+	rigidBodies.push_back(rb);
+
+	bool first = true;
+	for (of3dPrimitive* primitive : rb->getPrimitives())
+	{
+		if (first)
+		{
+			centersMass.push_back(pair<of3dPrimitive*, int>(primitive, red));
+			first = false;
+		}
+		else primitives.push_back(pair<of3dPrimitive*, int>(primitive, cyan));
+	}
 }
