@@ -10,7 +10,7 @@ BlobCollisionHandler::~BlobCollisionHandler()
 
 }
 
-void BlobCollisionHandler::handleCollision(std::list<Particle*> particles, ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler)
+void BlobCollisionHandler::handleCollision(std::list<Particle*> particles, ForceRegistry* forceRegistry, CollisionHandler* collisionHandler)
 {
 	// processing blob particles one by one
 	for (int i = 0; i < m_blob->m_particles.size(); i++)
