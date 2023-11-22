@@ -81,7 +81,10 @@ void Elastic::updateForPoint(Particle* particle, float duration)
 
 		float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
 
-		particle->addForce(direction * coeff * duration);
+		Vector3D res = direction * coeff;
+		res = res * duration;
+
+		particle->addForce(res);
 	}
 }
 void Elastic::updateForPoint(RigidBody* rb, float duration)
@@ -110,7 +113,10 @@ void Elastic::updateForPoint(RigidBody* rb, float duration)
 
 		float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
 
-		rb->addForce(direction * coeff * duration);
+		Vector3D res = direction * coeff;
+		res = res * duration;
+
+		rb->addForce(res);
 	}
 }
 
@@ -139,7 +145,10 @@ void Elastic::updateForParticle(Particle* particle, float duration)
 
 		float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
 
-		particle->addForce(direction * coeff * duration);
+		Vector3D res = direction * coeff;
+		res = res * duration;
+
+		particle->addForce(res);
 	}
 }
 void Elastic::updateForParticle(RigidBody* rb, float duration)
@@ -167,7 +176,10 @@ void Elastic::updateForParticle(RigidBody* rb, float duration)
 
 		float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
 
-		rb->addForce(direction * coeff * duration);
+		Vector3D res = direction * coeff;
+		res = res * duration;
+
+		rb->addForce(res);
 	}
 }
 
@@ -196,7 +208,10 @@ void Elastic::updateForRigidBody(Particle* particle, float duration)
 
 		float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
 
-		particle->addForce(direction * coeff * duration);
+		Vector3D res = direction * coeff;
+		res = res * duration;
+
+		particle->addForce(res);
 	}
 }
 void Elastic::updateForRigidBody(RigidBody* rb, float duration)
@@ -224,6 +239,9 @@ void Elastic::updateForRigidBody(RigidBody* rb, float duration)
 
 		float coeff = (-m_w * m_w * distance) - (2 * m_z * m_w * velocityProj);
 
-		rb->addForce(direction * coeff * duration);
+		Vector3D res = direction * coeff;
+		res = res * duration;
+
+		rb->addForce(res);
 	}
 }

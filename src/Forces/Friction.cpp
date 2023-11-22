@@ -32,5 +32,7 @@ void Friction::updateForce(RigidBody* rb, float duration)
 
 	/* Force director vector */
 	direction.Normalize();
-	rb->addForce(direction * (-coeff));
+	
+	Vector3D res = direction * (-coeff);
+	rb->addForce(res);
 }
