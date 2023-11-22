@@ -12,7 +12,7 @@ void ofApp::setup() {
 
 	//HUD
 	gui.setup();
-	gui.add(text1.setup("Mouvement camera", "ZQSD + AE"));
+	gui.add(text1.setup("Mouvement camera", "ZQSD + AE | WASD + QE"));
 	gui.add(text8.setup("Pause", "P"));
 	gui.add(text2.setup("Change RigidBody", "C"));
 	gui.add(text3.setup("Change Force", "V"));
