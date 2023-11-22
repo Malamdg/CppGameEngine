@@ -13,6 +13,7 @@ void ofApp::setup() {
 	//HUD
 	gui.setup();
 	gui.add(text1.setup("Mouvement camera", "ZQSD + AE"));
+	gui.add(text8.setup("Pause", "P"));
 	gui.add(text2.setup("Change RigidBody", "C"));
 	gui.add(text3.setup("Change Force", "V"));
 	gui.add(text4.setup("Lauch RigidBody", "Space"));
@@ -42,7 +43,7 @@ void ofApp::setup() {
 	colors[1] = ofColor(255, 255, 255);
 	colors[2] = ofColor(100, 100, 100);
 	colors[3] = ofColor(10, 200, 250);
-	colors[4] = ofColor(250, 10, 200);
+	colors[4] = ofColor(0, 255, 0);
 	colors[5] = ofColor(255, 0, 0);
 
 	//SkyBox
@@ -122,24 +123,27 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
-	fps = ofGetFrameRate();
-
-	duration = fps == 0 ? 0 : 1/fps;
-
-	for (RigidBody* rb : rigidBodies)
+	if (!pause)
 	{
-		forceRegistry->add(rb, gravity);
-		forceRegistry->add(rb, airFriction);
+		fps = ofGetFrameRate();
+
+		duration = fps == 0 ? 0 : 1 / fps;
+
+		for (RigidBody* rb : rigidBodies)
+		{
+			forceRegistry->add(rb, gravity);
+			forceRegistry->add(rb, airFriction);
+		}
+
+		Vector3D* attachPoint = new Vector3D(0, 0, 16);
+
+		for (RigidBody* rb : rbWithSpring) forceRegistry->add(rb, springZero, attachPoint);
+		for (RigidBody* rb : rbWithElastic) forceRegistry->add(rb, elasticZero, attachPoint);
+
+		forceRegistry->updateForces(duration);
+
+		for (RigidBody* rb : rigidBodies) rb->Update();
 	}
-
-	Vector3D* attachPoint = new Vector3D(0, 0, 16);
-
-	for (RigidBody* rb : rbWithSpring) forceRegistry->add(rb, springZero, attachPoint);
-	for (RigidBody* rb : rbWithElastic) forceRegistry->add(rb, elasticZero, attachPoint);
-
-	forceRegistry->updateForces(duration);
-
-	for (RigidBody* rb : rigidBodies) rb->Update();
 }
 
 //--------------------------------------------------------------
@@ -178,6 +182,13 @@ void ofApp::draw() {
 
 		// display primitive
 		centerMass.first->draw();
+	}
+	for (pair<of3dPrimitive*, int> impulse : impulses)
+	{
+		ofSetColor(colors[impulse.second]);
+
+		// display primitive
+		impulse.first->draw();
 	}
 	ofEnableDepthTest();
 
@@ -223,6 +234,10 @@ void ofApp::keyReleased(int key) {
 			drawGrid = !drawGrid;
 			break;
 
+		case 'p':
+			pause = !pause;
+			break;
+
 		case ' ': //Lauch RigidBody
 			Vector3D position = cam.getPosition();
 			Vector3D lauchDirection = cam.getLookAtDir();
@@ -249,6 +264,10 @@ void ofApp::keyReleased(int key) {
 			Vector3D impulsePoint = Vector3D((float)rand() * 10.f / (float)RAND_MAX, (float)rand() * 10.f / (float)RAND_MAX, (float)rand() * 10.f / (float)RAND_MAX);
 
 			rb->addForce(spawnImpulse, impulsePoint);
+
+			ofSpherePrimitive* impulsePrimitive = new ofSpherePrimitive(.25f, 16);
+			rb->addPrimitive(impulsePrimitive, impulsePoint);
+			impulses.push_back({ impulsePrimitive, magenta });
 
 			addToList(rb, forceMode);
 		

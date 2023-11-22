@@ -228,3 +228,10 @@ void RigidBody::updateOrientation(float duration)
 }
 
 list<of3dPrimitive*> RigidBody::getPrimitives() const { return m_primitives; }
+
+void RigidBody::addPrimitive(of3dPrimitive* primitive, Vector3D position)
+{
+	primitive->setParent(*m_centerMass);
+	primitive->setPosition(position.v3());
+	m_primitives.push_back(primitive);
+}
