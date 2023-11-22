@@ -50,8 +50,12 @@ public:
 		float frictionK2 = 0,
 		float coeffRestitutions = 1);
 
+	RigidBody(RigidBody& rb);
+
 	~RigidBody();
-Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 100);
+
+
+	Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 100);
 
 	/*
 	* private method to update acceleration given the duration of the frame
