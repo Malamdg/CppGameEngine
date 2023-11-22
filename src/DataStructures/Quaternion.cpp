@@ -15,8 +15,7 @@ Quaternion::Quaternion(const float w, const float x, const float y, const float 
 	m_x(x),
 	m_y(y),
 	m_z(z),
-	m_w(w),
-	m_v(Vector3D(m_x, m_y, m_z))
+	m_w(w)
 {
 	fixFloat();
 }
@@ -96,11 +95,11 @@ Quaternion& Quaternion::operator*(const float f) const
 
 Quaternion& Quaternion::operator*(const Quaternion& q) const
 {
-	float resw = m_w * q.m_w - m_v * q.m_v;
+	float resw = m_w * q.m_w - getVector() * q.getVector();
 	
-	Vector3D v1 = (q.m_v * m_w);
-	Vector3D v2 = (m_v * q.m_w);
-	Vector3D v3 = (m_v ^ q.m_v);
+	Vector3D v1 = (q.getVector() * m_w);
+	Vector3D v2 = (getVector() * q.m_w);
+	Vector3D v3 = (getVector() ^ q.getVector());
 	
 	Vector3D resv = v1 + v2;
 	resv = resv + v3;
@@ -130,7 +129,7 @@ Quaternion& Quaternion::operator^(const float exp)const
 	if (abs(Norm() - 1) > 10e-3) throw std::exception("Quaternion isn't a rotation - Current implementation do not consider exponentiation for Quaternion that are not roations");
 
 	float a = acos(m_w);
-	Vector3D resv = m_v * (sin(exp * a) / sin(a));
+	Vector3D resv = getVector() * (sin(exp * a) / sin(a));
 	return Quaternion(cos(exp * a), resv);
 }
 
@@ -145,7 +144,6 @@ Quaternion& Quaternion::operator=(const Quaternion& q)
 	m_x = q.m_x;
 	m_y = q.m_y;
 	m_z = q.m_z;
-	m_v = q.m_v;
 
 	return *this;
 }
@@ -171,7 +169,10 @@ float Quaternion::getW()const { return m_w; }
 float Quaternion::getX()const { return m_x; }
 float Quaternion::getY()const { return m_y; }
 float Quaternion::getZ()const { return m_z; }
-Vector3D Quaternion::getVector()const { return m_v; }
+Vector3D Quaternion::getVector()const
+{
+	return Vector3D(m_x, m_y, m_z);
+}
 
 //Matrix3 Quaternion::matrixFromQuaternion() const
 //{

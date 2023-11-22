@@ -10,8 +10,6 @@ private:
 	float m_z;
 	float m_w;
 
-	Vector3D m_v;
-
 	void fixFloat();
 public:
 	/*
