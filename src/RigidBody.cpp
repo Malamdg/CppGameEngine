@@ -115,6 +115,11 @@ void RigidBody::addVelocity(Vector3D velocity)
 
 Vector3D RigidBody::getPosition() { return m_position; }
 
+void RigidBody::setPosition(Vector3D position)
+{
+	m_position = position;
+}
+
 void RigidBody::addPosition(Vector3D position)
 {
 	m_position = m_position + position;
