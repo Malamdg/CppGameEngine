@@ -98,4 +98,6 @@ private:
 	Spring* springZero;
 	Elastic* elasticZero;
 
+	// Grid toggle
+	bool drawGrid = true;
 };

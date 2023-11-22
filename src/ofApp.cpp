@@ -44,7 +44,7 @@ void ofApp::setup() {
 	cam.setFarClip(15000);
 
 	//Rigid bodies
-	rigidObjects = new RigidBody[5];
+	rigidObjects = new RigidBody[6];
 
 	list<pair<of3dPrimitive*, Vector3D>> tablePrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
@@ -100,6 +100,7 @@ void ofApp::setup() {
 	RigidBody guitar = RigidBody(guitarPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), .5);
 	rigidObjects[4] = guitar;
 
+
 	//Setup Physics
 	forceRegistry = new ForceRegistry();
 
@@ -117,9 +118,9 @@ void ofApp::update() {
 
 	for (RigidBody* rb : rigidBodies)
 	{
-		forceRegistry->add(rb, gravity);
+		/*forceRegistry->add(rb, gravity);
 		forceRegistry->add(rb, airFriction);
-		forceRegistry->add(rb, springZero);
+		forceRegistry->add(rb, springZero);*/
 		//forceRegistry->add(rb, elasticZero);
 
 	}
@@ -142,7 +143,7 @@ void ofApp::draw() {
 	skybox.draw();
 	ofEnableDepthTest();
 
-	ofDrawGrid(10.0f, 10, true);
+	if (drawGrid) ofDrawGrid(10.0f, 10, true);
 
 	// display texts on screen
 	//drawText();
@@ -222,10 +223,27 @@ void ofApp::keyReleased(int key) {
 			objectIndex = (objectIndex + 1) % 5;
 			break;
 
+		case 'g':
+			drawGrid = !drawGrid;
+			break;
+
 		case ' ': //Lauch RigidBody
 			Vector3D position = cam.getPosition();
 			Vector3D lauchDirection = cam.getLookAtDir();
 			float velocity = 50;
+
+			list <pair<of3dPrimitive*, Vector3D>> weightedLadderPrimitives = list<pair<of3dPrimitive*, Vector3D>>
+			{
+				{new ofBoxPrimitive(1.5, 16, 1.5), Vector3D(2, 8, 0)},
+				{new ofBoxPrimitive(1.5, 16, 1.5), Vector3D(-2, 8, 0)},
+				{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 4, 0)},
+				{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 8, 0)},
+				{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 12, 0)},
+			};
+			RigidBody* weightedLadder = new RigidBody(weightedLadderPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(30, 0, 0));
+
+			addToList(weightedLadder);
+
 
 			RigidBody* rb = new RigidBody(rigidObjects[objectIndex]);
 			rb->setPosition(position);
