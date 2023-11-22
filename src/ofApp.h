@@ -46,6 +46,7 @@ private:
 	void drawText();
 	void addToList(RigidBody* rb, int mode);
 	void displayWindowTitle();
+	float getImpulse();
 
 	//HUD
 	float fps;
@@ -111,6 +112,8 @@ private:
 	list<RigidBody*> rbWithSpring = list<RigidBody*>();
 	list<RigidBody*> rbWithElastic = list<RigidBody*>();
 	int forceMode = 0;
+
+	RigidBody* lastLaunched;
 
 	// Grid toggle
 	bool drawGrid = true;
