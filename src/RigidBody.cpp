@@ -58,6 +58,7 @@ RigidBody::RigidBody(RigidBody& rb)
 
 	m_primitives.push_back(m_centerMass);
 
+	// Creating the shape of the RigidBody from the Primitive composing it
 	bool firstPrimitive = true;
 	for (of3dPrimitive* primitive : rb.m_primitives)
 	{
@@ -99,6 +100,7 @@ float RigidBody::getInverseMass() { return m_invertedMass; }
 
 void RigidBody::addForce(const Vector3D& force, const Vector3D& localPoint)
 {
+	// add the force to all the registry
 	m_accumForce = m_accumForce + force;
 	Vector3D torque = localPoint ^ force;
 	m_accumTorque = m_accumTorque + torque;
@@ -176,6 +178,7 @@ Vector3D RigidBody::integrate(function<Vector3D(float)> f, float interval[2], in
 
 void RigidBody::updateAcceleration()
 {
+	// Newton's law
 	m_acceleration = m_accumForce * m_invertedMass;
 	m_angularAcceleration = m_invertedInertiaTensor * m_accumTorque;
 	clearAccum();
