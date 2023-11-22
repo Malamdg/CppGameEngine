@@ -22,7 +22,11 @@ private:
 	float m_coefficientRestitutions = 1;
 
 	/*
-	* private function to implement Euler integration
+	private function to implement Euler integration
+
+ 	@param f, the function to integrate
+  	@param interval[2], integration terminals
+   	@param N, number of steps
 	*/
 	Vector3D integrate(function<Vector3D(float)> f, float interval[2], int N = 100);
 
@@ -105,6 +109,11 @@ public:
 	*/
 	Vector3D getVelocity();
 
+	/*
+	To add a velocity to the current velocity
+
+	@param velocity, the velocity to add
+	*/
 	void addVelocity(Vector3D velocity);
 
 	/*
@@ -121,6 +130,11 @@ public:
 	*/
 	void addPosition(Vector3D newPosition);
 
+	/*
+	get the Acceleration of the particle
+
+	@return the Acceleration of the particle
+	*/
 	Vector3D getAcceleration();
 
 	/*
@@ -130,6 +144,16 @@ public:
 	*/
 	float getCoefficientRestitution();
 
+	/*
+	get the first friction's coefficient of the particle
+
+	@return the first friction's coefficient
+	*/
 	float getK1();
+	/*
+	get the second friction's coefficient of the particle
+
+	@return the second friction's coefficient
+	*/
 	float getK2();
 };
