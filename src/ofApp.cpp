@@ -54,7 +54,7 @@ void ofApp::setup() {
 		{new ofBoxPrimitive(.5, 7, .5), Vector3D(7.75, -2.5, -3.75)},
 		{new ofBoxPrimitive(.5, 7, .5), Vector3D(-7.75, -2.5, -3.75)}
 	};
-	RigidBody table = RigidBody(tablePrimitives, Vector3D(-40, 0, 0));
+	RigidBody table = RigidBody(tablePrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 6.f);
 	rigidObjects[0] = table;
 
 	list <pair<of3dPrimitive*, Vector3D>> chairPrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -66,7 +66,7 @@ void ofApp::setup() {
 		{new ofBoxPrimitive(.5, 4, .5), Vector3D(1.75, -2, -1.75)},
 		{new ofBoxPrimitive(.5, 4, .5), Vector3D(-1.75, -2, -1.75)}
 	};
-	RigidBody chair = RigidBody(chairPrimitives, Vector3D(-15, 0, 0));
+	RigidBody chair = RigidBody(chairPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 2.5);
 	rigidObjects[1] = chair;
 
 	list <pair<of3dPrimitive*, Vector3D>> bottlePrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -75,7 +75,7 @@ void ofApp::setup() {
 		{new ofConePrimitive(.5, -1, 16, 16), Vector3D(0, 1.25, 0)},
 		{new ofCylinderPrimitive(.2, 1.5, 16, 16), Vector3D(0, 1, 0)},
 	};
-	RigidBody bottle = RigidBody(bottlePrimitives, Vector3D());
+	RigidBody bottle = RigidBody(bottlePrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1);
 	rigidObjects[2] = bottle;
 
 	list <pair<of3dPrimitive*, Vector3D>> carPrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -87,7 +87,7 @@ void ofApp::setup() {
 		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, -9, 8)},
 		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, -9, -8)},
 	};
-	RigidBody car = RigidBody(carPrimitives, Vector3D(15, 0, 0));
+	RigidBody car = RigidBody(carPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 1200.f);
 	rigidObjects[3] = car;
 
 	list <pair<of3dPrimitive*, Vector3D>> guitarPrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -97,7 +97,7 @@ void ofApp::setup() {
 		{new ofBoxPrimitive(1, .6, 5), Vector3D(0, 0, -4)},
 		{new ofBoxPrimitive(1.5, 1, 2), Vector3D(0, 0, -7)},
 	};
-	RigidBody guitar = RigidBody(guitarPrimitives, Vector3D(40, 0, 0));
+	RigidBody guitar = RigidBody(guitarPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), .5);
 	rigidObjects[4] = guitar;
 
 	//Setup Physics
@@ -227,10 +227,10 @@ void ofApp::keyReleased(int key) {
 			Vector3D lauchDirection = cam.getLookAtDir();
 			float velocity = 50;
 
-			RigidBody* tableCopy = new RigidBody(rigidObjects[(int) keyHold]);
-			tableCopy->setPosition(position);
+			RigidBody* rb = new RigidBody(rigidObjects[objectIndex]);
+			rb->setPosition(position);
 
-			addToList(tableCopy);
+			addToList(rb);
 		
 			keyHold = 0;
 			break;
