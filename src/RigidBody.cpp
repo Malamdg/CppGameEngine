@@ -179,9 +179,11 @@ void RigidBody::updatePosition(float duration)
 
 void RigidBody::updateOrientation(float duration)
 {
-	Quaternion fromAngularVelocity = Quaternion(0, m_angularVelocity);
+	Quaternion angularVariation = Quaternion(0, m_angularVelocity);
 
-	Quaternion angularVariation = (fromAngularVelocity * m_orientation) * (duration / 2);
+	angularVariation = angularVariation * .5f;
+	angularVariation = angularVariation * m_orientation;
+	angularVariation = angularVariation * duration;
 
 	m_orientation = m_orientation + angularVariation;
 	m_orientation.Normalize();
