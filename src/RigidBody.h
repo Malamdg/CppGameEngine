@@ -118,6 +118,8 @@ public:
 	*/
 	Vector3D getPosition();
 
+	void setPosition(Vector3D position);
+
 	/*
 	add a vector to the current position of the particle
 
