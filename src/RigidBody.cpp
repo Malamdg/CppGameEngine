@@ -39,8 +39,7 @@ RigidBody::RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives,
 }
 
 RigidBody::RigidBody(RigidBody& rb)
-	: m_primitives(rb.m_primitives),
-	m_position(rb.m_position),
+	: m_position(rb.m_position),
 	m_velocity(rb.m_velocity),
 	m_orientation(rb.m_orientation),
 	m_matrixOrientation(rb.m_matrixOrientation),
@@ -49,10 +48,22 @@ RigidBody::RigidBody(RigidBody& rb)
 	m_drag_coef(rb.m_drag_coef),
 	m_frictionK1(rb.m_frictionK1),
 	m_frictionK2(rb.m_frictionK2),
-	m_coeffRestitutions(rb.m_coeffRestitutions),
-	m_centerMass(rb.m_centerMass)
+	m_coeffRestitutions(rb.m_coeffRestitutions)
 {
+	m_centerMass = new ofSpherePrimitive();
+	m_centerMass->setRadius(.25);
 
+	m_primitives.push_back(m_centerMass);
+
+	for (of3dPrimitive* primitive : rb.m_primitives)
+	{
+		of3dPrimitive* primitiveCopy = new of3dPrimitive(*primitive);
+
+		primitiveCopy->setParent(*m_centerMass);
+		primitiveCopy->setPosition(primitive->getPosition());
+
+		m_primitives.push_back(primitiveCopy);
+	}
 }
 
 RigidBody::~RigidBody()
