@@ -238,60 +238,31 @@ float Matrix3::getDeterminant()
 }
 
 void Matrix3::invert() {
-	if (cmpf(getDeterminant(), 0.f)) {
+	float det = getDeterminant();
+	
+	if (cmpf(det, 0.f)) {
 		return;
 	}
 
-	float coeffs[9] = {};
+	float a = m_coeffs[0];
+	float b = m_coeffs[1];
+	float c = m_coeffs[2];
+	float d = m_coeffs[3];
+	float e = m_coeffs[4];
+	float f = m_coeffs[5];
+	float g = m_coeffs[6];
+	float h = m_coeffs[7];
+	float i = m_coeffs[8];
 
-	for (int i = 0; i < m_size*m_size; i++) {
-		coeffs[i] = m_coeffs[i];
-	}
-
-	// Augmented matrix 
-	Matrix3 A = Matrix3(coeffs);
-	Matrix3 I = Matrix3::Identity();
-
-	// Inversion stocked in var
-	float coeff;
-
-	/// Gaussian elimination - Gauss-Jordan algorithm ///
-
-	int r, k;
-	r = -1;
-
-	for (int j = 0; j < m_size; j++) {
-		k = A.findColumnMax(j);
-		if (A.at(k, j) == 0) {
-			continue;
-		}
-
-		r++;
-		coeff = 1 / A.at(k, j);
-		A.multiplyLineByScalar(k, coeff);
-		I.multiplyLineByScalar(k, coeff);
-
-		if (k != r) {
-			A.swapLines(k, r);
-			I.swapLines(k, r);
-		}
-
-		for (int i = 0; i < m_size; i++) {
-			if (i == r) {
-				continue;
-			}
-			coeff = -A.at(i,j);
-			A.addLineMultipleToTargetLine(i, r, coeff);
-			I.addLineMultipleToTargetLine(i, r, coeff);
-		}
-	}
-
-	// Apply inversion on this
-	for (int i = 0; i < m_size; i++) {
-		for (int j = 0; j < m_size; j++) {
-			this->at(i,j) = I.at(i,j);
-		}
-	}
+	m_coeffs[0] = (e*i - f*h) / det;
+	m_coeffs[1] = (c*h - b*i) / det;
+	m_coeffs[2] = (b*f - c*e) / det;
+	m_coeffs[3] = (f*g - d*i) / det;
+	m_coeffs[4] = (a*i - c*g) / det;
+	m_coeffs[5] = (c*d - a*f) / det;
+	m_coeffs[6] = (d*h - e*g) / det;
+	m_coeffs[7] = (b*g - a*h) / det;
+	m_coeffs[8] = (a*e - b*d) / det;
 }
 
 Matrix3 Matrix3::Inverse() {
