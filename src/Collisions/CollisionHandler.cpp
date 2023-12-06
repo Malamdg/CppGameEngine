@@ -10,7 +10,7 @@ CollisionHandler::~CollisionHandler()
 
 }
 
-void CollisionHandler::handleCollision(std::list<Particle*> particles, float duration, ParticleForceRegistry* forceRegistry)
+void CollisionHandler::handleCollision(std::list<Particle*> particles, float duration, ForceRegistry* forceRegistry)
 {
 	for (CollisionRegistration registration : m_registry)
 	{
@@ -69,7 +69,7 @@ void CollisionHandler::handleCollision(std::list<Particle*> particles, float dur
 						// We garanty the velocity is 0
 						(*secondParticle)->addVelocity(vectorBetweenParticles * velocity_proj * -1);
 
-						forceRegistry->add(*secondParticle, new ParticleFriction((*firstParticle)->getK1(), (*firstParticle)->getK2()));
+						forceRegistry->add(*secondParticle, new Friction((*firstParticle)->getK1(), (*firstParticle)->getK2()));
 					}
 
 				}
@@ -97,7 +97,7 @@ void CollisionHandler::handleCollision(std::list<Particle*> particles, float dur
 						// We garanty the velocity is 0
 						(*firstParticle)->addVelocity(vectorBetweenParticles * velocity_proj);
 
-						forceRegistry->add(*firstParticle, new ParticleFriction((*secondParticle)->getK1(), (*firstParticle)->getK2()));
+						forceRegistry->add(*firstParticle, new Friction((*secondParticle)->getK1(), (*firstParticle)->getK2()));
 					}
 				}
 				else

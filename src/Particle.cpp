@@ -62,7 +62,7 @@ float Particle::getInverseMass()
 void Particle::addForce(const Vector3D &force) 
 {
 	m_accumForce = m_accumForce + force;
-	std::cout << m_accumForce.toString() << std::endl;
+	//std::cout << m_accumForce.toString() << std::endl;
 }
 
 void Particle::clearAccum()

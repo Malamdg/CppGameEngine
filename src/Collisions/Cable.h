@@ -1,7 +1,6 @@
 #pragma once
 #include "Collision.h"
-#include "../Forces/ParticleForceGenerator.h"
-#include "../Particle.h"
+#include "../Forces/ForceGenerator.h"
 
 class Cable : public Collision
 {

@@ -1,8 +1,6 @@
-#include "../Particle.h"
-#include "ParticleForceGenerator.h"
-#include "../DataStructures/Vector3D.h"
+#include "ForceGenerator.h"
 
-class ParticleGravity : public ParticleForceGenerator{
+class Gravity : public ForceGenerator{
 	
 private:
 	/* constant of gravity */
@@ -14,12 +12,12 @@ public:
 
 	@param gravity, the vector associated to gravity
 	*/
-	ParticleGravity(Vector3D gravity);
+	Gravity(Vector3D gravity);
 
 	/*
 	class destructor
 	*/
-	~ParticleGravity();
+	~Gravity();
 
 	/*
 	update the particle's gravity
@@ -28,4 +26,12 @@ public:
 	@param duration, frame duration when the gravity applies
 	*/
 	virtual void updateForce(Particle* particle, float duration);
+
+	/*
+	update the RigidBody's gravity
+
+	@param *rb, the RigidBody to update
+	@param duration, frame duration when the gravity applies
+	*/
+	virtual void updateForce(RigidBody* rb, float duration, Vector3D* rbPoint = new Vector3D());
 };

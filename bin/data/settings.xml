@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<group>
+	<Test>Truc</Test>
+	<Mouvement_camera>ZQSD + AE</Mouvement_camera>
+	<Pause>P</Pause>
+	<Change_RigidBody>C</Change_RigidBody>
+	<Change_Force>V</Change_Force>
+	<Lauch_RigidBody>Space</Lauch_RigidBody>
+	<Toggle_Grid>G</Toggle_Grid>
+	<Toggle_FullScreen>F</Toggle_FullScreen>
+	<Toggle_Focus>Clic gauche</Toggle_Focus>
+</group>

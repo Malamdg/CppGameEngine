@@ -1,10 +1,8 @@
 #pragma once
 
-#include "../Particle.h"
-#include "ParticleForceGenerator.h"
-#include "../DataStructures/Vector3D.h"
+#include "ForceGenerator.h"
 
-class ParticleFriction : public ParticleForceGenerator
+class Friction : public ForceGenerator
 {
 private:
 	/* first coefficient friction */
@@ -22,18 +20,26 @@ public:
 
 	@param velocity, particle's speed
 	*/
-	ParticleFriction(float k1, float k2);
+	Friction(float k1, float k2);
 
 	/*
 	class destructor
 	*/
-	~ParticleFriction();
+	~Friction();
 
-		/*
+	/*
 	update the particle's force
 
 	@param *particle, the particle to update
 	@param duration, frame duration when the friction applies
 	*/
 	void updateForce(Particle* particle, float duration) override;
+
+	/*
+	update the RigidBody's force
+
+	@param *rb, the RigidBody to update
+	@param duration, frame duration when the friction applies
+	*/
+	void updateForce(RigidBody* rb, float duration, Vector3D* rbPoint = new Vector3D()) override;
 };

@@ -1,11 +1,11 @@
 #include "Vector3D.h"
 
-Vector3D::Vector3D(const float x, const float y, const float z)
+Vector3D::Vector3D(const float x, const float y, const float z, const float w)
 	:
 	m_x(x),
 	m_y(y),
 	m_z(z),  // w is currently set to 0 because the vectors used are for a 3-dimensional space
-	m_w(0)
+	m_w(w)
 { 
 	fixFloat();
 }
@@ -100,11 +100,14 @@ float Vector3D::Norm2()
 
 void Vector3D::Normalize()
 {
-	float norm = this->Norm();
-	m_x /= norm;
-	m_y /= norm;
-	m_z /= norm;
-	fixFloat();
+	if(!(*this == Vector3D()))
+	{
+		float norm = this->Norm();
+		m_x /= norm;
+		m_y /= norm;
+		m_z /= norm;
+		fixFloat();
+	}
 }
 
 float Vector3D::distance(const Vector3D& vector)
@@ -125,6 +128,8 @@ float Vector3D::y()const { return m_y; }
 void Vector3D::y(float f) { m_y = f; }
 float Vector3D::z()const { return m_z; }
 void Vector3D::z(float f) { m_z = f; }
+float Vector3D::w()const { return m_w; }
+void Vector3D::w(float f) { m_w = f; }
 
 float& Vector3D::operator[](int i)
 {
@@ -133,6 +138,7 @@ float& Vector3D::operator[](int i)
 	case 0: return m_x;
 	case 1: return m_y;
 	case 2: return m_z;
+	case 3: return m_w;
 	default: throw std::out_of_range("Bad idx passed to at()");
 	}
 }
@@ -143,6 +149,7 @@ const float& Vector3D::operator[](int i) const
 	case 0: return m_x;
 	case 1: return m_y;
 	case 2: return m_z;
+	case 3: return m_w;
 	default: throw std::out_of_range("Bad idx passed to at()");
 	}
 }

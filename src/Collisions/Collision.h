@@ -1,6 +1,6 @@
 #pragma once
-#include "../Particle.h"
 #include "CollisionHandler.h"
+#include "../Particle.h"
 
 class Collision
 {

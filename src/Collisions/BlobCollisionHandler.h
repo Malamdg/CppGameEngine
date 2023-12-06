@@ -1,7 +1,7 @@
 #pragma once
 #include "Collision.h"
-#include "../Forces/ParticleForceRegistry.h"
-#include "../Forces/ParticleFriction.cpp"
+#include "../Forces/ForceRegistry.h"
+#include "../Forces/Friction.cpp"
 #include "../Particle.h"
 #include "../Blob.h"
 
@@ -26,7 +26,7 @@ public:
    	@param particles, the particles consider
 	@param duration, frame duration
  	*/
-	void handleCollision(std::list<Particle*> particles, ParticleForceRegistry* forceRegistry, CollisionHandler* collisionHandler);
+	void handleCollision(std::list<Particle*> particles, ForceRegistry* forceRegistry, CollisionHandler* collisionHandler);
 
 private:
 	Blob* m_blob;

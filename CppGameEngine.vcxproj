@@ -61,7 +61,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofFirstPersonCamera;src\Addons\ofSkyBox;src;src\Collisions;src\DataStructures;src\Forces;..\..\..\addons\ofxGui\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)\Build\%(RelativeDir)\$(Configuration)\</ObjectFileName>
@@ -84,7 +84,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src\Addons\ofFirstPersonCamera;src\Addons\ofSkyBox;src;src\Collisions;src\DataStructures;src\Forces;..\..\..\addons\ofxGui\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)\Build\%(RelativeDir)\$(Configuration)\</ObjectFileName>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -104,52 +104,90 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
-      <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.cpp" />
+    <ClCompile Include="src\Addons\ofSkyBox\ofxCubeMap.cpp" />
+    <ClCompile Include="src\Addons\ofSkyBox\ofxSkyBox.cpp" />
     <ClCompile Include="src\Blob.cpp" />
     <ClCompile Include="src\Collisions\BlobCollisionHandler.cpp" />
     <ClCompile Include="src\Collisions\Cable.cpp" />
     <ClCompile Include="src\Collisions\Collision.cpp" />
     <ClCompile Include="src\Collisions\CollisionHandler.cpp" />
     <ClCompile Include="src\Collisions\Spindle.cpp" />
-    <ClCompile Include="src\Forces\ElasticParticleParticle.cpp" />
-    <ClCompile Include="src\Forces\ElasticParticlePoint.cpp" />
-    <ClCompile Include="src\Forces\ParticleDeplacement.cpp" />
-    <ClCompile Include="src\Forces\ParticleForceGenerator.cpp" />
-    <ClCompile Include="src\Forces\ParticleForceRegistry.cpp" />
-    <ClCompile Include="src\Forces\ParticleFriction.cpp" />
-    <ClCompile Include="src\Forces\ParticleGravity.cpp" />
-    <ClCompile Include="src\Forces\SpringParticleParticle.cpp" />
-    <ClCompile Include="src\Forces\SpringParticlePoint.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\Particle.cpp" />
-    <ClCompile Include="src\Tests.cpp" />
+    <ClCompile Include="src\DataStructures\Matrix3.cpp" />
+    <ClCompile Include="src\DataStructures\Matrix4.cpp" />
+    <ClCompile Include="src\DataStructures\Quaternion.cpp" />
     <ClCompile Include="src\DataStructures\Vector3D.cpp" />
+    <ClCompile Include="src\Forces\Deplacement.cpp" />
+    <ClCompile Include="src\Forces\Elastic.cpp" />
+    <ClCompile Include="src\Forces\ForceGenerator.cpp" />
+    <ClCompile Include="src\Forces\ForceRegistry.cpp" />
+    <ClCompile Include="src\Forces\Friction.cpp" />
+    <ClCompile Include="src\Forces\Gravity.cpp" />
+    <ClCompile Include="src\Forces\Spring.cpp" />
+    <ClCompile Include="src\Particle.cpp" />
+    <ClCompile Include="src\RigidBody.cpp" />
+    <ClCompile Include="src\Tests.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxBaseGui.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxButton.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxColorPicker.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxInputField.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxLabel.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxPanel.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.h" />
+    <ClInclude Include="src\Addons\ofSkyBox\ofxCubeMap.h" />
+    <ClInclude Include="src\Addons\ofSkyBox\ofxSkyBox.h" />
     <ClInclude Include="src\Blob.h" />
     <ClInclude Include="src\Collisions\BlobCollisionHandler.h" />
     <ClInclude Include="src\Collisions\Cable.h" />
     <ClInclude Include="src\Collisions\Collision.h" />
     <ClInclude Include="src\Collisions\CollisionHandler.h" />
     <ClInclude Include="src\Collisions\Spindle.h" />
-    <ClInclude Include="src\Forces\ElasticParticleParticle.h" />
-    <ClInclude Include="src\Forces\ElasticParticlePoint.h" />
-    <ClInclude Include="src\Forces\ParticleDeplacement.h" />
-    <ClInclude Include="src\Forces\ParticleForceGenerator.h" />
-    <ClInclude Include="src\Forces\ParticleForceRegistry.h" />
-    <ClInclude Include="src\Forces\ParticleFriction.h" />
-    <ClInclude Include="src\Forces\ParticleGravity.h" />
-    <ClInclude Include="src\Forces\SpringParticleParticle.h" />
-    <ClInclude Include="src\Forces\SpringParticlePoint.h" />
-    <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\DataStructures\Matrix3.h" />
+    <ClInclude Include="src\DataStructures\Matrix4.h" />
+    <ClInclude Include="src\DataStructures\Quaternion.h" />
+    <ClInclude Include="src\DataStructures\Vector3D.h" />
+    <ClInclude Include="src\Forces\Deplacement.h" />
+    <ClInclude Include="src\Forces\Elastic.h" />
+    <ClInclude Include="src\Forces\ForceGenerator.h" />
+    <ClInclude Include="src\Forces\ForceRegistry.h" />
+    <ClInclude Include="src\Forces\Friction.h" />
+    <ClInclude Include="src\Forces\Gravity.h" />
+    <ClInclude Include="src\Forces\Spring.h" />
     <ClInclude Include="src\Particle.h" />
+    <ClInclude Include="src\RigidBody.h" />
     <ClInclude Include="src\Tests.h" />
-    <ClCompile Include="src\DataStructures\Vector3D.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxColorPicker.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiUtils.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxInputField.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxLabel.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxPanel.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
+      <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(OF_ROOT)\libs\openFrameworksCompiled\project\vs</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>
