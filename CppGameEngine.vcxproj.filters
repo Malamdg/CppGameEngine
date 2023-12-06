@@ -1,264 +1,267 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<ItemGroup>
-		<ClCompile Include="src\ofApp.cpp">
-			<Filter>src</Filter>
-		</ClCompile>
-		<ClCompile Include="src\main.cpp">
-			<Filter>src</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.cpp">
-			<Filter>src\Addons\ofFirstPersonCamera</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Addons\ofSkyBox\ofxCubeMap.cpp">
-			<Filter>src\Addons\ofSkyBox</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Addons\ofSkyBox\ofxSkyBox.cpp">
-			<Filter>src\Addons\ofSkyBox</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Blob.cpp">
-			<Filter>src</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Collisions\BlobCollisionHandler.cpp">
-			<Filter>src\Collisions</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Collisions\Cable.cpp">
-			<Filter>src\Collisions</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Collisions\Collision.cpp">
-			<Filter>src\Collisions</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Collisions\CollisionHandler.cpp">
-			<Filter>src\Collisions</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Collisions\Spindle.cpp">
-			<Filter>src\Collisions</Filter>
-		</ClCompile>
-		<ClCompile Include="src\DataStructures\Matrix3.cpp">
-			<Filter>src\DataStructures</Filter>
-		</ClCompile>
-		<ClCompile Include="src\DataStructures\Matrix4.cpp">
-			<Filter>src\DataStructures</Filter>
-		</ClCompile>
-		<ClCompile Include="src\DataStructures\Quaternion.cpp">
-			<Filter>src\DataStructures</Filter>
-		</ClCompile>
-		<ClCompile Include="src\DataStructures\Vector3D.cpp">
-			<Filter>src\DataStructures</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Forces\Deplacement.cpp">
-			<Filter>src\Forces</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Forces\Elastic.cpp">
-			<Filter>src\Forces</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Forces\ForceGenerator.cpp">
-			<Filter>src\Forces</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Forces\ForceRegistry.cpp">
-			<Filter>src\Forces</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Forces\Friction.cpp">
-			<Filter>src\Forces</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Forces\Gravity.cpp">
-			<Filter>src\Forces</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Forces\Spring.cpp">
-			<Filter>src\Forces</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Particle.cpp">
-			<Filter>src</Filter>
-		</ClCompile>
-		<ClCompile Include="src\RigidBody.cpp">
-			<Filter>src</Filter>
-		</ClCompile>
-		<ClCompile Include="src\Tests.cpp">
-			<Filter>src</Filter>
-		</ClCompile>
-		<ClCompile Include="src\main.cpp">
-			<Filter>src</Filter>
-		</ClCompile>
-		<ClCompile Include="src\ofApp.cpp">
-			<Filter>src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxBaseGui.cpp">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxButton.cpp">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxColorPicker.cpp">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxInputField.cpp">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxLabel.cpp">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxPanel.cpp">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClCompile>
-		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClCompile>
-	</ItemGroup>
-	<ItemGroup>
-		<Filter Include="src">
-			<UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="src\Addons">
-			<UniqueIdentifier>{F34A294F--E8A-F-4A-51-9-FCF-53E93EE14DF7}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="src\Addons\ofFirstPersonCamera">
-			<UniqueIdentifier>{BB3C12B8--B6E-D-46-8B-8-33A-35E2F63A1C0E}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="src\Addons\ofSkyBox">
-			<UniqueIdentifier>{D3FC3066--8C7-C-4E-71-9-08F-B8DAD2403147}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="src\Collisions">
-			<UniqueIdentifier>{B5ECA877--239-8-47-A6-9-084-08F8E8E17A92}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="src\DataStructures">
-			<UniqueIdentifier>{E74F1632--4BF-4-45-CB-8-D11-2C17234A6DC7}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="src\Forces">
-			<UniqueIdentifier>{92575D6D--9E1-2-43-E8-9-C94-945A883E138D}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons">
-			<UniqueIdentifier>{C783AF54--932-C-44-AF-9-E05-230904195C59}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxGui">
-			<UniqueIdentifier>{56419DDF--6D6-1-42-0B-B-516-9B40DF74B8BA}</UniqueIdentifier>
-		</Filter>
-		<Filter Include="addons\ofxGui\src">
-			<UniqueIdentifier>{4A512064--F34-7-4E-6F-A-D41-EA77136317C2}</UniqueIdentifier>
-		</Filter>
-	</ItemGroup>
-	<ItemGroup>
-		<ClInclude Include="src\ofApp.h">
-			<Filter>src</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.h">
-			<Filter>src\Addons\ofFirstPersonCamera</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Addons\ofSkyBox\ofxCubeMap.h">
-			<Filter>src\Addons\ofSkyBox</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Addons\ofSkyBox\ofxSkyBox.h">
-			<Filter>src\Addons\ofSkyBox</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Blob.h">
-			<Filter>src</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Collisions\BlobCollisionHandler.h">
-			<Filter>src\Collisions</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Collisions\Cable.h">
-			<Filter>src\Collisions</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Collisions\Collision.h">
-			<Filter>src\Collisions</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Collisions\CollisionHandler.h">
-			<Filter>src\Collisions</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Collisions\Spindle.h">
-			<Filter>src\Collisions</Filter>
-		</ClInclude>
-		<ClInclude Include="src\DataStructures\Matrix3.h">
-			<Filter>src\DataStructures</Filter>
-		</ClInclude>
-		<ClInclude Include="src\DataStructures\Matrix4.h">
-			<Filter>src\DataStructures</Filter>
-		</ClInclude>
-		<ClInclude Include="src\DataStructures\Quaternion.h">
-			<Filter>src\DataStructures</Filter>
-		</ClInclude>
-		<ClInclude Include="src\DataStructures\Vector3D.h">
-			<Filter>src\DataStructures</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Forces\Deplacement.h">
-			<Filter>src\Forces</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Forces\Elastic.h">
-			<Filter>src\Forces</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Forces\ForceGenerator.h">
-			<Filter>src\Forces</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Forces\ForceRegistry.h">
-			<Filter>src\Forces</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Forces\Friction.h">
-			<Filter>src\Forces</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Forces\Gravity.h">
-			<Filter>src\Forces</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Forces\Spring.h">
-			<Filter>src\Forces</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Particle.h">
-			<Filter>src</Filter>
-		</ClInclude>
-		<ClInclude Include="src\RigidBody.h">
-			<Filter>src</Filter>
-		</ClInclude>
-		<ClInclude Include="src\Tests.h">
-			<Filter>src</Filter>
-		</ClInclude>
-		<ClInclude Include="src\ofApp.h">
-			<Filter>src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxColorPicker.h">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiUtils.h">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxInputField.h">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxLabel.h">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxPanel.h">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h">
-			<Filter>addons\ofxGui\src</Filter>
-		</ClInclude>
-	</ItemGroup>
-	<ItemGroup>
-		<ResourceCompile Include="icon.rc" />
-	</ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.cpp">
+      <Filter>src\Addons\ofFirstPersonCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofSkyBox\ofxCubeMap.cpp">
+      <Filter>src\Addons\ofSkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Addons\ofSkyBox\ofxSkyBox.cpp">
+      <Filter>src\Addons\ofSkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Blob.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\BlobCollisionHandler.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\Cable.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\Collision.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\CollisionHandler.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\Spindle.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataStructures\Matrix3.cpp">
+      <Filter>src\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataStructures\Matrix4.cpp">
+      <Filter>src\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataStructures\Quaternion.cpp">
+      <Filter>src\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataStructures\Vector3D.cpp">
+      <Filter>src\DataStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\Deplacement.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\Elastic.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\ForceGenerator.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\ForceRegistry.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\Friction.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\Gravity.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Forces\Spring.cpp">
+      <Filter>src\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Particle.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RigidBody.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tests.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxBaseGui.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxButton.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxColorPicker.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxInputField.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxLabel.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxPanel.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons">
+      <UniqueIdentifier>{F34A294F--E8A-F-4A-51-9-FCF-53E93EE14DF7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofFirstPersonCamera">
+      <UniqueIdentifier>{BB3C12B8--B6E-D-46-8B-8-33A-35E2F63A1C0E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Addons\ofSkyBox">
+      <UniqueIdentifier>{D3FC3066--8C7-C-4E-71-9-08F-B8DAD2403147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Collisions">
+      <UniqueIdentifier>{B5ECA877--239-8-47-A6-9-084-08F8E8E17A92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DataStructures">
+      <UniqueIdentifier>{E74F1632--4BF-4-45-CB-8-D11-2C17234A6DC7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Forces">
+      <UniqueIdentifier>{92575D6D--9E1-2-43-E8-9-C94-945A883E138D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons">
+      <UniqueIdentifier>{C783AF54--932-C-44-AF-9-E05-230904195C59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxGui">
+      <UniqueIdentifier>{56419DDF--6D6-1-42-0B-B-516-9B40DF74B8BA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxGui\src">
+      <UniqueIdentifier>{4A512064--F34-7-4E-6F-A-D41-EA77136317C2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.h">
+      <Filter>src\Addons\ofFirstPersonCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofSkyBox\ofxCubeMap.h">
+      <Filter>src\Addons\ofSkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Addons\ofSkyBox\ofxSkyBox.h">
+      <Filter>src\Addons\ofSkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Blob.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\BlobCollisionHandler.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\Cable.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\Collision.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\CollisionHandler.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\Spindle.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\Matrix3.h">
+      <Filter>src\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\Matrix4.h">
+      <Filter>src\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\Quaternion.h">
+      <Filter>src\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DataStructures\Vector3D.h">
+      <Filter>src\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\Deplacement.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\Elastic.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\ForceGenerator.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\ForceRegistry.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\Friction.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\Gravity.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Forces\Spring.h">
+      <Filter>src\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Particle.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RigidBody.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tests.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxColorPicker.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiUtils.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxInputField.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxLabel.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxPanel.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h">
+      <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\Box.h" />
+    <ClInclude Include="src\Collisions\Plane.h" />
+    <ClInclude Include="src\Collisions\Sphere.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
 </Project>
