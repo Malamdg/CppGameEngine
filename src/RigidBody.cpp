@@ -117,14 +117,14 @@ void RigidBody::clearAccum()
 	m_accumTorque[2] = 0;
 }
 
-Vector3D RigidBody::getVelocity() { return m_velocity; }
+Vector3D RigidBody::getVelocity() const { return m_velocity; }
 
 void RigidBody::addVelocity(Vector3D velocity)
 {
 	m_velocity = m_velocity + velocity;
 }
 
-Vector3D RigidBody::getPosition() { return m_position; }
+Vector3D RigidBody::getPosition() const { return m_position; }
 
 void RigidBody::setPosition(Vector3D position)
 {
@@ -136,13 +136,13 @@ void RigidBody::addPosition(Vector3D position)
 	m_position = m_position + position;
 }
 
-Vector3D RigidBody::getAcceleration() { return m_acceleration; }
+Vector3D RigidBody::getAcceleration() const { return m_acceleration; }
 
-float RigidBody::getCoefficientRestitution() { return m_coeffRestitutions; }
+float RigidBody::getCoefficientRestitution() const { return m_coeffRestitutions; }
 
-float RigidBody::getK1() { return m_frictionK1; }
+float RigidBody::getK1() const { return m_frictionK1; }
 
-float RigidBody::getK2() { return m_frictionK2; }
+float RigidBody::getK2() const { return m_frictionK2; }
 
 Vector3D RigidBody::getPointWorldPosition(Vector3D* localPoint)
 {

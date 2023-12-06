@@ -21,6 +21,7 @@ void ofApp::setup() {
 	gui.add(text9.setup("Toggle Impulse", "B"));
 	gui.add(text6.setup("Toggle FullScreen", "F"));
 	gui.add(text7.setup("Toggle Focus", "Clic gauche"));
+	gui.add(text10.setup("Toggle Octree", "O"));
 
 	// Light
 	directionalLight.setDirectional();
@@ -135,8 +136,14 @@ void ofApp::update() {
 
 		duration = fps == 0 ? 0 : 1 / fps;
 
+		Vector3D octreeMin = Vector3D(-1000, -1000, -1000);
+		Vector3D octreeMax = Vector3D(1000, 1000, 1000);
+		octree = Octree(octreeMin, octreeMax);
+
 		for (RigidBody* rb : rigidBodies)
 		{
+			octree.insert(rb);
+
 			forceRegistry->add(rb, gravity);
 			forceRegistry->add(rb, airFriction);
 		}
@@ -167,6 +174,13 @@ void ofApp::draw() {
 	ofEnableDepthTest();
 
 	if (drawGrid) ofDrawGrid(10.0f, 10, true);
+
+	if (drawOctree)
+	{
+		ofNoFill();
+		octree.draw();
+		ofFill();
+	}
 
 	// display texts on screen
 	//drawText();
@@ -246,6 +260,10 @@ void ofApp::keyReleased(int key) {
 
 		case 'p':
 			pause = !pause;
+			break;
+
+		case 'o':
+			drawOctree = !drawOctree;
 			break;
 
 		case ' ': //Lauch RigidBody

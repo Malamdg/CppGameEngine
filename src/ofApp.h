@@ -19,6 +19,7 @@
 #include "Particle.h"
 #include "RigidBody.h"
 #include "Tests.h"
+#include "Octree.h"
 
 #include "Addons/ofSkyBox/ofxSkyBox.h"
 #include "Addons/ofFirstPersonCamera/ofxFirstPersonCamera.h"
@@ -66,6 +67,7 @@ private:
 	ofxTextField text7;
 	ofxTextField text8;
 	ofxTextField text9;
+	ofxTextField text10;
 
 	//Lights
 	ofLight directionalLight;
@@ -122,4 +124,8 @@ private:
 	bool pause = false;
 	bool drawGrid = true;
 	bool toggleImpulse = true;
+	bool drawOctree = false;
+
+	// Octree
+	Octree octree;
 };
