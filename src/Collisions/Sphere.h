@@ -11,6 +11,12 @@ protected:
 	/* Radius of the sphere */
 	float m_radius;
 
+	/* 
+	Check the intersection with another sphere
+	
+	@param collider, the other sphere
+	@return true if there is a collision
+	*/
 	bool intersect(Sphere* collider);
 
 public:
@@ -30,8 +36,18 @@ public:
 		return dynamic_cast<const Base*>(ptr) != nullptr;
 	}
 
+	/*
+	to set the new orientation of the sphere
+
+	@param rotation, the rotation applied to get the new orientation
+	*/
 	virtual void setRotation(Quaternion* rotation);
 
+	/*
+	to get the radius of the sphere
+
+	@return the radius of the sphere
+	*/
 	float getRadius();
 
 	/*

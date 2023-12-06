@@ -11,6 +11,7 @@ Sphere::Sphere(Vector3D* center, float radius)
 /* Class Destructor */
 Sphere::~Sphere() { }
 
+/* The sphere doesn't need to rotate */
 void Sphere::setRotation(Quaternion* rotation) {}
 
 float Sphere::getRadius() { return m_radius; }
@@ -22,6 +23,7 @@ to detect a collision bewteen two spheres
 */
 bool Sphere::intersect(Collider* collider) 
 {
+	// The sphere can only intersect with spheres
 	if (instanceof<Sphere>(collider))
 	{
 		return intersect(collider);

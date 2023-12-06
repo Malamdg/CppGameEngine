@@ -39,6 +39,11 @@ public:
 	*/
 	virtual void setRotation(Quaternion* rotation);
 
+	/*
+	get the position of the collider
+
+	@return, the position of the collider
+	*/
 	Vector3D* getPosition();
 
 	/*

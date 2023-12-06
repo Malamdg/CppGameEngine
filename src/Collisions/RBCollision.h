@@ -1,23 +1,23 @@
 #pragma once
 #include "CollisionHandler.h"
-#include "../Particle.h"
+#include "../RigidBody.h"
 
-class Collision
+class RBCollision
 {
 public:
 	/*
  	Class Constructor
  	*/
-	Collision();
+    RBCollision();
 
 	/*
  	Class Destructor
  	*/
-	~Collision();
+	~RBCollision();
 
 	/*
- 	To update the particle's behaviour when a collision occurs
-  	@param particle, the particle to update
+ 	To update the RigidBody's behaviour when a collision occurs
+  	@param rb, the RigidBody to update
   	*/
-	virtual void update(Particle* particle);
+	virtual void update(RigidBody* rb);
 };
