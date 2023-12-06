@@ -8,7 +8,26 @@ class RBCollision;
 
 class RBCollisionHandler
 {
-public
+public :
+	/*
+	Definition of the struct CollisionRegistration
+
+	rb1, the first RigidBody
+	rb2, the second RigidBody
+	*/
+	struct CollisionRegistration
+	{
+		RigidBody* rb1;
+		RigidBody* rb2;
+	};
+
+	/*
+	Create the type Registry
+
+	Dynamic table of CollisionRegistration
+	*/
+	typedef std::vector<CollisionRegistration> RegistryCollision;
+
 	/*
 	Create the type Registry
 
@@ -52,14 +71,22 @@ public
 
 	/*
 	To create a Registry from a box of the octree
-
-	@param particle, the particle to add
-	@param collision, the collision associated to the particle
 	*/
 	void generateRegistry();
 
+
+	/*
+	To create a Registry from a box of the octree
+
+	@param rb1, the first RigidBody
+	@param rb2, the second RigidBody
+	*/
+	void addcollision(RigidBody* rb1, RigidBody* rb2);
+
 private:
 	Registry m_registry;
+
+	RegistryCollision m_collisionregistry;
 
 	Octree m_octree;
 };

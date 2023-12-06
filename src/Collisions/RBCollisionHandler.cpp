@@ -12,6 +12,7 @@ RBCollisionHandler::~RBCollisionHandler()
 
 void RBCollisionHandler::wideCollision(float duration, ForceRegistry* forceRegistry)
 {
+	// Attention: il ne faut pas appliquer la collision 2x (rb1xrb2 et rb2xrb1)
 	for (RigidBody rb1 : m_registry)
 	{
 		// A MODIFIER : BALAYER POUR AVOIR TOUT SAUF LE rb1
@@ -32,6 +33,9 @@ void RBCollisionHandler::narrowCollision(float duration, ForceRegistry* forceReg
 	if (true)
 	{
 		// Impulsions
+
+		// Ajouter les deux particules dans m_collisionregistry
+		addcollision(rb1, rb2);
 	}
 }
 
@@ -41,6 +45,14 @@ void RBCollisionHandler::generateRegistry()
 	// parcourir la box conisérée dans l'octree et collecter les RigidBody dedans
 }
 
+
+void RBCollisionHandler::addcollision(RigidBody* rb1, RigidBody* rb2)
+{
+	CollisionRegistration collisionRegistration;
+	collisionRegistration.rb1 = rb1;
+	collisionRegistration.rb2 = rb2;
+	m_collisionregistry.push_back(collisionRegistration);
+}
 
 
 /*
@@ -53,7 +65,6 @@ Pour chaque box de l'octree, on créé un registry (generateRegistry) puis on y ef
 		4 - Génération de collisions (phase restreinte) boîte-plan
 		si collision
 			5 - Résolution des Collisions
-Attention : il ne faut pas appliquer la collsion 2x
 */
 void RBCollisionHandler::handleCollision(float duration, ForceRegistry* forceRegistry)
 {
