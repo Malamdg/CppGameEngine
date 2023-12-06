@@ -13,8 +13,8 @@ Collider::~Collider()
 	delete m_center;
 }
 
-void Collider::translate(Vector3D* translation) {}
+void Collider::setPosition(Vector3D* translation) {}
 
-void Collider::rotate(Quaternion* rotation) {}
+void Collider::setRotation(Quaternion* rotation) {}
 
 bool Collider::intersect(Collider* collider) {}

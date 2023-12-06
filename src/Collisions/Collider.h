@@ -6,7 +6,7 @@
 
 class Collider
 {
-private:
+protected:
 	Vector3D* m_center;
 
 public:
@@ -17,20 +17,25 @@ public:
 
 	/* Class Destructor */
 	~Collider();
+	
+	template<typename Base, typename T>
+	inline bool instanceof(const T* ptr) {
+		return dynamic_cast<const Base*>(ptr) != nullptr;
+	}
 
 	/*
 	translate a Collider
 
 	@param translation, vector to translate the collider
 	*/
-	virtual void translate(Vector3D* translation);
+	virtual void setPosition(Vector3D* translation);
 
 	/*
 	rotate a Collider
 
 	@param rotation, a quaternion to rotate the collider
 	*/
-	virtual void rotate(Quaternion* rotation);
+	virtual void setRotation(Quaternion* rotation);
 
 	/*
 	to detect a collision bewteen Colliders

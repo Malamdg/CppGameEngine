@@ -6,10 +6,12 @@
 
 class Sphere : public Collider
 {
-private:
+protected:
 
 	/* Radius of the sphere */
 	float m_radius;
+
+	bool intersect(Sphere* collider);
 
 public:
 	/*
@@ -23,19 +25,16 @@ public:
 	/* Class Destructor */
 	~Sphere();
 
-	/*
-	translate a sphere
+	template<typename Base, typename T>
+	inline bool instanceof(const T* ptr) {
+		return dynamic_cast<const Base*>(ptr) != nullptr;
+	}
 
-	@param translation, vector to translate the sphere
-	*/
-	virtual void translate(Vector3D* translation);
+	virtual void setPosition(Vector3D* position);
+	virtual void setRotation(Quaternion* rotation);
 
-	/*
-	rotate a sphere
-
-	@param rotation, a quaternion ot rotate the sphere
-	*/
-	virtual void rotate(Quaternion* rotation);
+	Vector3D* getPosition();
+	float getRadius();
 
 	/*
 	to detect a collision bewteen two spheres 

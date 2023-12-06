@@ -11,23 +11,26 @@ Sphere::Sphere(Vector3D* center, float radius)
 /* Class Destructor */
 Sphere::~Sphere() { }
 
-/*
-translate a sphere
+void Sphere::setPosition(Vector3D* position) { m_center = position; }
+void Sphere::setRotation(Quaternion* rotation) {}
 
-@param translation, vector to translate the sphere
-*/
-void Sphere::translate(Vector3D* translation) {}
-
-/*
-rotate a sphere
-
-@param rotation, a quaternion ot rotate the sphere
-*/
-void Sphere::rotate(Quaternion* rotation) {}
+Vector3D* Sphere::getPosition() { return m_center; }
+float Sphere::getRadius() { return m_radius; }
 
 /*
 to detect a collision bewteen two spheres
 
 @param sphere, the other sphere
 */
-bool Sphere::intersect(Collider* collider) {}
+bool Sphere::intersect(Collider* collider) 
+{
+	if (instanceof<Sphere>(collider))
+	{
+		return intersect(collider);
+	}
+}
+
+bool Sphere::intersect(Sphere* collider)
+{
+	return abs(m_center - collider->getPosition()) < m_radius + collider->getRadius() ;
+}

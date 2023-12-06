@@ -104,6 +104,8 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Collisions\Collider.cpp" />
+    <ClCompile Include="src\Collisions\Sphere.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.cpp" />
@@ -142,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Collisions\Box.h" />
+    <ClInclude Include="src\Collisions\Collider.h" />
     <ClInclude Include="src\Collisions\Plane.h" />
     <ClInclude Include="src\Collisions\Sphere.h" />
     <ClInclude Include="src\ofApp.h" />
