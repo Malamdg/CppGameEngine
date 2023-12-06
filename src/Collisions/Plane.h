@@ -1,14 +1,11 @@
 #pragma once
-#include "Collision.h"
-#include "../Forces/ForceGenerator.h"
-#include "../Particle.h"
+#include "Collider.h"
 #include "Box.h"
 #include "Sphere.h"
 
-class Plane :
+class Plane : public Collider
 {
 private:
-	Vector3D* m_planecenter;
 
 	Vector3D* m_normal;
 
@@ -19,43 +16,29 @@ public:
 	@param attachPoint, the point to wich the particle is attached
  	@param length, the cable length
 	*/
-	Plane(Vector3D* planecenter, Vector3D* normal);
+	Plane(Vector3D* normal);
 
 	/* Class Destructor */
 	~Plane();
 
 	/*
-translate a sphere
+	translate a sphere
 
-@param translation, vector to translate the sphere
-*/
-	void translate(Vector3D* translation);
+	@param translation, vector to translate the sphere
+	*/
+	virtual void translate(Vector3D* translation);
 
 	/*
 	rotate a sphere
 
 	@param rotation, a quaternion ot rotate the sphere
 	*/
-	void rotate(Quaternion* rotation);
+	virtual void rotate(Quaternion* rotation);
 
 	/*
 	to detect a collision bewteen two spheres
 
 	@param sphere, the other sphere
 	*/
-	bool intersect(Sphere* sphere);
-
-	/*
-	update the cable between a particle and another particle
-
-	@param particle, the particle to update
-	*/
-	void intersect(Plane* plane);
-
-	/*
-	update the cable between a particle and another particle
-
-	@param particle, the particle to update
-	*/
-	void intersect(Box* box);
+	virtual bool intersect(Collider* Collider);
 };
