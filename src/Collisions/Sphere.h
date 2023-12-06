@@ -9,7 +9,7 @@ class Sphere : public Collider
 private:
 
 	/* Radius of the sphere */
-	Particle* m_radius;
+	float m_radius;
 
 public:
 	/*
@@ -42,6 +42,6 @@ public:
 
 	@param sphere, the other sphere
 	*/
-	virtual bool intersect(Sphere* sphere);
+	virtual bool intersect(Collider* collider);
 
 };

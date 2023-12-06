@@ -7,7 +7,7 @@
 class Collider
 {
 private:
-	Vector3D* m_planecenter;
+	Vector3D* m_center;
 
 public:
 	/*
