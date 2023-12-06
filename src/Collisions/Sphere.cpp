@@ -11,10 +11,8 @@ Sphere::Sphere(Vector3D* center, float radius)
 /* Class Destructor */
 Sphere::~Sphere() { }
 
-void Sphere::setPosition(Vector3D* position) { m_center = position; }
 void Sphere::setRotation(Quaternion* rotation) {}
 
-Vector3D* Sphere::getPosition() { return m_center; }
 float Sphere::getRadius() { return m_radius; }
 
 /*
@@ -32,5 +30,5 @@ bool Sphere::intersect(Collider* collider)
 
 bool Sphere::intersect(Sphere* collider)
 {
-	return abs(m_center - collider->getPosition()) < m_radius + collider->getRadius() ;
+	return abs(m_center - collider->getPosition()) < m_radius + collider->getRadius();
 }

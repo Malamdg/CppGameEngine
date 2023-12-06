@@ -30,10 +30,8 @@ public:
 		return dynamic_cast<const Base*>(ptr) != nullptr;
 	}
 
-	virtual void setPosition(Vector3D* position);
 	virtual void setRotation(Quaternion* rotation);
 
-	Vector3D* getPosition();
 	float getRadius();
 
 	/*

@@ -28,7 +28,7 @@ public:
 
 	@param translation, vector to translate the collider
 	*/
-	virtual void setPosition(Vector3D* translation);
+	void setPosition(Vector3D* translation);
 
 	/*
 	rotate a Collider
@@ -36,6 +36,8 @@ public:
 	@param rotation, a quaternion to rotate the collider
 	*/
 	virtual void setRotation(Quaternion* rotation);
+
+	Vector3D* getPosition();
 
 	/*
 	to detect a collision bewteen Colliders
