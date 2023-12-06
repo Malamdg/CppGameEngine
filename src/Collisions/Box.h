@@ -7,44 +7,46 @@ class Box : public Collider
 {
 private:
 
-	/* Other particle attached to the spindle */
+	/* the first demi-axis (with the top face) */
 	Vector3D* m_demiaxis1;
-	/* spindle length */
+	/* the second demi-axis (with the front face) */
 	Vector3D* m_demiaxis2;
-	/* spindle length */
+	/* the third demi-axis (with the right face) */
 	Vector3D* m_demiaxis3;
 
 public:
 	/*
-	class constructor for a Spindle between a particle and a point
+	class constructor
 
-	@param attachPoint, the point to wich the particle is attached
- 	@param length, the cable length
+	@param demiaxis1, the first demi-axis (with the top face)
+	@param demiaxis2, the second demi-axis (with the front face)
+	@param demiaxis3, third demi-axis (with the right face)
+ 	@param center, the center of the box
 	*/
-	Box(Vector3D* attachPoint, float length);
+	Box(Vector3D* demiaxis1, Vector3D* demiaxis2, Vector3D* demiaxis3, Vector3D* center);
 
 
 	/* Class Destructor */
 	~Box();
 
 	/*
-	translate a sphere
+	translate the box
 
-	@param translation, vector to translate the sphere
+	@param translation, vector to translate the box
 	*/
 	virtual void translate(Vector3D* translation);
 
 	/*
-	rotate a sphere
+	rotate the box
 
-	@param rotation, a quaternion ot rotate the sphere
+	@param rotation, a quaternion ot rotate the box
 	*/
 	virtual void rotate(Quaternion* rotation);
 
 	/*
-	to detect a collision bewteen two spheres
+	to detect a collision with another Collider
 
-	@param sphere, the other sphere
+	@param Collider, the other Collider
 	*/
 	virtual bool intersect(Collider* Collider);
 };

@@ -6,12 +6,14 @@
 
 class Collider
 {
-protected:
+private:
 	Vector3D* m_center;
 
 public:
 	/*
 	class constructor for a Collider
+
+	@param center, the center of the collider
 	*/
 	Collider(Vector3D* center);
 

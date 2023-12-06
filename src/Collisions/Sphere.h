@@ -16,9 +16,9 @@ protected:
 public:
 	/*
 	class constructor for a Sphere
-
+	
+	@param radius, the radius of the sphere 
 	@param center, the point at the center of the sphere
- 	@param radius, the radius of the sphere
 	*/
 	Sphere(Vector3D* center, float radius);
 
@@ -35,9 +35,9 @@ public:
 	float getRadius();
 
 	/*
-	to detect a collision bewteen two spheres 
+	to detect a collision with another Collider
 
-	@param sphere, the other sphere
+	@param Collider, the other Collider
 	*/
 	virtual bool intersect(Collider* collider);
 

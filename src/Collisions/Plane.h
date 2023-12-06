@@ -6,39 +6,39 @@
 class Plane : public Collider
 {
 private:
-
+	/* The normal vector of the plane */
 	Vector3D* m_normal;
 
 public:
 	/*
-	class constructor for a Spindle between a particle and a point
+	class constructor
 
-	@param attachPoint, the point to wich the particle is attached
- 	@param length, the cable length
+	@param normal, the normal vector of the plane
+ 	@param center, the center of the plane
 	*/
-	Plane(Vector3D* normal);
+	Plane(Vector3D* normal, Vector3D* center);
 
 	/* Class Destructor */
 	~Plane();
 
 	/*
-	translate a sphere
+	translate the plane
 
-	@param translation, vector to translate the sphere
+	@param translation, vector to translate the plane
 	*/
 	virtual void translate(Vector3D* translation);
 
 	/*
-	rotate a sphere
+	rotate the plane
 
-	@param rotation, a quaternion ot rotate the sphere
+	@param rotation, a quaternion to rotate the plane
 	*/
 	virtual void rotate(Quaternion* rotation);
 
 	/*
-	to detect a collision bewteen two spheres
+	to detect a collision with another Collider
 
-	@param sphere, the other sphere
+	@param Collider, the other Collider
 	*/
 	virtual bool intersect(Collider* Collider);
 };
