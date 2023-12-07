@@ -6,7 +6,8 @@
 
 class Sphere : public Collider
 {
-protected:
+
+private:
 
 	/* Radius of the sphere */
 	float m_radius;
@@ -36,12 +37,16 @@ public:
 		return dynamic_cast<const Base*>(ptr) != nullptr;
 	}
 
+<<<<<<< Updated upstream
 	/*
 	to set the new orientation of the sphere
 
 	@param rotation, the rotation applied to get the new orientation
 	*/
 	virtual void setRotation(Quaternion* rotation);
+=======
+	void setRotation(Quaternion* rotation);
+>>>>>>> Stashed changes
 
 	/*
 	to get the radius of the sphere
@@ -55,6 +60,6 @@ public:
 
 	@param Collider, the other Collider
 	*/
-	virtual bool intersect(Collider* collider);
+	bool intersect(Collider* collider, Vector3D* direction = nullptr, float* penetration = nullptr);
 
 };

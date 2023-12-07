@@ -4,6 +4,7 @@
 #include "DataStructures/Matrix4.h"
 #include "DataStructures/Vector3D.h"
 #include "DataStructures/Quaternion.h"
+#include <Box.h>
 
 static class Tests
 {
@@ -29,6 +30,8 @@ private:
 	display the number of tests passed and the number of tests failed
 	*/
 	static void ExecuteQuaternionTests();
+
+	static void ExecuteBoxCollisionsTests();
 
 	/*
 	test the construtor method of Vector3D
@@ -393,4 +396,8 @@ private:
 	@return true if the interpolation is correctly computed
 	*/
 	static bool QuaternionSlerpX();
+
+	static bool BoxCollision();
+
+	static bool BoxNoCollision();
 };

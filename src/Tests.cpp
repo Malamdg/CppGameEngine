@@ -6,6 +6,7 @@ void Tests::ExecuteTests()
 	ExecuteMatrix3Tests();
 	ExecuteMatrix4Tests();
 	ExecuteQuaternionTests();
+	ExecuteBoxCollisionsTests();
 }
 
 int Tests::nbOfTest = 0;
@@ -60,6 +61,17 @@ void Tests::ExecuteQuaternionTests()
 	success += QuaternionSlerpX();
 
 	std::cout << to_string(success) + " success, " + to_string(nbOfTest - success) + " fail" << std::endl;
+}
+
+void Tests::ExecuteBoxCollisionsTests()
+{
+	nbOfTest = 0;
+	int success = 0;
+
+	std::cout << "--- Box Collision ---" << std::endl << std::endl;
+
+	success += BoxCollision();
+	success += BoxNoCollision();
 }
 
 bool Tests::Vector3DEmtpyConstructor()
@@ -1608,6 +1620,57 @@ bool Tests::Matrix4Transposed()
 	return false;
 }
 
+bool Tests::BoxCollision()
+{
+	nbOfTest++;
 
+	Box* box1 = new Box(new Vector3D(), 
+		new Vector3D(1, 0, 0),
+		new Vector3D(0, 1, 0),
+		new Vector3D(0, 0, 1));
+	Box* box2 = new Box(new Vector3D(),
+		new Vector3D(1, 0, 0),
+		new Vector3D(0, 1, 0),
+		new Vector3D(0, 0, 1));
 
+	Vector3D* direction = new Vector3D();
+	float* penetration = new float(0);
+
+	if (box1->intersect(box2, direction, penetration))
+	{
+		std::cout << "Box Collision : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Box Collision : Fail. ";
+
+	return false;
+}
+
+bool Tests::BoxNoCollision()
+{
+	nbOfTest++;
+
+	Box* box1 = new Box(new Vector3D(),
+		new Vector3D(1, 0, 0),
+		new Vector3D(0, 1, 0),
+		new Vector3D(0, 0, 1));
+	Box* box2 = new Box(new Vector3D(5, 5, 5),
+		new Vector3D(1, 0, 0),
+		new Vector3D(0, 1, 0),
+		new Vector3D(0, 0, 1));
+
+	Vector3D* direction = new Vector3D();
+	float* penetration = new float(0);
+
+	if (!box1->intersect(box2, direction, penetration))
+	{
+		std::cout << "Box No Collision : Success" << std::endl;
+		return true;
+	}
+
+	std::cout << "Box No Collision : Fail. ";
+
+	return false;
+}
 

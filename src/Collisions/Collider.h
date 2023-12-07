@@ -39,17 +39,21 @@ public:
 	*/
 	virtual void setRotation(Quaternion* rotation);
 
+<<<<<<< Updated upstream
 	/*
 	get the position of the collider
 
 	@return, the position of the collider
 	*/
 	Vector3D* getPosition();
+=======
+	Vector3D getPosition();
+>>>>>>> Stashed changes
 
 	/*
 	to detect a collision bewteen Colliders
 
 	@param collider, the other collider
 	*/
-	virtual bool intersect(Collider* collider);
+	virtual bool intersect(Collider* collider, Vector3D* direction = nullptr, float* penetration = nullptr);
 };

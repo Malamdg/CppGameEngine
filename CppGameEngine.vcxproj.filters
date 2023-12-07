@@ -118,6 +118,9 @@
     <ClCompile Include="src\Collisions\Collider.cpp">
       <Filter>src\Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="src\Collisions\Box.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

@@ -1,10 +1,12 @@
 #pragma once
+
 #include "Collider.h"
 #include "Box.h"
 #include "Sphere.h"
 
 class Plane : public Collider
 {
+
 private:
 	/* The normal vector of the plane */
 	Vector3D* m_normal;

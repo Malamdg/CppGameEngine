@@ -17,6 +17,7 @@ void Collider::setPosition(Vector3D* translation) {}
 
 void Collider::setRotation(Quaternion* rotation) {}
 
-Vector3D* Collider::getPosition() { return m_center; }
+Vector3D Collider::getPosition() { return *m_center; }
 
-bool Collider::intersect(Collider* collider) {}
+bool Collider::intersect(Collider* collider, Vector3D* direction, float* penetration) { return false; }
+
