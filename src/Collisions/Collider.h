@@ -30,7 +30,7 @@ public:
 
 	@param translation, vector to translate the collider
 	*/
-	void setPosition(Vector3D* translation);
+	void setPosition(Vector3D* position);
 
 	/*
 	rotate a Collider
@@ -39,16 +39,13 @@ public:
 	*/
 	virtual void setRotation(Quaternion* rotation);
 
-<<<<<<< Updated upstream
 	/*
 	get the position of the collider
 
 	@return, the position of the collider
 	*/
-	Vector3D* getPosition();
-=======
 	Vector3D getPosition();
->>>>>>> Stashed changes
+
 
 	/*
 	to detect a collision bewteen Colliders

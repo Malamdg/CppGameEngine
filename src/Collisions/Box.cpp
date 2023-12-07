@@ -77,7 +77,10 @@ bool Box::intersection(Box* collider, Vector3D* direction, float* penetration)
 				if (currentPenetration < minPenetration)
 				{
 					minPenetration = currentPenetration;
-					*direction = otherAxe;
+					
+					if(boxDir * otherAxe < 0) *direction = otherAxe * (- 1);
+					else *direction = otherAxe;
+					
 					*penetration = currentPenetration;
 				}
 			}
@@ -91,3 +94,4 @@ bool Box::intersection(Plane* collider, Vector3D* direction, float* penetration)
 {
 	return false;
 }
+

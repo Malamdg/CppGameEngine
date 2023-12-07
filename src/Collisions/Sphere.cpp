@@ -26,9 +26,9 @@ bool Sphere::intersect(Collider* collider, Vector3D* direction, float* penetrati
 	// The sphere can only intersect with spheres
 	if (instanceof<Sphere>(collider))
 	{
-		return intersect(collider);
+		return intersect((Sphere*)collider);
 	}
-	else return false;
+	return false;
 }
 
 bool Sphere::intersect(Sphere* collider)
