@@ -173,6 +173,13 @@ public:
 	Matrix4 Transposed();
 
 	/*
+	* Augment to the right and at bottom a Matrix3 with a Vector3D
+	* 
+	* @return the augmented matrix
+	*/
+	static Matrix4 augment(Matrix3 m3, Vector3D rightmostColumn);
+
+	/*
 	To get the Matrix in string format (for dsiplay)
 
  	@return the Matrix's string 

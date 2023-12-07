@@ -89,7 +89,7 @@ void Elastic::updateForPoint(Particle* particle, float duration)
 }
 void Elastic::updateForPoint(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
-	Vector3D worldPoint = rb->getPointWorldPosition(rbPoint);
+	Vector3D worldPoint = rb->getWorldPosition(rbPoint);
 	Vector3D direction = ((*m_pointPosition) - worldPoint);
 
 	/* l-l0 distance computation */
@@ -154,7 +154,7 @@ void Elastic::updateForParticle(Particle* particle, float duration)
 }
 void Elastic::updateForParticle(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
-	Vector3D worldPoint = rb->getPointWorldPosition(rbPoint);
+	Vector3D worldPoint = rb->getWorldPosition(rbPoint);
 	Vector3D direction = (m_particle->getPosition() - worldPoint);
 
 	/* l-l0 distance computation */
@@ -218,7 +218,7 @@ void Elastic::updateForRigidBody(Particle* particle, float duration)
 }
 void Elastic::updateForRigidBody(RigidBody* rb, float duration, Vector3D* rbPoint)
 {
-	Vector3D worldPoint = rb->getPointWorldPosition(rbPoint);
+	Vector3D worldPoint = rb->getWorldPosition(rbPoint);
 	Vector3D direction = (m_rigidBody->getPosition() - worldPoint);
 
 	/* l-l0 distance computation */

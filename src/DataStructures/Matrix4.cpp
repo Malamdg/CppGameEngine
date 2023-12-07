@@ -273,6 +273,24 @@ Matrix4 Matrix4::Transposed() {
 	return transposed;
 }
 
+Matrix4 Matrix4::augment(Matrix3 m3, Vector3D rightmostColumn)
+{
+	Matrix4 augmentedMatrix = Matrix4();
+
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
+			augmentedMatrix.at(i, j) = m3.at(i, j);
+		}
+	}
+
+	augmentedMatrix.at(0, 3) = rightmostColumn.x();
+	augmentedMatrix.at(1, 3) = rightmostColumn.y();
+	augmentedMatrix.at(2, 3) = rightmostColumn.z();
+	augmentedMatrix.at(3, 3) = rightmostColumn.w();
+
+	return augmentedMatrix;
+}
+
 string Matrix4::toString() const
 {
 	string buffer = "[\n";

@@ -10,34 +10,50 @@ class RigidBody
 private:
 	list<of3dPrimitive*> m_primitives;
 
-	// Deplacement du centre de masse depuis la position
-	//Vector3D m_centerOfMass;
-	ofSpherePrimitive* m_centerMass;
+	// Handle center of masse
+	Vector3D m_centerOfMass;
 
 	Vector3D m_position;
+
 	Vector3D m_velocity;
-	Vector3D m_acceleration;
-	float m_invertedMass;
 
 	Quaternion m_orientation;
-	
-	Matrix3 m_matrixOrientation;
 
-	Matrix3 m_invertedInertiaTensor;
-		
 	Vector3D m_angularVelocity;
 
-	Vector3D m_angularAcceleration;
+	float m_invertedMass;
 
-	float m_radius;
-	Vector3D m_accumForce;
-	Vector3D m_accumTorque;
+	// Volume Box dimensions
+	float m_length; // forward
+	float m_width;	// right
+	float m_height; // top
 
 	float m_frictionK1;
 	float m_frictionK2;
 
 	// When a collision occurs, the coefficient is used to know the amount of energy absorbed by the RigidBody (if coeff = 1, then nothing is absorbed)
 	float m_coeffRestitutions = 1;
+
+	// Display center of mass
+	ofSpherePrimitive* m_centerMass;
+
+	// Accelerations
+	Vector3D m_acceleration;
+	Vector3D m_angularAcceleration;
+
+	// Rotation
+	Matrix3 m_matrixOrientation;
+
+	// Transform matrix
+	Matrix4 m_transformMatrix;
+
+	// Inertia Tensors
+	Matrix3 m_massCenterIntertiaTensor;
+
+	Matrix3 m_invertedInertiaTensor;
+
+	Vector3D m_accumForce;
+	Vector3D m_accumTorque;
 
 public:
 	
@@ -56,13 +72,15 @@ public:
     	@param coeffRestitutions, coeffecient of restitution ; the coefficient is used to know the amount of energy absorbed by the RigidBody (if coeff = 1, then nothing is absorbed)
 	*/
 	RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives = list<pair<of3dPrimitive*, Vector3D>>(),
-		//Vector3D centerOfMass = Vector3D(),
+		Vector3D centerOfMass = Vector3D(),
 		Vector3D position = Vector3D(),
 		Vector3D initVelocity = Vector3D(),
 		Quaternion orientation = Quaternion::Identity(),
 		Vector3D initAngVelocity = Vector3D(),
 		float invertedMass = 0,
-		float radius = 0,
+		float length = 0,
+		float width = 0,
+		float height = 0,
 		float frictionK1 = 0,
 		float frictionK2 = 0,
 		float coeffRestitutions = 1
@@ -115,6 +133,9 @@ public:
  	*/
 	void updateOrientation(float duration);
 
+	void updateTransformMatrix();
+
+	void updateInertiaTensor();
 	/*
 	public method to be called in ofMain's update
 	do the update job to the RigidBody
@@ -203,8 +224,12 @@ public:
 	float getK2() const;
 
 	// Get a given local point coordinates in world coordinates
-	// @return the Vector3D of point in coordinates
-	Vector3D getPointWorldPosition(Vector3D* localPoint);
+	// @return the Vector3D of point in world coordinates
+	Vector3D getWorldPosition(Vector3D* localPoint);
+
+	// Get a given world point coordinates in local coordinates
+	// @return the Vector3D of point in local coordinates
+	Vector3D getLocalPosition(Vector3D* worldPoint);
 
 	/*
 	get the primitives

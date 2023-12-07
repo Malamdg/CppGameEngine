@@ -68,7 +68,7 @@ void ofApp::setup() {
 		{new ofBoxPrimitive(.5, 7, .5), Vector3D(-7.75, -2.5, -3.75)}
 	};
 	// create a table
-	RigidBody table = RigidBody(tablePrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 6.f, 8.f);
+	RigidBody table = RigidBody(tablePrimitives, Vector3D(), Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 6.f, 8.f);
 	rigidObjects[0] = table;
 
 	list <pair<of3dPrimitive*, Vector3D>> chairPrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -81,7 +81,7 @@ void ofApp::setup() {
 		{new ofBoxPrimitive(.5, 4, .5), Vector3D(-1.75, -2, -1.75)}
 	};
 	// create a chair
-	RigidBody chair = RigidBody(chairPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 2.5, 4.5f);
+	RigidBody chair = RigidBody(chairPrimitives, Vector3D(), Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 2.5, 4.5f);
 	rigidObjects[1] = chair;
 
 	list <pair<of3dPrimitive*, Vector3D>> bottlePrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -91,7 +91,7 @@ void ofApp::setup() {
 		{new ofCylinderPrimitive(.2, 1.5, 16, 16), Vector3D(0, 1, 0)},
 	};
 	// create a bottle
-	RigidBody bottle = RigidBody(bottlePrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1, 1.75f);
+	RigidBody bottle = RigidBody(bottlePrimitives, Vector3D(), Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1, 1.75f);
 	rigidObjects[2] = bottle;
 
 	list <pair<of3dPrimitive*, Vector3D>> carPrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -104,7 +104,7 @@ void ofApp::setup() {
 		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, -9, -8)},
 	};
 	// create a car
-	RigidBody car = RigidBody(carPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 1200.f, 10.5f);
+	RigidBody car = RigidBody(carPrimitives, Vector3D(), Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 1200.f, 10.5f);
 	rigidObjects[3] = car;
 
 	list <pair<of3dPrimitive*, Vector3D>> guitarPrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -115,7 +115,7 @@ void ofApp::setup() {
 		{new ofBoxPrimitive(1.5, 1, 2), Vector3D(0, 0, -7)},
 	};
 	// create a guitar
-	RigidBody guitar = RigidBody(guitarPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), .5, 4.f);
+	RigidBody guitar = RigidBody(guitarPrimitives, Vector3D(), Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), .5, 4.f);
 	rigidObjects[4] = guitar;
 
 
@@ -283,7 +283,18 @@ void ofApp::keyReleased(int key) {
 					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 8, 0)},
 					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 12, 0)},
 				};
-				rb = new RigidBody(weightedLadderPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / keyHold, 8.f);
+				rb = new RigidBody(
+					weightedLadderPrimitives, 
+					Vector3D(0, 8.f, 0.f), 
+					Vector3D(), 
+					Vector3D(), 
+					Quaternion::Identity(), 
+					Vector3D(), 
+					1 / keyHold, 
+					8.f,
+					4.f,
+					16.f
+				);
 			}
 			rb->setPosition(position);
 
