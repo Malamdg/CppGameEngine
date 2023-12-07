@@ -1,26 +1,11 @@
 #include <Contact.h>
 
-
-Contact::Contact()
-	:
-	m_contact(false),
-	m_contactPoint(nullptr),
-	m_normal(nullptr),
-	m_penetration(0),
-	m_body1(nullptr),
-	m_body2(nullptr),
-	m_restitution(0),
-	m_friction(0)
-{ }
-
-
 Contact::Contact(Vector3D* contactPosition,
 	Vector3D* normalContact,
 	float penetration,
 	RigidBody* body1,
 	RigidBody* body2)
 	:
-	m_contact(true),
 	m_contactPoint(contactPosition),
 	m_normal(normalContact),
 	m_penetration(penetration),
@@ -40,7 +25,6 @@ Contact::~Contact()
 }
 
 
-bool Contact::hasContact() const { return m_contact; }
 Vector3D* Contact::getContactPoint() const { return m_contactPoint; }
 Vector3D* Contact::getNormal() const { return m_normal; }
 float Contact::getPenetration() const { return m_penetration; }
