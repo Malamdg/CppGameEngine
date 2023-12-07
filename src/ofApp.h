@@ -18,7 +18,7 @@
 #include "DataStructures/Quaternion.h"
 #include "Particle.h"
 #include "RigidBody.h"
-#include "Tests.h"
+#include "Tests/Tests.h"
 #include "Octree.h"
 
 #include "Addons/ofSkyBox/ofxSkyBox.h"
