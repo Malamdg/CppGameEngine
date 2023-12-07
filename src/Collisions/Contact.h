@@ -7,14 +7,13 @@ class Contact
 {
 private:
 
-	bool contact;
-	Vector3D* contactPoint;
-	Vector3D* normal;
-	float penetration;
-	RigidBody* body1;
-	RigidBody* body2;
-	float restitution;
-	float friction;
+	Vector3D* m_contactPoint;
+	Vector3D* m_normal;
+	float m_penetration;
+	RigidBody* m_body1;
+	RigidBody* m_body2;
+	float m_restitution;
+	float m_friction;
 
 	float calculateRestitution();
 	float calculateFriction();
@@ -29,6 +28,7 @@ public:
 	RigidBody* body2);
 	~Contact();
 
+	bool hasContact() const;
 	Vector3D* getContactPoint() const;
 	Vector3D* getNormal() const;
 	float getPenetration() const;
