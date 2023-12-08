@@ -26,9 +26,9 @@ public:
 	}
 
 	/*
-	translate a Collider
+	set the position of a collider
 
-	@param translation, vector to translate the collider
+	@param position, the new position of the collider
 	*/
 	void setPosition(Vector3D* position);
 
