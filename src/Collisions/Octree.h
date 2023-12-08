@@ -68,8 +68,15 @@ private:
     */
     bool rigidBodyInNode(OctreeNode* node, const RigidBody* rb);
 
-    // Split a node into eight children
+    /*
+    Function to split the node in eight
+
+    @param node, the node to split
+    */
     void splitNode(OctreeNode* node);
 
+    /*
+    To draw the octree
+    */
     void draw(OctreeNode* node);
 };
