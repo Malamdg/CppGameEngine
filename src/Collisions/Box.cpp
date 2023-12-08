@@ -3,9 +3,9 @@
 #include "Box.h"
 #include <Matrix3.h>
 
-Box::Box(Vector3D* position, Vector3D* axe1, Vector3D* axe2, Vector3D* axe3)
+Box::Box(RigidBody* rb, Vector3D* center, Vector3D* axe1, Vector3D* axe2, Vector3D* axe3)
 	:
-	Collider(position),
+	Collider(rb, center),
 	m_right(axe1),
 	m_top(axe2),
 	m_foward(axe3)
@@ -37,22 +37,24 @@ Vector3D Box::getAxis(int i)
 	else return Vector3D();
 }
 
-bool Box::intersect(Collider* collider, Vector3D* direction, float* penetration)
+list<Contact*> Box::intersect(Collider* collider)
 {
 	if (instanceof<Box>(collider))
 	{
-		return intersection((Box*)collider, direction, penetration);
+		return intersection((Box*)collider);
 	}
 	if (instanceof<Plane>(collider))
 	{
-		return intersection((Plane*)collider, direction, penetration);
+		return intersection((Plane*)collider);
 	}
-	return false;
+	return list<Contact*>();
 }
 
-bool Box::intersection(Box* collider, Vector3D* direction, float* penetration)
+list<Contact*> Box::intersection(Box* collider)
 {
-
+	list<Contact*> res = list<Contact*>();
+	
+	/*
 	Vector3D boxDir = getPosition() - collider->getPosition();
 
 	float minPenetration = FLT_MAX;
@@ -86,12 +88,13 @@ bool Box::intersection(Box* collider, Vector3D* direction, float* penetration)
 			}
 			else return false;
 		}
-	}
+	}*/
 
-	return true;
+	return res;
 }
-bool Box::intersection(Plane* collider, Vector3D* direction, float* penetration)
+
+list<Contact*> Box::intersection(Plane* collider)
 {
-	return false;
+	return list<Contact*>();
 }
 

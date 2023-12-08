@@ -30,10 +30,7 @@ private:
 	float calculateFriction();
 
 public:
-	/*
- 	Empty Constructor
-  	*/
-	Contact();
+
 	/*
  	Class Constructor
 
@@ -53,18 +50,6 @@ public:
   	*/
 	~Contact();
 
-	/*
- 	To know if the contact happened
-
-	@return true if the contact happened
-  	*/
-	bool hasContact() const;
-
-	/*
- 	To get the contact point
-
-	@return the coordinate of the contact point
-  	*/
 	Vector3D* getContactPoint() const;
 
 	/*

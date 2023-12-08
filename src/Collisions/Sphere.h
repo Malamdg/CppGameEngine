@@ -18,16 +18,17 @@ private:
 	@param collider, the other sphere
 	@return true if there is a collision
 	*/
-	bool intersect(Sphere* collider);
+	Contact* intersect(Sphere* collider);
 
 public:
 	/*
 	class constructor for a Sphere
 	
+	@param rb, the rigidbody of the sphere
 	@param radius, the radius of the sphere 
 	@param center, the point at the center of the sphere
 	*/
-	Sphere(Vector3D* center, float radius);
+	Sphere(RigidBody* rb, Vector3D* center, float radius);
 
 	/* Class Destructor */
 	~Sphere();
@@ -57,6 +58,6 @@ public:
 
 	@param Collider, the other Collider
 	*/
-	bool intersect(Collider* collider, Vector3D* direction = nullptr, float* penetration = nullptr);
+	list<Contact*> intersect(Collider* collider);
 
 };

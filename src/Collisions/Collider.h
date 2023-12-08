@@ -2,12 +2,14 @@
 
 #include <Vector3D.h>
 #include <Quaternion.h>
+#include <Contact.h>
 
 
 class Collider
 {
 private:
 	Vector3D* m_center;
+	RigidBody* m_rigidbody;
 
 public:
 	/*
@@ -15,7 +17,7 @@ public:
 
 	@param center, the center of the collider
 	*/
-	Collider(Vector3D* center);
+	Collider(RigidBody* rb, Vector3D* center);
 
 	/* Class Destructor */
 	~Collider();
@@ -48,9 +50,18 @@ public:
 
 
 	/*
+	get the rigidbody of the collider
+
+	@return, the rigidbody of the collider
+	*/
+	RigidBody* getRigidBody();
+
+
+	/*
 	to detect a collision bewteen Colliders
 
 	@param collider, the other collider
+	@return a list of contacts
 	*/
-	virtual bool intersect(Collider* collider, Vector3D* direction = nullptr, float* penetration = nullptr);
+	virtual list<Contact*> intersect(Collider* collider);
 };

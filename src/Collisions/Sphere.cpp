@@ -2,9 +2,9 @@
 
 #include "Sphere.h"
 
-Sphere::Sphere(Vector3D* center, float radius)
+Sphere::Sphere(RigidBody* rb, Vector3D* center, float radius)
 	:
-	Collider(center),
+	Collider(rb, center),
 	m_radius(radius)
 { }
 
@@ -21,18 +21,37 @@ to detect a collision bewteen two spheres
 
 @param sphere, the other sphere
 */
-bool Sphere::intersect(Collider* collider, Vector3D* direction, float* penetration)
+list<Contact*> Sphere::intersect(Collider* collider)
 {
+	list<Contact*> res = list<Contact*>();
+	
 	// The sphere can only intersect with spheres
 	if (instanceof<Sphere>(collider))
 	{
-		return intersect((Sphere*)collider);
+		Contact* contact = intersect((Sphere*)collider);
+		if(contact != nullptr) res.push_back(intersect((Sphere*)collider));
 	}
-	return false;
+	return res;
 }
 
-bool Sphere::intersect(Sphere* collider)
+Contact* Sphere::intersect(Sphere* collider)
 {
+	Contact* res = nullptr;
+
 	Vector3D direction = getPosition() - collider->getPosition();
-	return abs(direction.Norm()) < m_radius + collider->getRadius();
+	if (pow(direction.Norm(),2) < pow(m_radius + collider->getRadius(), 2))
+	{
+		Vector3D* normal = new Vector3D(direction);
+		normal->Normalize();
+
+		float penetration = m_radius + collider->getRadius() - direction.Norm();
+		
+		Vector3D* contact = new Vector3D(getPosition() - (*normal * m_radius));
+		res = new Contact(contact,
+			normal,
+			penetration,
+			getRigidBody(),
+			collider->getRigidBody());
+	}
+	return res;
 }

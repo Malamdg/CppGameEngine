@@ -121,6 +121,9 @@
     <ClCompile Include="src\Collisions\Box.cpp">
       <Filter>src\Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="src\Collisions\Contact.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -276,6 +279,9 @@
       <Filter>src\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="src\Collisions\Collider.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\Contact.h">
       <Filter>src\Collisions</Filter>
     </ClInclude>
   </ItemGroup>

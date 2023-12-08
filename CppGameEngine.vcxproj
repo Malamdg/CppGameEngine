@@ -106,6 +106,7 @@
   <ItemGroup>
     <ClCompile Include="src\Collisions\Box.cpp" />
     <ClCompile Include="src\Collisions\Collider.cpp" />
+    <ClCompile Include="src\Collisions\Contact.cpp" />
     <ClCompile Include="src\Collisions\Sphere.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -146,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="src\Collisions\Box.h" />
     <ClInclude Include="src\Collisions\Collider.h" />
+    <ClInclude Include="src\Collisions\Contact.h" />
     <ClInclude Include="src\Collisions\Plane.h" />
     <ClInclude Include="src\Collisions\Sphere.h" />
     <ClInclude Include="src\ofApp.h" />

@@ -18,7 +18,7 @@ public:
 	@param normal, the normal vector of the plane
  	@param center, the center of the plane
 	*/
-	Plane(Vector3D* normal, Vector3D* center);
+	Plane(RigidBody* rb, Vector3D* center, Vector3D* normal);
 
 	/* Class Destructor */
 	~Plane();
@@ -26,9 +26,9 @@ public:
 	/*
 	translate the plane
 
-	@param translation, vector to translate the plane
+	@param position, the new position of the plane
 	*/
-	virtual void translate(Vector3D* translation);
+	virtual void setPosition(Vector3D* position);
 
 	/*
 	rotate the plane
@@ -42,5 +42,5 @@ public:
 
 	@param Collider, the other Collider
 	*/
-	virtual bool intersect(Collider* Collider);
+	virtual list<Contact*> intersect(Collider* Collider);
 };

@@ -19,30 +19,27 @@ private:
  	Manage the intersection between the box and another box
 
   	@param collider, the other box colliding the box
-   	@param direction, the direction of the penetration
-    	@param penetration, the depth of the penetration
   	*/
-	bool intersection(Box* collider, Vector3D* direction, float* penetration);
+	list<Contact*> intersection(Box* collider);
 
 	/*
  	Manage the intersection between the box and a plane
 
   	@param collider, the plane colliding the box
-   	@param direction, the direction of the penetration
-    	@param penetration, the depth of the penetration
   	*/
-	bool intersection(Plane* collider, Vector3D* direction, float* penetration);
+	list<Contact*> intersection(Plane* collider);
 
 public:
 	/*
 	class constructor
 
+	@param rb, the rigidbody of the box
+	@param center, the center of the box
 	@param demiaxis1, the first demi - axis(with the top face)
 	@param demiaxis2, the second demi - axis(with the front face)
 	@param demiaxis3, third demi - axis(with the right face)
-	@param center, the center of the box
 	*/
-	Box(Vector3D* position, Vector3D* axe1, Vector3D* axe2, Vector3D* axe3);
+	Box(RigidBody* rb, Vector3D* center, Vector3D* axe1, Vector3D* axe2, Vector3D* axe3);
 
 	/* Class Destructor */
 	~Box();
@@ -89,5 +86,5 @@ public:
 
 	@param Collider, the other Collider
 	*/
-	bool intersect(Collider* collider, Vector3D* direction, float* penetration);
+	list<Contact*> intersect(Collider* collider);
 };
