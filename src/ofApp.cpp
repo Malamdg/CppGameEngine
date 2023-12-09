@@ -428,6 +428,7 @@ void ofApp::displayWindowTitle()
 
 	std::stringstream strm;
 	strm << " Objet : " << objectType << "     |     Initial Impulse : " << to_string(toggleImpulse) << "     |     Additional Force : " << forceType;
+	strm << "     |     octree leaves : " << octree.getLeaves().size();
 	strm << "     |     framerate : " << fps;
 	ofSetWindowTitle(strm.str());
 }

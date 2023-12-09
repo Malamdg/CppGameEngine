@@ -30,6 +30,8 @@ public:
 
     void draw();
 
+    list<OctreeNode*> getLeaves();
+
 private:
     OctreeNode* m_root;
 
@@ -42,4 +44,6 @@ private:
     void splitNode(OctreeNode* node);
 
     void draw(OctreeNode* node);
+
+    list<OctreeNode*> getLeaves(OctreeNode* node);
 };
