@@ -13,7 +13,7 @@ private:
 	/* the second demi-axis (with the top face) */
 	Vector3D* m_top;
 	/* the third demi-axis (with the front face) */
-	Vector3D* m_foward;
+	Vector3D* m_forward;
 
 	/*
  	Manage the intersection between the box and another box
@@ -28,6 +28,8 @@ private:
   	@param collider, the plane colliding the box
   	*/
 	list<Contact*> intersection(Plane* collider);
+
+	Vector3D* getAxes(Box* collider);
 
 public:
 	/*
@@ -80,6 +82,13 @@ public:
 	@return the i-th demi-axis
 	*/
 	Vector3D getAxis(int i);
+	
+	/*
+	to get the vertices of the box
+
+	@return the list of the verticies of the box
+	*/
+	Vector3D* getVertices()const;
 
 	/*
 	to detect a collision with another Collider
