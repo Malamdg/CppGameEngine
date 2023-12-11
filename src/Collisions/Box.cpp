@@ -78,13 +78,18 @@ Vector3D* Box::getVertices()const
 Vector3D* Box::getAxes(Box* collider)
 {
 	Vector3D* axes = new Vector3D[15];
+
+	// Axis for self faces
 	axes[0] = getAxis(0);
 	axes[1] = getAxis(1);
 	axes[2] = getAxis(2);
+
+	// Axis for collider faces
 	axes[3] = collider->getAxis(0);
 	axes[4] = collider->getAxis(1);
 	axes[5] = collider->getAxis(2);
 
+	// Edge-Edge axis
 	axes[6] = axes[0] * axes[3];
 	axes[7] = axes[0] * axes[4];
 	axes[8] = axes[0] * axes[5];
@@ -115,10 +120,12 @@ list<Contact*> Box::intersection(Box* collider)
 {
 	list<Contact*> res = list<Contact*>();
 	
-	Vector3D boxDir = getPosition() - collider->getPosition();
+	Vector3D toCenter = getPosition() - collider->getPosition();
+
+	float bestPenetration = FLT_MAX;
+	int bestCase = -1;
 
 	Vector3D contactNormal;
-	float minPenetration = FLT_MAX;
 	Vector3D contactPoint;
 
 	Vector3D* vertices = getVertices();
@@ -129,36 +136,77 @@ list<Contact*> Box::intersection(Box* collider)
 		float projection = axes[i].Norm();
 	}
 
-
-	for (int i = 0; i < 2; i++)
+	// On fait un test de collision pour les 15 axes de séparation
+	for (int i = 0; i < 14; i++)
 	{
-		Vector3D currentAxe = getAxis(i);
-		float projCA = currentAxe.Norm();
+		Vector3D& axis = axes[i];
 
-		currentAxe.Normalize();
+		// Projection of the boxes on the axis
+		float selfProject = transformToAxis(axis);
+		float colliderProject = collider->transformToAxis(axis);
 
-		float projDirection = abs(boxDir * currentAxe);
+		float distance = abs(toCenter * axis);
 
-		for (int j = 0; j < 2; j++)
+		float penetration = selfProject + colliderProject - distance;
+
+		// If no penetration, no collision data
+		if (penetration < 0) return res;
+		// Else we keep note of the best penetration and the index of its axis
+		if (penetration < bestPenetration)
 		{
-			Vector3D otherAxe = collider->getAxis(j);
-			float projOA = abs(otherAxe * currentAxe);
-
-			float currentPenetration = projCA + projOA - projDirection;
-			if (currentPenetration > 0)
-			{
-				if (currentPenetration < minPenetration)
-				{
-					minPenetration = currentPenetration;
-					
-					if(boxDir * otherAxe < 0) contactNormal = otherAxe * (- 1);
-					else contactNormal = otherAxe;
-
-					contactNormal.Normalize();
-				}
-			}
+			bestPenetration = penetration;
+			bestCase = i;
 		}
 	}
+
+	// Normale a la face dans le cadre d une collision face-vertex
+	Vector3D& normal = axes[bestCase];
+
+	// Si bestCase est compris entre 0 et 2, c est un contacte face-vertex, avec une face de la premiere boite
+	if (bestCase < 3)
+	{
+		// fillPointFaceBoxBox
+
+		if (normal * toCenter > 0)
+		{
+			normal = normal * -1;
+		}
+
+		Vector3D vertex = Vector3D(1, 1, 1);
+		if (collider->getAxis(0) * normal < 0) vertex.x(-1);
+		if (collider->getAxis(1) * normal < 0) vertex.y(-1);
+		if (collider->getAxis(2) * normal < 0) vertex.z(-1);
+
+		vertex =
+			collider->getAxis(0) * vertex.x() +
+			collider->getAxis(1) * vertex.y() +
+			collider->getAxis(2) * vertex.z();
+
+		Contact* contact = new Contact(&vertex, &normal, bestPenetration, getRigidBody(), collider->getRigidBody());
+		res.push_back(contact);
+	}
+	// Sinon, si bestCase est compris entre 3 et 5, c est un contacte face-vertex, avec une face de la deuxieme boite
+	else if (bestCase < 6)
+	{
+		if (normal * toCenter > 0)
+		{
+			normal = normal * -1;
+		}
+
+		Vector3D vertex = Vector3D(1, 1, 1);
+		if (getAxis(0) * normal < 0) vertex.x(-1);
+		if (getAxis(1) * normal < 0) vertex.y(-1);
+		if (getAxis(2) * normal < 0) vertex.z(-1);
+
+		vertex =
+			getAxis(0) * vertex.x() +
+			getAxis(1) * vertex.y() +
+			getAxis(2) * vertex.z();
+
+		Contact* contact = new Contact(&vertex, &normal, bestPenetration, collider->getRigidBody(), getRigidBody());
+		res.push_back(contact);
+	}
+	// Sinon c est un contact edge-edge
 
 	return res;
 }
@@ -168,3 +216,11 @@ list<Contact*> Box::intersection(Plane* collider)
 	return list<Contact*>();
 }
 
+float Box::transformToAxis(Vector3D& axis)
+{
+	Vector3D halfSize = Vector3D(m_right->Norm(), m_top->Norm(), m_forward->Norm());
+	return
+		halfSize.x()* abs(axis * getRight()) +
+		halfSize.y() * abs(axis * getTop()) +
+		halfSize.z() * abs(axis * getForward());
+}

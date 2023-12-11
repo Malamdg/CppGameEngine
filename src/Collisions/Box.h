@@ -31,6 +31,8 @@ private:
 
 	Vector3D* getAxes(Box* collider);
 
+	float transformToAxis(Vector3D& axis);
+
 public:
 	/*
 	class constructor
