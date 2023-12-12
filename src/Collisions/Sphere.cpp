@@ -2,7 +2,7 @@
 
 #include "Sphere.h"
 
-Sphere::Sphere(RigidBody* rb, Vector3D* center, float radius)
+Sphere::Sphere(RigidBody& rb, Vector3D& center, float radius)
 	:
 	Collider(rb, center),
 	m_radius(radius)

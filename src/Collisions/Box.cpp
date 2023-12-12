@@ -3,7 +3,7 @@
 #include "Box.h"
 #include <Matrix3.h>
 
-Box::Box(RigidBody* rb, Vector3D* center, Vector3D* axe1, Vector3D* axe2, Vector3D* axe3)
+Box::Box(RigidBody& rb, Vector3D& center, Vector3D* axe1, Vector3D* axe2, Vector3D* axe3)
 	:
 	Collider(rb, center),
 	m_right(axe1),

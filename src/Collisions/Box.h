@@ -48,7 +48,7 @@ public:
 	@param demiaxis2, the second demi - axis(with the front face)
 	@param demiaxis3, third demi - axis(with the right face)
 	*/
-	Box(RigidBody* rb, Vector3D* center, Vector3D* axe1, Vector3D* axe2, Vector3D* axe3);
+	Box(RigidBody& rb, Vector3D& center, Vector3D* axe1, Vector3D* axe2, Vector3D* axe3);
 
 	/* Class Destructor */
 	~Box();

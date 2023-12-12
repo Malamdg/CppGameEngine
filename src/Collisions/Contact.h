@@ -10,8 +10,8 @@ private:
 	Vector3D* m_contactPoint;
 	Vector3D* m_normal;
 	float m_penetration;
-	RigidBody* m_body1;
-	RigidBody* m_body2;
+	RigidBody& m_body1;
+	RigidBody& m_body2;
 	float m_restitution;
 	float m_friction;
 
@@ -43,8 +43,8 @@ public:
 	Contact(Vector3D* contactPosition,
 	Vector3D* normalContact,
 	float penetration,
-	RigidBody* body1,
-	RigidBody* body2);
+	RigidBody& body1,
+	RigidBody& body2);
 	/*
  	Class Destructor
   	*/
@@ -72,7 +72,7 @@ public:
  	@param i, the number of the RigidBody to get
 	@return the i-th RigidBody
   	*/
-	RigidBody* getBody(int i = 0) const;
+	RigidBody& getBody(int i = 0) const;
 
 	/*
  	To get the restitution coefficient

@@ -8,8 +8,8 @@
 class Collider
 {
 private:
-	Vector3D* m_center;
-	RigidBody* m_rigidbody;
+	Vector3D& m_center;
+	RigidBody& m_rigidbody;
 
 public:
 	/*
@@ -17,7 +17,7 @@ public:
 
 	@param center, the center of the collider
 	*/
-	Collider(RigidBody* rb, Vector3D* center);
+	Collider(RigidBody& rb, Vector3D& center);
 
 	/* Class Destructor */
 	~Collider();
@@ -54,7 +54,7 @@ public:
 
 	@return, the rigidbody of the collider
 	*/
-	RigidBody* getRigidBody();
+	RigidBody& getRigidBody();
 
 
 	/*
