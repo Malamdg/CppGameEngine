@@ -27,6 +27,8 @@ public:
 		return dynamic_cast<const Base*>(ptr) != nullptr;
 	}
 
+	void update();
+
 	/*
 	set the position of a collider
 
