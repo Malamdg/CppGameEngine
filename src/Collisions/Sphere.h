@@ -62,4 +62,5 @@ public:
 	*/
 	list<Contact*> intersect(Collider* collider);
 
+	void draw() override;
 };

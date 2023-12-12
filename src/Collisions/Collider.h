@@ -66,4 +66,6 @@ public:
 	@return a list of contacts
 	*/
 	virtual list<Contact*> intersect(Collider* collider);
+
+	virtual void draw();
 };

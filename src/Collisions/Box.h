@@ -123,4 +123,6 @@ public:
  	@return a list of contact
 	*/
 	list<Contact*> intersect(Collider* collider);
+
+	void draw() override;
 };

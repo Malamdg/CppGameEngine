@@ -310,3 +310,25 @@ Vector3D Box::getContactPoint(Vector3D& pOne, Vector3D& dOne, float oneSize, Vec
 		return cOne * .5f + cTwo * .5f;
 	}
 }
+
+void Box::draw()
+{
+	Vector3D boxSize(getAxis(0).Norm(), getAxis(1).Norm(), getAxis(2).Norm());
+
+	// Calcul de l'orientation de la box
+	Vector3D uA = getAxis(0).Normalized();
+	Vector3D uB = getAxis(1).Normalized();
+	Vector3D uC = getAxis(2).Normalized();
+
+	Matrix3 r(uA, uB, uC);
+	float aX = atan(r.at(3, 2) / r.at(3, 3));
+	float aY = asin(-1 * r.at(3, 1));
+	float aZ = atan(r.at(2, 1) / r.at(1, 1));
+	Quaternion boxOrientation = Quaternion::Euler(aX, aY, aZ);
+
+	ofBoxPrimitive boxPrimitive(boxSize.x(), boxSize.y(), boxSize.z());
+	boxPrimitive.setOrientation(boxOrientation.q());
+	boxPrimitive.setPosition(getRigidBody()->getPosition().v3());
+
+	boxPrimitive.drawWireframe();
+}
