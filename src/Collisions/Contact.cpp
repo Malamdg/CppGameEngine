@@ -36,13 +36,11 @@ RigidBody* Contact::getBody(int i) const
 float Contact::getRestitution() const { return m_restitution; }
 float Contact::getFriction() const { return m_friction; }
 
-float calculateRestitution()
+float Contact::calculateRestitution()
 {
-	//TODO
-	return 0;
+	return 0.7f;
 }
-float calculateFriction()
+float Contact::calculateFriction()
 {
-	//TODO
-	return 0;
+	return 0.7f;
 }
