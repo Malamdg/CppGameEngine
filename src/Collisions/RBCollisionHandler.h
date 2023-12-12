@@ -1,5 +1,6 @@
 #pragma once
 #include "RBCollision.h"
+#include "Octree.h"
 #include "../Forces/ForceRegistry.h"
 #include "../Forces/Friction.h"
 #include "../RigidBody.h"
