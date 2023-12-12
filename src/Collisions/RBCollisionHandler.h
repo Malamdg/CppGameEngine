@@ -3,6 +3,7 @@
 #include "../Forces/ForceRegistry.h"
 #include "../Forces/Friction.h"
 #include "../RigidBody.h"
+#include <Octree.h>
 
 class RBCollision;
 
