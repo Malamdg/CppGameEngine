@@ -45,9 +45,15 @@ void RBCollisionHandler::narrowCollision(float duration, ForceRegistry* forceReg
 	if (true)
 	{
 		// Compute the vector between both rigid bodies
-		Vector3D vectorBetweenParticles = (*rb1)->getPosition() - (*rb2)->getPosition();
-		float firstMass = (1 / (*rb1)->getInverseMass());
-		float secondMass = (1 / (*rb2)->getInverseMass());
+		Vector3D vectorBetweenParticles = rb1.getPosition() - rb2.getPosition();
+		// ADD GETRADIUS TO RIGIDBODY
+		float displacement = (rb1.getRadius()+rb2.getRadius()) - vectorBetweenParticles.Norm();
+		vectorBetweenParticles.Normalize();
+
+		Vector3D relativeVelocity = rb1.getVelocity() - rb2.getVelocity();
+
+		float firstMass = (1 / rb1.getInverseMass());
+		float secondMass = (1 / rb2.getInverseMass());
 
 		// Third Newton's law
 		float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
@@ -57,8 +63,8 @@ void RBCollisionHandler::narrowCollision(float duration, ForceRegistry* forceReg
 		Vector3D secondDisplacementVector = vectorBetweenParticles * secondDisplacement;
 
 		// This separate the two particles
-		(*firstParticle)->addPosition(firstDisplacementVector);
-		(*secondParticle)->addPosition(secondDisplacementVector);
+		rb1.addPosition(firstDisplacementVector);
+		rb2.addPosition(secondDisplacementVector);
 
 		// No rest contact if there is no static particle
 
@@ -67,8 +73,8 @@ void RBCollisionHandler::narrowCollision(float duration, ForceRegistry* forceReg
 		float secondK = (relativeVelocity * vectorBetweenParticles * ((*rb1)->getCoefficientRestitution() + 1)) / ((*rb1)->getInverseMass() + (*rb2)->getInverseMass());
 		Vector3D firstVelocityModifier = vectorBetweenParticles * (firstK * (*rb1)->getInverseMass());
 		Vector3D secondVelocityModifier = vectorBetweenParticles * (secondK * (*rb2)->getInverseMass());
-		(*rb1)->addVelocity(firstVelocityModifier * -1);
-		(*rb2)->addVelocity(secondVelocityModifier);
+		rb1.addVelocity(firstVelocityModifier * -1);
+		rb2.addVelocity(secondVelocityModifier);
 		
 
 		// Ajouter les deux particules dans m_collisionregistry
