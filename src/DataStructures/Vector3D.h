@@ -21,7 +21,17 @@ public:
 	@param z the depth
 	*/
 	Vector3D(const float x = 0, const float y = 0, const float z = 0, const float w = 0);
+
+	/*
+	class constructor
+
+	@param vector, a glm vec3
+	*/
 	Vector3D(glm::vec3 vector);
+
+	/*
+ 	Class Destructor
+ 	*/
 	~Vector3D();
 
 	/*
@@ -100,6 +110,14 @@ public:
 	*/
 	bool operator==(const Vector3D& vector) const;
 
+	/*
+	definition of operator =
+	allows to assign a vector to another
+
+	@param vector, the vector compared to assign
+
+	@return the vector updated
+	*/
 	Vector3D& operator=(const Vector3D vector);
 
 	/*
@@ -124,6 +142,11 @@ public:
 	*/
 	void Normalize();
 
+	/*
+	normalise a vector
+	
+ 	@return the vector normalized
+	*/
 	Vector3D& Normalized() const;
 
 	/*
