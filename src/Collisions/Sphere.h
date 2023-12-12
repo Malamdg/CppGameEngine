@@ -28,7 +28,7 @@ public:
 	@param radius, the radius of the sphere 
 	@param center, the point at the center of the sphere
 	*/
-	Sphere(RigidBody& rb, Vector3D& center, float radius);
+	Sphere(RigidBody* rb, Vector3D* center, float radius);
 
 	/* Class Destructor */
 	~Sphere();

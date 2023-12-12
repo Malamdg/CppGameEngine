@@ -22,9 +22,7 @@ RigidBody::RigidBody(list<pair<of3dPrimitive*, Vector3D>> primitives,
 	m_radius(radius),
 	m_frictionK1(frictionK1),
 	m_frictionK2(frictionK2),
-	m_coeffRestitutions(coeffRestitutions),
-	m_boxCollider(new Box(*this, getPosition(), new Vector3D(1, 0, 0), new Vector3D(0, 1, 0), new Vector3D(0, 0, 1))),
-	m_encompassingSphere(new Sphere(*this, getPosition(), 2))
+	m_coeffRestitutions(coeffRestitutions)
 {
 	m_centerMass = new ofSpherePrimitive();
 	m_centerMass->setRadius(.25);
@@ -53,9 +51,7 @@ RigidBody::RigidBody(RigidBody& rb)
 	m_frictionK1(rb.m_frictionK1),
 	m_frictionK2(rb.m_frictionK2),
 	m_coeffRestitutions(rb.m_coeffRestitutions),
-	m_invertedInertiaTensor(rb.m_invertedInertiaTensor),
-	m_boxCollider(rb.m_boxCollider),
-	m_encompassingSphere(rb.m_encompassingSphere)
+	m_invertedInertiaTensor(rb.m_invertedInertiaTensor)
 {
 	m_centerMass = new ofSpherePrimitive();
 	m_centerMass->setRadius(.25);

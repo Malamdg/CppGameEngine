@@ -4,8 +4,6 @@
 #include "DataStructures/Quaternion.h"
 #include "DataStructures/Matrix3.h"
 #include "DataStructures/Matrix4.h"
-#include <Sphere.h>
-#include <Box.h>
 
 class RigidBody
 {
@@ -40,9 +38,6 @@ private:
 
 	// When a collision occurs, the coefficient is used to know the amount of energy absorbed by the RigidBody (if coeff = 1, then nothing is absorbed)
 	float m_coeffRestitutions = 1;
-
-	Box* m_boxCollider;
-	Sphere* m_encompassingSphere;
 
 public:
 	
