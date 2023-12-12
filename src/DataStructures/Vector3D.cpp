@@ -110,6 +110,20 @@ void Vector3D::Normalize()
 	}
 }
 
+Vector3D& Vector3D::Normalized() const
+{
+	Vector3D res = *this;
+	if (!(res == Vector3D()))
+	{
+		float norm = res.Norm();
+		res.m_x /= norm;
+		res.m_y /= norm;
+		res.m_z /= norm;
+		res.fixFloat();
+	}
+	return res;
+}
+
 float Vector3D::distance(const Vector3D& vector)
 {
 	return (*this - vector).Norm();

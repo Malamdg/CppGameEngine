@@ -124,6 +124,8 @@ public:
 	*/
 	void Normalize();
 
+	Vector3D& Normalized() const;
+
 	/*
 	deistance between two vector
 	
