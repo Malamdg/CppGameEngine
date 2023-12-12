@@ -16,6 +16,8 @@ public:
 
 	GameObject(RigidBody* rigidBody, Box* boxCollider, Sphere* encompassingSphere);
 
+	~GameObject();
+
 	void update();
 
 	void draw();
