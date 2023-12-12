@@ -8,7 +8,7 @@ class GameObject
 {
 private:
 	RigidBody* m_rigidBody;
-	Box* m_boxCollider;
+	Collider* m_collider;
 	Sphere* m_encompassingSphere;
 
 public:
@@ -21,4 +21,8 @@ public:
 	void update();
 
 	void draw();
+
+	RigidBody* getRigidBody();
+	Collider* getCollider();
+	Sphere* getSphere();
 };
