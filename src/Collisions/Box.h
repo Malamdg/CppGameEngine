@@ -31,7 +31,12 @@ private:
 
 	Vector3D* getAxes(Box* collider);
 
+	// Project the box on the axis
 	float transformToAxis(Vector3D& axis);
+
+	// Return the point of contact in case of an edge-edge collision
+	Vector3D getContactPoint(Vector3D& pOne, Vector3D& dOne, float oneSize,
+		Vector3D& pTwo, Vector3D& dTwo, float twoSize, bool useOne);
 
 public:
 	/*

@@ -161,6 +161,8 @@ list<Contact*> Box::intersection(Box* collider)
 
 	// Normale a la face dans le cadre d une collision face-vertex
 	Vector3D& normal = axes[bestCase];
+	// Store the best axis-major, in case we run into almost parallel edge collisions later
+	int bestSingleAxis = bestCase;
 
 	// Si bestCase est compris entre 0 et 2, c est un contacte face-vertex, avec une face de la premiere boite
 	if (bestCase < 3)
@@ -184,11 +186,12 @@ list<Contact*> Box::intersection(Box* collider)
 
 		Contact* contact = new Contact(&vertex, &normal, bestPenetration, getRigidBody(), collider->getRigidBody());
 		res.push_back(contact);
+		return res;
 	}
 	// Sinon, si bestCase est compris entre 3 et 5, c est un contacte face-vertex, avec une face de la deuxieme boite
 	else if (bestCase < 6)
 	{
-		if (normal * toCenter > 0)
+		if (normal * (toCenter * -1) > 0)
 		{
 			normal = normal * -1;
 		}
@@ -205,8 +208,50 @@ list<Contact*> Box::intersection(Box* collider)
 
 		Contact* contact = new Contact(&vertex, &normal, bestPenetration, collider->getRigidBody(), getRigidBody());
 		res.push_back(contact);
+		return res;
 	}
 	// Sinon c est un contact edge-edge
+	else
+	{
+		bestCase -= 6;
+		int selfAxisIndex = bestCase / 3;
+		int colliderAxisIndex = bestCase % 3;
+		Vector3D& selfAxis = getAxis(selfAxisIndex);
+		Vector3D& colliderAxis = collider->getAxis(selfAxisIndex);
+		Vector3D axis = selfAxis ^ colliderAxis;
+		axis.Normalize();
+
+		if (axis * toCenter > 0) axis = axis * -1;
+
+		Vector3D ptOnSelfEdge = Vector3D(1, 1, 1);
+		Vector3D ptOnColliderEdge = Vector3D(1, 1, 1);
+		for (int i = 0; i < 3; i++)
+		{
+			if (i == selfAxisIndex) ptOnSelfEdge[i] = 0;
+			else if (getAxis(i) * axis > 0) ptOnSelfEdge[i] = -1;
+
+			if (i == colliderAxisIndex) ptOnColliderEdge[i] = 0;
+			else if (collider->getAxis(i) * axis < 0) ptOnColliderEdge[i] = -1;
+		}
+
+		ptOnSelfEdge = 
+			getAxis(0) * ptOnSelfEdge.x() +
+			getAxis(1) * ptOnSelfEdge.y() +
+			getAxis(2) * ptOnSelfEdge.z();
+		ptOnColliderEdge =
+			getAxis(0) * ptOnColliderEdge.x() +
+			getAxis(1) * ptOnColliderEdge.y() +
+			getAxis(2) * ptOnColliderEdge.z();
+
+		Vector3D vertex = getContactPoint(
+			ptOnSelfEdge, selfAxis, getAxis(selfAxisIndex).Norm(),
+			ptOnColliderEdge, colliderAxis, collider->getAxis(colliderAxisIndex).Norm(),
+			bestSingleAxis > 2);
+
+		Contact* contact = new Contact(&vertex, &axis, bestPenetration, getRigidBody(), collider->getRigidBody());
+		res.push_back(contact);
+		return res;
+	}
 
 	return res;
 }
@@ -223,4 +268,39 @@ float Box::transformToAxis(Vector3D& axis)
 		halfSize.x()* abs(axis * getRight()) +
 		halfSize.y() * abs(axis * getTop()) +
 		halfSize.z() * abs(axis * getForward());
+}
+
+Vector3D Box::getContactPoint(Vector3D& pOne, Vector3D& dOne, float oneSize, Vector3D& pTwo, Vector3D& dTwo, float twoSize, bool useOne)
+{
+	Vector3D toSt, cOne, cTwo;
+	float dpStaOne, dpStaTwo, dpOneTwo, smOne, smTwo;
+	float denom, mua, mub;
+
+	smOne = dOne.Norm2();
+	smTwo = dTwo.Norm2();
+	dpOneTwo = dTwo * dOne;
+
+	toSt = pOne - pTwo;
+	dpStaOne = dOne * toSt;
+	dpStaTwo = dTwo * toSt;
+
+	denom = smOne * smTwo - dpOneTwo * dpOneTwo;
+
+	if (abs(denom) < 10e-4) return useOne ? pOne : pTwo;
+
+	mua = (dpOneTwo * dpStaTwo - smTwo * dpStaOne) / denom;
+	mub = (smOne * dpStaTwo - dpOneTwo * dpStaOne) / denom;
+
+	if (mua > oneSize || mua < -oneSize ||
+		mub > twoSize || mub < -twoSize)
+	{
+		return useOne ? pOne : pTwo;
+	}
+	else
+	{
+		cOne = pOne + dOne * mua;
+		cTwo = pTwo + dTwo * mub;
+
+		return cOne * .5f + cTwo * .5f;
+	}
 }
