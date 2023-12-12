@@ -100,7 +100,7 @@ float Vector3D::Norm2()
 
 void Vector3D::Normalize()
 {
-	if(!(*this == Vector3D()))
+	if(Norm() != 0)
 	{
 		float norm = this->Norm();
 		m_x /= norm;
@@ -113,7 +113,7 @@ void Vector3D::Normalize()
 Vector3D& Vector3D::Normalized() const
 {
 	Vector3D res = *this;
-	if (!(res == Vector3D()))
+	if (res.Norm() != 0)
 	{
 		float norm = res.Norm();
 		res.m_x /= norm;
