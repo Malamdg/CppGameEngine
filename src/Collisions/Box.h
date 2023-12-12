@@ -75,6 +75,8 @@ public:
 		return dynamic_cast<const Base*>(ptr) != nullptr;
 	}
 
+	void update() override;
+
 	/*
 	rotate the box
 

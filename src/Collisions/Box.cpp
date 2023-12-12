@@ -18,6 +18,12 @@ Box::~Box()
 	delete m_forward;
 }
 
+void Box::update()
+{
+	setPosition(&getRigidBody()->getPosition());
+	setRotation(&getRigidBody()->getOrientation());
+}
+
 void Box::setRotation(Quaternion* rotation)
 {
 	Matrix3 rotationM = Matrix3::FromQuaternion(*rotation);

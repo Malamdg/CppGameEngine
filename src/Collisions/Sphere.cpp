@@ -11,6 +11,11 @@ Sphere::Sphere(RigidBody* rb, Vector3D* center, float radius)
 /* Class Destructor */
 Sphere::~Sphere() { }
 
+void Sphere::update()
+{
+	setPosition(&getRigidBody()->getPosition());
+}
+
 /* The sphere doesn't need to rotate */
 void Sphere::setRotation(Quaternion* rotation) {}
 
