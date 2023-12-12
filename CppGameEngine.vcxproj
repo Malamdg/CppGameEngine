@@ -111,6 +111,7 @@
     <ClCompile Include="src\Collisions\RBCollision.cpp" />
     <ClCompile Include="src\Collisions\RBCollisionHandler.cpp" />
     <ClCompile Include="src\Collisions\Sphere.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="src\Collisions\RBCollision.h" />
     <ClInclude Include="src\Collisions\RBCollisionHandler.h" />
     <ClInclude Include="src\Collisions\Sphere.h" />
+    <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.h" />
     <ClInclude Include="src\Addons\ofSkyBox\ofxCubeMap.h" />
