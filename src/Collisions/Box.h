@@ -19,6 +19,7 @@ private:
  	Manage the intersection between the box and another box
 
   	@param collider, the other box colliding the box
+   	@return a list of contact
   	*/
 	list<Contact*> intersection(Box* collider);
 
@@ -26,15 +27,31 @@ private:
  	Manage the intersection between the box and a plane
 
   	@param collider, the plane colliding the box
+   	@return a list of contact
   	*/
 	list<Contact*> intersection(Plane* collider);
 
+	/*
+ 	To get the Axes required for the collision
+
+  	@param collider, the box for the collision
+   	@return a list of the 15 useful axes to compute the collision
+  	*/
 	Vector3D* getAxes(Box* collider);
 
-	// Project the box on the axis
+	/*
+ 	To project the box on the axis
+
+	@param axis, the axis to project the box
+ 	@return the projection
+   	*/
 	float transformToAxis(Vector3D& axis);
 
-	// Return the point of contact in case of an edge-edge collision
+	/*
+ 	To return the point of contact in case of an edge-edge collision
+
+  	@return the point of contact
+  	*/
 	Vector3D getContactPoint(Vector3D& pOne, Vector3D& dOne, float oneSize,
 		Vector3D& pTwo, Vector3D& dTwo, float twoSize, bool useOne);
 
@@ -101,6 +118,7 @@ public:
 	to detect a collision with another Collider
 
 	@param Collider, the other Collider
+ 	@return a list of contact
 	*/
 	list<Contact*> intersect(Collider* collider);
 };
