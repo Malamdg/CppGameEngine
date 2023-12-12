@@ -21,4 +21,8 @@ public:
 	void update();
 
 	void draw();
+
+	RigidBody* getRigidBody();
+	Box* getCollider();
+	Sphere* getSphere();
 };
