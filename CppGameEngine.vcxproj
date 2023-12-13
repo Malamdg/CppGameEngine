@@ -108,7 +108,7 @@
     <ClCompile Include="src\Collisions\Collider.cpp" />
     <ClCompile Include="src\Collisions\Contact.cpp" />
     <ClCompile Include="src\Collisions\Octree.cpp" />
-    <ClCompile Include="src\Collisions\PLane.cpp" />
+    <ClCompile Include="src\Collisions\Plane.cpp" />
     <ClCompile Include="src\Collisions\RBCollisionHandler.cpp" />
     <ClCompile Include="src\Collisions\Sphere.cpp" />
     <ClCompile Include="src\GameObject.cpp" />

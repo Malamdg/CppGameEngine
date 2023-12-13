@@ -134,11 +134,17 @@ void ofApp::setup() {
 	rigidObjects[4] = guitar;
 
 	//Setup floor
-	list<pair<of3dPrimitive*, Vector3D>> floorPrimitive = list<pair<of3dPrimitive*, Vector3D>>
-	{
-		{new ofBoxPrimitive(floorWidth, .1, floorLength), Vector3D(0, 0, 0)}
-	};
-	RigidBody floorBody = RigidBody(floorPrimitive);
+	RigidBody* floorBody = new RigidBody(
+		{{new ofBoxPrimitive(floorWidth, .1, floorLength), Vector3D()}},
+		Vector3D(0,0,0),
+		Vector3D(), Quaternion::Identity(), Vector3D(), 0, 8.f
+	);
+
+	floor = new GameObject(
+		floorBody,
+		new Box(floorBody, floorBody->getPosition(), Vector3D(floorWidth / 1.5, .1, floorLength / 1.5)),
+		new Sphere(floorBody, floorBody->getPosition(), max(floorWidth, floorLength))
+	);
 
 	//Setup Physics
 	forceRegistry = new ForceRegistry();
@@ -149,6 +155,7 @@ void ofApp::setup() {
 	elasticZero = new Elastic(new Vector3D(), 60, 10, .8);
 
 	// Pseudo sol
+	/*
 	RigidBody* rb = new RigidBody(
 		{
 		{new ofBoxPrimitive(300, 2, 300), Vector3D()}}
@@ -158,6 +165,7 @@ void ofApp::setup() {
 		new Box(rb, rb->getPosition(), Vector3D(150, 1, 150)),
 		new Sphere(rb, rb->getPosition(), 150)
 	);
+	*/
 }
 
 //--------------------------------------------------------------
@@ -179,7 +187,7 @@ void ofApp::update() {
 			forceRegistry->add(go->getRigidBody(), gravity);
 			forceRegistry->add(go->getRigidBody(), airFriction);
 		}
-		octree.insert(pseudoSol);
+		octree.insert(floor);
 
 		Vector3D* attachPoint = new Vector3D(0, 0, 16);
 
@@ -189,7 +197,7 @@ void ofApp::update() {
 		forceRegistry->updateForces(duration);
 
 		for (GameObject* go : gameObjects) go->update();
-		pseudoSol->update();
+		floor->update();
 
 		collisionsHandler.handleCollision(duration, forceRegistry, &octree);
 	}
@@ -234,7 +242,7 @@ void ofApp::draw() {
 	{
 		go->draw(colors[cyan], drawCollider, drawOctree);
 	}
-	pseudoSol->draw(colors[cyan], drawCollider, drawOctree);
+	floor->draw(colors[cyan], drawCollider, drawOctree);
 
 	// display centers of mass above the primitives
 	ofDisableDepthTest();

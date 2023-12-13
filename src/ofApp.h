@@ -146,5 +146,5 @@ private:
 	RBCollisionHandler collisionsHandler;
 
 	// Pseudo sol
-	GameObject* pseudoSol;
+	// GameObject* pseudoSol;
 };

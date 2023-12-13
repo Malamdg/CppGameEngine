@@ -2,7 +2,6 @@
 
 #include "Collider.h"
 #include "Box.h"
-#include "Sphere.h"
 
 class Plane : public Collider
 {
@@ -10,15 +9,13 @@ class Plane : public Collider
 private:
 	/* The normal vector of the plane */
 	Vector3D m_normal;
-	/* The forward dimension of the plane */
-	Vector3D m_forward;
-	/* The right dimension of the plane */
-	Vector3D m_right;
+	/* The dimensions of the plane */
+	float m_width, m_length;
 
 	/*
 	Handle a collision with a box
 
-	@param Collider, the other Collider
+	@param box, the Box
 	*/
 	list<Contact*> intersection(Box* box);
 
