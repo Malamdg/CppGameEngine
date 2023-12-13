@@ -55,6 +55,7 @@ public :
 
 	@param duration, frame duration
 	@param forceRegistry, to add the forces generated
+ 	@param tree, the octree managing the collision
 	*/
 	void handleCollision(float duration, ForceRegistry* forceRegistry, Octree* tree);
 
