@@ -27,6 +27,9 @@ public:
 		return dynamic_cast<const Base*>(ptr) != nullptr;
 	}
 
+	/*
+ 	to update the collider's component
+ 	*/
 	virtual void update() {}
 
 	/*
@@ -67,5 +70,8 @@ public:
 	*/
 	virtual list<Contact*> intersect(Collider* collider);
 
+	/*
+ 	to draw the collider
+ 	*/ 
 	virtual void draw() {}
 };
