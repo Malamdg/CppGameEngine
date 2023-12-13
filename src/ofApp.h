@@ -70,6 +70,7 @@ private:
 	ofxTextField text9;
 	ofxTextField text10;
 	ofxTextField text11;
+	ofxTextField text12;
 
 	//Lights
 	ofLight directionalLight;
@@ -138,4 +139,7 @@ private:
 
 	// Collision
 	RBCollisionHandler collisionsHandler;
+
+	// Pseudo sol
+	GameObject* pseudoSol;
 };

@@ -23,6 +23,7 @@ void ofApp::setup() {
 	gui.add(text7.setup("Toggle Focus", "Clic gauche"));
 	gui.add(text10.setup("Toggle Octree", "O"));
 	gui.add(text11.setup("Toggle Colliders", "N"));
+	gui.add(text12.setup("Clear all objects", "Y"));
 
 	// Light
 	directionalLight.setDirectional();
@@ -134,7 +135,6 @@ void ofApp::setup() {
 	boxCollidersDimensions[4] = Vector3D(2.5, .5, 6.75);
 	encompassingSpheresRadius[4] = 7.5;
 
-
 	//Setup Physics
 	forceRegistry = new ForceRegistry();
 
@@ -142,6 +142,17 @@ void ofApp::setup() {
 	airFriction = new Friction(.1, .1);
 	springZero = new Spring(new Vector3D(), 20, 32, .8);
 	elasticZero = new Elastic(new Vector3D(), 60, 10, .8);
+
+	// Pseudo sol
+	RigidBody* rb = new RigidBody(
+		{
+		{new ofBoxPrimitive(300, 2, 300), Vector3D()}}
+	, Vector3D(0, -10, 0), Vector3D(), Quaternion::Identity(), Vector3D(), 0, 8.f);
+	pseudoSol = new GameObject(
+		rb,
+		new Box(rb, rb->getPosition(), Vector3D(150, 1, 150)),
+		new Sphere(rb, rb->getPosition(), 150)
+	);
 }
 
 //--------------------------------------------------------------
@@ -163,6 +174,7 @@ void ofApp::update() {
 			forceRegistry->add(go->getRigidBody(), gravity);
 			forceRegistry->add(go->getRigidBody(), airFriction);
 		}
+		octree.insert(pseudoSol);
 
 		Vector3D* attachPoint = new Vector3D(0, 0, 16);
 
@@ -172,6 +184,7 @@ void ofApp::update() {
 		forceRegistry->updateForces(duration);
 
 		for (GameObject* go : gameObjects) go->update();
+		pseudoSol->update();
 
 		collisionsHandler.handleCollision(duration, forceRegistry, &octree);
 	}
@@ -216,6 +229,7 @@ void ofApp::draw() {
 	{
 		go->draw(colors[cyan], drawCollider, drawOctree);
 	}
+	pseudoSol->draw(colors[cyan], drawCollider, drawOctree);
 
 	// display centers of mass above the primitives
 	ofDisableDepthTest();
@@ -224,7 +238,7 @@ void ofApp::draw() {
 		ofSetColor(colors[centerMass.second]);
 
 		// display primitive
-		centerMass.first->draw();
+		if (centerMass.first) centerMass.first->draw();
 	}
 	for (pair<of3dPrimitive*, int> impulse : impulses)
 	{
@@ -291,6 +305,12 @@ void ofApp::keyReleased(int key) {
 
 		case 'n':
 			drawCollider = !drawCollider;
+			break;
+
+		case 'y':
+			gameObjects.clear();
+			centersMass.emplace_front();
+			impulses.clear();
 			break;
 
 		case ' ': //Lauch RigidBody
