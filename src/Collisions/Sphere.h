@@ -28,7 +28,7 @@ public:
 	@param radius, the radius of the sphere 
 	@param center, the point at the center of the sphere
 	*/
-	Sphere(RigidBody* rb, Vector3D* center, float radius);
+	Sphere(RigidBody* rb, Vector3D center, float radius);
 
 	/* Class Destructor */
 	~Sphere();
@@ -45,7 +45,7 @@ public:
 
 	@param rotation, the rotation applied to get the new orientation
 	*/
-	void setRotation(Quaternion* rotation);
+	void setRotation(Quaternion rotation) override;
 
 
 	/*

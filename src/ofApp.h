@@ -17,7 +17,7 @@
 #include "DataStructures/Vector3D.h"
 #include "DataStructures/Quaternion.h"
 #include "Particle.h"
-#include "RigidBody.h"
+#include "GameObject.h"
 #include "Tests/Tests.h"
 #include "Octree.h"
 
@@ -119,13 +119,16 @@ private:
 	list<RigidBody*> rbWithElastic = list<RigidBody*>();
 	int forceMode = 0;
 
-	RigidBody* lastLaunched;
+	//RigidBody* lastLaunched;
 
 	// System boolean
 	bool pause = false;
 	bool drawGrid = true;
 	bool toggleImpulse = true;
 	bool drawOctree = false;
+
+	// GameObjects
+	list<GameObject*> gameObjects;
 
 	// Octree
 	Octree octree;

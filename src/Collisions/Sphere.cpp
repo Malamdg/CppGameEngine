@@ -2,7 +2,7 @@
 
 #include "Sphere.h"
 
-Sphere::Sphere(RigidBody* rb, Vector3D* center, float radius)
+Sphere::Sphere(RigidBody* rb, Vector3D center, float radius)
 	:
 	Collider(rb, center),
 	m_radius(radius)
@@ -13,11 +13,11 @@ Sphere::~Sphere() { }
 
 void Sphere::update()
 {
-	setPosition(&getRigidBody()->getPosition());
+	setPosition(getRigidBody()->getPosition());
 }
 
 /* The sphere doesn't need to rotate */
-void Sphere::setRotation(Quaternion* rotation) {}
+void Sphere::setRotation(Quaternion rotation) {}
 
 float Sphere::getRadius() { return m_radius; }
 
@@ -66,6 +66,8 @@ void Sphere::draw()
 	ofSpherePrimitive spherePrimitive;
 	spherePrimitive.setRadius(getRadius());
 	spherePrimitive.setPosition(getPosition().v3());
+
+	cout << getPosition().toString() << endl;
 
 	spherePrimitive.drawWireframe();
 }

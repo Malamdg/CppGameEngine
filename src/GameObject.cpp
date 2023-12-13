@@ -2,8 +2,8 @@
 
 GameObject::GameObject() :
 	m_rigidBody(new RigidBody()),
-	m_collider(new Box(m_rigidBody, &m_rigidBody->getPosition(), new Vector3D(1, 0, 0), new Vector3D(0, 1, 0), new Vector3D(0, 0, 1))),
-	m_encompassingSphere(new Sphere(m_rigidBody, &m_rigidBody->getPosition(), 2))
+	m_collider(new Box(m_rigidBody, m_rigidBody->getPosition(), Vector3D(1, 0, 0), Vector3D(0, 1, 0), Vector3D(0, 0, 1))),
+	m_encompassingSphere(new Sphere(m_rigidBody, m_rigidBody->getPosition(), 2))
 {}
 
 GameObject::GameObject(RigidBody* rigidBody, Box* boxCollider, Sphere* encompassingSphere) :
@@ -39,6 +39,13 @@ void GameObject::draw(ofColor color)
 
 	ofSetColor(0, 255, 0);
 	m_encompassingSphere->draw();
+}
+
+void GameObject::setPosition(Vector3D position)
+{
+	m_rigidBody->setPosition(position);
+	m_collider->setPosition(position);
+	m_encompassingSphere->setPosition(position);
 }
 
 RigidBody* GameObject::getRigidBody() { return m_rigidBody; }

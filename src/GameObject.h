@@ -22,6 +22,8 @@ public:
 
 	void draw(ofColor color);
 
+	void setPosition(Vector3D position);
+
 	RigidBody* getRigidBody();
 	Collider* getCollider();
 	Sphere* getSphere();

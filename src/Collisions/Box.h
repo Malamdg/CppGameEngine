@@ -9,11 +9,11 @@ class Box : public Collider
 private:
 
 	/* the first demi-axis (with the right fac) */
-	Vector3D* m_right;
+	Vector3D m_right;
 	/* the second demi-axis (with the top face) */
-	Vector3D* m_top;
+	Vector3D m_top;
 	/* the third demi-axis (with the front face) */
-	Vector3D* m_forward;
+	Vector3D m_forward;
 
 	/*
  	Manage the intersection between the box and another box
@@ -65,7 +65,7 @@ public:
 	@param demiaxis2, the second demi - axis(with the front face)
 	@param demiaxis3, third demi - axis(with the right face)
 	*/
-	Box(RigidBody* rb, Vector3D* center, Vector3D* axe1, Vector3D* axe2, Vector3D* axe3);
+	Box(RigidBody* rb, Vector3D center, Vector3D axe1, Vector3D axe2, Vector3D axe3);
 
 	/* Class Destructor */
 	~Box();
@@ -82,7 +82,7 @@ public:
 
 	@param rotation, a quaternion ot rotate the box
 	*/
-	void setRotation(Quaternion* rotation);
+	void setRotation(Quaternion rotation) override;
 
 	/*
 	to get the right demi-axis
