@@ -1,19 +1,19 @@
 #include "Octree.h"
 
-void Octree::insert(RigidBody* rb) {
+void Octree::insert(GameObject* rb) {
     insertRecursive(m_root, rb);
 }
 
-void Octree::insertRecursive(OctreeNode* node, RigidBody* rb) {
+void Octree::insertRecursive(OctreeNode* node, GameObject* rb) {
     // If the rigidbody is outside the node's bounding box, ignore it
-    if (!rigidBodyInNode(node, rb)) return;
+    if (!gameObjectInNode(node, rb)) return;
 
     // If the node is a leaf, insert the point
     if (node->children[0] == nullptr) {
-        node->rbs.push_back(rb);
+        node->gameObjects.push_back(rb);
 
         // Split the node if it has too many points (you can adjust this threshold)
-        if (node->rbs.size() > m_maxCount) {
+        if (node->gameObjects.size() > m_maxCount) {
             splitNode(node);
         }
     }
@@ -25,44 +25,29 @@ void Octree::insertRecursive(OctreeNode* node, RigidBody* rb) {
     }
 }
 
-bool Octree::rigidBodyInNode(OctreeNode* node, const RigidBody* rb)
+bool Octree::gameObjectInNode(OctreeNode* node, GameObject* rb)
 {
-    Vector3D position = rb->getPosition();
+    Sphere* encompassingSphere = rb->getSphere();
+    Vector3D position = encompassingSphere->getPosition();
 
-    Vector3D halfAxisRight = Vector3D(10, 0, 0);
-    Vector3D halfAxisTop = Vector3D(0, 10, 0);
-    Vector3D halfAxisForward = Vector3D(0, 0, 10);
+    float nodeDimension = node->max.x() - node->min.x();
+    Vector3D nodeCenter = node->min + Vector3D(nodeDimension / 2, nodeDimension / 2, nodeDimension / 2);
 
-    // TODO : Use the vector of the collision box to get the 8 corners
-    // The current points are arbitrarily fixed at a certain distance from the object center
+    // Get the point on the surface of the sphere closest to the center of the node
+    Vector3D sphereToNode = nodeCenter - encompassingSphere->getPosition();
+    sphereToNode.Normalize();
+    sphereToNode = sphereToNode * encompassingSphere->getRadius();
+    Vector3D closestPoint = encompassingSphere->getPosition() + sphereToNode;
 
-    Vector3D corners[8] =
+    // If the point is in the node, we return true
+    if (closestPoint.x() > node->min.x() && closestPoint.x() < node->max.x() &&
+        closestPoint.y() > node->min.y() && closestPoint.y() < node->max.y() &&
+        closestPoint.z() > node->min.z() && closestPoint.z() < node->max.z())
     {
-        ((position + halfAxisRight) + halfAxisTop) + halfAxisForward,
-        ((position + halfAxisRight) + halfAxisTop) - halfAxisForward,
-        ((position + halfAxisRight) - halfAxisTop) + halfAxisForward,
-        ((position + halfAxisRight) - halfAxisTop) - halfAxisForward,
-        ((position - halfAxisRight) + halfAxisTop) + halfAxisForward,
-        ((position - halfAxisRight) + halfAxisTop) - halfAxisForward,
-        ((position - halfAxisRight) - halfAxisTop) + halfAxisForward,
-        ((position - halfAxisRight) - halfAxisTop) - halfAxisForward,
-    };
-
-    for (Vector3D corner : corners)
-    {
-        // If the corner isn't in the node, we skip the end of the for loop
-        if (corner.x() < node->min.x() || corner.x() > node->max.x() ||
-            corner.y() < node->min.y() || corner.y() > node->max.y() ||
-            corner.z() < node->min.z() || corner.z() > node->max.z())
-        {
-            continue;
-        }
-
-        // else, we return true because the object is at least partially in the node
         return true;
     }
-
-    // If no corner was found in the node, we return false
+    
+    // else we return false
     return false;
 }
 

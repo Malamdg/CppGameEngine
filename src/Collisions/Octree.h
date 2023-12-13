@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Vector3D.h"
-#include "RigidBody.h"
+#include "GameObject.h"
 
 // Node structure for the octree
 struct OctreeNode {
     Vector3D min, max;
-    list<RigidBody*> rbs;
+    list<GameObject*> gameObjects;
     // There is 8 children because we are in 3D
     OctreeNode* children[8];
 
@@ -41,7 +41,7 @@ public:
 
     @param rb, the RigidBody to add
     */
-    void insert(RigidBody* rb);
+    void insert(GameObject* rb);
 
     /*
     To draw the octree
@@ -57,7 +57,7 @@ private:
     @param node, the node where the RigidBody is added
     @param rb, the RigidBody to add
     */
-    void insertRecursive(OctreeNode* node, RigidBody* rb);
+    void insertRecursive(OctreeNode* node, GameObject* rb);
 
     /*
     Function to determine if a RigidBody is in a node
@@ -66,7 +66,7 @@ private:
     @param rb, the RigidBody to check
     @return true if the rigidbody is in the node
     */
-    bool rigidBodyInNode(OctreeNode* node, const RigidBody* rb);
+    bool gameObjectInNode(OctreeNode* node, GameObject* rb);
 
     /*
     Function to split the node in eight
