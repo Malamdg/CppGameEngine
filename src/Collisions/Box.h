@@ -75,6 +75,9 @@ public:
 		return dynamic_cast<const Base*>(ptr) != nullptr;
 	}
 
+	/*
+ 	update the box position and rotation according to the rigodbody's movement
+ 	*/
 	void update() override;
 
 	/*
@@ -124,5 +127,8 @@ public:
 	*/
 	list<Contact*> intersect(Collider* collider) override;
 
+	/*
+ 	To draw the box
+ 	*/
 	void draw() override;
 };
