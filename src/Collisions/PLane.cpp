@@ -53,7 +53,7 @@ list<Contact*> Plane::intersection(Box* box)
 		point = vertex - point;
 
 		if (t <= 0) {
-			contact = new Contact(&vertex, &m_normal, t, box->getRigidBody(), getRigidBody());
+			contact = new Contact(&vertex, &m_normal, abs(t), box->getRigidBody(), getRigidBody());
 		}
 	}
 
