@@ -64,6 +64,7 @@ Contact* Sphere::intersection(Sphere* collider)
 void Sphere::draw()
 {
 	ofSpherePrimitive spherePrimitive;
+	spherePrimitive.setResolution(8);
 	spherePrimitive.setRadius(getRadius());
 	spherePrimitive.setPosition(getPosition().v3()); 
 

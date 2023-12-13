@@ -67,6 +67,8 @@ public:
 	*/
 	Box(RigidBody* rb, Vector3D center, Vector3D axe1, Vector3D axe2, Vector3D axe3);
 
+	Box(RigidBody* rb, Vector3D center, Vector3D dimension);
+
 	/* Class Destructor */
 	~Box();
 

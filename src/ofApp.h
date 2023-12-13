@@ -120,8 +120,6 @@ private:
 	list<RigidBody*> rbWithElastic = list<RigidBody*>();
 	int forceMode = 0;
 
-	//RigidBody* lastLaunched;
-
 	// System boolean
 	bool pause = false;
 	bool drawGrid = true;
@@ -131,6 +129,9 @@ private:
 	// GameObjects
 	list<GameObject*> gameObjects;
 	bool drawCollider = false;
+
+	Vector3D* boxCollidersDimensions;
+	float* encompassingSpheresRadius;
 
 	// Octree
 	Octree octree;
