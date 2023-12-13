@@ -114,9 +114,32 @@ void Octree::draw(OctreeNode* node)
         return;
     }
 
-    // else we draw it's children
+    // else we draw its children
     for (OctreeNode* child : node->children)
     {
         draw(child);
     }
+}
+
+list<OctreeNode*> Octree::getLeaves()
+{
+    return getLeaves(m_root);
+}
+
+list<OctreeNode*> Octree::getLeaves(OctreeNode* node)
+{
+    list<OctreeNode*> leaves = list<OctreeNode*>();
+    // If node is a leaf
+    if (node->children[0] == nullptr) {
+        // Then we return it
+        leaves.push_back(node);
+        return leaves;
+    }
+
+    // Else add children's leaves to node's
+    for (OctreeNode* child : node->children) {
+        leaves.merge(getLeaves(child));
+    }
+
+    return leaves;
 }

@@ -48,6 +48,8 @@ public:
     */
     void draw();
 
+    list<OctreeNode*> getLeaves();
+
 private:
     OctreeNode* m_root;
 
@@ -79,4 +81,6 @@ private:
     To draw the octree
     */
     void draw(OctreeNode* node);
+
+    list<OctreeNode*> getLeaves(OctreeNode* node);
 };
