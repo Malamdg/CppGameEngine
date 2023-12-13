@@ -104,7 +104,14 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Collisions\Box.cpp" />
+    <ClCompile Include="src\Collisions\Collider.cpp" />
+    <ClCompile Include="src\Collisions\Contact.cpp" />
     <ClCompile Include="src\Collisions\Octree.cpp" />
+    <ClCompile Include="src\Collisions\RBCollision.cpp" />
+    <ClCompile Include="src\Collisions\RBCollisionHandler.cpp" />
+    <ClCompile Include="src\Collisions\Sphere.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.cpp" />
@@ -129,7 +136,6 @@
     <ClCompile Include="src\Forces\Spring.cpp" />
     <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\RigidBody.cpp" />
-    <ClCompile Include="src\Tests.cpp" />
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxBaseGui.cpp" />
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxButton.cpp" />
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxColorPicker.cpp" />
@@ -140,9 +146,22 @@
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp" />
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp" />
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp" />
+    <ClCompile Include="src\Tests\Tests.cpp" />
+    <ClCompile Include="src\Tests\TestsMatrix3.cpp" />
+    <ClCompile Include="src\Tests\TestsMatrix4.cpp" />
+    <ClCompile Include="src\Tests\TestsQuaternion.cpp" />
+    <ClCompile Include="src\Tests\TestsVector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Collisions\Box.h" />
+    <ClInclude Include="src\Collisions\Collider.h" />
+    <ClInclude Include="src\Collisions\Contact.h" />
     <ClInclude Include="src\Collisions\Octree.h" />
+    <ClInclude Include="src\Collisions\Plane.h" />
+    <ClInclude Include="src\Collisions\RBCollision.h" />
+    <ClInclude Include="src\Collisions\RBCollisionHandler.h" />
+    <ClInclude Include="src\Collisions\Sphere.h" />
+    <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Addons\ofFirstPersonCamera\ofxFirstPersonCamera.h" />
     <ClInclude Include="src\Addons\ofSkyBox\ofxCubeMap.h" />
@@ -166,7 +185,6 @@
     <ClInclude Include="src\Forces\Spring.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\RigidBody.h" />
-    <ClInclude Include="src\Tests.h" />
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h" />
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h" />
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxColorPicker.h" />
@@ -179,6 +197,11 @@
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h" />
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h" />
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h" />
+    <ClInclude Include="src\Tests\Tests.h" />
+    <ClInclude Include="src\Tests\TestsMatrix3.h" />
+    <ClInclude Include="src\Tests\TestsMatrix4.h" />
+    <ClInclude Include="src\Tests\TestsQuaternion.h" />
+    <ClInclude Include="src\Tests\TestsVector3D.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

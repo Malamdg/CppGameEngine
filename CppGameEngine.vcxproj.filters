@@ -73,9 +73,6 @@
     <ClCompile Include="src\RigidBody.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Tests.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -115,6 +112,42 @@
     <ClCompile Include="src\Collisions\Octree.cpp">
       <Filter>src\Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="src\Tests\Tests.cpp">
+      <Filter>src\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tests\TestsMatrix3.cpp">
+      <Filter>src\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tests\TestsMatrix4.cpp">
+      <Filter>src\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tests\TestsQuaternion.cpp">
+      <Filter>src\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tests\TestsVector3D.cpp">
+      <Filter>src\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\Box.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\Collider.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\RBCollision.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\RBCollisionHandler.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\Sphere.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collisions\Contact.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -146,6 +179,9 @@
     </Filter>
     <Filter Include="addons\ofxGui\src">
       <UniqueIdentifier>{4A512064--F34-7-4E-6F-A-D41-EA77136317C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Tests">
+      <UniqueIdentifier>{1306bb11-cdd4-4691-8ca9-11e99b22bcd8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -218,9 +254,6 @@
     <ClInclude Include="src\RigidBody.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Tests.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\ofApp.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -262,6 +295,45 @@
     </ClInclude>
     <ClInclude Include="src\Collisions\Octree.h">
       <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tests\Tests.h">
+      <Filter>src\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tests\TestsMatrix3.h">
+      <Filter>src\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tests\TestsMatrix4.h">
+      <Filter>src\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tests\TestsQuaternion.h">
+      <Filter>src\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Tests\TestsVector3D.h">
+      <Filter>src\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\Box.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\Collider.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\Plane.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\RBCollision.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\RBCollisionHandler.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\Sphere.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collisions\Contact.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
