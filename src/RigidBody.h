@@ -175,6 +175,8 @@ public:
 	*/
 	void addPosition(Vector3D position);
 
+	Quaternion getOrientation();
+
 	/*
 	get the Acceleration of the RigidBody
 
