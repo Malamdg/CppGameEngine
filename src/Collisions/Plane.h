@@ -35,6 +35,11 @@ public:
 	*/
 	virtual void setPosition(Vector3D position);
 
+	/*
+	to get the normal of a plane
+
+	@return the normal of the plane
+	*/
 	Vector3D getNormal();
 
 	/*
