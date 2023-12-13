@@ -1,10 +1,10 @@
 #pragma once
-#include "RBCollision.h"
 #include "Octree.h"
 #include "../Forces/ForceRegistry.h"
 #include "../Forces/Friction.h"
 #include "../RigidBody.h"
 #include <Octree.h>
+#include <GameObject.h>
 
 class RBCollision;
 
@@ -14,13 +14,11 @@ public :
 	/*
 	Definition of the struct CollisionRegistration
 
-	rb1, the first RigidBody
-	rb2, the second RigidBody
+	contact, a collision's contact
 	*/
 	struct CollisionRegistration
 	{
-		RigidBody* rb1;
-		RigidBody* rb2;
+		Contact* contact;
 	};
 
 	/*
@@ -35,7 +33,7 @@ public :
 
 	Dynamic table of CollisionRegistration to keep potential collision
 	*/
-	typedef std::vector<RigidBody> Registry;
+	typedef list<GameObject*> Registry;
 
 	/*
 	Constructor
@@ -53,7 +51,7 @@ public :
 	@param duration, frame duration
 	@param forceRegistry, to add the forces generated
 	*/
-	void handleCollision(float duration, ForceRegistry* forceRegistry);
+	void handleCollision(float duration, ForceRegistry* forceRegistry, Octree* tree);
 
 	/*
  	To manage collision with sphere
@@ -61,7 +59,7 @@ public :
 	@param duration, frame duration
 	@param forceRegistry, to add the forces generated
  	*/
-	void wideCollision(float duration, ForceRegistry* forceRegistry);
+	void broadPhase(float duration, ForceRegistry* forceRegistry);
 
 	/*
 	To manage narrow collision with bounding boxes
@@ -69,26 +67,22 @@ public :
 	@param duration, frame duration
 	@param forceRegistry, to add the forces generated
 	*/
-	void narrowCollision(float duration, ForceRegistry* forceRegistry, RigidBody* rb1, RigidBody* rb2);
-
-	/*
-	To create a Registry from a box of the octree
-	*/
-	void generateRegistry();
-
+	void narrowPhase(float duration, ForceRegistry* forceRegistry, GameObject* go1, GameObject* go2);
 
 	/*
 	To create a Registry from a box of the octree
 
-	@param rb1, the first RigidBody
-	@param rb2, the second RigidBody
+	@param rb1, the first GameObject
+	@param rb2, the second GameObject
 	*/
-	void addcollision(RigidBody* rb1, RigidBody* rb2);
+	void addcollision(Contact* contact);
+
+	void computeCollision(float duration, ForceRegistry* forceRegistry);
 
 private:
 	Registry m_registry;
 
-	RegistryCollision m_collisionregistry;
+	list<pair<GameObject*, GameObject*>> m_pairs;
 
-	Octree m_octree;
+	RegistryCollision m_collisionregistry;
 };

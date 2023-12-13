@@ -1,11 +1,10 @@
 #include "RBCollisionHandler.h"
-#include 'Sphere.h'
-#include 'Box.h'
 
 RBCollisionHandler::RBCollisionHandler()
 {
-	// Create and instanciate the octree
-
+	m_registry = Registry();
+	m_collisionregistry = RegistryCollision();
+	m_pairs = list<pair<GameObject*, GameObject*>>();
 }
 
 RBCollisionHandler::~RBCollisionHandler()
@@ -13,87 +12,60 @@ RBCollisionHandler::~RBCollisionHandler()
 
 }
 
-void RBCollisionHandler::wideCollision(float duration, ForceRegistry* forceRegistry)
+void RBCollisionHandler::broadPhase(float duration, ForceRegistry* forceRegistry)
 {
-	// Attention: il ne faut pas appliquer la collision 2x (rb1xrb2 et rb2xrb1)
-	for (RigidBody rb1 : m_registry)
-	{
-		//Sphere sph1 = Sphere(rb1, rb1.getPointWorldPosition(), rb1.getRadius());
 
-		// A MODIFIER : BALAYER POUR AVOIR TOUT SAUF LE rb1
-		for (RigidBody rb2 : m_registry)
+	for (auto i = m_registry.begin(); i != m_registry.end(); i++)
+	{
+		GameObject* go1 = *i;
+		Sphere* sph1 = go1->getSphere();
+
+		for (auto j = i; j != m_registry.end(); j++)
 		{
-			// Sphere sph2 = Sphere(rb2, rb2.getPointWorldPosition(), rb2.getRadius());
-			// list<Contact*> contacts = sph1.intersect(sph2)
-			
+			if (j == i) continue;
+
+			GameObject* go2 = *j;
+
+			pair<GameObject*, GameObject*> m_pair1 = pair<GameObject*, GameObject*>(go1, go2);
+			pair<GameObject*, GameObject*> m_pair2 = pair<GameObject*, GameObject*>(go2, go1);
+
+			auto f1 = find(m_pairs.begin(), m_pairs.end(), m_pair1);
+			auto f2 = find(m_pairs.begin(), m_pairs.end(), m_pair2);
+
+			if (!(f1 == m_pairs.end() && f2 == m_pairs.end())) continue;
+
+			m_pairs.push_back(m_pair1);
+
+			Sphere* sph2 = go2->getSphere();
+			list<Contact*> contacts = sph1->intersect(sph2);
+
 			// test intesection of encompassing sphere
-			// si contacts est vide...
-			if (true)
+			if (!contacts.empty())
 			{
-				narrowCollision(duration, forceRegistry, &rb1, &rb2);
+				narrowPhase(duration, forceRegistry, go1, go2);
 			}
 		}
 	}
 }
 
-void RBCollisionHandler::narrowCollision(float duration, ForceRegistry* forceRegistry, RigidBody* rb1, RigidBody* rb2)
+void RBCollisionHandler::narrowPhase(float duration, ForceRegistry* forceRegistry, GameObject* go1, GameObject* go2)
 {
-	// Box box1 = Box(rb1, rb1.getPointWorldPosition(), Vector3D* axe1, Vector3D* axe2, Vector3D* axe3);
-	// Box box2 = Box(rb2, rb2.getPointWorldPosition(), Vector3D* axe1, Vector3D* axe2, Vector3D* axe3);
-	
+	Collider* collider1 = go1->getCollider();
+	Collider* collider2 = go2->getCollider();
+	list<Contact*> contacts = collider1->intersect(collider2);
+
 	// test intesection of bounding boxes
-	if (true)
+	for (Contact* contact : contacts)
 	{
-		// Compute the vector between both rigid bodies
-		Vector3D vectorBetweenParticles = rb1.getPosition() - rb2.getPosition();
-		// ADD GETRADIUS TO RIGIDBODY
-		float displacement = (rb1.getRadius()+rb2.getRadius()) - vectorBetweenParticles.Norm();
-		vectorBetweenParticles.Normalize();
-
-		Vector3D relativeVelocity = rb1.getVelocity() - rb2.getVelocity();
-
-		float firstMass = (1 / rb1.getInverseMass());
-		float secondMass = (1 / rb2.getInverseMass());
-
-		// Third Newton's law
-		float firstDisplacement = secondMass / (firstMass + secondMass) * displacement;
-		float secondDisplacement = -1 * firstMass / (firstMass + secondMass) * displacement;
-
-		Vector3D firstDisplacementVector = vectorBetweenParticles * firstDisplacement;
-		Vector3D secondDisplacementVector = vectorBetweenParticles * secondDisplacement;
-
-		// This separate the two particles
-		rb1.addPosition(firstDisplacementVector);
-		rb2.addPosition(secondDisplacementVector);
-
-		// No rest contact if there is no static particle
-
-		// Impulsions
-		float firstK = (relativeVelocity * vectorBetweenParticles * ((*rb2)->getCoefficientRestitution() + 1)) / ((*rb1)->getInverseMass() + (*rb2)->getInverseMass());
-		float secondK = (relativeVelocity * vectorBetweenParticles * ((*rb1)->getCoefficientRestitution() + 1)) / ((*rb1)->getInverseMass() + (*rb2)->getInverseMass());
-		Vector3D firstVelocityModifier = vectorBetweenParticles * (firstK * (*rb1)->getInverseMass());
-		Vector3D secondVelocityModifier = vectorBetweenParticles * (secondK * (*rb2)->getInverseMass());
-		rb1.addVelocity(firstVelocityModifier * -1);
-		rb2.addVelocity(secondVelocityModifier);
-		
-
-		// Ajouter les deux particules dans m_collisionregistry
-		addcollision(rb1, rb2);
+		addcollision(contact);
 	}
 }
 
 
-void RBCollisionHandler::generateRegistry()
-{
-	// parcourir la box conisérée dans l'octree et collecter les RigidBody dedans
-}
-
-
-void RBCollisionHandler::addcollision(RigidBody* rb1, RigidBody* rb2)
+void RBCollisionHandler::addcollision(Contact* contact)
 {
 	CollisionRegistration collisionRegistration;
-	collisionRegistration.rb1 = rb1;
-	collisionRegistration.rb2 = rb2;
+	collisionRegistration.contact = contact;
 	m_collisionregistry.push_back(collisionRegistration);
 }
 
@@ -108,14 +80,86 @@ Pour chaque box de l'octree, on créé un registry (generateRegistry) puis on y ef
 		4 - Génération de collisions (phase restreinte) boîte-plan
 		si collision
 			5 - Résolution des Collisions
+			Vider le registre
 */
-void RBCollisionHandler::handleCollision(float duration, ForceRegistry* forceRegistry)
+void RBCollisionHandler::handleCollision(float duration, ForceRegistry* forceRegistry, Octree* tree)
 {
-	// Create the Octree
+	m_pairs.clear();
 
 	// Apply Octree
+	list<OctreeNode*> leaves = tree->getLeaves();
+	for (OctreeNode* leave : leaves)
+	{
+		m_registry = leave->gameObjects;
 
-	// Loop for each box in the octree
+		broadPhase(duration, forceRegistry);
+	}
 
-	// Penser à supprimer les octrees à la fin
+	computeCollision(duration, forceRegistry);
+}
+
+void RBCollisionHandler::computeCollision(float duration, ForceRegistry* forceRegistry)
+{
+	for (CollisionRegistration collision : m_collisionregistry)
+	{
+		Contact* contact = collision.contact;
+
+		RigidBody* rb1 = contact->getBody(0);
+		RigidBody* rb2 = contact->getBody(1);
+
+		Vector3D normal = *contact->getNormal();
+		Vector3D point = *contact->getContactPoint();
+		float penetration = contact->getPenetration();
+		float restitution = contact->getRestitution();
+		float friction = contact->getFriction();
+
+		//Compute the 2 normals
+		Vector3D n1 = normal;
+		Vector3D n2 = normal;
+
+		Vector3D direction = point - rb1->getPosition();
+		if (direction * normal > 0) n1 = n1 * -1;
+		else n2 = n2 * -1;
+
+		float accelerationProj1 = rb1->getAcceleration() * normal;
+		float accelerationProj2 = rb2->getAcceleration() * normal;
+
+		float velocityProj1 = rb1->getVelocity() * normal;
+		float velocityProj2 = rb2->getVelocity() * normal;
+
+		if (rb1->getInverseMass() == 0 && rb2->getInverseMass() == 0) continue;
+		else if (rb1->getInverseMass() == 0) rb2->addPosition(n2 * penetration);
+		else if (rb2->getInverseMass() == 0) rb1->addPosition(n1 * penetration);
+		else
+		{
+			float mass1 = 1 / rb1->getInverseMass();
+			float mass2 = 1 / rb2->getInverseMass();
+
+			float firstDisplacement = mass2 / (mass1 + mass2) * penetration;
+			float secondDisplacement = mass1 / (mass1 + mass2) * penetration;
+
+			Vector3D firstDisplacementVector = n1 * firstDisplacement;
+			Vector3D secondDisplacementVector = n2 * secondDisplacement;
+
+			rb1->addPosition(firstDisplacementVector);
+			rb2->addPosition(secondDisplacementVector);
+		}
+
+		Vector3D relativeVelocity = rb1->getVelocity() - rb2->getVelocity();
+
+		//compute of impulse's amplitude
+		float amp = relativeVelocity.Norm() * restitution;
+
+		//Friction
+		Friction* f = new Friction(friction, friction);
+
+		//Adding impulsion if not a resting contact
+		if(!(abs(accelerationProj1 * duration) > abs(velocityProj1))) rb1->addForce(n1 * amp, point);
+		else forceRegistry->add(rb1, f);
+
+		if (!(abs(accelerationProj2 * duration) > abs(velocityProj2))) rb2->addForce(n2 * amp, point);
+		else forceRegistry->add(rb2, f);
+	}
+
+	m_collisionregistry.clear();
 }
