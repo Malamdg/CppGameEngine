@@ -54,6 +54,11 @@ void RBCollisionHandler::narrowPhase(float duration, ForceRegistry* forceRegistr
 	Collider* collider2 = go2->getCollider();
 	list<Contact*> contacts = collider1->intersect(collider2);
 
+	// Collisions are handled from the box
+	if (instanceof<Box>(collider2) && instanceof<Plane>(collider1)) {
+		list<Contact*> contacts = collider2->intersect(collider1);
+	}
+
 	// test intesection of bounding boxes
 	for (Contact* contact : contacts)
 	{

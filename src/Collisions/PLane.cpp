@@ -14,8 +14,19 @@ Plane::Plane(RigidBody* rb, Vector3D center, Vector3D* normal, float width, floa
 
 Plane::~Plane() {}
 
+void Plane::update()
+{
+	setPosition(m_rigidbody->getPosition());
+	rotate(&m_rigidbody->getOrientation());
+}
+
 void Plane::setPosition(Vector3D position) {
 	Collider::setPosition(position);
+}
+
+Vector3D Plane::getNormal()
+{
+	return m_normal;
 }
 
 void Plane::rotate(Quaternion* rotation)
@@ -29,33 +40,30 @@ void Plane::rotate(Quaternion* rotation)
 
 list<Contact*> Plane::intersect(Collider* collider)
 {
-	if (instanceof<Box>(collider))
-	{
-		return intersection((Box*)collider);
-	}
 	return list<Contact*>();
 }
 
-list<Contact*> Plane::intersection(Box* box) 
+void Plane::draw()
 {
-	list<Contact*> contacts = list<Contact*>();
-	Contact* contact;
-	Vector3D* vertices = box->getVertices();
-	Vector3D vertex, point;
-	float t;
+	ofBoxPrimitive boxPrimitive(m_width, .1, m_length);
+	boxPrimitive.setOrientation(getRigidBody()->getOrientation().q());
+	boxPrimitive.setPosition(getPosition().v3());
 
-	for (int i = 0; i < 8; i++) {
-		vertex = vertices[i];
+	boxPrimitive.drawWireframe();
 
-		point = vertex - m_center;
-		t = m_normal * point;
-		point = m_normal * t;
-		point = vertex - point;
-
-		if (t <= 0) {
-			contact = new Contact(&vertex, &m_normal, abs(t), box->getRigidBody(), getRigidBody());
-		}
-	}
-
-	return contacts;
+	ofCylinderPrimitive cylinderPrimitive = ofCylinderPrimitive();
+	cylinderPrimitive.setRadius(.2f);
+	cylinderPrimitive.setHeight(10.f);
+	cylinderPrimitive.setOrientation(getRigidBody()->getOrientation().q());
+	cylinderPrimitive.setPosition((getPosition() + Vector3D(0, 5)).v3());
+	
+	cylinderPrimitive.draw();
+	
+	ofConePrimitive conePrimitive = ofConePrimitive();
+	conePrimitive.setRadius(.5f);
+	conePrimitive.setHeight(-.8f);
+	conePrimitive.setOrientation(getRigidBody()->getOrientation().q());
+	conePrimitive.setPosition((getPosition() + Vector3D(0, 10)).v3()); 
+	
+	conePrimitive.draw();
 }

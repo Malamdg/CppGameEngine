@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Collider.h"
-#include "Box.h"
 
 class Plane : public Collider
 {
@@ -11,13 +10,6 @@ private:
 	Vector3D m_normal;
 	/* The dimensions of the plane */
 	float m_width, m_length;
-
-	/*
-	Handle a collision with a box
-
-	@param box, the Box
-	*/
-	list<Contact*> intersection(Box* box);
 
 public:
 	/*
@@ -32,11 +24,18 @@ public:
 	~Plane();
 
 	/*
+	update the plane position and rotation according to the rigodbody's movement
+	*/
+	void update() override;
+
+	/*
 	translate the plane
 
 	@param position, the new position of the plane
 	*/
 	virtual void setPosition(Vector3D position);
+
+	Vector3D getNormal();
 
 	/*
 	rotate the plane
@@ -51,4 +50,9 @@ public:
 	@param Collider, the other Collider
 	*/
 	virtual list<Contact*> intersect(Collider* Collider) override;	
+
+	/*
+	to draw the collider
+	*/
+	virtual void draw() override;
 };

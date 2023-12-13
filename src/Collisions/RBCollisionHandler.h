@@ -45,6 +45,11 @@ public :
 	*/
 	~RBCollisionHandler();
 
+	template<typename Base, typename T>
+	inline bool instanceof(const T* ptr) {
+		return dynamic_cast<const Base*>(ptr) != nullptr;
+	}
+
 	/*
 	To manage the collision of all RigidBodies
 

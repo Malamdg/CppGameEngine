@@ -142,8 +142,8 @@ void ofApp::setup() {
 
 	floor = new GameObject(
 		floorBody,
-		new Box(floorBody, floorBody->getPosition(), Vector3D(floorWidth / 1.5, .1, floorLength / 1.5)),
-		new Sphere(floorBody, floorBody->getPosition(), max(floorWidth, floorLength))
+		new Plane(floorBody, floorBody->getPosition(), new Vector3D(0,1,0), floorWidth, floorLength),
+		new Sphere(floorBody, floorBody->getPosition(), sqrt(floorWidth* floorWidth + floorLength* floorLength)/2)
 	);
 
 	//Setup Physics

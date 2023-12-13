@@ -2,6 +2,7 @@
 
 #include <RigidBody.h>
 #include <Box.h>
+#include <Plane.h>
 #include <Sphere.h>
 
 class GameObject
@@ -24,7 +25,7 @@ public:
      	@param boxCollider, the box collider associated to the rigid body
       	@param encompassingSphere, the sphere encompassing the rigid body
   	*/
-	GameObject(RigidBody* rigidBody, Box* boxCollider, Sphere* encompassingSphere);
+	GameObject(RigidBody* rigidBody, Collider* boxCollider, Sphere* encompassingSphere);
 
 	/*
  	Class Destructor
