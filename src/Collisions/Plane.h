@@ -10,6 +10,12 @@ class Plane : public Collider
 private:
 	/* The normal vector of the plane */
 	Vector3D* m_normal;
+	/* The center of the plane */
+	Vector3D m_center;
+	/* The forward dimension of the plane */
+	Vector3D m_forwardVector;
+	/* The right dimension of the plane */
+	Vector3D m_rightVector;
 
 public:
 	/*
