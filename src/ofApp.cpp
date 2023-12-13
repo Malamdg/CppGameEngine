@@ -22,6 +22,7 @@ void ofApp::setup() {
 	gui.add(text6.setup("Toggle FullScreen", "F"));
 	gui.add(text7.setup("Toggle Focus", "Clic gauche"));
 	gui.add(text10.setup("Toggle Octree", "O"));
+	gui.add(text11.setup("Toggle Colliders", "N"));
 
 	// Light
 	directionalLight.setDirectional();
@@ -201,7 +202,7 @@ void ofApp::draw() {
 
 	for (GameObject* go : gameObjects)
 	{
-		go->draw(colors[cyan]);
+		go->draw(colors[cyan], drawCollider, drawOctree);
 	}
 
 	// display centers of mass above the primitives
@@ -274,6 +275,10 @@ void ofApp::keyReleased(int key) {
 
 		case 'o':
 			drawOctree = !drawOctree;
+			break;
+
+		case 'n':
+			drawCollider = !drawCollider;
 			break;
 
 		case ' ': //Lauch RigidBody

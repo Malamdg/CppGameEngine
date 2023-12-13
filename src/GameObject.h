@@ -20,7 +20,7 @@ public:
 
 	void update();
 
-	void draw(ofColor color);
+	void draw(ofColor color = ofColor(0, 255, 255), bool drawCollider = false, bool drawSphere = false);
 
 	void setPosition(Vector3D position);
 

@@ -130,6 +130,7 @@ private:
 
 	// GameObjects
 	list<GameObject*> gameObjects;
+	bool drawCollider = false;
 
 	// Octree
 	Octree octree;

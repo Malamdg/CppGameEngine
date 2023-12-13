@@ -65,7 +65,7 @@ void Sphere::draw()
 {
 	ofSpherePrimitive spherePrimitive;
 	spherePrimitive.setRadius(getRadius());
-	spherePrimitive.setPosition(getPosition().v3());
+	spherePrimitive.setPosition(getPosition().v3()); 
 
 	spherePrimitive.drawWireframe();
 }
