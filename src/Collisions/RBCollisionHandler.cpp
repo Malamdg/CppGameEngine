@@ -141,25 +141,26 @@ void RBCollisionHandler::computeCollision(float duration, ForceRegistry* forceRe
 			Vector3D firstDisplacementVector = n1 * firstDisplacement;
 			Vector3D secondDisplacementVector = n2 * secondDisplacement;
 
-			cout << rb1->getPosition().toString() << endl;
 			rb1->addPosition(firstDisplacementVector);
-			cout << rb1->getPosition().toString() << endl;
 			rb2->addPosition(secondDisplacementVector);
 		}
 
 		Vector3D relativeVelocity = rb1->getVelocity() - rb2->getVelocity();
 
 		//compute of impulse's amplitude
-		float amp = relativeVelocity.Norm()* restitution;
+		float amp = relativeVelocity.Norm()* restitution * 100;
 
 		//Friction
 		Friction* f = new Friction(friction, friction);
 
+		Vector3D imp1 = n1 * amp;
+		Vector3D imp2 = n2 * amp;
+
 		//Adding impulsion if not a resting contact
-		if (!(abs(accelerationProj1 * duration) > abs(velocityProj1))) rb1->addVelocity(n1 * amp);//rb1->addForce(n1 * amp, point);
+		if (!(abs(accelerationProj1 * duration) > abs(velocityProj1))) rb1->addForce(imp1, point);
 		else forceRegistry->add(rb1, f);
 
-		if (!(abs(accelerationProj2 * duration) > abs(velocityProj2))) rb2->addVelocity(n2 * amp);//rb2->addForce(n2 * amp, point);
+		if (!(abs(accelerationProj2 * duration) > abs(velocityProj2))) rb2->addForce(imp2, point);
 		else forceRegistry->add(rb2, f);
 	}
 
