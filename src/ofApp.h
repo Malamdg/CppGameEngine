@@ -68,6 +68,7 @@ private:
 	ofxTextField text8;
 	ofxTextField text9;
 	ofxTextField text10;
+	ofxTextField text11;
 
 	//Lights
 	ofLight directionalLight;
