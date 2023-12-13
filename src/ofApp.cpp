@@ -121,6 +121,12 @@ void ofApp::setup() {
 	RigidBody guitar = RigidBody(guitarPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), .5, 4.f);
 	rigidObjects[4] = guitar;
 
+	//Setup floor
+	list<pair<of3dPrimitive*, Vector3D>> floorPrimitive = list<pair<of3dPrimitive*, Vector3D>>
+	{
+		{new ofBoxPrimitive(floorWidth, .1, floorLength), Vector3D(0, 0, 0)}
+	};
+	RigidBody floorBody = RigidBody(floorPrimitive);
 
 	//Setup Physics
 	forceRegistry = new ForceRegistry();

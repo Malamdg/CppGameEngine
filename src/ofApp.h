@@ -131,6 +131,11 @@ private:
 	// GameObjects
 	list<GameObject*> gameObjects;
 
+	// Floor
+	GameObject* floor;
+	float floorWidth = 400;
+	float floorLength = 500;
+
 	// Octree
 	Octree octree;
 
