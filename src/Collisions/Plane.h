@@ -9,13 +9,18 @@ class Plane : public Collider
 
 private:
 	/* The normal vector of the plane */
-	Vector3D* m_normal;
-	/* The center of the plane */
-	Vector3D m_center;
+	Vector3D m_normal;
 	/* The forward dimension of the plane */
-	Vector3D m_forwardVector;
+	Vector3D m_forward;
 	/* The right dimension of the plane */
-	Vector3D m_rightVector;
+	Vector3D m_right;
+
+	/*
+	Handle a collision with a box
+
+	@param Collider, the other Collider
+	*/
+	list<Contact*> intersection(Box* box);
 
 public:
 	/*
@@ -24,7 +29,7 @@ public:
 	@param normal, the normal vector of the plane
  	@param center, the center of the plane
 	*/
-	Plane(RigidBody* rb, Vector3D* center, Vector3D* normal);
+	Plane(RigidBody* rb, Vector3D center, Vector3D* normal, float width, float length);
 
 	/* Class Destructor */
 	~Plane();
@@ -34,7 +39,7 @@ public:
 
 	@param position, the new position of the plane
 	*/
-	virtual void setPosition(Vector3D* position);
+	virtual void setPosition(Vector3D position);
 
 	/*
 	rotate the plane
@@ -48,5 +53,5 @@ public:
 
 	@param Collider, the other Collider
 	*/
-	virtual list<Contact*> intersect(Collider* Collider) override;
+	virtual list<Contact*> intersect(Collider* Collider) override;	
 };
