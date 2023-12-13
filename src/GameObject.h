@@ -36,12 +36,12 @@ public:
  	*/
 	void update();
 
-    /*
-    To draw the GameObject
-
-    @param color, the color for the dipslay
-    */
-    void draw(ofColor color = ofColor(0, 255, 255), bool drawCollider = false, bool drawSphere = false);
+    	/*
+   	To draw the GameObject
+	
+	@param color, the color for the dipslay
+	*/
+	void draw(ofColor color = ofColor(0, 255, 255), bool drawCollider = false, bool drawSphere = false);
 
 	/*
  	To set the position of the GameObject
