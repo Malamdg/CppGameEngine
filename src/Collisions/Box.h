@@ -120,5 +120,5 @@ public:
 	@param Collider, the other Collider
  	@return a list of contact
 	*/
-	list<Contact*> intersect(Collider* collider);
+	list<Contact*> intersect(Collider* collider) override;
 };

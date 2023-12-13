@@ -108,7 +108,6 @@
     <ClCompile Include="src\Collisions\Collider.cpp" />
     <ClCompile Include="src\Collisions\Contact.cpp" />
     <ClCompile Include="src\Collisions\Octree.cpp" />
-    <ClCompile Include="src\Collisions\RBCollision.cpp" />
     <ClCompile Include="src\Collisions\RBCollisionHandler.cpp" />
     <ClCompile Include="src\Collisions\Sphere.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
@@ -158,7 +157,6 @@
     <ClInclude Include="src\Collisions\Contact.h" />
     <ClInclude Include="src\Collisions\Octree.h" />
     <ClInclude Include="src\Collisions\Plane.h" />
-    <ClInclude Include="src\Collisions\RBCollision.h" />
     <ClInclude Include="src\Collisions\RBCollisionHandler.h" />
     <ClInclude Include="src\Collisions\Sphere.h" />
     <ClInclude Include="src\GameObject.h" />

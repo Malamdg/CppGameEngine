@@ -133,9 +133,6 @@
     <ClCompile Include="src\Collisions\Collider.cpp">
       <Filter>src\Collisions</Filter>
     </ClCompile>
-    <ClCompile Include="src\Collisions\RBCollision.cpp">
-      <Filter>src\Collisions</Filter>
-    </ClCompile>
     <ClCompile Include="src\Collisions\RBCollisionHandler.cpp">
       <Filter>src\Collisions</Filter>
     </ClCompile>
@@ -318,9 +315,6 @@
       <Filter>src\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="src\Collisions\Plane.h">
-      <Filter>src\Collisions</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Collisions\RBCollision.h">
       <Filter>src\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="src\Collisions\RBCollisionHandler.h">

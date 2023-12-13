@@ -18,7 +18,7 @@ private:
 	@param collider, the other sphere
 	@return true if there is a collision
 	*/
-	Contact* intersect(Sphere* collider);
+	Contact* intersection(Sphere* collider);
 
 public:
 	/*
@@ -58,6 +58,6 @@ public:
 
 	@param Collider, the other Collider
 	*/
-	list<Contact*> intersect(Collider* collider);
+	list<Contact*> intersect(Collider* collider) override;
 
 };

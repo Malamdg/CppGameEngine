@@ -42,5 +42,5 @@ public:
 
 	@param Collider, the other Collider
 	*/
-	virtual list<Contact*> intersect(Collider* Collider);
+	virtual list<Contact*> intersect(Collider* Collider) override;
 };

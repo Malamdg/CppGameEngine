@@ -28,13 +28,13 @@ list<Contact*> Sphere::intersect(Collider* collider)
 	// The sphere can only intersect with spheres
 	if (instanceof<Sphere>(collider))
 	{
-		Contact* contact = intersect((Sphere*)collider);
-		if(contact != nullptr) res.push_back(intersect((Sphere*)collider));
+		Contact* contact = intersection((Sphere*)collider);
+		if(contact != nullptr) res.push_back(contact);
 	}
 	return res;
 }
 
-Contact* Sphere::intersect(Sphere* collider)
+Contact* Sphere::intersection(Sphere* collider)
 {
 	Contact* res = nullptr;
 
