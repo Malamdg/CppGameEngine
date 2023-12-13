@@ -48,9 +48,17 @@ public:
     */
     void draw();
 
+    /*
+    to get the leaves of the curent octree's root
+
+    @return a list of the leaves of the root
+    */
     list<OctreeNode*> getLeaves();
 
 private:
+    /*
+    the first node
+    */
     OctreeNode* m_root;
 
     /*
@@ -82,5 +90,10 @@ private:
     */
     void draw(OctreeNode* node);
 
+     /*
+    to get the leaves of the specified octree's node
+
+    @return a list of the leaves of the specified node
+    */
     list<OctreeNode*> getLeaves(OctreeNode* node);
 };
