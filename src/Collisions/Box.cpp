@@ -292,9 +292,9 @@ float Box::transformToAxis(Vector3D& axis)
 {
 	Vector3D halfSize = Vector3D(m_right.Norm(), m_top.Norm(), m_forward.Norm());
 	return
-		halfSize.x()* abs(axis * getRight()) +
-		halfSize.y() * abs(axis * getTop()) +
-		halfSize.z() * abs(axis * getForward());
+		halfSize.x() * abs(axis * getRight().Normalized()) +
+		halfSize.y() * abs(axis * getTop().Normalized()) +
+		halfSize.z() * abs(axis * getForward().Normalized());
 }
 
 Vector3D Box::getContactPoint(Vector3D& pOne, Vector3D& dOne, float oneSize, Vector3D& pTwo, Vector3D& dTwo, float twoSize, bool useOne)
@@ -325,10 +325,15 @@ Vector3D Box::getContactPoint(Vector3D& pOne, Vector3D& dOne, float oneSize, Vec
 	}
 	else
 	{
-		cOne = pOne + dOne * mua;
-		cTwo = pTwo + dTwo * mub;
+		cOne = dOne * mua;
+		cOne = pOne + cOne;
+		cTwo = dTwo * mub;
+		cTwo = pTwo + cTwo;
 
-		return cOne * .5f + cTwo * .5f;
+		Vector3D res = cOne + cTwo;
+		res = res * .5f;
+
+		return res;
 	}
 }
 
