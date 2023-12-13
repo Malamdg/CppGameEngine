@@ -73,10 +73,10 @@ void Octree::splitNode(OctreeNode* node) {
     }
 
     // Distribute points to the children
-    for (const auto& point : node->rbs) {
+    for (const auto& point : node->gameObjects) {
         insertRecursive(node, point);
     }
-    node->rbs.clear();
+    node->gameObjects.clear();
 }
 
 void Octree::draw()

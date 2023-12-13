@@ -3,7 +3,7 @@
 #include "Box.h"
 #include <Matrix3.h>
 
-Box::Box(RigidBody* rb, Vector3D* center, Vector3D* axe1, Vector3D* axe2, Vector3D* axe3)
+Box::Box(RigidBody* rb, Vector3D center, Vector3D axe1, Vector3D axe2, Vector3D axe3)
 	:
 	Collider(rb, center),
 	m_right(axe1),
@@ -11,30 +11,43 @@ Box::Box(RigidBody* rb, Vector3D* center, Vector3D* axe1, Vector3D* axe2, Vector
 	m_forward(axe3)
 {}
 
-Box::~Box()
-{
-	delete m_right;
-	delete m_top;
-	delete m_forward;
-}
+Box::~Box() {}
 
 void Box::update()
 {
-	setPosition(&getRigidBody()->getPosition());
-	setRotation(&getRigidBody()->getOrientation());
+	setPosition(getRigidBody()->getPosition());
+	setRotation(getRigidBody()->getOrientation());
 }
 
-void Box::setRotation(Quaternion* rotation)
+void Box::setRotation(Quaternion rotation)
 {
-	Matrix3 rotationM = Matrix3::FromQuaternion(*rotation);
-	*m_right = rotationM * *m_right;
-	*m_top = rotationM * *m_top;
-	*m_forward = rotationM * *m_forward;
+	float normRight = m_right.Norm();
+	float normTop = m_top.Norm();
+	float normForward = m_forward.Norm();
+
+	// Allignement des axes avec le repère
+	m_right = Vector3D(m_right.Norm(), 0, 0);
+	m_top = Vector3D(0, m_top.Norm(), 0);
+	m_forward = Vector3D(0, 0, m_forward.Norm());
+
+	Matrix3 rotationM = Matrix3::FromQuaternion(rotation);
+	m_right = rotationM * m_right;
+	m_top = rotationM * m_top;
+	m_forward = rotationM * m_forward;
+
+	// Normalize and extend to norn to guaranty that the float do not mess up the sizes
+	m_right.Normalize();
+	m_top.Normalize();
+	m_forward.Normalize();
+
+	m_right = m_right * normRight;
+	m_top = m_top * normTop;
+	m_forward = m_forward * normForward;
 }
 
-Vector3D Box::getRight() { return *m_right; }
-Vector3D Box::getTop() { return *m_top; }
-Vector3D Box::getForward() { return *m_forward; }
+Vector3D Box::getRight() { return m_right; }
+Vector3D Box::getTop() { return m_top; }
+Vector3D Box::getForward() { return m_forward; }
 Vector3D Box::getAxis(int i) 
 {
 	if (i == 0) return getRight();
@@ -47,37 +60,45 @@ Vector3D* Box::getVertices()const
 {
 	Vector3D* vertices = new Vector3D[8];
 
-	vertices[0] = (*m_right);
-	vertices[0] = vertices[0] + (*m_top);
-	vertices[0] = vertices[0] + (*m_forward);
+	vertices[0] = m_right;
+	vertices[0] = vertices[0] + m_top;
+	vertices[0] = vertices[0] + m_forward;
+	vertices[0] = vertices[0] + m_center;
 
-	vertices[1] = (*m_right) * -1;
-	vertices[1] = vertices[1] + (*m_top);
-	vertices[1] = vertices[1] + (*m_forward);
+	vertices[1] = m_right * -1;
+	vertices[1] = vertices[1] + m_top;
+	vertices[1] = vertices[1] + m_forward;
+	vertices[1] = vertices[1] + m_center;
 
-	vertices[2] = (*m_right);
-	vertices[2] = vertices[2] + (*m_top) * -1;
-	vertices[2] = vertices[2] + (*m_forward);
+	vertices[2] = m_right;
+	vertices[2] = vertices[2] + m_top * -1;
+	vertices[2] = vertices[2] + m_forward;
+	vertices[2] = vertices[2] + m_center;
 
-	vertices[3] = (*m_right);
-	vertices[3] = vertices[3] + (*m_top);
-	vertices[3] = vertices[3] + (*m_forward) * -1;
+	vertices[3] = m_right;
+	vertices[3] = vertices[3] + m_top;
+	vertices[3] = vertices[3] + m_forward * -1;
+	vertices[3] = vertices[3] + m_center;
 
-	vertices[4] = (*m_right) * -1;
-	vertices[4] = vertices[4] + (*m_top) * -1;
-	vertices[4] = vertices[4] + (*m_forward);
+	vertices[4] = m_right * -1;
+	vertices[4] = vertices[4] + m_top * -1;
+	vertices[4] = vertices[4] + m_forward;
+	vertices[4] = vertices[4] + m_center;
 
-	vertices[5] = (*m_right) * -1;
-	vertices[5] = vertices[5] + (*m_top);
-	vertices[5] = vertices[5] + (*m_forward) * -1;
+	vertices[5] = m_right * -1;
+	vertices[5] = vertices[5] + m_top;
+	vertices[5] = vertices[5] + m_forward * -1;
+	vertices[5] = vertices[5] + m_center;
 
-	vertices[6] = (*m_right);
-	vertices[6] = vertices[6] + (*m_top) * -1;
-	vertices[6] = vertices[6] + (*m_forward) * -1;
+	vertices[6] = m_right;
+	vertices[6] = vertices[6] + m_top * -1;
+	vertices[6] = vertices[6] + m_forward * -1;
+	vertices[6] = vertices[6] + m_center;
 
-	vertices[7] = (*m_right) * -1;
-	vertices[7] = vertices[7] + (*m_top) * -1;
-	vertices[7] = vertices[7] + (*m_forward) * -1;
+	vertices[7] = m_right * -1;
+	vertices[7] = vertices[7] + m_top * -1;
+	vertices[7] = vertices[7] + m_forward * -1;
+	vertices[7] = vertices[7] + m_center;
 
 	return vertices;
 }
@@ -269,7 +290,7 @@ list<Contact*> Box::intersection(Plane* collider)
 
 float Box::transformToAxis(Vector3D& axis)
 {
-	Vector3D halfSize = Vector3D(m_right->Norm(), m_top->Norm(), m_forward->Norm());
+	Vector3D halfSize = Vector3D(m_right.Norm(), m_top.Norm(), m_forward.Norm());
 	return
 		halfSize.x()* abs(axis * getRight()) +
 		halfSize.y() * abs(axis * getTop()) +
@@ -313,7 +334,7 @@ Vector3D Box::getContactPoint(Vector3D& pOne, Vector3D& dOne, float oneSize, Vec
 
 void Box::draw()
 {
-	Vector3D boxSize(getAxis(0).Norm(), getAxis(1).Norm(), getAxis(2).Norm());
+	Vector3D boxSize(getAxis(0).Norm() * 2, getAxis(1).Norm() * 2, getAxis(2).Norm() * 2);
 
 	// Calcul de l'orientation de la box
 	Vector3D uA = getAxis(0).Normalized();
@@ -327,8 +348,18 @@ void Box::draw()
 	Quaternion boxOrientation = Quaternion::Euler(aX, aY, aZ);
 
 	ofBoxPrimitive boxPrimitive(boxSize.x(), boxSize.y(), boxSize.z());
-	boxPrimitive.setOrientation(boxOrientation.q());
-	boxPrimitive.setPosition(getRigidBody()->getPosition().v3());
+	boxPrimitive.setOrientation(getRigidBody()->getOrientation().q());
+	boxPrimitive.setPosition(getPosition().v3());
 
 	boxPrimitive.drawWireframe();
+
+	Vector3D* vertices = getVertices();
+	for (int i = 0; i < 8; i++)
+	{
+		ofSpherePrimitive vertex = ofSpherePrimitive();
+		vertex.setRadius(.5f);
+		vertex.setPosition(vertices[i].v3());
+
+		vertex.draw();
+	}
 }

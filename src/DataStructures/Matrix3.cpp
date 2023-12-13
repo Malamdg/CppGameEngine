@@ -54,13 +54,13 @@ Matrix3& Matrix3::FromQuaternion(const Quaternion& q){
 	float coefficient[9];
 
 	coefficient[0] = 1 - 2 * (qy * qy + qz * qz);
-	coefficient[1] = 2 * (qx * qy + qz * qw);
-	coefficient[2] = 2 * (qx * qz - qy * qw);
-	coefficient[3] = 2 * (qx * qy - qz * qw);
+	coefficient[1] = 2 * (qx * qy - qz * qw);
+	coefficient[2] = 2 * (qx * qz + qy * qw);
+	coefficient[3] = 2 * (qx * qy + qz * qw);
 	coefficient[4] = 1 - 2 * (qx * qx + qz * qz);
-	coefficient[5] = 2 * (qy * qz + qx * qw);
-	coefficient[6] = 2 * (qx * qz + qy * qw);
-	coefficient[7] = 2 * (qy * qz - qz * qw);
+	coefficient[5] = 2 * (qy * qz - qx * qw);
+	coefficient[6] = 2 * (qx * qz - qy * qw);
+	coefficient[7] = 2 * (qy * qz + qz * qw);
 	coefficient[8] = 1 - 2 * (qx * qx + qy * qy);
 
 	Matrix3 mq = Matrix3(coefficient);

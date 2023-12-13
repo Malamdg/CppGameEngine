@@ -140,12 +140,12 @@ void ofApp::update() {
 		Vector3D octreeMax = Vector3D(1000, 1000, 1000);
 		octree = Octree(octreeMin, octreeMax);
 
-		for (RigidBody* rb : rigidBodies)
+		for (GameObject* go : gameObjects)
 		{
-			octree.insert(rb);
+			octree.insert(go);
 
-			forceRegistry->add(rb, gravity);
-			forceRegistry->add(rb, airFriction);
+			forceRegistry->add(go->getRigidBody(), gravity);
+			forceRegistry->add(go->getRigidBody(), airFriction);
 		}
 
 		Vector3D* attachPoint = new Vector3D(0, 0, 16);
@@ -155,7 +155,7 @@ void ofApp::update() {
 
 		forceRegistry->updateForces(duration);
 
-		for (RigidBody* rb : rigidBodies) rb->Update();
+		for (GameObject* go : gameObjects) go->update();
 	}
 }
 
@@ -186,12 +186,17 @@ void ofApp::draw() {
 	//drawText();
 
 	// display primitives with correct color
-	for (pair<of3dPrimitive*, int> primitive : primitives)
-	{
-		ofSetColor(colors[primitive.second]);
+	//for (pair<of3dPrimitive*, int> primitive : primitives)
+	//{
+	//	ofSetColor(colors[primitive.second]);
 
-		// display primitive
-		primitive.first->draw();
+	//	// display primitive
+	//	primitive.first->draw();
+	//}
+
+	for (GameObject* go : gameObjects)
+	{
+		go->draw(colors[cyan]);
 	}
 
 	// display centers of mass above the primitives
@@ -271,8 +276,16 @@ void ofApp::keyReleased(int key) {
 			Vector3D lauchDirection = cam.getLookAtDir();
 			float impulse = getImpulse();
 
-			RigidBody* rb;
-			if (objectIndex < 5) rb = new RigidBody(rigidObjects[objectIndex]);
+			GameObject* go;
+			if (objectIndex < 5)
+			{
+				RigidBody* rb = new RigidBody(rigidObjects[objectIndex]);
+				go = new GameObject(
+					rb,
+					new Box(rb, rb->getPosition(), Vector3D(10, 0, 0), Vector3D(0, 10, 0), Vector3D(0, 0, 10)),
+					new Sphere(rb, rb->getPosition(), 2)
+				);
+			}
 			else
 			{
 				list <pair<of3dPrimitive*, Vector3D>> weightedLadderPrimitives = list<pair<of3dPrimitive*, Vector3D>>
@@ -283,9 +296,15 @@ void ofApp::keyReleased(int key) {
 					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 8, 0)},
 					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 12, 0)},
 				};
-				rb = new RigidBody(weightedLadderPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / keyHold, 8.f);
+				RigidBody* rb = new RigidBody(weightedLadderPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / keyHold, 8.f);
+
+				go = new GameObject(
+					rb,
+					new Box(rb, rb->getPosition(), Vector3D(10, 0, 0), Vector3D(0, 10, 0), Vector3D(0, 0, 10)),
+					new Sphere(rb, rb->getPosition(), 2)
+				);
 			}
-			rb->setPosition(position);
+			go->setPosition(position);
 
 			Vector3D spawnImpulse = lauchDirection * impulse;
 
@@ -293,15 +312,15 @@ void ofApp::keyReleased(int key) {
 
 			if (toggleImpulse)
 			{
-				rb->addForce(spawnImpulse, impulsePoint);
+				go->getRigidBody()->addForce(spawnImpulse, impulsePoint);
 
 				ofSpherePrimitive* impulsePrimitive = new ofSpherePrimitive(.25f, 16);
-				rb->addPrimitive(impulsePrimitive, impulsePoint);
+				go->getRigidBody()->addPrimitive(impulsePrimitive, impulsePoint);
 				impulses.push_back({ impulsePrimitive, magenta });
 			}
-			addToList(rb, forceMode);
-		
-			lastLaunched = rb;
+			addToList(go->getRigidBody(), forceMode);
+			gameObjects.push_back(go);
+			//lastLaunched = go;
 
 			keyHold = 1;
 			break;
