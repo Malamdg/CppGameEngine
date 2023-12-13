@@ -148,7 +148,7 @@ void RBCollisionHandler::computeCollision(float duration, ForceRegistry* forceRe
 		Vector3D relativeVelocity = rb1->getVelocity() - rb2->getVelocity();
 
 		//compute of impulse's amplitude
-		float amp = relativeVelocity.Norm()* restitution * 100;
+		float amp = relativeVelocity.Norm()* restitution;
 
 		//Friction
 		Friction* f = new Friction(friction, friction);

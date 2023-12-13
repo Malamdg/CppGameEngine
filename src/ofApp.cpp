@@ -22,6 +22,8 @@ void ofApp::setup() {
 	gui.add(text6.setup("Toggle FullScreen", "F"));
 	gui.add(text7.setup("Toggle Focus", "Clic gauche"));
 	gui.add(text10.setup("Toggle Octree", "O"));
+	gui.add(text11.setup("Toggle Colliders", "N"));
+	gui.add(text12.setup("Clear all objects", "Y"));
 
 	// Light
 	directionalLight.setDirectional();
@@ -61,6 +63,8 @@ void ofApp::setup() {
 
 	//Rigid bodies
 	rigidObjects = new RigidBody[5];
+	boxCollidersDimensions = new Vector3D[5];
+	encompassingSpheresRadius = new float[5];
 
 	list<pair<of3dPrimitive*, Vector3D>> tablePrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
@@ -73,49 +77,57 @@ void ofApp::setup() {
 	// create a table
 	RigidBody table = RigidBody(tablePrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 6.f, 8.f);
 	rigidObjects[0] = table;
+	boxCollidersDimensions[0] = Vector3D(8, 3.5, 4);
+	encompassingSpheresRadius[0] = 10;
 
 	list <pair<of3dPrimitive*, Vector3D>> chairPrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
-		{new ofBoxPrimitive(4, .5, 4), Vector3D(0, 0, 0)},
-		{new ofBoxPrimitive(4, 5, .5), Vector3D(0, 2.5, -1.75)},
-		{new ofBoxPrimitive(.5, 4, .5), Vector3D(1.75, -2, 1.75)},
-		{new ofBoxPrimitive(.5, 4, .5), Vector3D(-1.75, -2, 1.75)},
-		{new ofBoxPrimitive(.5, 4, .5), Vector3D(1.75, -2, -1.75)},
-		{new ofBoxPrimitive(.5, 4, .5), Vector3D(-1.75, -2, -1.75)}
+		{new ofBoxPrimitive(4, .5, 4), Vector3D(0, -.5, 0)},
+		{new ofBoxPrimitive(4, 5, .5), Vector3D(0, 2, -1.75)},
+		{new ofBoxPrimitive(.5, 4, .5), Vector3D(1.75, -2.5, 1.75)},
+		{new ofBoxPrimitive(.5, 4, .5), Vector3D(-1.75, -2.5, 1.75)},
+		{new ofBoxPrimitive(.5, 4, .5), Vector3D(1.75, -2.5, -1.75)},
+		{new ofBoxPrimitive(.5, 4, .5), Vector3D(-1.75, -2.5, -1.75)}
 	};
 	// create a chair
 	RigidBody chair = RigidBody(chairPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 2.5, 4.5f);
 	rigidObjects[1] = chair;
+	boxCollidersDimensions[1] = Vector3D(2, 4.5, 2);
+	encompassingSpheresRadius[1] = 5.5;
 
 	list <pair<of3dPrimitive*, Vector3D>> bottlePrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
-		{new ofCylinderPrimitive(.5, 2, 16, 16), Vector3D(0, -.25, 0)},
-		{new ofConePrimitive(.5, -1, 16, 16), Vector3D(0, 1.25, 0)},
-		{new ofCylinderPrimitive(.2, 1.5, 16, 16), Vector3D(0, 1, 0)},
+		{new ofCylinderPrimitive(.5, 2, 16, 16), Vector3D(0, -.5, 0)},
+		{new ofConePrimitive(.5, -1, 16, 16), Vector3D(0, 1, 0)},
+		{new ofCylinderPrimitive(.2, 1.5, 16, 16), Vector3D(0, .75, 0)},
 	};
 	// create a bottle
 	RigidBody bottle = RigidBody(bottlePrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1, 1.75f);
 	rigidObjects[2] = bottle;
+	boxCollidersDimensions[2] = Vector3D(.5, 1.5, .5);
+	encompassingSpheresRadius[2] = 1.75;
 
 	list <pair<of3dPrimitive*, Vector3D>> carPrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
-		{new ofBoxPrimitive(8, 15, 30), Vector3D(2, 0, 0)},
-		{new ofBoxPrimitive(8, 15, 15), Vector3D(10, 0, 0)},
-		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, 9, 8)},
-		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, 9, -8)},
-		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, -9, 8)},
-		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-1, -9, -8)},
+		{new ofBoxPrimitive(8, 15, 30), Vector3D(-2, 0, 0)},
+		{new ofBoxPrimitive(8, 15, 15), Vector3D(6, 0, 0)},
+		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-5, 9, 8)},
+		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-5, 9, -8)},
+		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-5, -9, 8)},
+		{new ofCylinderPrimitive(5, 3, 16, 16), Vector3D(-5, -9, -8)},
 	};
 	// create a car
 	RigidBody car = RigidBody(carPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 1200.f, 10.5f);
 	rigidObjects[3] = car;
+	boxCollidersDimensions[3] = Vector3D(10, 10.5, 15);
+	encompassingSpheresRadius[3] = 20;
 
 	list <pair<of3dPrimitive*, Vector3D>> guitarPrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
-		{new ofCylinderPrimitive(2.5, 1, 16, 16), Vector3D(0, 0, 3)},
-		{new ofCylinderPrimitive(2, 1, 16, 16), Vector3D()},
-		{new ofBoxPrimitive(1, .6, 5), Vector3D(0, 0, -4)},
-		{new ofBoxPrimitive(1.5, 1, 2), Vector3D(0, 0, -7)},
+		{new ofCylinderPrimitive(2.5, 1, 16, 16), Vector3D(0, 0, 4.25)},
+		{new ofCylinderPrimitive(2, 1, 16, 16), Vector3D(0, 0, 1.25)},
+		{new ofBoxPrimitive(1, .6, 5), Vector3D(0, 0, -2.75)},
+		{new ofBoxPrimitive(1.5, 1, 2), Vector3D(0, 0, -5.75)},
 	};
 	// create a guitar
 	RigidBody guitar = RigidBody(guitarPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), .5, 4.f);
@@ -135,6 +147,17 @@ void ofApp::setup() {
 	airFriction = new Friction(.1, .1);
 	springZero = new Spring(new Vector3D(), 20, 32, .8);
 	elasticZero = new Elastic(new Vector3D(), 60, 10, .8);
+
+	// Pseudo sol
+	RigidBody* rb = new RigidBody(
+		{
+		{new ofBoxPrimitive(300, 2, 300), Vector3D()}}
+	, Vector3D(0, -10, 0), Vector3D(), Quaternion::Identity(), Vector3D(), 0, 8.f);
+	pseudoSol = new GameObject(
+		rb,
+		new Box(rb, rb->getPosition(), Vector3D(150, 1, 150)),
+		new Sphere(rb, rb->getPosition(), 150)
+	);
 }
 
 //--------------------------------------------------------------
@@ -156,6 +179,7 @@ void ofApp::update() {
 			forceRegistry->add(go->getRigidBody(), gravity);
 			forceRegistry->add(go->getRigidBody(), airFriction);
 		}
+		octree.insert(pseudoSol);
 
 		Vector3D* attachPoint = new Vector3D(0, 0, 16);
 
@@ -165,6 +189,7 @@ void ofApp::update() {
 		forceRegistry->updateForces(duration);
 
 		for (GameObject* go : gameObjects) go->update();
+		pseudoSol->update();
 
 		collisionsHandler.handleCollision(duration, forceRegistry, &octree);
 	}
@@ -207,8 +232,9 @@ void ofApp::draw() {
 
 	for (GameObject* go : gameObjects)
 	{
-		go->draw(colors[cyan]);
+		go->draw(colors[cyan], drawCollider, drawOctree);
 	}
+	pseudoSol->draw(colors[cyan], drawCollider, drawOctree);
 
 	// display centers of mass above the primitives
 	ofDisableDepthTest();
@@ -217,7 +243,7 @@ void ofApp::draw() {
 		ofSetColor(colors[centerMass.second]);
 
 		// display primitive
-		centerMass.first->draw();
+		if (centerMass.first) centerMass.first->draw();
 	}
 	for (pair<of3dPrimitive*, int> impulse : impulses)
 	{
@@ -282,6 +308,16 @@ void ofApp::keyReleased(int key) {
 			drawOctree = !drawOctree;
 			break;
 
+		case 'n':
+			drawCollider = !drawCollider;
+			break;
+
+		case 'y':
+			gameObjects.clear();
+			centersMass.emplace_front();
+			impulses.clear();
+			break;
+
 		case ' ': //Lauch RigidBody
 			Vector3D position = cam.getPosition();
 			Vector3D lauchDirection = cam.getLookAtDir();
@@ -293,26 +329,26 @@ void ofApp::keyReleased(int key) {
 				RigidBody* rb = new RigidBody(rigidObjects[objectIndex]);
 				go = new GameObject(
 					rb,
-					new Box(rb, rb->getPosition(), Vector3D(8, 0, 0), Vector3D(0, 3.5, 0), Vector3D(0, 0, 4)),
-					new Sphere(rb, rb->getPosition(), 10)
+					new Box(rb, rb->getPosition(), boxCollidersDimensions[objectIndex]),
+					new Sphere(rb, rb->getPosition(), encompassingSpheresRadius[objectIndex])
 				);
 			}
 			else
 			{
 				list <pair<of3dPrimitive*, Vector3D>> weightedLadderPrimitives = list<pair<of3dPrimitive*, Vector3D>>
 				{
-					{new ofBoxPrimitive(1.5, 16, 1.5), Vector3D(2, 8, 0)},
-					{new ofBoxPrimitive(1.5, 16, 1.5), Vector3D(-2, 8, 0)},
+					{new ofBoxPrimitive(1.5, 16, 1.5), Vector3D(2, 0, 0)},
+					{new ofBoxPrimitive(1.5, 16, 1.5), Vector3D(-2, 0, 0)},
+					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, -4, 0)},
+					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 0, 0)},
 					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 4, 0)},
-					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 8, 0)},
-					{new ofBoxPrimitive(8, 1, 1), Vector3D(0, 12, 0)},
 				};
 				RigidBody* rb = new RigidBody(weightedLadderPrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / keyHold, 8.f);
 
 				go = new GameObject(
 					rb,
-					new Box(rb, rb->getPosition(), Vector3D(10, 0, 0), Vector3D(0, 10, 0), Vector3D(0, 0, 10)),
-					new Sphere(rb, rb->getPosition(), 2)
+					new Box(rb, rb->getPosition(), Vector3D(4, 8, .75)),
+					new Sphere(rb, rb->getPosition(), 9)
 				);
 			}
 			go->setPosition(position);

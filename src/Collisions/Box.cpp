@@ -3,12 +3,18 @@
 #include "Box.h"
 #include <Matrix3.h>
 
-Box::Box(RigidBody* rb, Vector3D center, Vector3D axe1, Vector3D axe2, Vector3D axe3)
-	:
+Box::Box(RigidBody* rb, Vector3D center, Vector3D axe1, Vector3D axe2, Vector3D axe3) :
 	Collider(rb, center),
 	m_right(axe1),
 	m_top(axe2),
 	m_forward(axe3)
+{}
+
+Box::Box(RigidBody* rb, Vector3D center, Vector3D dimension) :
+	Collider(rb, center),
+	m_right(Vector3D(dimension.x(), 0, 0)),
+	m_top(Vector3D(0, dimension.y(), 0)),
+	m_forward(Vector3D(0, 0, dimension.z()))
 {}
 
 Box::~Box() {}

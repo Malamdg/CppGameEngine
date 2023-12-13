@@ -38,6 +38,9 @@ public:
 		return dynamic_cast<const Base*>(ptr) != nullptr;
 	}
 
+	/*
+ 	to update the sphere position
+ 	*/
 	void update() override;
 
 	/*
@@ -62,5 +65,8 @@ public:
 	*/
 	list<Contact*> intersect(Collider* collider) override;
 
+	/*
+ 	to draww the sphere
+ 	*/
 	void draw() override;
 };

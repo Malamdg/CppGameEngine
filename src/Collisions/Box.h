@@ -67,6 +67,8 @@ public:
 	*/
 	Box(RigidBody* rb, Vector3D center, Vector3D axe1, Vector3D axe2, Vector3D axe3);
 
+	Box(RigidBody* rb, Vector3D center, Vector3D dimension);
+
 	/* Class Destructor */
 	~Box();
 
@@ -75,6 +77,9 @@ public:
 		return dynamic_cast<const Base*>(ptr) != nullptr;
 	}
 
+	/*
+ 	update the box position and rotation according to the rigodbody's movement
+ 	*/
 	void update() override;
 
 	/*
@@ -124,5 +129,8 @@ public:
 	*/
 	list<Contact*> intersect(Collider* collider) override;
 
+	/*
+ 	To draw the box
+ 	*/
 	void draw() override;
 };

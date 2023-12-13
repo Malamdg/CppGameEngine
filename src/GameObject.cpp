@@ -26,7 +26,7 @@ void GameObject::update()
 	m_encompassingSphere->update();
 }
 
-void GameObject::draw(ofColor color)
+void GameObject::draw(ofColor color, bool drawCollider, bool drawSphere)
 {
 	ofSetColor(color);
 	for (of3dPrimitive* primitive : m_rigidBody->getPrimitives())
@@ -34,11 +34,17 @@ void GameObject::draw(ofColor color)
 		primitive->draw();
 	}
 
-	ofSetColor(255, 0, 0);
-	m_collider->draw();
+	if (drawCollider)
+	{
+		ofSetColor(255, 0, 0);
+		m_collider->draw();
+	}
 
-	ofSetColor(0, 255, 0);
-	m_encompassingSphere->draw();
+	if (drawSphere)
+	{
+		ofSetColor(0, 255, 0);
+		m_encompassingSphere->draw();
+	}
 }
 
 void GameObject::setPosition(Vector3D position)

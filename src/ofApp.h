@@ -70,6 +70,7 @@ private:
 	ofxTextField text9;
 	ofxTextField text10;
 	ofxTextField text11;
+	ofxTextField text12;
 
 	//Lights
 	ofLight directionalLight;
@@ -120,8 +121,6 @@ private:
 	list<RigidBody*> rbWithElastic = list<RigidBody*>();
 	int forceMode = 0;
 
-	//RigidBody* lastLaunched;
-
 	// System boolean
 	bool pause = false;
 	bool drawGrid = true;
@@ -130,6 +129,10 @@ private:
 
 	// GameObjects
 	list<GameObject*> gameObjects;
+	bool drawCollider = false;
+
+	Vector3D* boxCollidersDimensions;
+	float* encompassingSpheresRadius;
 
 	// Floor
 	GameObject* floor;
@@ -141,4 +144,7 @@ private:
 
 	// Collision
 	RBCollisionHandler collisionsHandler;
+
+	// Pseudo sol
+	GameObject* pseudoSol;
 };
