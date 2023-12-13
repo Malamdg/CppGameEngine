@@ -20,7 +20,7 @@ struct OctreeNode {
 class Octree
 {
 private:
-    int m_maxCount = 1;
+    int m_maxCount = 8;
 
 public:
     /*

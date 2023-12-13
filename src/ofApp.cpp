@@ -56,16 +56,19 @@ void ofApp::setup() {
 	cam.setPosition(0, 0, 10);
 	cam.setFarClip(15000);
 
+	// Collisions handler
+	collisionsHandler = RBCollisionHandler();
+
 	//Rigid bodies
 	rigidObjects = new RigidBody[5];
 
 	list<pair<of3dPrimitive*, Vector3D>> tablePrimitives = list<pair<of3dPrimitive*, Vector3D>>
 	{
-		{new ofBoxPrimitive(16, .5, 8), Vector3D(0, 1, 0)},
-		{new ofBoxPrimitive(.5, 7, .5), Vector3D(7.75, -2.5, 3.75)},
-		{new ofBoxPrimitive(.5, 7, .5), Vector3D(-7.75, -2.5, 3.75)},
-		{new ofBoxPrimitive(.5, 7, .5), Vector3D(7.75, -2.5, -3.75)},
-		{new ofBoxPrimitive(.5, 7, .5), Vector3D(-7.75, -2.5, -3.75)}
+		{new ofBoxPrimitive(16, .5, 8), Vector3D(0, 3.5, 0)},
+		{new ofBoxPrimitive(.5, 7, .5), Vector3D(7.75, 0, 3.75)},
+		{new ofBoxPrimitive(.5, 7, .5), Vector3D(-7.75, 0, 3.75)},
+		{new ofBoxPrimitive(.5, 7, .5), Vector3D(7.75, 0, -3.75)},
+		{new ofBoxPrimitive(.5, 7, .5), Vector3D(-7.75, 0, -3.75)}
 	};
 	// create a table
 	RigidBody table = RigidBody(tablePrimitives, Vector3D(), Vector3D(), Quaternion::Identity(), Vector3D(), 1 / 6.f, 8.f);
@@ -156,6 +159,8 @@ void ofApp::update() {
 		forceRegistry->updateForces(duration);
 
 		for (GameObject* go : gameObjects) go->update();
+
+		collisionsHandler.handleCollision(duration, forceRegistry, &octree);
 	}
 }
 
@@ -282,8 +287,8 @@ void ofApp::keyReleased(int key) {
 				RigidBody* rb = new RigidBody(rigidObjects[objectIndex]);
 				go = new GameObject(
 					rb,
-					new Box(rb, rb->getPosition(), Vector3D(10, 0, 0), Vector3D(0, 10, 0), Vector3D(0, 0, 10)),
-					new Sphere(rb, rb->getPosition(), 2)
+					new Box(rb, rb->getPosition(), Vector3D(8, 0, 0), Vector3D(0, 3.5, 0), Vector3D(0, 0, 4)),
+					new Sphere(rb, rb->getPosition(), 10)
 				);
 			}
 			else

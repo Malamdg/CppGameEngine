@@ -357,7 +357,7 @@ void Box::draw()
 	for (int i = 0; i < 8; i++)
 	{
 		ofSpherePrimitive vertex = ofSpherePrimitive();
-		vertex.setRadius(.5f);
+		vertex.setRadius(.2f);
 		vertex.setPosition(vertices[i].v3());
 
 		vertex.draw();

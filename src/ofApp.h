@@ -20,6 +20,7 @@
 #include "GameObject.h"
 #include "Tests/Tests.h"
 #include "Octree.h"
+#include "Collisions/RBCollisionHandler.h"
 
 #include "Addons/ofSkyBox/ofxSkyBox.h"
 #include "Addons/ofFirstPersonCamera/ofxFirstPersonCamera.h"
@@ -132,4 +133,7 @@ private:
 
 	// Octree
 	Octree octree;
+
+	// Collision
+	RBCollisionHandler collisionsHandler;
 };
