@@ -134,6 +134,11 @@ private:
 	Vector3D* boxCollidersDimensions;
 	float* encompassingSpheresRadius;
 
+	// Floor
+	GameObject* floor;
+	float floorWidth = 400;
+	float floorLength = 500;
+
 	// Octree
 	Octree octree;
 
@@ -141,5 +146,5 @@ private:
 	RBCollisionHandler collisionsHandler;
 
 	// Pseudo sol
-	GameObject* pseudoSol;
+	// GameObject* pseudoSol;
 };

@@ -291,7 +291,32 @@ list<Contact*> Box::intersection(Box* collider)
 
 list<Contact*> Box::intersection(Plane* collider)
 {
-	return list<Contact*>();
+	list<Contact*> contacts = list<Contact*>();
+	Contact* contact;
+	Vector3D* vertices = getVertices();
+	Vector3D normal = collider->getNormal();
+
+	Vector3D vertex, projectionPoint;
+	float t, centerPosition;
+	// Position of this center's relatively to the plane
+	centerPosition = normal * (m_center - collider->getPosition());
+	centerPosition = centerPosition < 0 ? -1 : 1;
+
+	for (int i = 0; i < 8; i++) {
+		vertex = vertices[i];
+		t = normal * (vertex - collider->getPosition());
+		projectionPoint = normal * t;
+		projectionPoint = vertex - projectionPoint;
+		
+		if (t * centerPosition <= 0) {
+			contact = new Contact(&vertex, &normal, abs(t) / 2, collider->getRigidBody(), getRigidBody());
+			contacts.push_back(contact);
+		}
+	}
+
+
+
+	return contacts;
 }
 
 float Box::transformToAxis(Vector3D& axis)

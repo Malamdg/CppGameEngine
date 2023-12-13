@@ -38,7 +38,7 @@ float Contact::getFriction() const { return m_friction; }
 
 float Contact::calculateRestitution()
 {
-	return .9f;
+	return .5f;
 }
 float Contact::calculateFriction()
 {

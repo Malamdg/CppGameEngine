@@ -6,7 +6,7 @@ GameObject::GameObject() :
 	m_encompassingSphere(new Sphere(m_rigidBody, m_rigidBody->getPosition(), 2))
 {}
 
-GameObject::GameObject(RigidBody* rigidBody, Box* boxCollider, Sphere* encompassingSphere) :
+GameObject::GameObject(RigidBody* rigidBody, Collider* boxCollider, Sphere* encompassingSphere) :
 	m_rigidBody(rigidBody),
 	m_collider(boxCollider),
 	m_encompassingSphere(encompassingSphere)

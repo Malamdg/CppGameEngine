@@ -135,6 +135,20 @@ void ofApp::setup() {
 	boxCollidersDimensions[4] = Vector3D(2.5, .5, 6.75);
 	encompassingSpheresRadius[4] = 7.5;
 
+
+	//Setup floor
+	RigidBody* floorBody = new RigidBody(
+		{{new ofBoxPrimitive(floorWidth, .1, floorLength), Vector3D()}},
+		Vector3D(0,0,0),
+		Vector3D(), Quaternion::Identity(), Vector3D(), 0, 8.f
+	);
+
+	floor = new GameObject(
+		floorBody,
+		new Plane(floorBody, floorBody->getPosition(), new Vector3D(0,1,0), floorWidth, floorLength),
+		new Sphere(floorBody, floorBody->getPosition(), sqrt(floorWidth* floorWidth + floorLength* floorLength)/2)
+	);
+
 	//Setup Physics
 	forceRegistry = new ForceRegistry();
 
@@ -144,6 +158,7 @@ void ofApp::setup() {
 	elasticZero = new Elastic(new Vector3D(), 60, 10, .8);
 
 	// Pseudo sol
+	/*
 	RigidBody* rb = new RigidBody(
 		{
 		{new ofBoxPrimitive(300, 2, 300), Vector3D()}}
@@ -153,6 +168,7 @@ void ofApp::setup() {
 		new Box(rb, rb->getPosition(), Vector3D(150, 1, 150)),
 		new Sphere(rb, rb->getPosition(), 150)
 	);
+	*/
 }
 
 //--------------------------------------------------------------
@@ -174,7 +190,7 @@ void ofApp::update() {
 			forceRegistry->add(go->getRigidBody(), gravity);
 			forceRegistry->add(go->getRigidBody(), airFriction);
 		}
-		octree.insert(pseudoSol);
+		octree.insert(floor);
 
 		Vector3D* attachPoint = new Vector3D(0, 0, 16);
 
@@ -184,7 +200,7 @@ void ofApp::update() {
 		forceRegistry->updateForces(duration);
 
 		for (GameObject* go : gameObjects) go->update();
-		pseudoSol->update();
+		floor->update();
 
 		collisionsHandler.handleCollision(duration, forceRegistry, &octree);
 	}
@@ -229,7 +245,8 @@ void ofApp::draw() {
 	{
 		go->draw(colors[cyan], drawCollider, drawOctree);
 	}
-	pseudoSol->draw(colors[cyan], drawCollider, drawOctree);
+
+	floor->draw(colors[cyan], drawCollider, drawOctree);
 
 	// display centers of mass above the primitives
 	ofDisableDepthTest();
