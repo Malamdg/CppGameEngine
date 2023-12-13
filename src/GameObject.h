@@ -41,6 +41,8 @@ public:
    	To draw the GameObject
 	
 	@param color, the color for the dipslay
+ 	@param drawCollider, true to draw the box collider
+  	@param drawSphere, true to draw the encompassing sphere
 	*/
 	void draw(ofColor color = ofColor(0, 255, 255), bool drawCollider = false, bool drawSphere = false);
 
