@@ -11,6 +11,11 @@ Sphere::Sphere(RigidBody* rb, Vector3D* center, float radius)
 /* Class Destructor */
 Sphere::~Sphere() { }
 
+void Sphere::update()
+{
+	setPosition(&getRigidBody()->getPosition());
+}
+
 /* The sphere doesn't need to rotate */
 void Sphere::setRotation(Quaternion* rotation) {}
 
@@ -54,4 +59,13 @@ Contact* Sphere::intersect(Sphere* collider)
 			collider->getRigidBody());
 	}
 	return res;
+}
+
+void Sphere::draw()
+{
+	ofSpherePrimitive spherePrimitive;
+	spherePrimitive.setRadius(getRadius());
+	spherePrimitive.setPosition(getPosition().v3());
+
+	spherePrimitive.drawWireframe();
 }

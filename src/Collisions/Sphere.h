@@ -38,6 +38,8 @@ public:
 		return dynamic_cast<const Base*>(ptr) != nullptr;
 	}
 
+	void update() override;
+
 	/*
 	to set the new orientation of the sphere
 
@@ -60,4 +62,5 @@ public:
 	*/
 	list<Contact*> intersect(Collider* collider);
 
+	void draw() override;
 };

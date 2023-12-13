@@ -75,6 +75,8 @@ public:
 		return dynamic_cast<const Base*>(ptr) != nullptr;
 	}
 
+	void update() override;
+
 	/*
 	rotate the box
 
@@ -121,4 +123,6 @@ public:
  	@return a list of contact
 	*/
 	list<Contact*> intersect(Collider* collider);
+
+	void draw() override;
 };

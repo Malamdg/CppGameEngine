@@ -136,6 +136,8 @@ void RigidBody::addPosition(Vector3D position)
 	m_position = m_position + position;
 }
 
+Quaternion RigidBody::getOrientation() { return m_orientation; }
+
 Vector3D RigidBody::getAcceleration() const { return m_acceleration; }
 
 float RigidBody::getCoefficientRestitution() const { return m_coeffRestitutions; }

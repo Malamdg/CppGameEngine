@@ -20,7 +20,7 @@ public:
 
 	void update();
 
-	void draw();
+	void draw(ofColor color);
 
 	RigidBody* getRigidBody();
 	Collider* getCollider();
