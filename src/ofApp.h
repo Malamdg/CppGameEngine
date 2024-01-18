@@ -17,8 +17,10 @@
 #include "DataStructures/Vector3D.h"
 #include "DataStructures/Quaternion.h"
 #include "Particle.h"
-#include "RigidBody.h"
-#include "Tests.h"
+#include "GameObject.h"
+#include "Tests/Tests.h"
+#include "Octree.h"
+#include "Collisions/RBCollisionHandler.h"
 
 #include "Addons/ofSkyBox/ofxSkyBox.h"
 #include "Addons/ofFirstPersonCamera/ofxFirstPersonCamera.h"
@@ -66,6 +68,9 @@ private:
 	ofxTextField text7;
 	ofxTextField text8;
 	ofxTextField text9;
+	ofxTextField text10;
+	ofxTextField text11;
+	ofxTextField text12;
 
 	//Lights
 	ofLight directionalLight;
@@ -116,10 +121,30 @@ private:
 	list<RigidBody*> rbWithElastic = list<RigidBody*>();
 	int forceMode = 0;
 
-	RigidBody* lastLaunched;
-
 	// System boolean
 	bool pause = false;
 	bool drawGrid = true;
 	bool toggleImpulse = true;
+	bool drawOctree = false;
+
+	// GameObjects
+	list<GameObject*> gameObjects;
+	bool drawCollider = false;
+
+	Vector3D* boxCollidersDimensions;
+	float* encompassingSpheresRadius;
+
+	// Floor
+	GameObject* floor;
+	float floorWidth = 400;
+	float floorLength = 500;
+
+	// Octree
+	Octree octree;
+
+	// Collision
+	RBCollisionHandler collisionsHandler;
+
+	// Pseudo sol
+	// GameObject* pseudoSol;
 };

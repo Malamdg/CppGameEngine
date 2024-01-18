@@ -145,7 +145,7 @@ public:
 
 	@return the velocity of the RigidBody
 	*/
-	Vector3D getVelocity();
+	Vector3D getVelocity() const;
 
 	/*
 	To add a velocity to the current velocity
@@ -159,7 +159,7 @@ public:
 
 	@return the position of the RigidBody
 	*/
-	Vector3D getPosition();
+	Vector3D getPosition() const;
 
 	/*
 	To set the position of the RigidBody
@@ -175,32 +175,34 @@ public:
 	*/
 	void addPosition(Vector3D position);
 
+	Quaternion getOrientation();
+
 	/*
 	get the Acceleration of the RigidBody
 
 	@return the Acceleration of the RigidBody
 	*/
-	Vector3D getAcceleration();
+	Vector3D getAcceleration() const;
 
 	/*
 	get the coefficient of restitution
 
 	@return the coefficient of restitution
 	*/
-	float getCoefficientRestitution();
+	float getCoefficientRestitution() const;
 
 	/*
 	get the first coefficient of friction
 
 	@return the first coefficient of friction
 	*/
-	float getK1();
+	float getK1() const;
 	/*
 	get the second coefficient of friction
 
 	@return the second coefficient of friction
 	*/
-	float getK2();
+	float getK2() const;
 
 	// Get a given local point coordinates in world coordinates
 	// @return the Vector3D of point in coordinates
